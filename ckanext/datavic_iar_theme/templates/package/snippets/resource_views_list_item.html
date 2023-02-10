@@ -1,0 +1,37 @@
+{% set action = 'resource.edit_view' if is_edit else 'resource.read' %}
+
+{% if current_filters %}
+  {% set url = h.url_for(action, id=pkg.name,
+                         resource_id=view.resource_id, view_id=view.id,
+                         filters=current_filters) %}
+{% else %}
+  {% set url = h.url_for(action, id=pkg.name,
+                         resource_id=view.resource_id, view_id=view.id) %}
+{% endif %}
+
+<li class="{% if is_selected %} active{% endif %}" data-id="{{ view.id }}">
+
+  <a href="{{ url }}" data-id="{{ view.id }}">
+    <i class="fa icon fa-{{ h.resource_view_icon(view) }}"></i>
+    {{ view.title }}
+  </a>
+
+  {% if pkg.nominated_view_id == view.id %}
+    {% set url_denominate = h.url_for('datavicmain.denominate_view', package_id=pkg.id, view_id=view.id) %}
+    <form action="{{url_denominate}}" method="post">
+      <button type="submit" class="btn btn-danger">
+        {{ _('Stop showing this preview on Dataset page') }}
+      </button>
+    </form>
+  {% else %}
+
+    {% set url_nominate = h.url_for('datavicmain.nominate_view', package_id=pkg.id, view_id=view.id) %}
+    <form action="{{url_nominate}}" method="post">
+      <button type="submit" class="btn btn-success">
+        {{ _('Show this preview on Dataset page') }}
+      </button>
+    </form>
+  {% endif %}
+
+
+</li>

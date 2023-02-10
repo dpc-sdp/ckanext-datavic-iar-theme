@@ -11,20 +11,20 @@
     <div class="search-form-wrapper">
       <div class="rpl-search-form da-search rpl-site-constrain--on-all">
         {% if query %}
-          <h1> {{ ungettext(
+          <h2> {{ ungettext(
             'Search Results ({number} dataset found)', 
             'Search Results ({number} datasets found)', 
              count
             ).format(number=count) }}
-         </h1>              
+         </h2>              
         {% else %}
-          <h1>
+          <h2>
             {{ ungettext(
               'Search {number} dataset', 
               'Search {number} datasets', 
                count
             ).format(number=count) }}
-         </h1>
+         </h2>
         {% endif %}
         <form {% if form_id %}id="{{ form_id }}" {% endif %}class="rpl-form" action="{{ h.url_for('dataset.search') }}" method="get">
           <input type="hidden" id="field-order-by" name="sort" value="{{ sorting_selected }}" />

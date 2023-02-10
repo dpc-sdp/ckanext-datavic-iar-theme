@@ -16,6 +16,16 @@
     {% endif %}
   {% endblock %}
 
+  {% if stage%}
+    <h1 class="header">
+      {% if stage == 1 %}
+        {{ _('Edit a data resource') }}
+      {% elif stage|count > 1 %}
+        {{ _('Add a data resource') }}
+      {% endif %}
+    </h1>
+  {% endif %}
+
   {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
 
   <input name="id" value="{{ data.id }}" type="hidden"/>

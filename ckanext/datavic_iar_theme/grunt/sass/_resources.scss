@@ -42,7 +42,7 @@ $primary-color: #0052C2;
         top: auto;
         right: auto;
     }
-    
+
     @media (max-width:767px) {
         .resource-item {
             display: inline;
@@ -100,4 +100,17 @@ $primary-color: #0052C2;
     font-size: 1.5rem;
     line-height: 1.2em;
     font-weight: normal;
+}
+
+.datapreview .resource-view .resource-view .actions {
+    position:relative;
+}
+
+.dtv-resource-view {
+    position: relative;
+    .dtv-external-link {
+        position: absolute;
+        right: rem(10px);
+        top: rem(10px);
+    }
 }

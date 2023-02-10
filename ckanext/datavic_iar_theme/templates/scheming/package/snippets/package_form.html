@@ -9,12 +9,12 @@
   {%- endif -%}
   {%- set schema = h.scheming_get_dataset_schema(dataset_type) -%}
   {%- set ns = namespace(display_group='General') -%}
-  <h1 class="header">{{ ns.display_group|capitalize }}</h1>
+  <h2 class="header">{{ ns.display_group|capitalize }}</h2>
   {%- for field in schema.dataset_fields -%}
     {%- if field.display_group is not none and field.display_group != ns.display_group -%}
         {%- set ns.display_group = field.display_group -%}
         {%- if ns.display_group not in ['general'] -%}
-            <h1 class="header">{{ field.display_group|capitalize }}</h1>
+            <h2 class="header">{{ field.display_group|capitalize }}</h2>
         {%- endif -%}
     {%- endif -%}
 

@@ -19,6 +19,8 @@ $rpl-form-element-margin-bottom-s: $rpl-space-4 !default;
 $rpl-form-element-margin-bottom-m: $rpl-space * 7 !default;
 $rpl-form-textarea-height-s: rem(180px) !default;
 $rpl-form-textarea-height-m: rem(75px) !default;
+$break-highlight-small: 375px;
+$break-stages-text-small: 545px;
 
 @mixin rpl_form_text {
   @include rpl_typography_ruleset($rpl-form-element-text-ruleset);
@@ -59,7 +61,15 @@ $rpl-form-textarea-height-m: rem(75px) !default;
 
         .highlight {
             color: #6B6B6B;
-        }
+
+            @media (min-width: $break-highlight-small) {
+                text-indent: 0px;
+            }
+            @media (max-width: $break-stages-text-small) {
+                padding: 5px 60px;
+                line-height: 20px;
+            }
+        }        
         &.active {
             &:before {
                 color: $green;

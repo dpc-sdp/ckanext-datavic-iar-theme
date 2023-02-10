@@ -31,7 +31,7 @@
                     <h4 class="modal-title">Sync dataset on DataVic: {{ pkg.title }}</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Note: This will send the most recent version of this dataset to DataVic. Data records are automatically updated on DataVic when published, with only a small time delay. In rare cases there can be a connection issue at the time of publishing. this manual update should only be used if the change has not appeared on DataVic after 10 minutes. 
+                    <p>Note: This will send the most recent version of this dataset to DataVic. Data records are automatically updated on DataVic when published, with only a small time delay. In rare cases there can be a connection issue at the time of publishing. this manual update should only be used if the change has not appeared on DataVic after 10 minutes.
                     </p>
                     <p>Are you sure you want to try syncing this dataset again?</p>
                 </div>
@@ -41,8 +41,8 @@
                       data-module="datavic_sync_dataset"
                       data-module-action="syndicate_sync"
                       data-module-flash-error="{{ _('Dataset cannot be syndicated.') }}"
-                      data-module-flash-success="{{ _("Dataset " ~ pkg.title ~ " is being syndicated to DataVic.") }}"
-                      data-module-payload="{{ {"profile": "odp", "topic": "update", "id": pkg.id}|tojson|forceescape }}"
+                      data-module-flash-success="{{ _('Dataset {pkg_title} is being syndicated to DataVic.').format(pkg_title=pkg.title) }}"
+                      data-module-payload="{{ {'profile': 'odp', 'topic': 'update', 'id': pkg.id}|tojson|forceescape }}"
                       >Sync</button>
                 </div>
             </div>
