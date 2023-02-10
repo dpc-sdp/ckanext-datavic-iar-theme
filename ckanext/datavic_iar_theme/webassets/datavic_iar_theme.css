@@ -106,7 +106,7 @@ body {
   padding-left: 0;
   padding-right: 0;
   width: 940px; }
-  @media (max-width: 767px) {
+  @media (max-width: 991px) {
     [role="main"] .container {
       width: auto; } }
 
@@ -626,6 +626,35 @@ h2 {
     .dashboard .nav-tabs > li:first-child > a,
     .dashboard .nav-tabs > li:first-child > a:hover {
       border-left: 1px solid #D7DBE0; } }
+
+.sdp-alert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  padding: 20px;
+  margin-left: -40px;
+  margin-right: -40px; }
+  @media (max-width: 767px) {
+    .sdp-alert {
+      margin-left: 0px;
+      margin-right: 0px; } }
+  .sdp-alert .rpl-icon {
+    min-width: 25px;
+    min-height: 25px;
+    margin-inline-end: 10px; }
+  .sdp-alert-danger {
+    color: #af272f;
+    border-color: #af272f;
+    background: #f9f0f0; }
+    .sdp-alert-danger .error-list {
+      padding-inline-start: 30px; }
+  .sdp-alert-success {
+    color: #027a83;
+    border-color: #027a83;
+    background: #edf6f6; }
+    .sdp-alert-success .rpl-icon {
+      fill: #027a83; }
 
 .select2-search-choice-close, .select2-container-multi .select2-search-choice-close {
   top: 5px; }
@@ -1307,6 +1336,11 @@ nav {
     letter-spacing: 0.0125rem;
     line-height: 1rem;
     padding-left: 0; }
+
+.module .dashboard-header {
+  font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
+  font-size: 1.5em;
+  padding: 0px 15px 0px 30px; }
 
 .rpl-text-icon--before {
   margin: auto .5rem auto auto; }
@@ -2338,8 +2372,9 @@ label.rpl-checkbox:after {
       padding-top: 3rem;
       padding-bottom: 3.75rem; } }
   .rpl-search-form h1 {
-    color: #F6BE00;
-    margin-top: 0; }
+    color: #011A3C;
+    margin-top: 0;
+    padding-left: 25px; }
     @media screen and (min-width: 0) {
       .rpl-search-form h1 {
         font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
@@ -2349,12 +2384,12 @@ label.rpl-checkbox:after {
     @media screen and (min-width: 768px) {
       .rpl-search-form h1 {
         font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
-        font-size: 3rem;
+        font-size: 2rem;
         line-height: 1em; } }
     @media screen and (min-width: 1600px) {
       .rpl-search-form h1 {
         font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
-        font-size: 3.5rem;
+        font-size: 2rem;
         line-height: 1em; } }
     .rpl-search-form--dark h1 {
       color: #fff; }
@@ -2871,6 +2906,167 @@ label.chk-label-active .custom-check,
 
 a.close {
   font-size: 1.5rem; }
+
+.row.user-login-page .primary,
+.row.user-register-page .primary {
+  float: none; }
+  .row.user-login-page .primary .page-heading,
+  .row.user-register-page .primary .page-heading {
+    margin-bottom: 4rem; }
+  .row.user-login-page .primary .sso-block,
+  .row.user-register-page .primary .sso-block {
+    padding: 0 30px; }
+    .row.user-login-page .primary .sso-block .sso-block-button,
+    .row.user-register-page .primary .sso-block .sso-block-button {
+      text-align: center;
+      margin-bottom: 2.25rem; }
+      .row.user-login-page .primary .sso-block .sso-block-button .btn,
+      .row.user-register-page .primary .sso-block .sso-block-button .btn {
+        width: 100%;
+        text-decoration: none; }
+    .row.user-login-page .primary .sso-block .sso-block--info,
+    .row.user-register-page .primary .sso-block .sso-block--info {
+      font-style: italic;
+      line-height: 1.3;
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem; }
+      .row.user-login-page .primary .sso-block .sso-block--info .info--icon,
+      .row.user-register-page .primary .sso-block .sso-block--info .info--icon {
+        margin: 0 10px; }
+        .row.user-login-page .primary .sso-block .sso-block--info .info--icon svg,
+        .row.user-register-page .primary .sso-block .sso-block--info .info--icon svg {
+          height: 32px;
+          width: 32px; }
+      .row.user-login-page .primary .sso-block .sso-block--info .info--text a,
+      .row.user-register-page .primary .sso-block .sso-block--info .info--text a {
+        text-decoration: underline; }
+  .row.user-login-page .primary .module-content,
+  .row.user-register-page .primary .module-content {
+    width: fit-content;
+    margin: 0 auto;
+    max-width: 655px; }
+    .row.user-login-page .primary .module-content .control-label,
+    .row.user-register-page .primary .module-content .control-label {
+      width: unset;
+      float: unset;
+      text-align: left;
+      font-family: "Vic-Bold", arial, sans-serif;
+      font-size: 1rem;
+      margin-bottom: 0.5rem; }
+    .row.user-login-page .primary .module-content .control-medium,
+    .row.user-register-page .primary .module-content .control-medium {
+      margin: 0;
+      margin-bottom: 1rem; }
+      .row.user-login-page .primary .module-content .control-medium .controls,
+      .row.user-register-page .primary .module-content .control-medium .controls {
+        margin-left: 0; }
+      .row.user-login-page .primary .module-content .control-medium input,
+      .row.user-login-page .primary .module-content .control-medium select,
+      .row.user-login-page .primary .module-content .control-medium textarea,
+      .row.user-register-page .primary .module-content .control-medium input,
+      .row.user-register-page .primary .module-content .control-medium select,
+      .row.user-register-page .primary .module-content .control-medium textarea {
+        width: 100%;
+        height: 50px;
+        background-color: #F6F6F9;
+        border: 1px solid #D7DBE0;
+        border-radius: 0.25rem; }
+    .row.user-login-page .primary .module-content .form-actions,
+    .row.user-register-page .primary .module-content .form-actions {
+      display: flex;
+      gap: 30px;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem; }
+      .row.user-login-page .primary .module-content .form-actions .sign-up,
+      .row.user-register-page .primary .module-content .form-actions .sign-up {
+        font-family: "Vic-Bold", arial, sans-serif; }
+        .row.user-login-page .primary .module-content .form-actions .sign-up a,
+        .row.user-register-page .primary .module-content .form-actions .sign-up a {
+          color: #011A3C; }
+      .row.user-login-page .primary .module-content .form-actions .btn,
+      .row.user-register-page .primary .module-content .form-actions .btn {
+        width: 25%; }
+        .row.user-login-page .primary .module-content .form-actions .btn:disabled,
+        .row.user-register-page .primary .module-content .form-actions .btn:disabled {
+          width: unset;
+          margin-left: auto; }
+    .row.user-login-page .primary .module-content .password-reset,
+    .row.user-register-page .primary .module-content .password-reset {
+      font-size: 0.875rem;
+      text-align: right; }
+      .row.user-login-page .primary .module-content .password-reset a,
+      .row.user-register-page .primary .module-content .password-reset a {
+        color: #011A3C;
+        text-decoration: underline; }
+
+@media (max-width: 767px) {
+  .row.user-login-page .primary,
+  .row.user-register-page .primary {
+    padding: 0; }
+    .row.user-login-page .primary .sso-block,
+    .row.user-register-page .primary .sso-block {
+      padding: 0; }
+      .row.user-login-page .primary .sso-block .sso-block-button,
+      .row.user-register-page .primary .sso-block .sso-block-button {
+        text-align: center;
+        margin-bottom: 1.5rem; }
+        .row.user-login-page .primary .sso-block .sso-block-button .btn,
+        .row.user-register-page .primary .sso-block .sso-block-button .btn {
+          word-wrap: break-word;
+          white-space: normal;
+          line-height: 1.3; }
+    .row.user-login-page .primary .module-content,
+    .row.user-register-page .primary .module-content {
+      max-width: unset;
+      width: 100%;
+      padding: 10px; }
+      .row.user-login-page .primary .module-content .form-actions .btn,
+      .row.user-register-page .primary .module-content .form-actions .btn {
+        padding: 16px; } }
+
+@media (max-width: 991px) {
+  .row.user-login-page,
+  .row.user-register-page {
+    margin: 0; } }
+
+.row.user-register-page .division-line {
+  margin-bottom: 1.5rem; }
+
+.row.user-register-page .module .module-content .form-actions {
+  justify-content: end; }
+  .row.user-register-page .module .module-content .form-actions .btn {
+    width: unset; }
+
+.row.user-register-page .password-block--info {
+  margin-top: 3rem;
+  margin-bottom: 2.25rem; }
+  .row.user-register-page .password-block--info .info--title {
+    font-size: 28px;
+    margin-bottom: 2.25rem; }
+
+.division-line {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #c0c0c0;
+  line-height: 0;
+  margin: 3rem 0;
+  font-style: italic;
+  font-size: 0.875rem; }
+  .division-line span {
+    background: #fff;
+    padding: 0 1.125rem; }
+
+.custom-select .controls {
+  overflow: hidden;
+  background: url("/assets/images/arrow.svg") no-repeat right;
+  background-position-x: 97%;
+  background-color: #F6F6F9; }
+  .custom-select .controls select {
+    -webkit-appearance: none;
+    box-shadow: none;
+    background-color: transparent !important; }
 
 .activity .item .date {
   color: #757575; }

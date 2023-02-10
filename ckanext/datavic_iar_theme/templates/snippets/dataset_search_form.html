@@ -10,6 +10,22 @@
 
     <div class="search-form-wrapper">
       <div class="rpl-search-form da-search rpl-site-constrain--on-all">
+        {% if query %}
+          <h1> {{ ungettext(
+            'Search Results ({number} dataset found)', 
+            'Search Results ({number} datasets found)', 
+             count
+            ).format(number=count) }}
+         </h1>              
+        {% else %}
+          <h1>
+            {{ ungettext(
+              'Search {number} dataset', 
+              'Search {number} datasets', 
+               count
+            ).format(number=count) }}
+         </h1>
+        {% endif %}
         <form {% if form_id %}id="{{ form_id }}" {% endif %}class="rpl-form" action="{{ h.url_for('dataset.search') }}" method="get">
           <input type="hidden" id="field-order-by" name="sort" value="{{ sorting_selected }}" />
           <input type="hidden" id="field-visibility" name="visibility" value="{{ visibility_selected }}" />
@@ -357,9 +373,7 @@
   {% endblock %}
 
   {% block search_title %}
-    {% if not error and count %}
-      <h2 class="block-search-title">{% snippet 'snippets/search_result_text.html', query=query, count=count, type=type %}</h2>
-    {% elif error %}
+    {% if error %}
       <h2>Error</h2>
     {% endif %}
   {% endblock %}

@@ -158,3 +158,45 @@ $nav-tab-a-color: rpl-color('mid_neutral_4') !default;
 
   }
 }
+
+.sdp-alert {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    padding: 20px;
+
+    margin-left: -40px;
+    margin-right: -40px;
+    @media (max-width: 767px) {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .rpl-icon {
+        min-width: 25px;
+        min-height: 25px;
+        margin-inline-end: 10px;
+    }
+
+    &-danger {
+        color: rpl-color('danger');
+        border-color: rpl-color('danger');
+        background: #f9f0f0;
+
+        .error-list {
+            padding-inline-start: 30px;
+        }
+
+    }
+    &-success {
+        color: #027a83;
+        border-color: #027a83;
+        background: #edf6f6;
+
+        .rpl-icon {
+            fill: #027a83;
+        }
+    }
+
+}

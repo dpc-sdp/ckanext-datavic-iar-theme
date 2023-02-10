@@ -1,46 +1,272 @@
 // User login form
 .module.module-narrow.module-shallow {
-  .module-heading {
-    border: none;
-  }
+    .module-heading {
+        border: none;
+    }
 }
 
 .action a.btn {
-  @include rpl_button;
-  @include rpl_button_secondary;
+    @include rpl_button;
+    @include rpl_button_secondary;
 
-  padding: 4px 12px;
+    padding: 4px 12px;
 }
 
 .error-explanation.alert.alert-error {
-  background-color: $rpl-danger-bg-color;
-  color: rpl-color("danger");
+    background-color: $rpl-danger-bg-color;
+    color: rpl-color("danger");
 }
 
 .control-group.error .control-label {
-  color: rpl-color("danger");
+    color: rpl-color("danger");
 }
 
 // Password reset request form
 .form-inline.control-medium {
-  label,
-  input,
-  button {
-    margin-right: 20px;
-  }
-  input {
-    border-color: rpl-color("mid_neutral_1");
-  }
-  .btn.btn-primary {
-    @include rpl-breakpoint(xs) {
-      margin-top: 32px;
+
+    label,
+    input,
+    button {
+        margin-right: 20px;
     }
-    @include rpl-breakpoint(l) {
-      margin-top: 0px;
+
+    input {
+        border-color: rpl-color("mid_neutral_1");
     }
-  }
+
+    .btn.btn-primary {
+        @include rpl-breakpoint(xs) {
+            margin-top: 32px;
+        }
+
+        @include rpl-breakpoint(l) {
+            margin-top: 0px;
+        }
+    }
 }
 
 a.close {
-  font-size: rpl-font-size(xl);
+    font-size: rpl-font-size(xl);
+}
+
+
+.row.user-login-page,
+.row.user-register-page {
+    .primary {
+        float: none;
+
+        .page-heading {
+            margin-bottom: rem(64px);
+        }
+
+        .sso-block {
+            padding: 0 30px;
+
+            .sso-block-button {
+                text-align: center;
+                margin-bottom: rem(36px);
+
+                .btn {
+                    width: 100%;
+                    text-decoration: none;
+                }
+            }
+
+            .sso-block--info {
+                font-style: italic;
+                line-height: 1.3;
+
+                display: flex;
+                align-items: center;
+
+                margin-bottom: rem(32px);
+
+                .info--icon {
+                    margin: 0 10px;
+
+                    svg {
+                        height: 32px;
+                        width: 32px;
+                    }
+                }
+
+                .info--text {
+                    a {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
+        .module-content {
+            width: fit-content;
+            margin: 0 auto;
+            max-width: 655px;
+
+
+            .control-label {
+                width: unset;
+                float: unset;
+                text-align: left;
+
+                font-family: "Vic-Bold", arial, sans-serif;
+                font-size: rem(16px);
+                margin-bottom: rem(8px);
+            }
+
+            .control-medium {
+                margin: 0;
+                margin-bottom: rem(16px);
+
+                .controls {
+                    margin-left: 0;
+                }
+
+                input,
+                select,
+                textarea {
+                    width: 100%;
+                    height: 50px;
+
+                    background-color: $rpl-form-element-bg-color;
+                    border: 1px solid $rpl-form-element-border-color;
+                    border-radius: $rpl-form-element-border-radius;
+                }
+            }
+
+            .form-actions {
+                display: flex;
+                gap: 30px;
+                justify-content: space-between;
+                align-items: center;
+
+                margin-top: rem(48px);
+
+
+                .sign-up {
+                    font-family: "Vic-Bold", arial, sans-serif;
+
+                    a {
+                        color: rpl-color('secondary');
+                    }
+                }
+
+                .btn {
+                    width: 25%;
+
+                    &:disabled {
+                        width: unset;
+                        margin-left: auto;
+                    }
+                }
+            }
+
+            .password-reset {
+                font-size: rem(14px);
+                text-align: right;
+
+                a {
+                    color: rpl-color('secondary');
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 767px) {
+        .primary {
+            padding: 0;
+
+            .sso-block {
+                padding: 0;
+
+                .sso-block-button {
+                    text-align: center;
+                    margin-bottom: rem(24px);
+
+                    .btn {
+                        word-wrap: break-word;
+                        white-space: normal;
+                        line-height: 1.3;
+                    }
+                }
+            }
+
+            .module-content {
+                max-width: unset;
+                width: 100%;
+                padding: 10px;
+
+                .form-actions {
+
+                    .btn {
+                        padding: 16px;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width:991px) {
+        margin: 0;
+    }
+}
+
+
+.row.user-register-page {
+    .division-line {
+        margin-bottom: rem(24px);
+    }
+
+    .module .module-content {
+        .form-actions {
+            justify-content: end;
+
+            .btn {
+                width: unset;
+            }
+        }
+    }
+
+    .password-block--info {
+        margin-top: rem(48px);
+        margin-bottom: rem(36px);
+
+        .info--title {
+            font-size: 28px;
+            margin-bottom: rem(36px);
+        }
+    }
+
+}
+
+.division-line {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #c0c0c0;
+    line-height: 0;
+    margin: rem(48px) 0;
+    font-style: italic;
+    font-size: rem(14px);
+
+    span {
+        background: rpl-color('white');
+        padding: 0 rem(18px);
+    }
+}
+
+.custom-select {
+
+    .controls {
+        overflow: hidden;
+        background: url('/assets/images/arrow.svg') no-repeat right;
+        background-position-x: 97%;
+        background-color: $rpl-form-element-bg-color;
+
+        select {
+            -webkit-appearance: none;
+            box-shadow: none;
+            background-color: transparent !important;
+        }
+    }
 }
