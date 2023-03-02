@@ -34,23 +34,9 @@ ckan.module("-datavic-autocomplete", function ($) {
     console.debug("[-datavic-autocomplete] Set aria-expanded on %o", target);
     target.attr("aria-expanded", "false");
 
-    // add required property to select2 fields
-    $('.select2-search-field').children('input[type="text"]').prop("required", "true");
-    $('.select2-search-field').children('input[type="text"]').attr("aria-required", "true");
+    // remove duplicate labels
     $('.select2-search-field').children('label').remove();
-    $('label[for="field-tag_string"]').attr("for", $('.select2-search-field').children('input[type="text"]').attr("id"));
-    
-    $('.select2-focusser').prop("required", "true");
-    $('.select2-focusser').attr("aria-required", "true");
     $('.select2-container').children('label').remove();
-
-    organization = $('label[for="field-organizations"]').next().children("div").children("div").children(".select2-focusser")
-    license = $('label[for="field-license_id"]').next().children("div").children(".select2-focusser")
-    $('label[for="field-organizations"]').attr("for", organization.attr("id"));
-    $('label[for="field-license_id"]').attr("for", license.attr("id"));
-
-    $('.select2-search').children('input[role="combobox"]').prop("required", "true");
-    $('.select2-search').children('input[role="combobox"]').attr("aria-required", "true");
     $('.select2-search').children('label').remove();
   };
 });
