@@ -7,17 +7,23 @@
   {{ super() }}
 {% endblock %}
 
+{% block header %}
+  <header>
+    {{ super() }}
+  </header>
+{% endblock %}
+
 {%- block content %}
 
     {% if self.breadcrumb_content() | trim %}
-    <div class="rpl-breadcrumbs">
-        <nav aria-label="breadcrumbs">
-            <ul class="rpl-breadcrumbs__items">
-                <li class="rpl-breadcrumbs__item"><a href="{{ h.url_for('home.index') }}"  class="rpl-link rpl-breadcrumbs__link">Home</a></li>
-                {% block breadcrumb_content %}{% endblock %}
-            </ul>
-        </nav>
-    </div>
+      <div id="breadcrumbs" class="rpl-breadcrumbs" role="breadcrumbs">
+          <nav aria-label="breadcrumbs">
+              <ul class="rpl-breadcrumbs__items">
+                  <li class="rpl-breadcrumbs__item"><a href="{{ h.url_for('home.index') }}"  class="rpl-link rpl-breadcrumbs__link">Home</a></li>
+                  {% block breadcrumb_content %}{% endblock %}
+              </ul>
+          </nav>
+      </div>
     {% endif %}
 
     {% block maintag %}<main class="main" role="main">{% endblock %}
