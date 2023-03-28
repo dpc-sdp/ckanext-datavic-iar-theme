@@ -19,7 +19,7 @@
     {% set url = h.url_for('dataset.edit', id=pkg.name) %}
     {% set is_ready_for_sync = h.is_ready_for_publish(pkg) %}
     {% if is_ready_for_sync %}
-      <a type="btn" class="btn" data-toggle="modal" data-target="#syncModal">
+      <a type="btn" class="btn" data-ds-toggle="modal" data-ds-target="#syncModal">
         <i class="fa fa-refresh"></i>
         {{ _('Sync') }}
       </a>
