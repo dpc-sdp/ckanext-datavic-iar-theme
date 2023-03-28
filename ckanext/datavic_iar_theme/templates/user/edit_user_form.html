@@ -12,7 +12,7 @@
 
     {{ form.input('fullname', label=_('Full name'), id='field-fullname', value=data.fullname, error=errors.fullname, placeholder=_('eg. Joe Bloggs'), classes=['control-medium']) }}
 
-    {% set email_attrs = {"class": "form-control"} %}
+    {% set email_attrs = {"class": "form-control", "aria-required": "true", "required": "true"} %}
     {% if is_sso_user %}
         {% do email_attrs.update(readonly=true) %}
     {% endif %}
