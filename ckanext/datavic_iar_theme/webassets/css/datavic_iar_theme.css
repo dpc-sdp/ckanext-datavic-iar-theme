@@ -802,132 +802,6 @@ nav {
     line-height: 1.4em;
     font-weight: normal; }
 
-.btn-primary {
-  color: #011A3C;
-  text-align: center;
-  display: inline-block;
-  margin: 0;
-  box-sizing: border-box;
-  text-decoration: none;
-  width: 100%;
-  padding: 1rem 3rem;
-  border: 1px solid transparent;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  color: #011A3C;
-  background-color: #F6BE00; }
-  @media screen and (min-width: 0) {
-    .btn-primary {
-      font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
-      font-size: 0.875rem;
-      line-height: 1em;
-      font-weight: normal; } }
-  @media screen and (min-width: 768px) {
-    .btn-primary {
-      font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
-      font-size: 1rem;
-      line-height: 1em; } }
-  @media print {
-    .btn-primary {
-      color: #000; } }
-  @media screen and (min-width: 576px) {
-    .btn-primary {
-      width: auto; } }
-  @media print {
-    .btn-primary {
-      padding-left: 0;
-      padding-right: 0;
-      width: auto; } }
-  .btn-primary:hover, .btn-primary:focus {
-    text-decoration: none; }
-  .btn-primary:active {
-    background-color: transparent;
-    background-image: linear-gradient(180deg, #F6BE00 0%, #F69C00 100%);
-    color: #011A3C; }
-  @media print {
-    .btn-primary {
-      color: #000; } }
-  @media print {
-    .btn-primary {
-      background-color: transparent; } }
-  .btn-primary:hover, .btn-primary:focus {
-    background-color: #F69C00;
-    color: #011A3C; }
-  .btn-primary:active {
-    color: #011A3C; }
-    @media print {
-      .btn-primary:active {
-        color: #000; } }
-  .btn-primary:hover, .btn-primary:focus {
-    text-decoration: none; }
-
-.btn-group.open .btn-primary.dropdown-toggle {
-  background-color: #F6BE00; }
-
-.btn-group > .btn {
-  font-size: initial; }
-
-.btn-secondary {
-  color: #011A3C;
-  text-align: center;
-  display: inline-block;
-  margin: 0;
-  box-sizing: border-box;
-  text-decoration: none;
-  width: 100%;
-  padding: 1rem 3rem;
-  border: 1px solid transparent;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  color: #011A3C;
-  background-color: #BFC5CD; }
-  @media screen and (min-width: 0) {
-    .btn-secondary {
-      font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
-      font-size: 0.875rem;
-      line-height: 1em;
-      font-weight: normal; } }
-  @media screen and (min-width: 768px) {
-    .btn-secondary {
-      font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
-      font-size: 1rem;
-      line-height: 1em; } }
-  @media print {
-    .btn-secondary {
-      color: #000; } }
-  @media screen and (min-width: 576px) {
-    .btn-secondary {
-      width: auto; } }
-  @media print {
-    .btn-secondary {
-      padding-left: 0;
-      padding-right: 0;
-      width: auto; } }
-  .btn-secondary:hover, .btn-secondary:focus {
-    text-decoration: none; }
-  .btn-secondary:active {
-    background-color: transparent;
-    background-image: linear-gradient(180deg, #F6BE00 0%, #F69C00 100%);
-    color: #011A3C; }
-  @media print {
-    .btn-secondary {
-      color: #000; } }
-  @media print {
-    .btn-secondary {
-      background-color: transparent; } }
-  .btn-secondary:hover, .btn-secondary:focus {
-    background-color: #667285;
-    color: #011A3C; }
-  .btn-secondary:active {
-    color: #011A3C;
-    background-color: transparent;
-    background-image: linear-gradient(180deg, #011A3C 0%, #667285 100%); }
-    @media print {
-      .btn-secondary:active {
-        color: #000; } }
-  .btn-secondary:hover, .btn-secondary:focus {
-    text-decoration: none; }
-
 .btn.a {
   color: #206b82; }
 
@@ -999,6 +873,67 @@ nav {
       .btn.btn-primary:active {
         color: #000; } }
   .btn.btn-primary:hover, .btn.btn-primary:focus {
+    text-decoration: none; }
+
+.btn.btn-secondary {
+  color: #011A3C;
+  text-align: center;
+  display: inline-block;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  width: 100%;
+  padding: 1rem 3rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  color: #011A3C;
+  background-color: #BFC5CD; }
+  @media screen and (min-width: 0) {
+    .btn.btn-secondary {
+      font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
+      font-size: 0.875rem;
+      line-height: 1em;
+      font-weight: normal; } }
+  @media screen and (min-width: 768px) {
+    .btn.btn-secondary {
+      font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
+      font-size: 1rem;
+      line-height: 1em; } }
+  @media print {
+    .btn.btn-secondary {
+      color: #000; } }
+  @media screen and (min-width: 576px) {
+    .btn.btn-secondary {
+      width: auto; } }
+  @media print {
+    .btn.btn-secondary {
+      padding-left: 0;
+      padding-right: 0;
+      width: auto; } }
+  .btn.btn-secondary:hover, .btn.btn-secondary:focus {
+    text-decoration: none; }
+  .btn.btn-secondary:active {
+    background-color: transparent;
+    background-image: linear-gradient(180deg, #F6BE00 0%, #F69C00 100%);
+    color: #011A3C; }
+  @media print {
+    .btn.btn-secondary {
+      color: #000; } }
+  @media print {
+    .btn.btn-secondary {
+      background-color: transparent; } }
+  .btn.btn-secondary:hover, .btn.btn-secondary:focus {
+    background-color: #667285;
+    color: #011A3C; }
+  .btn.btn-secondary:active {
+    color: #011A3C;
+    background-color: transparent;
+    background-image: linear-gradient(180deg, #011A3C 0%, #667285 100%); }
+    @media print {
+      .btn.btn-secondary:active {
+        color: #000; } }
+  .btn.btn-secondary:hover, .btn.btn-secondary:focus {
     text-decoration: none; }
 
 .btn.btn-success {
@@ -1970,6 +1905,17 @@ nav {
 
 .resource-read .table.table-striped thead {
   display: none; }
+
+.module-resource .nav.nav-tabs li {
+  padding: 0 10px; }
+  .module-resource .nav.nav-tabs li .btn {
+    border: none;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    font-weight: 600;
+    font-family: "VIC-Regular", "Arial", "Helvetica", "sans-serif";
+    margin-bottom: 0.5rem; }
 
 .dataset-resources {
   margin-top: 0.75rem; }
