@@ -63,7 +63,7 @@ this.ckan.module('datavic-api-info', function (jQuery) {
 
       this.loadTemplate().done(function (html) {
         module.modal = jQuery(html);
-        module.modal.find('.modal-header :header').append('<button class="close" data-dismiss="modal">×</button>');
+        module.modal.find('.modal-header :header').append('<button class="btn-close" data-bs-dismiss="modal">×</button>');
         module.modal.find('.a').first().focus();
         module.modal.modal().appendTo(sandbox.body);
         module.modal.on('shown.bs.modal', function () {

@@ -816,7 +816,13 @@ nav {
   .btn.btn-danger:hover, .btn.btn-danger:focus, .btn.btn-danger:active {
     color: #fff; }
 
-.btn.btn-primary {
+.btn.btn-group.open .btn-primary.dropdown-toggle {
+  background-color: #F6BE00; }
+
+.btn.btn-group > .btn {
+  font-size: initial; }
+
+.btn-primary {
   color: #011A3C;
   text-align: center;
   display: inline-block;
@@ -831,51 +837,51 @@ nav {
   color: #011A3C;
   background-color: #F6BE00; }
   @media screen and (min-width: 0) {
-    .btn.btn-primary {
+    .btn-primary {
       font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
       font-size: 0.875rem;
       line-height: 1em;
       font-weight: normal; } }
   @media screen and (min-width: 768px) {
-    .btn.btn-primary {
+    .btn-primary {
       font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
       font-size: 1rem;
       line-height: 1em; } }
   @media print {
-    .btn.btn-primary {
+    .btn-primary {
       color: #000; } }
   @media screen and (min-width: 576px) {
-    .btn.btn-primary {
+    .btn-primary {
       width: auto; } }
   @media print {
-    .btn.btn-primary {
+    .btn-primary {
       padding-left: 0;
       padding-right: 0;
       width: auto; } }
-  .btn.btn-primary:hover, .btn.btn-primary:focus {
+  .btn-primary:hover, .btn-primary:focus {
     text-decoration: none; }
-  .btn.btn-primary:active {
+  .btn-primary:active {
     background-color: transparent;
     background-image: linear-gradient(180deg, #F6BE00 0%, #F69C00 100%);
     color: #011A3C; }
   @media print {
-    .btn.btn-primary {
+    .btn-primary {
       color: #000; } }
   @media print {
-    .btn.btn-primary {
+    .btn-primary {
       background-color: transparent; } }
-  .btn.btn-primary:hover, .btn.btn-primary:focus {
+  .btn-primary:hover, .btn-primary:focus {
     background-color: #F69C00;
     color: #011A3C; }
-  .btn.btn-primary:active {
+  .btn-primary:active {
     color: #011A3C; }
     @media print {
-      .btn.btn-primary:active {
+      .btn-primary:active {
         color: #000; } }
-  .btn.btn-primary:hover, .btn.btn-primary:focus {
+  .btn-primary:hover, .btn-primary:focus {
     text-decoration: none; }
 
-.btn.btn-secondary {
+.btn-secondary {
   color: #011A3C;
   text-align: center;
   display: inline-block;
@@ -890,77 +896,51 @@ nav {
   color: #011A3C;
   background-color: #BFC5CD; }
   @media screen and (min-width: 0) {
-    .btn.btn-secondary {
+    .btn-secondary {
       font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
       font-size: 0.875rem;
       line-height: 1em;
       font-weight: normal; } }
   @media screen and (min-width: 768px) {
-    .btn.btn-secondary {
+    .btn-secondary {
       font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
       font-size: 1rem;
       line-height: 1em; } }
   @media print {
-    .btn.btn-secondary {
+    .btn-secondary {
       color: #000; } }
   @media screen and (min-width: 576px) {
-    .btn.btn-secondary {
+    .btn-secondary {
       width: auto; } }
   @media print {
-    .btn.btn-secondary {
+    .btn-secondary {
       padding-left: 0;
       padding-right: 0;
       width: auto; } }
-  .btn.btn-secondary:hover, .btn.btn-secondary:focus {
+  .btn-secondary:hover, .btn-secondary:focus {
     text-decoration: none; }
-  .btn.btn-secondary:active {
+  .btn-secondary:active {
     background-color: transparent;
     background-image: linear-gradient(180deg, #F6BE00 0%, #F69C00 100%);
     color: #011A3C; }
   @media print {
-    .btn.btn-secondary {
+    .btn-secondary {
       color: #000; } }
   @media print {
-    .btn.btn-secondary {
+    .btn-secondary {
       background-color: transparent; } }
-  .btn.btn-secondary:hover, .btn.btn-secondary:focus {
+  .btn-secondary:hover, .btn-secondary:focus {
     background-color: #667285;
     color: #011A3C; }
-  .btn.btn-secondary:active {
+  .btn-secondary:active {
     color: #011A3C;
     background-color: transparent;
     background-image: linear-gradient(180deg, #011A3C 0%, #667285 100%); }
     @media print {
-      .btn.btn-secondary:active {
+      .btn-secondary:active {
         color: #000; } }
-  .btn.btn-secondary:hover, .btn.btn-secondary:focus {
+  .btn-secondary:hover, .btn-secondary:focus {
     text-decoration: none; }
-
-.btn.btn-success {
-  color: #fff;
-  text-align: center;
-  display: inline-block;
-  margin: 0;
-  margin-left: 0px;
-  margin-left: 0px;
-  box-sizing: border-box;
-  text-decoration: none;
-  width: 100%;
-  padding: 1rem 3rem;
-  border: 1px solid transparent;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  color: #fff;
-  line-height: 1rem;
-  font-size: 1rem;
-  font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
-  font-weight: initial; }
-
-.btn.btn-group.open .btn-primary.dropdown-toggle {
-  background-color: #F6BE00; }
-
-.btn.btn-group > .btn {
-  font-size: initial; }
 
 .btn:hover {
   background-color: #F69C00; }
