@@ -2,29 +2,29 @@
 
     {% block page_header %}
       <h1 class="dashboard-header">{{ _('My Dashboard') }}</h1>
-      <header class="module-content page-header hug">
+      <div class="module-content page-header hug">
         <div class="content_action">
           {% link_for _('Edit'), named_route='datavicuser.edit', id=user.name, class_='btn', icon='cog' %}
         </div>
         <ul class="nav nav-tabs">
           {% if h.check_access('package_create') %}
-           
+
             {{ h.build_nav_icon('dashboard.datasets', _('My datasets'), icon='sitemap') }}
             {{ h.build_nav_icon('dashboard.organizations', _('My organizations')) }}
             {{ h.build_nav_icon('dashboard.groups', _('My groups')) }}
             {{ h.build_nav_icon('dashboard.index', _('Activity stream')) }}
             {% if h.check_access('user_dashboard_reports') %}
-            {{ h.build_nav_icon('reporting.reports', _('Reports')) }}         
+            {{ h.build_nav_icon('reporting.reports', _('Reports')) }}
             {% endif %}
-            {% if h.check_access('user_report_schedules') %}        
+            {% if h.check_access('user_report_schedules') %}
               {{ h.build_nav_icon('scheduling.schedules', _('Report schedules')) }}
             {% endif %}
           {% else %}
-            {{ h.build_nav_icon('dashboard.organizations', _('My organizations')) }}  
+            {{ h.build_nav_icon('dashboard.organizations', _('My organizations')) }}
             {{ h.build_nav_icon('dashboard.index', _('Activity stream')) }}
           {% endif %}
         </ul>
-      </header>
+      </div>
     {% endblock %}
 
     {% block primary_content_inner %}
