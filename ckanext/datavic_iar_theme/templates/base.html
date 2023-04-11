@@ -13,12 +13,12 @@
 {% block styles %}
   {{ super() }}
   {% asset 'datavic_iar_theme/iar-theme-css' %}
-  
+
   {% asset 'datavic_iar_theme/datavic-iar-theme-js' %}
 {% endblock %}
 
 
 {% block scripts %}
   {{ super() }}
-   
+    <script src="{{ h.url_for_static_or_external("ckeditor.js") }}"></script>
 {% endblock %}
