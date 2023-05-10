@@ -7,58 +7,58 @@
 
 {% block header_account %}
   {% if c.userobj %}
-  <header class="account-masthead">
-    <div class="container">
-      {% block header_account_container_content %}
-        {% if c.userobj %}
-          <div class="account avatar authed" data-module="me" data-me="{{ g.userobj.id }}">
-            <ul class="unstyled">
-              {% block header_account_logged %}
-              {% if c.userobj.sysadmin %}
+    <nav id="account-menu" class="account-masthead">
+      <div class="container">
+        {% block header_account_container_content %}
+          {% if c.userobj %}
+            <div class="account avatar authed" data-module="me" data-me="{{ g.userobj.id }}">
+              <ul class="unstyled">
+                {% block header_account_logged %}
+                {% if c.userobj.sysadmin %}
+                  <li>
+                    <a href="{{ h.url_for('admin.index') }}" title="{{ _('Sysadmin settings') }}">
+                      <i class="fa fa-gavel" aria-hidden="true"></i>
+                      <span class="text">{{ _('Admin') }}</span>
+                    </a>
+                  </li>
+                {% endif %}
                 <li>
-                  <a href="{{ h.url_for('admin.index') }}" title="{{ _('Sysadmin settings') }}">
-                    <i class="fa fa-gavel" aria-hidden="true"></i>
-                    <span class="text">{{ _('Admin') }}</span>
+                  {% set user_url = h.url_for('user.read', id=g.userobj.name) if h.check_access('package_create') else h.url_for('user.activity', id=g.userobj.name) %}
+                  <a href="{{ user_url }}" class="image" title="{{ _('View profile') }}">
+                    <img src="/user-gravatar.svg" width="16" height="16" alt="User gravatar">
+                    <span class="username">{{ g.userobj.display_name }}</span>
                   </a>
                 </li>
-              {% endif %}
-              <li>
-                {% set user_url = h.url_for('user.read', id=g.userobj.name) if h.check_access('package_create') else h.url_for('user.activity', id=g.userobj.name) %}
-                <a href="{{ user_url }}" class="image" title="{{ _('View profile') }}">
-                  <img src="/user-gravatar.svg" width="16" height="16" alt="User gravatar">
-                  <span class="username">{{ g.userobj.display_name }}</span>
-                </a>
-              </li>
-              {% block header_account_log_out_link %}
-                <li>
-                  <a href="{{ h.url_for('user.logout',  _time=session._accessed_time) }}" title="{{ _('Log out') }}">
-                    <i class="fa fa-sign-out"></i>
-                    <span class="sr-only">{{ _('Log out') }}</span>
-                  </a>
-                </li>
-              {% endblock %}
-              {% endblock %}
-            </ul>
-          </div>
-        {% else %}
-          <nav class="account not-authed">
-            <ul class="unstyled">
-              {% block header_account_notlogged %}
-              <li>{% link_for _('Log in'), 'user.login' %}</li>
-              {% if h.check_access('user_create') %}
-                <li>{% link_for _('Register'), 'user.register', class_='sub' %}</li>
-              {% endif %}
-              {% endblock %}
-            </ul>
-          </nav>
-        {% endif %}
-      {% endblock %}
-    </div>
-  </header>
+                {% block header_account_log_out_link %}
+                  <li>
+                    <a href="{{ h.url_for('user.logout',  _time=session._accessed_time) }}" title="{{ _('Log out') }}">
+                      <i class="fa fa-sign-out"></i>
+                      <span class="sr-only">{{ _('Log out') }}</span>
+                    </a>
+                  </li>
+                {% endblock %}
+                {% endblock %}
+              </ul>
+            </div>
+          {% else %}
+            <nav class="account not-authed">
+              <ul class="unstyled">
+                {% block header_account_notlogged %}
+                <li>{% link_for _('Log in'), 'user.login' %}</li>
+                {% if h.check_access('user_create') %}
+                  <li>{% link_for _('Register'), 'user.register', class_='sub' %}</li>
+                {% endif %}
+                {% endblock %}
+              </ul>
+            </nav>
+          {% endif %}
+        {% endblock %}
+      </div>
+    </nav>
   {% endif %}
 {% endblock %}
 
-<div id="mobile-menu" class="rpl-site-header hidden">
+<nav id="mobile-menu" class="rpl-site-header hidden">
   <div class="rpl-site-header__inner">
     <div class="rpl-site-header__top">
       <div class="rpl-site-header__logo-container">
@@ -103,9 +103,9 @@
       <div class="rpl-site-header__btn-container"><!----> <!----></div>
     </div> <!---->
   </div>
-</div>
+</nav>
 
-<div id="main-menu" class="rpl-site-header">
+<nav id="main-menu" class="rpl-site-header">
   <div class="rpl-site-header__inner">
     <div class="rpl-site-header__top">
       <div class="rpl-site-header__logo-container">
@@ -163,6 +163,6 @@
       </div>
     </div> <!---->
   </div>
-</div>
+</nav>
 
 {% endblock %}
