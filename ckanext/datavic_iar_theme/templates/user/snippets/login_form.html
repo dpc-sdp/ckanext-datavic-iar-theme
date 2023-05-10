@@ -78,9 +78,9 @@ Example:
   </div>
 
 
-  {{ form.input('login', label=_("Username"), id='field-login', placeholder="Username", value="", error=username_error, classes=["control-medium"]) }}
+  {{ form.input('login', label=_("Username"), id='field-login', placeholder="Username", value="", error=username_error, classes=["control-medium"], autocomplete="username") }}
 
-  {{ form.input('password', label=_("Password"), id='field-password', placeholder="Enter password", type="password", value="", error=password_error, classes=["control-medium"]) }}
+  {{ form.input('password', label=_("Password"), id='field-password', placeholder="Enter password", type="password", value="", error=password_error, classes=["control-medium"], autocomplete="current-password") }}
 
   <div class="control-group hidden">
     <div class="controls">

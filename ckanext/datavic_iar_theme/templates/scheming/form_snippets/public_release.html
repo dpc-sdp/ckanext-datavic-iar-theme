@@ -6,7 +6,7 @@
         {{ _('Public Release') }}
         </label>
         <div class="controls">
-        <select id="field-private" name="private" class="form-control" required aria-required="true">
+        <select id="field-private" name="private" class="form-control" autocomplete="on" required aria-required="true">
             {% for option in [('True', _('No')), ('False', _('Yes'))] %}
             <option value="{{ option[0] }}" {% if option[0] == data.private|trim %}selected="selected"{% endif %}>{{ option[1] }}</option>
             {% endfor %}

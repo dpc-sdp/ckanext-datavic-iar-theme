@@ -13,7 +13,7 @@ not used as a form_snippet directly #}
     ) %}
     <div {{
       form.attributes(field.form_attrs) if 'form_attrs' in field else '' }}>
-    <select id="field-{{field.field_name}}" name="{{field.field_name}}" class="form-control" {% if workflow_required %}required aria-required="true"{% endif %}>
+    <select id="field-{{field.field_name}}" name="{{field.field_name}}" class="form-control" autocomplete="on" {% if workflow_required %}required aria-required="true"{% endif %}>
       {% for workflow_status in workflow_available %}
         {% set selected_workflow_status = existing_workflow_status == workflow_status.get('value', None) %}
         {% set still_published = '(still published)' if data.syndicate and data.syndicated_id and existing_workflow_status != 'archived' else '' %}
