@@ -16,45 +16,45 @@
                 {% block header_account_logged %}
                 {% if c.userobj.sysadmin %}
                   <li>
-                    <a href="{{ h.url_for('admin.index') }}" title="{{ _('Sysadmin settings') }}">
-                      <i class="fa fa-gavel" aria-hidden="true"></i>
-                      <span class="text">{{ _('Admin') }}</span>
-                    </a>
-                  </li>
-                {% endif %}
-                <li>
-                  {% set user_url = h.url_for('user.read', id=g.userobj.name) if h.check_access('package_create') else h.url_for('user.activity', id=g.userobj.name) %}
-                  <a href="{{ user_url }}" class="image" title="{{ _('View profile') }}">
-                    <img src="/user-gravatar.svg" width="16" height="16" alt="User gravatar">
-                    <span class="username">{{ g.userobj.display_name }}</span>
+                  <a href="{{ h.url_for('admin.index') }}">
+                    <i class="fa fa-gavel" aria-hidden="true"></i>
+                    <span class="text">{{ _('Admin') }}</span>
                   </a>
                 </li>
-                {% block header_account_log_out_link %}
-                  <li>
-                    <a href="{{ h.url_for('user.logout',  _time=session._accessed_time) }}" title="{{ _('Log out') }}">
-                      <i class="fa fa-sign-out"></i>
-                      <span class="sr-only">{{ _('Log out') }}</span>
-                    </a>
-                  </li>
-                {% endblock %}
-                {% endblock %}
-              </ul>
-            </div>
-          {% else %}
-            <nav class="account not-authed">
-              <ul class="unstyled">
-                {% block header_account_notlogged %}
-                <li>{% link_for _('Log in'), 'user.login' %}</li>
-                {% if h.check_access('user_create') %}
-                  <li>{% link_for _('Register'), 'user.register', class_='sub' %}</li>
-                {% endif %}
-                {% endblock %}
-              </ul>
-            </nav>
-          {% endif %}
-        {% endblock %}
-      </div>
-    </nav>
+              {% endif %}
+              <li>
+                {% set user_url = h.url_for('user.read', id=g.userobj.name) if h.check_access('package_create') else h.url_for('user.activity', id=g.userobj.name) %}
+                <a href="{{ user_url }}" class="image">
+                  <img src="/user-gravatar.svg" width="16" height="16" alt="User gravatar">
+                  <span class="username">{{ g.userobj.display_name }}</span>
+                </a>
+              </li>
+              {% block header_account_log_out_link %}
+                <li>
+                  <a href="{{ h.url_for('user.logout',  _time=session._accessed_time) }}" title="{{ _('Log out') }}">
+                    <i class="fa fa-sign-out"></i>
+                    <span class="sr-only">{{ _('Log out') }}</span>
+                  </a>
+                </li>
+              {% endblock %}
+              {% endblock %}
+            </ul>
+          </div>
+        {% else %}
+          <nav class="account not-authed">
+            <ul class="unstyled">
+              {% block header_account_notlogged %}
+              <li>{% link_for _('Log in'), 'user.login' %}</li>
+              {% if h.check_access('user_create') %}
+                <li>{% link_for _('Register'), 'user.register', class_='sub' %}</li>
+              {% endif %}
+              {% endblock %}
+            </ul>
+          </nav>
+        {% endif %}
+      {% endblock %}
+    </div>
+  </header>
   {% endif %}
 {% endblock %}
 
