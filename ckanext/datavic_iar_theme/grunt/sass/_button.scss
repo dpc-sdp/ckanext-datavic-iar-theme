@@ -1,3 +1,39 @@
+.btn {
+    &.a {
+        color: #206b82;
+    }
+
+    .fa {
+        margin-right: 4px;
+    }
+
+    &.btn-light,
+    &.btn-default {
+        color: #000;
+    }
+
+    &.btn-danger {
+        color: #fff;
+        &:hover, &:focus, &:active {
+            color: #fff;
+        }
+    }
+
+    &.btn-group {
+        &.open {
+            .btn-primary {
+                &.dropdown-toggle {
+                    background-color: $rpl-button-primary-background-color;
+                }
+            }
+        }
+        > .btn {
+            font-size: initial;
+        }
+    }
+}
+
+
 .btn-primary {
 
     @include rpl_button;
@@ -9,27 +45,10 @@
     }
 }
 
-.btn-group.open .btn-primary.dropdown-toggle {
-    //background-color: $primary-color;
-}
-
-.btn-group {
-    &.open {
-        .btn-primary {
-            &.dropdown-toggle {
-                background-color: $rpl-button-primary-background-color;
-            }
-        }
-    }
-    > .btn {
-        font-size: initial;
-    }
-}
-
 .btn-secondary {
 
     @include rpl_button;
-    @include rpl_button_secondary
+    @include rpl_button_secondary;
 
     &:hover,
     &:focus {

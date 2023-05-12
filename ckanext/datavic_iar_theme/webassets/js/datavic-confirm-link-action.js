@@ -1,4 +1,4 @@
-this.ckan.module('datavic-confirm-link-action', function (jQuery) {
+ckan.module('datavic-confirm-link-action', function (jQuery) {
     return {
       /* An object of module options */
       options: {
@@ -38,8 +38,8 @@ this.ckan.module('datavic-confirm-link-action', function (jQuery) {
           '<div class="modal-dialog">',
           '<div class="modal-content">',
           '<div class="modal-header">',
-          '<button type="button" class="close" data-dismiss="modal">×</button>',
           '<h3 class="modal-title"></h3>',
+          '<button type="button" class="btn-close" data-bs-dismiss="modal">×</button>',
           '</div>',
           '<div class="modal-body"></div>',
           '<div class="modal-footer">',

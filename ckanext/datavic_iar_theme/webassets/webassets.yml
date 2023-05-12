@@ -25,6 +25,10 @@ datavic-iar-confirm-link-action:
   output: datavic_iar_theme/%(version)s_confirm_link_action.js
   contents:
     - js/datavic-confirm-link-action.js
+  extra:
+    preload:
+      - base/main
+      - base/ckan
   filters: rjsmin
 
 datavic_recline_patch_css:

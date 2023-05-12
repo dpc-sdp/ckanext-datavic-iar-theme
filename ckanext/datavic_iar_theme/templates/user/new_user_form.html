@@ -1,6 +1,8 @@
 {% import "macros/form.html" as form %}
 
 <form id="user-register-form" class="form-horizontal" action="" method="post">
+    {{ h.csrf_input() }}
+
   {{ form.errors(error_summary) }}
 
   <div class="custom-select">

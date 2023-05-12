@@ -40,6 +40,8 @@ Example:
 
 
 <form action="{{ action }}" method="post" class="form-horizontal">
+    {{ h.csrf_input() }}
+
   {{ form.errors(errors=error_summary) }}
 
   <div class="sso-block">

@@ -62,7 +62,7 @@ def format_list() -> list[str]:
 
 @helper
 def get_parent_site_url():
-    return conf.get_parent_site_url()
+    return conf.get_parent_site_url().rstrip("/")
 
 
 @helper

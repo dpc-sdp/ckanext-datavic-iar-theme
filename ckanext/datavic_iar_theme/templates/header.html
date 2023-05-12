@@ -31,7 +31,7 @@
               </li>
               {% block header_account_log_out_link %}
                 <li>
-                  <a href="{{ h.url_for('user.logout',  _time=session._accessed_time) }}">
+                  <a href="{{ h.url_for('user.logout',  _time=session._accessed_time) }}" title="{{ _('Log out') }}">
                     <i class="fa fa-sign-out"></i>
                     <span class="sr-only">{{ _('Log out') }}</span>
                   </a>

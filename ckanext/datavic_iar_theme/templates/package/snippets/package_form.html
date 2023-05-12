@@ -6,14 +6,14 @@
 
 
 <form id="dataset-edit" class="dataset-form" method="post" action="{{ action }}" data-module="basic-form" novalidate>
-  
+    {{ h.csrf_input() }}
   {{ form.required_message() }}
 
   {% block stages %}
     {{ h.snippet('package/snippets/stages.html', stages=stage) }}
   {% endblock %}
 
-  <h1 class="header"> 
+  <h1 class="header">
     {% if form_style != 'edit' %}
       {{ _('Create a new data record') }}
     {% else %}
@@ -57,7 +57,7 @@
           {% asset 'ckanext-datavicmain/datavicmain-confirm-action' %}
           <input type="hidden" name="save" value="true" />
           <button class="btn btn-primary" type="submit" data-module="datavicmain-confirm-action" data-module-with-data=true data-module-content="{{ confirmation_text }}{{ _('Are you sure you want to update?') }}">{{ _('Update Dataset') }}</button>
-        {% else %} 
+        {% else %}
           <button class="btn btn-primary" type="submit" name="save" >{% block save_button_text %}{{ _('Next: Add Data') }}{% endblock %}</button>
         {% endif %}
       {% endblock %}

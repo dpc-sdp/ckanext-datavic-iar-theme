@@ -21,7 +21,7 @@
             {% endif %}
           {% else %}
             {{ h.build_nav_icon('dashboard.organizations', _('My organizations')) }}
-            {{ h.build_nav_icon('dashboard.index', _('Activity stream')) }}
+            {{ h.build_nav_icon('activity.dashboard', _('Activity stream')) }}
           {% endif %}
         </ul>
       </div>
@@ -36,7 +36,7 @@
           <small>{{ _("Activity from items that I'm following") }}</small>
         </h2>
         {% block activity_stream %}
-          {% snippet 'snippets/activity_stream.html', activity_stream=dashboard_activity_stream, id=id, object_type='user' %}
+          {% snippet 'snippets/stream.html', activity_stream=dashboard_activity_stream, id=id, object_type='user' %}
         {% endblock %}
       </div>
     {% endblock %}
