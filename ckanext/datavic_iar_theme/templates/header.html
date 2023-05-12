@@ -1,7 +1,7 @@
 {% block header_wrapper %}
   {% block header_debug %}
     {% if g.debug and not g.debug_supress_header %}
-      <div class="debug">Controller : {{ g.controller }}<br/>Action : {{ g.action }}</div>
+      <div class="debug">Controller : {{ g.blueprint }}<br/>Action : {{ g.view }}</div>
     {% endif %}
   {% endblock %}
 
@@ -23,7 +23,7 @@
                 </li>
               {% endif %}
               <li>
-                {% set user_url = h.url_for('user.read', id=g.userobj.name) if h.check_access('package_create') else h.url_for('user.activity', id=g.userobj.name) %}
+                {% set user_url = h.url_for('user.read', id=g.userobj.name) if h.check_access('package_create') else h.url_for('activity.user_activity', id=g.userobj.name) %}
                 <a href="{{ user_url }}" class="image">
                   <img src="/user-gravatar.svg" width="16" height="16" alt="User gravatar">
                   <span class="username">{{ g.userobj.display_name }}</span>

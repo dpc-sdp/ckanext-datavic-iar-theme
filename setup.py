@@ -46,6 +46,7 @@ setup(
     install_requires=[
         "ckanext-check-link~=0.0.16",
         "ckanext-oidc-pkce~=0.2.3",
+        "ckanext-vip-portal~=0.2.1",
         "ckanext-toolbelt >=0.2.3, <1.0.0",
     ],
     # If there are data files included in your packages that need to be

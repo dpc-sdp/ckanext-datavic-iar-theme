@@ -8,19 +8,19 @@
         </div>
         <ul class="nav nav-tabs">
           {% if h.check_access('package_create') %}
-           
+
             {{ h.build_nav_icon('dashboard.datasets', _('My datasets'), icon='sitemap') }}
             {{ h.build_nav_icon('dashboard.organizations', _('My organizations')) }}
             {{ h.build_nav_icon('dashboard.groups', _('My groups')) }}
-            {{ h.build_nav_icon('dashboard.index', _('Activity stream')) }}
+            {{ h.build_nav_icon('activity.dashboard', _('Activity stream')) }}
             {% if h.check_access('user_dashboard_reports') %}
-            {{ h.build_nav_icon('reporting.reports', _('Reports')) }}         
+            {{ h.build_nav_icon('reporting.reports', _('Reports')) }}
             {% endif %}
-            {% if h.check_access('user_report_schedules') %}        
+            {% if h.check_access('user_report_schedules') %}
               {{ h.build_nav_icon('scheduling.schedules', _('Report schedules')) }}
             {% endif %}
           {% else %}
-            {{ h.build_nav_icon('dashboard.organizations', _('My organizations')) }}  
+            {{ h.build_nav_icon('dashboard.organizations', _('My organizations')) }}
             {{ h.build_nav_icon('dashboard.index', _('Activity stream')) }}
           {% endif %}
         </ul>
