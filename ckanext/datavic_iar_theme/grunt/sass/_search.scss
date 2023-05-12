@@ -27,9 +27,16 @@ $dataset-item-text-color: rpl-color('extra_dark_neutral') !default;
       margin-top: rem(24px);
     }
   }
-  
+
   .dataset-content .dataset-heading > a, .dataset-content div {
     color: $dataset-item-text-color;
+  }
+
+  .dataset-private.badge.bg-secondary {
+    background-color: #000 !important;
+    font-size: .75rem;
+    padding: 2px 4px;
+    border-radius: 0.25rem;
   }
 
   .privacy-label {

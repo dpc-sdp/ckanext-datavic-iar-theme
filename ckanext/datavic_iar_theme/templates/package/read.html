@@ -3,27 +3,12 @@
 {# Note: The parent template has aliased c.pkg_dict as pkg #}
 
 
-{% block primary_content_inner %}
-  {% block package_description %}
+{% block package_tags %}
     {{ super() }}
-  {% endblock %}
-
-  {% block package_resources %}
-    {{ super() }}
-  {% endblock %}
-
-  {% block package_tags %}
-    {{ super() }}
-  {% endblock %}
-
-  {% block featured_resource_content %}
-    {% snippet 'package/snippets/featured_resource.html',
-      pkg=pkg
-      %}
-  {% endblock %}
-
-  {% block package_additional_info %}
-    {{ super() }}
-  {% endblock %}
+    {% block featured_resource_content %}
+        {% snippet 'package/snippets/featured_resource.html',
+        pkg=pkg
+        %}
+    {% endblock %}
 
 {% endblock %}

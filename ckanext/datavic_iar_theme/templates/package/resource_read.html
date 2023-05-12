@@ -1,5 +1,7 @@
 {% ckan_extends %}
 
+{% block wrapper_class %} resource-read{% endblock %}
+
 {% block resource_actions_inner %}
 {% if h.is_dataset_harvested(pkg.id) %}
     {% set harvest_text = 'Harvest Data' if h.check_access('sysadmin') else 'Harvest Data - Read Only'%}

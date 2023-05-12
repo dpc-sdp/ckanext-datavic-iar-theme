@@ -1,17 +1,17 @@
 {#
     Displays information about accessing a resource via the API.
-    
+
     resource_id - The resource id
     embedded - If true will not include the "modal" classes on the snippet.
-    
+
     Example
-    
+
         {% snippet 'ajax_snippets/api_info.html', resource_id=resource_id, embedded=true %}
-    
+
     #}
-    
+
     {% set resource_id = h.sanitize_id(resource_id) %}
-    {% set sql_example_url = h.url_for(controller='api', action='action', ver=3, logic_function='datastore_search_sql', qualified=True) + '?sql=SELECT * from "' + resource_id + '" WHERE title LIKE \'jones\'' %}
+    {% set sql_example_url = h.url_for('api.action', ver=3, logic_function='datastore_search_sql', qualified=True) + '?sql=SELECT * from "' + resource_id + '" WHERE title LIKE \'jones\'' %}
     {# not urlencoding the sql because its clearer #}
     <div{% if not embedded %} class="data-api modal fade"{% endif %} tabindex="-1">
       <div class="modal-dialog">
@@ -31,7 +31,7 @@
               <div class="panel-group" id="accordion2">
               <div class="panel panel-default">
                 <div class="panel-heading">
-    
+
                   <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion2" href="#collapse-endpoints">{{ _('Endpoints') }} &raquo;</a>
                 </div>
                 <div id="collapse-endpoints" class="in panel-collapse collapse">
@@ -42,27 +42,27 @@
                       <tbody>
                         <tr>
                           <th scope="row">{{ _('Create') }}</th>
-                          <td><code>{{ h.url_for(controller='api', action='action', ver=3, logic_function='datastore_create', qualified=True) }}</code></td>
+                          <td><code>{{ h.url_for('api.action', ver=3, logic_function='datastore_create', qualified=True) }}</code></td>
                         </tr>
                         <tr>
                           <th scope="row">{{ _('Update / Insert') }}</th>
-                          <td><code>{{ h.url_for(controller='api', action='action', ver=3, logic_function='datastore_upsert', qualified=True) }}</code></td>
+                          <td><code>{{ h.url_for('api.action', ver=3, logic_function='datastore_upsert', qualified=True) }}</code></td>
                         </tr>
                         <tr>
                           <th scope="row">{{ _('Query') }}</th>
-                          <td><code>{{ h.url_for(controller='api', action='action', ver=3, logic_function='datastore_search', qualified=True) }}</code></td>
+                          <td><code>{{ h.url_for('api.action', ver=3, logic_function='datastore_search', qualified=True) }}</code></td>
                         </tr>
                         <tr>
                           <th scope="row">{{ _('Query (via SQL)') }}</th>
-                          <td><code>{{ h.url_for(controller='api', action='action', ver=3, logic_function='datastore_search_sql', qualified=True) }}</code></td>
+                          <td><code>{{ h.url_for('api.action', ver=3, logic_function='datastore_search_sql', qualified=True) }}</code></td>
                         </tr>
-    
+
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
-    
+
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion2" href="#collapse-querying">{{ _('Querying') }} &raquo;</a>
@@ -71,23 +71,23 @@
                   <div class="panel-body">
                     <strong>{{ _('Query example (first 5 results)') }}</strong>
                     <p>
-                    <code><a href="{{ h.url_for(controller='api', action='action', ver=3, logic_function='datastore_search', resource_id=resource_id, limit=5, qualified=True) }}" target="_blank" rel="nofollow">{{ h.url_for(controller='api', action='action', ver=3, logic_function='datastore_search', resource_id=resource_id, limit=5, qualified=True) }}</a></code>
+                    <code><a href="{{ h.url_for('api.action', ver=3, logic_function='datastore_search', resource_id=resource_id, limit=5, qualified=True) }}" target="_blank" rel="nofollow">{{ h.url_for('api.action', ver=3, logic_function='datastore_search', resource_id=resource_id, limit=5, qualified=True) }}</a></code>
                     </p>
-    
+
                     <strong>{{ _('Query example (results containing \'jones\')') }}</strong>
                     <p>
-                    <code><a href="{{ h.url_for(controller='api', action='action', ver=3, logic_function='datastore_search', resource_id=resource_id, q='jones', qualified=True) }}" target="_blank" rel="nofollow">{{ h.url_for(controller='api', action='action', ver=3, logic_function='datastore_search', resource_id=resource_id, q='jones', qualified=True) }}</a></code>
+                    <code><a href="{{ h.url_for('api.action', ver=3, logic_function='datastore_search', resource_id=resource_id, q='jones', qualified=True) }}" target="_blank" rel="nofollow">{{ h.url_for('api.action', ver=3, logic_function='datastore_search', resource_id=resource_id, q='jones', qualified=True) }}</a></code>
                     </p>
-    
+
                     <strong>{{ _('Query example (via SQL statement)') }}</strong>
                     <p>
                     <code><a href="{{sql_example_url}}" target="_blank" rel="nofollow">{{ sql_example_url }}</a></code>
                     </p>
-    
+
                   </div>
                 </div>
               </div>
-    
+
               <div class="panel panel-default">
                 <div class="panel-heading">
                  <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion2" href="#collapse-javascript">{{ _('Example: Javascript') }} &raquo;</a>
@@ -102,7 +102,7 @@
               q: 'jones' // query for 'jones'
             };
             $.ajax({
-              url: '{{ h.url_for(controller='api', action='action', ver=3, logic_function='datastore_search', qualified=True) }}',
+              url: '{{ h.url_for('api.action', ver=3, logic_function='datastore_search', qualified=True) }}',
               data: data,
               dataType: 'jsonp',
               success: function(data) {
@@ -112,7 +112,7 @@
                   </div>
                 </div>
               </div>
-    
+
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion2" href="#collapse-python">{{ _('Example: Python') }} &raquo;</a>
@@ -121,7 +121,7 @@
                   <div class="panel-body">
                     <pre>
           import urllib
-          url = '{{ h.url_for(qualified=True, controller='api', action='action', ver=3, logic_function='datastore_search', resource_id=resource_id, limit=5) + '&q=title:jones' }}'  {# not urlencoding the ":" because its clearer #}
+          url = '{{ h.url_for(qualified=True, 'api.action', ver=3, logic_function='datastore_search', resource_id=resource_id, limit=5) + '&q=title:jones' }}'  {# not urlencoding the ":" because its clearer #}
           fileobj = urllib.urlopen(url)
           print fileobj.read()
           </pre>
@@ -129,10 +129,9 @@
                 </div>
               </div>
             </div>
-    
+
           </div>
         </div>
       </div>
-    
+
     </div>
-    

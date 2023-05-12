@@ -11,20 +11,26 @@
 
 {% block subtitle %}{% endblock %}
 
+{% block content %}
+    <main>
+        {{ super() }}
+    </main>
+{% endblock %}
+
 {% block primary_content %}
 
-<section>
-    <div class="rpl-hero-banner">
-        <div class=rpl-hero-banner__center>
-            <h1 class="rpl-hero-banner__title">
-                <span>VPS Data Directory</span>
-            </h1>
-            <p class="rpl-hero-banner__description">The place for Victorian public servants to find, discover and share data amongst departments and agencies</p>
+    <section>
+        <div class="rpl-hero-banner">
+            <div class=rpl-hero-banner__center>
+                <h1 class="rpl-hero-banner__title">
+                    <span>VPS Data Directory</span>
+                </h1>
+                <p class="rpl-hero-banner__description">The place for Victorian public servants to find, discover and share data amongst departments and agencies</p>
+            </div>
         </div>
-    </div>
- {% block search %}
-    {% snippet 'snippets/dataset_search_form.html', query=query, count=count, type=type, facets=facets, placeholder=placeholder, sorting=sorting, form_id=form_id, sorting_selected=sorting_selected %}
-{% endblock %}
-</section>
+        {% block search %}
+            {% snippet 'snippets/dataset_search_form.html', query=query, count=count, type=type, facets=facets, placeholder=placeholder, sorting=sorting, form_id=form_id, sorting_selected=sorting_selected %}
+        {% endblock %}
+    </section>
 
 {% endblock %}
