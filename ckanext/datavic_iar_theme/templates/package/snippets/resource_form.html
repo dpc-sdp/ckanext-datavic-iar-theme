@@ -6,9 +6,9 @@
 
 
 <form id="resource-edit" class="dataset-form dataset-resource-form" method="post" action="{{ action }}" data-module="basic-form resource-form" enctype="multipart/form-data">
-  
+
   {{ form.required_message() }}
-  
+
   {% block stages %}
     {# An empty stages variable will not show the stages #}
     {% if stage %}
@@ -59,9 +59,6 @@
 
   {% block metadata_fields %}
     {% if include_metadata %}
-      {# TODO: Where do these come from, they don't exist in /package/new_package_form.html #}
-      {# {{ form.select('resource_type', id='field-type', label=_('Resource Type'), options=[{'value': 'empty', 'text': _('Select a type…')}], selected="empty", error=errors.type) }} #}
-
       {{ form.input('last_modified', id='field-last-modified', label=_('Last Modified'), placeholder=_('eg. 2012-06-05'), value=data.last_modified, error=errors.last_modified, classes=[]) }}
 
       {{ form.input('size', id='field-size', label=_('File Size'), placeholder=_('eg. 1024'), value=data.size, error=errors.size, classes=[]) }}
@@ -94,7 +91,7 @@
           {% asset 'ckanext-datavicmain/datavicmain-confirm-action' %}
           <input type="hidden" name="save" value="go-metadata" />
           <button class="btn btn-primary" type="submit" data-module="datavicmain-confirm-action" data-module-with-data=true  data-module-content="{{ confirmation_text }}{{ _('Are you sure you want to update?') }}">{{ _('Update resource') }}</button>
-        {% else %} 
+        {% else %}
           <button class="btn btn-primary" name="save" value="go-metadata" type="submit">{% block save_button_text %}{{ _('Finish') }}{% endblock %}</button>
         {% endif %}
       {% endblock %}
@@ -105,17 +102,10 @@
             {% set confirmation_text =  _('This dataset has been harvested and should only be updated from the harvested source. Are you sure you want to add?') %}
             <input type="hidden" name="save" value="go-dataset-complete" />
             <button class="btn btn-primary" type="submit" data-module="datavicmain-confirm-action" data-module-with-data=true  data-module-content="{{ confirmation_text }}">{{ _('Add') }}</button>
-        {% else %} 
+        {% else %}
           <button class="btn btn-primary" name="save" value="go-dataset-complete" type="submit">{{ _('Add') }}</button>
         {% endif %}
       {% endblock %}
     {% endif %}
   </div>
 </form>
-
-
-
-
-
-
-

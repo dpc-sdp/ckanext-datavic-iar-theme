@@ -7,7 +7,7 @@
     {{ form.select(
     "organisation_id",
     label=_("Organisation"),
-    options=h.get_parent_orgs(),
+    options=h.vic_iar_get_parent_orgs(),
     selected=data.organisation_id,
     error=errors.organisation_id,
     classes=["control-medium"],

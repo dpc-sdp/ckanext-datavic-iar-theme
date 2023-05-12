@@ -8,20 +8,20 @@
     {% set placeholder =  _('Search Data') %}
     {% set visibility_selected = g.visibility_selected or 'all' %}
 
-    <div class="search-form-wrapper">
+    <div class="search-form-wrapper" data-module="datavic-advanced-search">
       <div class="rpl-search-form da-search rpl-site-constrain--on-all">
         {% if query %}
           <h2> {{ ungettext(
-            'Search Results ({number} dataset found)', 
-            'Search Results ({number} datasets found)', 
+            'Search Results ({number} dataset found)',
+            'Search Results ({number} datasets found)',
              count
             ).format(number=count) }}
-         </h2>              
+         </h2>
         {% else %}
           <h2>
             {{ ungettext(
-              'Search {number} dataset', 
-              'Search {number} datasets', 
+              'Search {number} dataset',
+              'Search {number} datasets',
                count
             ).format(number=count) }}
          </h2>
@@ -63,7 +63,7 @@
                               <div class="rpl-checklist__main-row">
                                 <button type="button" class="rpl-checklist__info" data-checklist="checklist-organization">
                                   {% if organization %}
-                                    {% for item in h.organization_list() %}
+                                    {% for item in h.vic_iar_organization_list() %}
                                       {% if item.name == organization %}
                                         <span>{{ item.display_name }}</span>
                                       {% endif %}
@@ -77,7 +77,7 @@
                                   </svg>
                                 </button>
                               </div>
-                              {% with items = h.organization_list() %}
+                              {% with items = h.vic_iar_organization_list() %}
                                 {% if items %}
                                   <div aria-hidden="true" class="rpl-checklist__list rpl-checklist__list--dropdown" style="display: none;">
                                     <div class="rpl-checklist__list-row rpl-checklist__list-row--single">
@@ -118,7 +118,7 @@
                               <div class="rpl-checklist__main-row">
                                 <button type="button" class="rpl-checklist__info" data-checklist="checklist-group">
                                   {% if group %}
-                                    {% for item in h.search_form_group_list() %}
+                                    {% for item in h.vic_iar_search_form_group_list() %}
                                       {% if item.name == group %}
                                         <span>{{ item.display_name }}</span>
                                       {% endif %}
@@ -132,7 +132,7 @@
                                   </svg>
                                 </button>
                               </div>
-                              {% with items = h.search_form_group_list() %}
+                              {% with items = h.vic_iar_search_form_group_list() %}
                                 {% if items %}
                                   <div aria-hidden="true" class="rpl-checklist__list rpl-checklist__list--dropdown" style="display: none;">
                                     <div class="rpl-checklist__list-row rpl-checklist__list-row--single">
@@ -177,7 +177,7 @@
                               <div class="rpl-checklist__main-row">
                                 <button type="button" class="rpl-checklist__info" data-checklist="checklist-format">
                                   {% if format %}
-                                    {% for item in h.format_list() %}
+                                    {% for item in h.vic_iar_format_list() %}
                                       {% if item == format %}
                                         <span>{{ item|upper }}</span>
                                       {% endif %}
@@ -191,7 +191,7 @@
                                   </svg>
                                 </button>
                               </div>
-                              {% with items = h.format_list() %}
+                              {% with items = h.vic_iar_format_list() %}
                                 {% if items %}
                                   <div aria-hidden="true" class="rpl-checklist__list rpl-checklist__list--dropdown" style="display: none;">
                                     <div class="rpl-checklist__list-row rpl-checklist__list-row--single">
@@ -322,7 +322,7 @@
                         </div>
                       </div>
                     </div>
-                    {% set visibility_list = h.visibility_list() %}
+                    {% set visibility_list = h.vic_iar_visibility_list() %}
                     {% set visibility_selected = g.visibility_selected or 'all' %}
                     <div class="form-group form-group--col-two field-rplchecklist">
                       <label for="field-visibility">

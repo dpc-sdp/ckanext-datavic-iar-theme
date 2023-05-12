@@ -1,40 +1,34 @@
-iar-theme-css:
+datavic-iar-theme-css:
   contents:
-    - datavic_iar_theme.css
+    - css/datavic_iar_theme.css
   output: datavic_iar_theme_css/%(version)s_datavic_iar_theme.css
 
 
 datavic-iar-theme-js:
   output: datavic_iar_theme/%(version)s_datavic_iar_theme.js
   contents:
-    - datavic_iar_theme.js
-    - datavic_sync_dataset.js
-    - datavic-api-info.js
-    - _datavic_autocomplete.js
+    - js/datavic-sync-dataset.js
+    - js/datavic-api-info.js
+    - js/datavic-header.js
+    - js/datavic-breadcrumb.js
+    - js/datavic-advanced-search.js
+    - js/datavic-api-info.js
+    - js/datavic-checkbox.js
+    - js/_datavic_autocomplete.js
   extra:
     preload:
       - base/main
       - base/ckan
   filters: rjsmin
 
-confirm-link-action:
+datavic-iar-confirm-link-action:
   output: datavic_iar_theme/%(version)s_confirm_link_action.js
   contents:
-    - datavicmain-confirm-link-action.js
+    - js/datavic-confirm-link-action.js
   filters: rjsmin
-
-# repeating-fields:
-#   output: 'datavic_iar_theme/%(version)s_'
-#   extra:
-#     preload:
-#       - qdes_schema/repeater
-#   contents:
-#     - repeating-fields.js
-#  filters: rjsmin
-#  output: qdes_schema/repeating-fields.js
 
 datavic_recline_patch_css:
   filter: cssrewrite
   output: ckanext-datavic_iar_theme/%(version)s-datavic-recline.css
   contents:
-    - datavic_recline.css
+    - css/datavic_recline.css

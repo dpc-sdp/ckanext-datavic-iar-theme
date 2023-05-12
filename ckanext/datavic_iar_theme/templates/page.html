@@ -1,7 +1,7 @@
 {% ckan_extends %}
 
 {% block skip %}
-  {% if h.get_gtm_code() %}
+  {% if h.vic_iar_get_gtm_container_id() %}
     {% snippet "snippets/gtm_include_noscript.html" %}
   {% endif %}
   {{ super() }}
@@ -14,16 +14,16 @@
 {% endblock %}
 
 {%- block content %}
-
+  <main>
     {% if self.breadcrumb_content() | trim %}
-      <div id="breadcrumbs" class="rpl-breadcrumbs" role="breadcrumbs">
-          <nav aria-label="breadcrumbs">
-              <ul class="rpl-breadcrumbs__items">
-                  <li class="rpl-breadcrumbs__item"><a href="{{ h.url_for('home.index') }}"  class="rpl-link rpl-breadcrumbs__link">Home</a></li>
-                  {% block breadcrumb_content %}{% endblock %}
-              </ul>
-          </nav>
-      </div>
+    <div id="breadcrumbs" class="rpl-breadcrumbs" role="breadcrumbs">
+        <nav aria-label="breadcrumbs">
+            <ul class="rpl-breadcrumbs__items">
+                <li class="rpl-breadcrumbs__item"><a href="{{ h.url_for('home.index') }}"  class="rpl-link rpl-breadcrumbs__link">Home</a></li>
+                {% block breadcrumb_content %}{% endblock %}
+            </ul>
+        </nav>
+    </div>
     {% endif %}
 
     {% block maintag %}<main class="main" role="main">{% endblock %}
@@ -92,7 +92,8 @@
         {% endblock %}
       </div>
     </main>
-  {% endblock -%}
+  </main>
+{% endblock -%}
 
 
   {% block page_header %}
