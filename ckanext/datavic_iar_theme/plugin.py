@@ -8,7 +8,7 @@ log = logging.getLogger(__name__)
 class DatavicIARThemePlugin(p.SingletonPlugin):
     p.implements(p.IConfigurer)
     p.implements(p.ITemplateHelpers)
-    p.implements(p.IMiddleware)
+    p.implements(p.IMiddleware, inherit=True)
 
     def make_middleware(self, app, config):
         app.before_request(lambda: log.info("Session cookie: %s", tk.request.headers.get("cookie")))
