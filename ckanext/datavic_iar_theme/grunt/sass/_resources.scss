@@ -20,6 +20,10 @@ $primary-color: #0052C2;
         .format-label {
             position: initial;
             margin-right: 10px;
+            color: transparent;
+            display: inline-block;
+            height: 60px;
+            width: 60px;
         }
     }
 }
@@ -42,7 +46,7 @@ $primary-color: #0052C2;
         top: auto;
         right: auto;
     }
-    
+
     @media (max-width:767px) {
         .resource-item {
             display: inline;
@@ -104,4 +108,40 @@ $primary-color: #0052C2;
 
 .datapreview .resource-view .resource-view .actions {
     position:relative;
+}
+
+.dtv-resource-view {
+    position: relative;
+    .dtv-external-link {
+        margin-left: auto;
+        width: fit-content;
+        display: block;
+        white-space: inherit;
+        line-height: 1.5em;
+    }
+}
+
+.resource-read {
+    .table.table-striped {
+        thead {
+            display: none;
+        }
+    }
+}
+
+.module-resource {
+    .nav.nav-tabs {
+        li {
+            padding: 0 10px;
+            .btn {
+                border: none;
+                padding: 0.375rem 0.75rem;
+                font-size: 0.875rem;
+                line-height: 1.5;
+                font-weight: 600;
+                font-family: "VIC-Regular", "Arial", "Helvetica", "sans-serif";
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
 }

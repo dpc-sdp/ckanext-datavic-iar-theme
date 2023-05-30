@@ -69,7 +69,7 @@ $break-stages-text-small: 545px;
                 padding: 5px 60px;
                 line-height: 20px;
             }
-        }        
+        }
         &.active {
             &:before {
                 color: $green;
@@ -122,4 +122,12 @@ $break-stages-text-small: 545px;
     &, &:focus, &:hover, &:active {
         color: #000;
     }
+}
+
+.form-actions {
+    overflow: hidden;
+}
+
+select.form-control {
+    appearance: auto;
 }
