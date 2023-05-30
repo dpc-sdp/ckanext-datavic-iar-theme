@@ -2028,6 +2028,27 @@ nav {
 select.form-control {
   appearance: auto; }
 
+.dataset-form .form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; }
+  .dataset-form .form-actions .action-info {
+    margin: 0; }
+  .dataset-form .form-actions .btn {
+    width: 100%;
+    display: block; }
+
+@media (min-width: 768px) {
+  .dataset-form .form-actions {
+    flex-direction: row;
+    align-items: center; }
+    .dataset-form .form-actions .action-info {
+      min-width: 250px;
+      margin-right: 35px; }
+    .dataset-form .form-actions .btn {
+      height: fit-content;
+      max-width: 260px; } }
+
 .rpl-form {
   font-family: "VIC-Regular", "Arial", "Helvetica", "sans-serif";
   font-size: 0.875rem;
