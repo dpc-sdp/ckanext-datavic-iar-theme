@@ -127,17 +127,51 @@ def visibility_list() -> list[dict[str, str]]:
 
 @helper
 def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any]]:
-    """Return a featured resource preview if exists for a specific dataset"""
+    """Return a featured resource preview
+        - It takes only CSV resources with an existing preview
+        - Only resources uploaded to datastore
+        - Only not historical resources
+    """
+
     featured_preview = None
-    if package.get("nominated_view_id", None):
+
+    historical_resouce: dict[str, Any] | None = _get_last_resource_if_historical(
+        package
+    )
+
+    resources: list[dict[str, Any]] = (
+        sorted(package.get("resources", []), key=lambda res: res["metadata_modified"])
+        if not historical_resouce
+        else [historical_resouce]
+    )
+
+    for resource in resources:
+        if resource.get("format", "").lower() != "csv":
+            continue
+
+        if not resource.get("datastore_active"):
+            continue
+
         try:
-            resource_view = tk.get_action("resource_view_show")(
-                {}, {"id": package["nominated_view_id"]}
+            resource_views = tk.get_action("resource_view_list")(
+                {}, {"id": resource["id"]}
             )
-            resource = tk.get_action("resource_show")(
-                {}, {"id": resource_view["resource_id"]}
-            )
-            featured_preview = {"preview": resource_view, "resource": resource}
         except tk.ObjectNotFound:
             pass
+        else:
+            featured_preview = {"preview": resource_views[0], "resource": resource}
+
     return featured_preview
+
+
+def _get_last_resource_if_historical(package: dict[str, Any]) -> dict[str, Any] | None:
+    """If the dataset contains historical resources, return the most recent one"""
+    historical_resources = tk.h.historical_resources_list(package.get("resources", []))
+
+    if len(historical_resources) <= 1:
+        return
+
+    if historical_resources[1].get("period_start"):
+        return historical_resources[0]
+
+    return
