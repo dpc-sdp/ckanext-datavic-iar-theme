@@ -16,7 +16,18 @@
               {% block header_account_logged %}
               {% if c.userobj.sysadmin %}
                 <li>
-                  <a href="{{ h.url_for('admin.index') }}">
+                    <a href="{{ h.url_for('pages.pages_index') }}" title="{{ _('Pages') }}">
+                        <i class="fa fa-file icon-file"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ h.url_for('pages.blog_index') }}" title="{{ _('Blog') }}">
+                        <i class="fa fa-pencil icon-pencil"></i>
+                    </a>
+                </li>
+
+                <li>
+                  <a href="{{ h.url_for('admin.index') }}" title="{{ _('Sysadmin settings') }}">
                     <i class="fa fa-gavel" aria-hidden="true"></i>
                     <span class="text">{{ _('Admin') }}</span>
                   </a>
