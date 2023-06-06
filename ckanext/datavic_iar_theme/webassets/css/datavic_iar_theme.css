@@ -1762,7 +1762,8 @@ nav {
         background: transparent;
         border: 0;
         margin: 0;
-        padding: 0; }
+        padding: 0;
+        border-radius: 0; }
         @media screen and (min-width: 0) {
           .module .pagination-wrapper ul > li > a,
           .module .pagination-wrapper ul > li.active > a {
@@ -1780,7 +1781,8 @@ nav {
         color: #011A3C;
         cursor: pointer;
         border-bottom: 2px solid transparent;
-        border-radius: 0; }
+        border-radius: 0;
+        display: inline-block; }
         .module .pagination-wrapper ul > li > a:hover, .module .pagination-wrapper ul > li > a:focus {
           color: #011A3C;
           border-bottom: 2px solid transparent; }
