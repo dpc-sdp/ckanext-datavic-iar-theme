@@ -105,7 +105,7 @@ def linked_user(user: str, maxlength: int = 0, avatar: int = 20):
     url: str = (
         h.url_for("user.read", id=name)
         if h.check_access("package_create")
-        else h.url_for("activity.user_activity", id=name),
+        else h.url_for("activity.user_activity", id=name)
     )  # type: ignore
 
     return h.literal(

@@ -1848,21 +1848,21 @@ nav {
     background-image: none;
     background-color: #F6BE00; }
 
-.dataset-resources .label {
+.dataset-resources .badge {
   background: none;
   color: #465870;
   font-size: 0.875rem;
   padding: 0 0.25rem 0 0;
   text-shadow: none;
   text-transform: uppercase; }
-  .dataset-resources .label:hover, .dataset-resources .label:focus {
+  .dataset-resources .badge:hover, .dataset-resources .badge:focus {
     color: #465870;
     text-decoration: underline; }
-  .dataset-resources .label:before {
+  .dataset-resources .badge:before {
     content: "|";
     padding-right: 0.625rem; }
 
-.dataset-resources li:first-child .label:before {
+.dataset-resources li:first-child .badge:before {
   content: "";
   padding-right: 0; }
 
@@ -1900,7 +1900,7 @@ nav {
 
 .dataset-resources {
   margin-top: 0.75rem; }
-  .dataset-resources li a.label {
+  .dataset-resources li a.badge {
     font-family: "Vic-Medium", arial, sans-serif;
     font-weight: normal;
     background-color: transparent !important; }

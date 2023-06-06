@@ -71,7 +71,7 @@ $primary-color: #0052C2;
 }
 
 .dataset-resources {
-    .label {
+    .badge {
         background: none;
         color: rpl_color('dark_neutral');
         font-size: rem(14px);
@@ -90,7 +90,7 @@ $primary-color: #0052C2;
     }
     li {
         &:first-child {
-            .label {
+            .badge {
                 &:before {
                     content: "";
                     padding-right: 0;
