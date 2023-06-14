@@ -1,0 +1,34 @@
+.dataTables_wrapper {
+    .dt-buttons {
+        .btn-secondary {
+            background-color: $rpl-button-primary-background-color;
+            padding: 16px 16px;
+        }
+    }
+    .dataTables_filter {
+        margin-top: 0 !important;
+        label {
+            &:after {
+                content: unset;
+            }
+        }
+    }
+    & i.fa-info-circle {
+        color: rpl-color('primary') !important;
+    }
+    .dataTables_scroll 
+        .dtr-control:before {
+            background-color: #3A833A !important;
+        }
+    #dtprv_paginate {
+        ul {
+            li {
+                &.active {
+                    a {
+                        background-color: #3A833A !important;
+                    }
+                }
+            }
+        }
+    }
+}

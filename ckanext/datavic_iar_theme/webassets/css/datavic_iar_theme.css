@@ -3182,3 +3182,22 @@ a.close {
 
 .activity .item .date {
   color: #757575; }
+
+.dataTables_wrapper .dt-buttons .btn-secondary {
+  background-color: #F6BE00;
+  padding: 16px 16px; }
+
+.dataTables_wrapper .dataTables_filter {
+  margin-top: 0 !important; }
+  .dataTables_wrapper .dataTables_filter label:after {
+    content: unset; }
+
+.dataTables_wrapper i.fa-info-circle {
+  color: #F6BE00 !important; }
+
+.dataTables_wrapper .dataTables_scroll
+.dtr-control:before {
+  background-color: #3A833A !important; }
+
+.dataTables_wrapper #dtprv_paginate ul li.active a {
+  background-color: #3A833A !important; }
