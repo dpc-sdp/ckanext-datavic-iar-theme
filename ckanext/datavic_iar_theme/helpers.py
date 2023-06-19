@@ -159,7 +159,8 @@ def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any
         except tk.ObjectNotFound:
             pass
         else:
-            featured_preview = {"preview": resource_views[0], "resource": resource}
+            if resource_views:
+                featured_preview = {"preview": resource_views[0], "resource": resource}
 
     return featured_preview
 
