@@ -1,0 +1,17 @@
+{% from "macros/form/input_block.html" import input_block %}
+{% from "macros/form/attributes.html" import attributes %}
+
+{#
+
+    Customized input.html
+    Added:
+        - autocomplete="{{ autocomplete }}"
+#}
+
+{% macro input(name, id='', label='', value='', placeholder='', type='text', error="", classes=[], attrs={'class': 'form-control'}, is_required=false, autocomplete="on") %}
+{%- set extra_html = caller() if caller -%}
+
+{% call input_block(id or name, label or name, error, classes, extra_html=extra_html, is_required=is_required) %}
+<input id="{{ id or name }}" type="{{ type }}" name="{{ name }}" value="{{ value | empty_and_escape }}" placeholder="{{ placeholder }}" autocomplete="{{ autocomplete }}" {{ attributes(attrs) }} />
+{% endcall %}
+{% endmacro %}
