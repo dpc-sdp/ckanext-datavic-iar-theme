@@ -33,5 +33,10 @@ ckan.module("-datavic-autocomplete", function ($) {
 
     console.debug("[-datavic-autocomplete] Set aria-expanded on %o", target);
     target.attr("aria-expanded", "false");
+
+    // remove duplicate labels
+    $('.select2-search-field').children('label').remove();
+    $('.select2-container').children('label').remove();
+    $('.select2-search').children('label').remove();
   };
 });

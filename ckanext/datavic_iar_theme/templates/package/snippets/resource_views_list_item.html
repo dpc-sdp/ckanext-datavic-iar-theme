@@ -19,6 +19,8 @@
   {% if pkg.nominated_view_id == view.id %}
     {% set url_denominate = h.url_for('datavicmain.denominate_view', package_id=pkg.id, view_id=view.id) %}
     <form action="{{url_denominate}}" method="post">
+      {{ h.csrf_input() }}
+
       <button type="submit" class="btn btn-danger">
         {{ _('Stop showing this preview on Dataset page') }}
       </button>
@@ -27,6 +29,8 @@
 
     {% set url_nominate = h.url_for('datavicmain.nominate_view', package_id=pkg.id, view_id=view.id) %}
     <form action="{{url_nominate}}" method="post">
+      {{ h.csrf_input() }}
+
       <button type="submit" class="btn btn-success">
         {{ _('Show this preview on Dataset page') }}
       </button>

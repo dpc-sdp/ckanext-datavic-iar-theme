@@ -2,23 +2,29 @@
 
 {% block head_extras %}
   {{ super() }}
-  {% if h.get_gtm_code() %}
+
+  {% if h.vic_iar_get_gtm_container_id() %}
     {% snippet "snippets/gtm_include.html" %}
   {% endif %}
-  {% if h.hotjar_tracking_enabled() == true %}
+
+  {% if h.vic_iar_hotjar_tracking_enabled() %}
     {% snippet "snippets/hotjar.html" %}
   {% endif %}
 {% endblock %}
 
 {% block styles %}
   {{ super() }}
-  {% asset 'datavic_iar_theme/iar-theme-css' %}
-
-  {% asset 'datavic_iar_theme/datavic-iar-theme-js' %}
+  {% asset 'datavic_iar_theme/datavic-iar-theme-css' %}
 {% endblock %}
 
 
 {% block scripts %}
   {{ super() }}
-    <script src="{{ h.url_for_static_or_external("ckeditor.js") }}"></script>
+  <script src="{{ h.url_for_static_or_external("ckeditor.js") }}"></script>
+  {% asset 'datavic_iar_theme/datavic-iar-theme-js' %}
 {% endblock %}
+
+{%- block htmltag -%}
+  <!--[if IE 9]> <html lang="en_AU" class="ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en_AU"> <!--<![endif]-->
+{%- endblock -%}

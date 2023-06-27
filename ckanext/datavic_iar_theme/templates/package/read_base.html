@@ -3,7 +3,7 @@
 {% set confirmation_text = _('You will now enter edit mode. By saving any changes the workflow status for this dataset will transition to DRAFT. Are you sure you want to edit this dataset?') %}
 
 {% block content_action %}
-  {% asset 'datavic_iar_theme/confirm-link-action' %}
+  {% asset 'datavic_iar_theme/datavic-iar-confirm-link-action' %}
 
   {% if h.is_dataset_harvested(pkg.id) %}
     {% set harvest_text = 'Harvest Data' if h.check_access('sysadmin') else 'Harvest Data - Read Only'%}
@@ -19,7 +19,7 @@
     {% set url = h.url_for('dataset.edit', id=pkg.name) %}
     {% set is_ready_for_sync = h.is_ready_for_publish(pkg) %}
     {% if is_ready_for_sync %}
-      <a type="btn" class="btn" data-toggle="modal" data-target="#syncModal">
+      <a type="btn" class="btn" data-bs-toggle="modal" data-bs-target="#syncModal">
         <i class="fa fa-refresh"></i>
         {{ _('Sync') }}
       </a>
@@ -36,7 +36,6 @@
                     <p>Are you sure you want to try syncing this dataset again?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-success"
                       data-module="datavic_sync_dataset"
                       data-module-action="syndicate_sync"
@@ -44,13 +43,14 @@
                       data-module-flash-success="{{ _('Dataset {pkg_title} is being syndicated to DataVic.').format(pkg_title=pkg.title) }}"
                       data-module-payload="{{ {'profile': 'odp', 'topic': 'update', 'id': pkg.id}|tojson|forceescape }}"
                       >Sync</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
     {% endif %}
     {% if pkg.workflow_status|lower != 'draft' %}
-      <a class="btn" href="{{ url }}" data-module="datavicmain-confirm-link-action" data-module-content="{{ confirmation_text }}"><i class="fa fa-wrench"></i> {{ _('Edit') }}</a>
+      <a class="btn" href="{{ url }}" data-module="datavic-confirm-link-action" data-module-content="{{ confirmation_text }}"><i class="fa fa-wrench"></i> {{ _('Edit') }}</a>
     {% else %}
       <a class="btn" href="{{ url }}"><i class="fa fa-wrench"></i> {{ _('Edit') }}</a>
     {% endif %}
