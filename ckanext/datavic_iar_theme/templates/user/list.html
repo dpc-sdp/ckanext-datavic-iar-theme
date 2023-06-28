@@ -6,6 +6,6 @@
     {% if h.check_access('sysadmin') %}
       {% set pending = '(Review required)' if h.is_user_account_pending_review(user['User'].id) else '(Invite not active)' if user['User'].state == 'pending' else '' %}
     {% endif %}
-    <li>{{ h.datavic_linked_user(user['name'], maxlength=20) }} {{ pending }}</li>
+    <li>{{ h.vic_iar_linked_user(user['name'], maxlength=20) }} {{ pending }}</li>
   {% endfor %}
 {% endblock %}

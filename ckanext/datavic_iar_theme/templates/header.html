@@ -1,13 +1,13 @@
 {% block header_wrapper %}
   {% block header_debug %}
     {% if g.debug and not g.debug_supress_header %}
-      <div class="debug">Controller : {{ g.controller }}<br/>Action : {{ g.action }}</div>
+      <div class="debug">Controller : {{ g.blueprint }}<br/>Action : {{ g.view }}</div>
     {% endif %}
   {% endblock %}
 
 {% block header_account %}
   {% if c.userobj %}
-  <header class="account-masthead">
+  <nav id="account-menu" class="account-masthead">
     <div class="container">
       {% block header_account_container_content %}
         {% if c.userobj %}
@@ -16,6 +16,17 @@
               {% block header_account_logged %}
               {% if c.userobj.sysadmin %}
                 <li>
+                    <a href="{{ h.url_for('pages.pages_index') }}" title="{{ _('Pages') }}">
+                        <i class="fa fa-file icon-file"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ h.url_for('pages.blog_index') }}" title="{{ _('Blog') }}">
+                        <i class="fa fa-pencil icon-pencil"></i>
+                    </a>
+                </li>
+
+                <li>
                   <a href="{{ h.url_for('admin.index') }}" title="{{ _('Sysadmin settings') }}">
                     <i class="fa fa-gavel" aria-hidden="true"></i>
                     <span class="text">{{ _('Admin') }}</span>
@@ -23,8 +34,8 @@
                 </li>
               {% endif %}
               <li>
-                {% set user_url = h.url_for('user.read', id=g.userobj.name) if h.check_access('package_create') else h.url_for('user.activity', id=g.userobj.name) %}
-                <a href="{{ user_url }}" class="image" title="{{ _('View profile') }}">
+                {% set user_url = h.url_for('user.read', id=g.userobj.name) if h.check_access('package_create') else h.url_for('activity.user_activity', id=g.userobj.name) %}
+                <a href="{{ user_url }}" class="image">
                   <img src="/user-gravatar.svg" width="16" height="16" alt="User gravatar">
                   <span class="username">{{ g.userobj.display_name }}</span>
                 </a>
@@ -54,11 +65,11 @@
         {% endif %}
       {% endblock %}
     </div>
-  </header>
+  </nav>
   {% endif %}
 {% endblock %}
 
-<div id="mobile-menu" class="rpl-site-header hidden">
+<nav id="mobile-menu" class="rpl-site-header hidden" data-module="datavic-header datavic-breadcrumb">
   <div class="rpl-site-header__inner">
     <div class="rpl-site-header__top">
       <div class="rpl-site-header__logo-container">
@@ -91,7 +102,7 @@
                       <a href="{{ h.url_for('home.about') }}" class="rpl-link rpl-menu__item-link">{{ _('About us') }}</a>
                     </li>
                     <li class="rpl-menu__item">
-                      <a href="{{ h.get_parent_site_url() }}/contact-us" class="rpl-link rpl-menu__item-link" target="_blank">{{ _('Contact us') }}</a>
+                      <a href="{{ h.vic_iar_get_parent_site_url() }}/contact-us" class="rpl-link rpl-menu__item-link" target="_blank">{{ _('Contact us') }}</a>
                     </li>
                   </ul>
                 </div>
@@ -103,9 +114,9 @@
       <div class="rpl-site-header__btn-container"><!----> <!----></div>
     </div> <!---->
   </div>
-</div>
+</nav>
 
-<div id="main-menu" class="rpl-site-header">
+<nav id="main-menu" class="rpl-site-header">
   <div class="rpl-site-header__inner">
     <div class="rpl-site-header__top">
       <div class="rpl-site-header__logo-container">
@@ -150,7 +161,7 @@
                       <a href="{{ h.url_for('home.about') }}" class="rpl-link rpl-menu__item-link">{{ _('About us') }}</a>
                     </li>
                     <li class="rpl-menu__item">
-                      <a href="{{ h.get_parent_site_url() }}/contact-us" class="rpl-link rpl-menu__item-link" target="_blank">{{ _('Contact us') }}</a>
+                      <a href="{{ h.vic_iar_get_parent_site_url() }}/contact-us" class="rpl-link rpl-menu__item-link" target="_blank">{{ _('Contact us') }}</a>
                     </li>
                   </ul>
                 </div>
@@ -163,6 +174,6 @@
       </div>
     </div> <!---->
   </div>
-</div>
+</nav>
 
 {% endblock %}
