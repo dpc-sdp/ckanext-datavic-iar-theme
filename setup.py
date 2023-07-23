@@ -46,7 +46,7 @@ setup(
     install_requires=[
         "ckanext-check-link~=0.1.0",
         "ckanext-oidc-pkce~=0.2.3",
-        "ckanext-vip-portal~=0.2.1",
+        "ckanext-vip-portal~=0.2.3",
         "ckanext-toolbelt >=0.2.3, <1.0.0",
         "ckanext-flakes~=0.4.1",
     ],
