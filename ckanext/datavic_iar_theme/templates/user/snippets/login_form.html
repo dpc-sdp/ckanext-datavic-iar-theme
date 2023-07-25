@@ -38,14 +38,14 @@ Example:
 {% endif %}
 
 
-<form action="{{ action }}" method="post" class="form-horizontal">
+<form action="{{ action }}{% if not h.get_request_param('came_from') %}?came_from={{ h.url_for(h.vic_iar_get_route_after_login_config() or 'dataset.search') }}{% endif %}" method="post" class="form-horizontal">
   {{ h.csrf_input() }}
 
   {{ form.errors(errors=error_summary) }}
 
   <div class="sso-block">
     {% block oidc_login_button %}
-      {% set came_from = request.args.get('came_from') or request.path %}
+      {% set came_from = h.get_request_param('came_from') or request.path %}
       <div class="sso-block-button">
         <a href="{{ h.url_for('oidc_pkce.login', came_from=came_from ~ '?__no_cache__=True') }}" class="btn btn-primary">
           {{ _("Access VPS Data Directory using Single Sign-On") }}
