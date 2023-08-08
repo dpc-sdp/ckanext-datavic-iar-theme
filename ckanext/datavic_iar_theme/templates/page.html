@@ -1,9 +1,6 @@
 {% ckan_extends %}
 
 {% block skip %}
-  {% if h.vic_iar_get_gtm_container_id() %}
-    {% snippet "snippets/gtm_include_noscript.html" %}
-  {% endif %}
   {{ super() }}
 {% endblock %}
 
