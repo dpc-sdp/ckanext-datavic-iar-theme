@@ -81,11 +81,6 @@ def get_hotjar_hjsv():
 
 
 @helper
-def get_gtm_container_id():
-    return conf.get_gtm_container_id()
-
-
-@helper
 def linked_user(user: str, maxlength: int = 0, avatar: int = 20):
     """Custom linked_user helper"""
     user_obj: model.User | None = model.User.get(user)

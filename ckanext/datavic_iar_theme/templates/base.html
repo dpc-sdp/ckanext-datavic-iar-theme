@@ -3,10 +3,6 @@
 {% block head_extras %}
   {{ super() }}
 
-  {% if h.vic_iar_get_gtm_container_id() %}
-    {% snippet "snippets/gtm_include.html" %}
-  {% endif %}
-
   {% if h.vic_iar_hotjar_tracking_enabled() %}
     {% snippet "snippets/hotjar.html" %}
   {% endif %}
