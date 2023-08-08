@@ -22,6 +22,12 @@
 {% endblock %}
 
 {%- block htmltag -%}
+  {% set lang = h.lang() %}
+
+  {% if lang == 'en_AU' %}
+    {% set lang = 'en-au' %}
+  {% endif %}
+
   <!--[if IE 9]> <html lang="en-au" class="ie9"> <![endif]-->
   <!--[if gt IE 8]><!--> <html lang="{{ lang }}"> <!--<![endif]-->
 {%- endblock -%}
