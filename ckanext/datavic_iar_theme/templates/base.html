@@ -16,6 +16,7 @@
 
 {% block scripts %}
   {{ super() }}
+  <script src="{{ h.url_for_static_or_external("ckeditor.js") }}"></script>
   {% asset 'datavic_iar_theme/datavic-iar-theme-js' %}
 {% endblock %}
 

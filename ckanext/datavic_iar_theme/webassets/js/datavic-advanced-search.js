@@ -37,6 +37,9 @@ ckan.module("datavic-advanced-search", function ($) {
                     if ($(this).attr('data-checklist') == 'checklist-order-by') {
                         $('.rpl-search-form input[name="sort"]').val(value);
                         $('.rpl-search-form form').submit();
+                    } else if ($(this).attr('data-checklist') == 'checklist-visibility') {
+                        $('.rpl-search-form input[name="visibility"]').val(value);
+                        $('.rpl-search-form form').submit();
                     }
                 }
 
