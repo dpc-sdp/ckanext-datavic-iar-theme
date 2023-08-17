@@ -2031,6 +2031,27 @@ nav {
 select.form-control {
   appearance: auto; }
 
+.dataset-form .form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; }
+  .dataset-form .form-actions .action-info {
+    margin: 0; }
+  .dataset-form .form-actions .btn {
+    width: 100%;
+    display: block; }
+
+@media (min-width: 768px) {
+  .dataset-form .form-actions {
+    flex-direction: row;
+    align-items: center; }
+    .dataset-form .form-actions .action-info {
+      min-width: 250px;
+      margin-right: 35px; }
+    .dataset-form .form-actions .btn {
+      height: fit-content;
+      max-width: 260px; } }
+
 .rpl-form {
   font-family: "VIC-Regular", "Arial", "Helvetica", "sans-serif";
   font-size: 0.875rem;
@@ -3185,3 +3206,53 @@ a.close {
 
 .activity .item .date {
   color: #757575; }
+
+.dataTables_wrapper .dt-buttons .btn-secondary {
+  background-color: #f6f6f6;
+  padding: 16px 16px; }
+
+.dataTables_wrapper .dt-buttons button[title="Table/List toggle"],
+.dataTables_wrapper .dt-buttons button[title="Toggle column visibility"],
+.dataTables_wrapper .dt-buttons button[title="Share current view"] {
+  display: none;
+  visibility: hidden; }
+
+.dataTables_wrapper .dt-buttons button[title="Copy to clipboard"] {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem; }
+
+.dataTables_wrapper .dt-buttons button[title="Print"] {
+  border-top-right-radius: 0.25rem !important;
+  border-top-right-radius: 0.25rem !important; }
+
+.dataTables_wrapper .dt-buttons .btn-secondary {
+  background-color: #f6f6f6;
+  border: #dee2e6 solid 1px; }
+
+.dataTables_wrapper #dtprv_filter {
+  display: block;
+  text-align: left;
+  margin-top: 0;
+  float: none; }
+  .dataTables_wrapper #dtprv_filter #filterinfoicon {
+    display: none; }
+  .dataTables_wrapper #dtprv_filter label {
+    display: flex;
+    align-items: center; }
+    .dataTables_wrapper #dtprv_filter label input {
+      width: 100%; }
+    .dataTables_wrapper #dtprv_filter label::after {
+      content: ""; }
+
+.dataTables_wrapper .sortinfo, .dataTables_wrapper .resourceinfo {
+  display: none; }
+
+.dataTables_wrapper .dataTables_scroll
+.dtr-control:before {
+  background-color: #3A833A !important; }
+
+.dataTables_wrapper #dtprv_paginate ul li.active a {
+  background-color: #3A833A !important; }
+
+.dataTables_wrapper .pagination {
+  padding-top: 2.5rem; }
