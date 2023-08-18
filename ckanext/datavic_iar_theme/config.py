@@ -9,7 +9,6 @@ DEFAULT_PARENT_SITE_URL = "https://www.data.vic.gov.au/"
 CONFIG_HOTJAR_ENABLED = "ckan.tracking.hotjar_enabled"
 CONFIG_HOTJAR_HJID = "ckan.tracking.hotjar.hjid"
 CONFIG_HOTJAR_HJSV = "ckan.tracking.hotjar.hjsv"
-CONFIG_GTM_CONTAINER_ID = "ckan.google_tag_manager.gtm_container_id"
 
 
 def get_parent_site_url() -> str:
@@ -27,6 +26,3 @@ def get_hotjar_hsid() -> str | None:
 def get_hotjar_hjsv() -> str | None:
     return tk.config.get(CONFIG_HOTJAR_HJSV)
 
-
-def get_gtm_container_id() -> str | None:
-    return tk.config.get(CONFIG_GTM_CONTAINER_ID)

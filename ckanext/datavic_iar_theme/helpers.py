@@ -81,11 +81,6 @@ def get_hotjar_hjsv():
 
 
 @helper
-def get_gtm_container_id():
-    return conf.get_gtm_container_id()
-
-
-@helper
 def linked_user(user: str, maxlength: int = 0, avatar: int = 20):
     """Custom linked_user helper"""
     user_obj: model.User | None = model.User.get(user)
@@ -127,17 +122,35 @@ def visibility_list() -> list[dict[str, str]]:
 
 @helper
 def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any]]:
-    """Return a featured resource preview if exists for a specific dataset"""
+    """Return a featured resource preview
+        - It takes only CSV resources with an existing preview
+        - Only resources uploaded to datastore
+        - Only not historical resources
+    """
+
     featured_preview = None
-    if package.get("nominated_view_id", None):
+
+    resource_groups: list[list[dict[str, Any]]] = tk.h.group_resources_by_temporal_range(
+        package.get("resources", [])
+    )
+
+    resources = resource_groups[0] if resource_groups else []
+
+    for resource in resources:
+        if resource.get("format", "").lower() != "csv":
+            continue
+
+        if not resource.get("datastore_active"):
+            continue
+
         try:
-            resource_view = tk.get_action("resource_view_show")(
-                {}, {"id": package["nominated_view_id"]}
+            resource_views = tk.get_action("resource_view_list")(
+                {}, {"id": resource["id"]}
             )
-            resource = tk.get_action("resource_show")(
-                {}, {"id": resource_view["resource_id"]}
-            )
-            featured_preview = {"preview": resource_view, "resource": resource}
         except tk.ObjectNotFound:
             pass
+        else:
+            if resource_views:
+                featured_preview = {"preview": resource_views[0], "resource": resource}
+
     return featured_preview

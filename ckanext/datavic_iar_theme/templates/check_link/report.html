@@ -1,0 +1,9 @@
+{% ckan_extends %}
+
+{% block check_link_action_download_csv %}
+    <li>
+        <a class="btn btn-primary" href="{{ h.remove_url_param("format", null, "csv") }}">
+            {{ _("Download link report") }}
+        </a>
+    </li>
+{% endblock check_link_action_download_csv %}
