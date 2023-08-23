@@ -2066,6 +2066,10 @@ select.form-control {
     width: 100%;
     display: block; }
 
+.dataset-form .resource-upload-field .btn-remove-url {
+  margin: 0;
+  top: 7px; }
+
 @media (min-width: 768px) {
   .dataset-form .form-actions {
     flex-direction: row;
