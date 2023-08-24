@@ -57,7 +57,12 @@ def format_list() -> list[str]:
         .order_by(func.lower(model.Resource.format))
     )
 
-    return [resource.format for resource in query if resource.format]
+    formats = [
+        resource.format.upper().split('.')[-1] for resource in query if resource.format
+    ]
+    unique_formats = set(formats)
+
+    return sorted(list(unique_formats))
 
 
 @helper
@@ -130,15 +135,11 @@ def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any
 
     featured_preview = None
 
-    historical_resouce: dict[str, Any] | None = _get_last_resource_if_historical(
-        package
+    resource_groups: list[list[dict[str, Any]]] = tk.h.group_resources_by_temporal_range(
+        package.get("resources", [])
     )
 
-    resources: list[dict[str, Any]] = (
-        sorted(package.get("resources", []), key=lambda res: res["metadata_modified"])
-        if not historical_resouce
-        else [historical_resouce]
-    )
+    resources = resource_groups[0] if resource_groups else []
 
     for resource in resources:
         if resource.get("format", "").lower() != "csv":
@@ -160,14 +161,6 @@ def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any
     return featured_preview
 
 
-def _get_last_resource_if_historical(package: dict[str, Any]) -> dict[str, Any] | None:
-    """If the dataset contains historical resources, return the most recent one"""
-    historical_resources = tk.h.historical_resources_list(package.get("resources", []))
-
-    if len(historical_resources) <= 1:
-        return
-
-    if historical_resources[1].get("period_start"):
-        return historical_resources[0]
-
-    return
+@helper
+def get_route_after_login_config():
+    return tk.config.get("ckan.auth.route_after_login")
