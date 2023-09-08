@@ -3,10 +3,6 @@
 {% block head_extras %}
   {{ super() }}
 
-  {% if h.vic_iar_get_gtm_container_id() %}
-    {% snippet "snippets/gtm_include.html" %}
-  {% endif %}
-
   {% if h.vic_iar_hotjar_tracking_enabled() %}
     {% snippet "snippets/hotjar.html" %}
   {% endif %}
@@ -20,10 +16,17 @@
 
 {% block scripts %}
   {{ super() }}
+  <script src="{{ h.url_for_static_or_external("ckeditor.js") }}"></script>
   {% asset 'datavic_iar_theme/datavic-iar-theme-js' %}
 {% endblock %}
 
 {%- block htmltag -%}
-  <!--[if IE 9]> <html lang="en_AU" class="ie9"> <![endif]-->
-  <!--[if gt IE 8]><!--> <html lang="en_AU"> <!--<![endif]-->
+  {% set lang = h.lang() %}
+
+  {% if lang == 'en_AU' %}
+    {% set lang = 'en-au' %}
+  {% endif %}
+
+  <!--[if IE 9]> <html lang="en-au" class="ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="{{ lang }}"> <!--<![endif]-->
 {%- endblock -%}

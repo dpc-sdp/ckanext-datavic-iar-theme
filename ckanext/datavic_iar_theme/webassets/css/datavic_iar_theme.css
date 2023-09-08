@@ -1777,7 +1777,8 @@ nav {
         background: transparent;
         border: 0;
         margin: 0;
-        padding: 0; }
+        padding: 0;
+        border-radius: 0; }
         @media screen and (min-width: 0) {
           .module .pagination-wrapper ul > li > a,
           .module .pagination-wrapper ul > li.active > a {
@@ -1795,7 +1796,8 @@ nav {
         color: #011A3C;
         cursor: pointer;
         border-bottom: 2px solid transparent;
-        border-radius: 0; }
+        border-radius: 0;
+        display: inline-block; }
         .module .pagination-wrapper ul > li > a:hover, .module .pagination-wrapper ul > li > a:focus {
           color: #011A3C;
           border-bottom: 2px solid transparent; }
@@ -1833,7 +1835,8 @@ nav {
       color: transparent;
       display: inline-block;
       height: 60px;
-      width: 60px; }
+      width: 60px;
+      vertical-align: text-bottom; }
 
 .resource-list .resource-item {
   display: flex;
@@ -1862,21 +1865,21 @@ nav {
     background-image: none;
     background-color: #F6BE00; }
 
-.dataset-resources .label {
+.dataset-resources .badge {
   background: none;
   color: #465870;
   font-size: 0.875rem;
   padding: 0 0.25rem 0 0;
   text-shadow: none;
   text-transform: uppercase; }
-  .dataset-resources .label:hover, .dataset-resources .label:focus {
+  .dataset-resources .badge:hover, .dataset-resources .badge:focus {
     color: #465870;
     text-decoration: underline; }
-  .dataset-resources .label:before {
+  .dataset-resources .badge:before {
     content: "|";
     padding-right: 0.625rem; }
 
-.dataset-resources li:first-child .label:before {
+.dataset-resources li:first-child .badge:before {
   content: "";
   padding-right: 0; }
 
@@ -1924,7 +1927,7 @@ nav {
 
 .dataset-resources {
   margin-top: 0.75rem; }
-  .dataset-resources li a.label {
+  .dataset-resources li a.badge {
     font-family: "Vic-Medium", arial, sans-serif;
     font-weight: normal;
     background-color: transparent !important; }
@@ -3228,3 +3231,53 @@ a.close {
 
 .activity .item .date {
   color: #757575; }
+
+.dataTables_wrapper .dt-buttons .btn-secondary {
+  background-color: #f6f6f6;
+  padding: 16px 16px; }
+
+.dataTables_wrapper .dt-buttons button[title="Table/List toggle"],
+.dataTables_wrapper .dt-buttons button[title="Toggle column visibility"],
+.dataTables_wrapper .dt-buttons button[title="Share current view"] {
+  display: none;
+  visibility: hidden; }
+
+.dataTables_wrapper .dt-buttons button[title="Copy to clipboard"] {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem; }
+
+.dataTables_wrapper .dt-buttons button[title="Print"] {
+  border-top-right-radius: 0.25rem !important;
+  border-top-right-radius: 0.25rem !important; }
+
+.dataTables_wrapper .dt-buttons .btn-secondary {
+  background-color: #f6f6f6;
+  border: #dee2e6 solid 1px; }
+
+.dataTables_wrapper #dtprv_filter {
+  display: block;
+  text-align: left;
+  margin-top: 0;
+  float: none; }
+  .dataTables_wrapper #dtprv_filter #filterinfoicon {
+    display: none; }
+  .dataTables_wrapper #dtprv_filter label {
+    display: flex;
+    align-items: center; }
+    .dataTables_wrapper #dtprv_filter label input {
+      width: 100%; }
+    .dataTables_wrapper #dtprv_filter label::after {
+      content: ""; }
+
+.dataTables_wrapper .sortinfo, .dataTables_wrapper .resourceinfo {
+  display: none; }
+
+.dataTables_wrapper .dataTables_scroll
+.dtr-control:before {
+  background-color: #3A833A !important; }
+
+.dataTables_wrapper #dtprv_paginate ul li.active a {
+  background-color: #3A833A !important; }
+
+.dataTables_wrapper .pagination {
+  padding-top: 2.5rem; }

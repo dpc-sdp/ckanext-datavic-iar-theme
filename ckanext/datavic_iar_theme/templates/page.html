@@ -1,9 +1,6 @@
 {% ckan_extends %}
 
 {% block skip %}
-  {% if h.vic_iar_get_gtm_container_id() %}
-    {% snippet "snippets/gtm_include_noscript.html" %}
-  {% endif %}
   {{ super() }}
 {% endblock %}
 
@@ -31,8 +28,8 @@
           {% block flash %}
             <div class="flash-messages">
               {% block flash_inner %}
-                {% for message in h.get_flashed_messages() %}
-                  <div class="alert alert-dismissible fade show {{ message.category }}">
+                {% for category, message in h.get_flashed_messages(with_categories=true) %}
+                  <div class="alert alert-dismissible fade show {{ category }}">
                     {{ h.literal(message) }}
                   </div>
                 {% endfor %}
