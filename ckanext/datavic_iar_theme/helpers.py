@@ -135,15 +135,11 @@ def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any
 
     featured_preview = None
 
-    historical_resouce: dict[str, Any] | None = _get_last_resource_if_historical(
-        package
+    resource_groups: list[list[dict[str, Any]]] = tk.h.group_resources_by_temporal_range(
+        package.get("resources", [])
     )
 
-    resources: list[dict[str, Any]] = (
-        sorted(package.get("resources", []), key=lambda res: res["metadata_modified"])
-        if not historical_resouce
-        else [historical_resouce]
-    )
+    resources = resource_groups[0] if resource_groups else []
 
     for resource in resources:
         if resource.get("format", "").lower() != "csv":

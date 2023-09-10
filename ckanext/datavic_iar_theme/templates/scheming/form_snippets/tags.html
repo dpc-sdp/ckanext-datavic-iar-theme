@@ -3,10 +3,6 @@
 {% set is_required = h.scheming_field_required(field) %}
 {% set attrs = {} %}
 
-{% if is_required %}
-    {% do attrs.update({"required": "true", "aria-required": "true"}) %}
-{% endif %}
-
 {% call form.input(
     field.field_name,
     id='field-' + field.field_name,

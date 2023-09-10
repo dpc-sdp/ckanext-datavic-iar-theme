@@ -150,6 +150,12 @@ select.form-control {
         }
     }
 
+    .resource-upload-field {
+        .btn-remove-url {
+            margin: 0;
+            top: 7px;
+        }
+    }
     @media (min-width: 768px) {
         .form-actions {
             flex-direction: row;
