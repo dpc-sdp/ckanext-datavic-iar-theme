@@ -2713,7 +2713,6 @@ label.rpl-checkbox:after {
   position: absolute;
   z-index: 1;
   width: auto;
-  max-height: 23.75rem;
   left: -1px;
   right: -1px;
   margin: 0; }
