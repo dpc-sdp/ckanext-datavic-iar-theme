@@ -1,8 +1,10 @@
 {% set resource_view = h.vic_iar_featured_resource_preview(pkg) %}
 
 {% if resource_view %}
-  <section class="datapreview">
-    <h3>{{ _('Data preview') }} - {{ resource_view.resource.name }}</h3>
+  <section class="datapreview resource-preview">
+    <div class="header-container">
+      <h3>{{ _('Data preview') }} - {{ resource_view.resource.name }}</h3>
+    </div>
     <div class="resource-view">
       {% snippet 'package/snippets/resource_view.html',
           resource_view=resource_view.preview,

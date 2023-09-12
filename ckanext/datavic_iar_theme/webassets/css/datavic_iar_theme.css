@@ -615,6 +615,9 @@ h2 {
 .rpl-icon--color_black {
   fill: #000; }
 
+.rpl-icon--color_dark_success {
+  fill: #316f31; }
+
 .nav.nav-tabs i.fa {
   color: #F6BE00; }
 
@@ -941,6 +944,18 @@ nav {
         color: #000; } }
   .btn-secondary:hover, .btn-secondary:focus {
     text-decoration: none; }
+
+.btn-success {
+  text-align: center;
+  display: inline-block;
+  padding: 1rem 3rem;
+  border: 1px solid transparent;
+  line-height: 1rem;
+  font-size: 1rem;
+  font-family: VIC-Bold,Arial,Helvetica,"sans-serif"; }
+  .btn-success:hover, .btn-success:focus {
+    background-color: #316f31 !important;
+    border-color: #316f31; }
 
 .btn:hover {
   background-color: #F69C00; }
@@ -1762,7 +1777,8 @@ nav {
         background: transparent;
         border: 0;
         margin: 0;
-        padding: 0; }
+        padding: 0;
+        border-radius: 0; }
         @media screen and (min-width: 0) {
           .module .pagination-wrapper ul > li > a,
           .module .pagination-wrapper ul > li.active > a {
@@ -1780,7 +1796,8 @@ nav {
         color: #011A3C;
         cursor: pointer;
         border-bottom: 2px solid transparent;
-        border-radius: 0; }
+        border-radius: 0;
+        display: inline-block; }
         .module .pagination-wrapper ul > li > a:hover, .module .pagination-wrapper ul > li > a:focus {
           color: #011A3C;
           border-bottom: 2px solid transparent; }
@@ -1818,7 +1835,8 @@ nav {
       color: transparent;
       display: inline-block;
       height: 60px;
-      width: 60px; }
+      width: 60px;
+      vertical-align: text-bottom; }
 
 .resource-list .resource-item {
   display: flex;
@@ -1847,21 +1865,21 @@ nav {
     background-image: none;
     background-color: #F6BE00; }
 
-.dataset-resources .label {
+.dataset-resources .badge {
   background: none;
   color: #465870;
   font-size: 0.875rem;
   padding: 0 0.25rem 0 0;
   text-shadow: none;
   text-transform: uppercase; }
-  .dataset-resources .label:hover, .dataset-resources .label:focus {
+  .dataset-resources .badge:hover, .dataset-resources .badge:focus {
     color: #465870;
     text-decoration: underline; }
-  .dataset-resources .label:before {
+  .dataset-resources .badge:before {
     content: "|";
     padding-right: 0.625rem; }
 
-.dataset-resources li:first-child .label:before {
+.dataset-resources li:first-child .badge:before {
   content: "";
   padding-right: 0; }
 
@@ -1874,14 +1892,24 @@ nav {
 .datapreview .resource-view .resource-view .actions {
   position: relative; }
 
-.dtv-resource-view {
-  position: relative; }
-  .dtv-resource-view .dtv-external-link {
-    margin-left: auto;
-    width: fit-content;
-    display: block;
-    white-space: inherit;
-    line-height: 1.5em; }
+.resource-preview {
+  padding-bottom: 1rem; }
+  .resource-preview h3 {
+    margin: 0; }
+  .resource-preview .header-container {
+    padding-top: 3rem;
+    padding-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+    .resource-preview .header-container .dtv-external-link {
+      font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
+      color: #0052C2; }
+      .resource-preview .header-container .dtv-external-link svg {
+        fill: #0052C2; }
+  .resource-preview .resource-view {
+    margin: 0;
+    position: relative; }
 
 .resource-read .table.table-striped thead {
   display: none; }
@@ -1899,7 +1927,7 @@ nav {
 
 .dataset-resources {
   margin-top: 0.75rem; }
-  .dataset-resources li a.label {
+  .dataset-resources li a.badge {
     font-family: "Vic-Medium", arial, sans-serif;
     font-weight: normal;
     background-color: transparent !important; }

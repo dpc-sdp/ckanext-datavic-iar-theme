@@ -57,7 +57,12 @@ def format_list() -> list[str]:
         .order_by(func.lower(model.Resource.format))
     )
 
-    return [resource.format for resource in query if resource.format]
+    formats = [
+        resource.format.upper().split('.')[-1] for resource in query if resource.format
+    ]
+    unique_formats = set(formats)
+
+    return sorted(list(unique_formats))
 
 
 @helper
@@ -100,7 +105,7 @@ def linked_user(user: str, maxlength: int = 0, avatar: int = 20):
     url: str = (
         h.url_for("user.read", id=name)
         if h.check_access("package_create")
-        else h.url_for("activity.user_activity", id=name),
+        else h.url_for("activity.user_activity", id=name)
     )  # type: ignore
 
     return h.literal(
@@ -154,3 +159,21 @@ def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any
                 featured_preview = {"preview": resource_views[0], "resource": resource}
 
     return featured_preview
+
+
+def _get_last_resource_if_historical(package: dict[str, Any]) -> dict[str, Any] | None:
+    """If the dataset contains historical resources, return the most recent one"""
+    historical_resources = tk.h.historical_resources_list(package.get("resources", []))
+
+    if len(historical_resources) <= 1:
+        return
+
+    if historical_resources[1].get("period_start"):
+        return historical_resources[0]
+
+    return
+
+
+@helper
+def get_route_after_login_config():
+    return tk.config.get("ckan.auth.route_after_login")
