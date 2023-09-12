@@ -2714,7 +2714,6 @@ label.rpl-checkbox:after {
   z-index: 1;
   width: auto;
   max-height: 23.75rem;
-  overflow: auto;
   left: -1px;
   right: -1px;
   margin: 0; }
@@ -2734,7 +2733,7 @@ label.rpl-checkbox:after {
   .suggestion-box .suggestion-section .suggestions li {
     display: block;
     background-color: #fff;
-    padding: 10px 24px;
+    padding: 5px 24px 5px 24px;
     margin-top: 0;
     margin-left: -24px;
     margin-right: -24px; }
@@ -2742,12 +2741,23 @@ label.rpl-checkbox:after {
       margin-top: 0; }
     .suggestion-box .suggestion-section .suggestions li.active, .suggestion-box .suggestion-section .suggestions li:hover {
       background-color: #F6BE00;
-      padding: 10px 24px;
+      padding: 5px 24px 5px 24px;
       margin-left: -24px;
       margin-right: -24px; }
+      .suggestion-box .suggestion-section .suggestions li.active a span .muted, .suggestion-box .suggestion-section .suggestions li:hover a span .muted {
+        color: #465870; }
     .suggestion-box .suggestion-section .suggestions li a.selected, .suggestion-box .suggestion-section .suggestions li a:focus {
       border: none;
       text-decoration: unset; }
+
+.pending-request {
+  position: absolute;
+  top: 50%;
+  margin-left: -17px;
+  display: none;
+  color: #000;
+  transform: translateY(-50%);
+  transform-origin: 50%; }
 
 ul.btn-holder {
   margin: 0;
