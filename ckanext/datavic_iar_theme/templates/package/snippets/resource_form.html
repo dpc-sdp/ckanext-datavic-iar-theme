@@ -80,7 +80,7 @@
     {% endblock %}
     {% if stage %}
       {% block previous_button %}
-        <button class="btn btn-default" name="save" value="go-dataset" type="submit">{{ _('Previous') }}</button>
+        <a class="btn btn-default" href="{% url_for 'dataset.edit', id=pkg_name %}">{{ _('Previous') }}</a>
       {% endblock %}
     {% endif %}
     {% block again_button %}
