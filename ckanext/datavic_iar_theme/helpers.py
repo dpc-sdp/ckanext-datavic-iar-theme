@@ -171,3 +171,8 @@ def _get_last_resource_if_historical(package: dict[str, Any]) -> dict[str, Any] 
         return historical_resources[0]
 
     return
+
+
+@helper
+def get_route_after_login_config():
+    return tk.config.get("ckan.auth.route_after_login")
