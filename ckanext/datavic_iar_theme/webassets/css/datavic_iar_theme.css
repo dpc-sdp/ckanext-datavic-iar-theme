@@ -615,6 +615,9 @@ h2 {
 .rpl-icon--color_black {
   fill: #000; }
 
+.rpl-icon--color_dark_success {
+  fill: #316f31; }
+
 .nav.nav-tabs i.fa {
   color: #F6BE00; }
 
@@ -941,6 +944,18 @@ nav {
         color: #000; } }
   .btn-secondary:hover, .btn-secondary:focus {
     text-decoration: none; }
+
+.btn-success {
+  text-align: center;
+  display: inline-block;
+  padding: 1rem 3rem;
+  border: 1px solid transparent;
+  line-height: 1rem;
+  font-size: 1rem;
+  font-family: VIC-Bold,Arial,Helvetica,"sans-serif"; }
+  .btn-success:hover, .btn-success:focus {
+    background-color: #316f31 !important;
+    border-color: #316f31; }
 
 .btn:hover {
   background-color: #F69C00; }
