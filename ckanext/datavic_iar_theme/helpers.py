@@ -57,7 +57,12 @@ def format_list() -> list[str]:
         .order_by(func.lower(model.Resource.format))
     )
 
-    return [resource.format for resource in query if resource.format]
+    formats = [
+        resource.format.upper().split('.')[-1] for resource in query if resource.format
+    ]
+    unique_formats = set(formats)
+
+    return sorted(list(unique_formats))
 
 
 @helper
@@ -171,3 +176,8 @@ def _get_last_resource_if_historical(package: dict[str, Any]) -> dict[str, Any] 
         return historical_resources[0]
 
     return
+
+
+@helper
+def get_route_after_login_config():
+    return tk.config.get("ckan.auth.route_after_login")
