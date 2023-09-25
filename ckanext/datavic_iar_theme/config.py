@@ -28,3 +28,7 @@ def get_hotjar_hjsv() -> str | None:
 
 def show_blog_button() -> bool:
     return tk.config[CONFIG_SHOW_BLOG]
+
+
+def get_pages_base_url() -> str:
+    return tk.config[CONFIG_PAGES_BASE_URL]

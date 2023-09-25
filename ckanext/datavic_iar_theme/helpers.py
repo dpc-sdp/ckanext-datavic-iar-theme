@@ -184,7 +184,7 @@ def get_pages_dropdown_items():
     pages_list = tk.get_action('ckanext_pages_list')({},
                                                      {'order': True, 'private': False})
     for page in pages_list:
-        type_ = 'blog' if page['page_type'] == 'blog' else 'pages'
+        type_ = 'blog' if page['page_type'] == 'blog' else conf.get_pages_base_url()
         name = page['name']
         title = page['title']
         link = tk.h.literal('<a class="dropdown-item" href="/{}/{}">{}</a>'.format(type_, name, title))
