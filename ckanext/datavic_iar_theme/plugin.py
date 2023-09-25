@@ -7,6 +7,7 @@ from ckanext.search_autocomplete.interfaces import ISearchAutocomplete
 
 log = logging.getLogger(__name__)
 
+@tk.blanket.config_declarations
 class DatavicIARThemePlugin(p.SingletonPlugin):
     p.implements(p.IConfigurer)
     p.implements(p.ITemplateHelpers)

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html {
   font-size: 100%; }
 
@@ -1719,6 +1720,64 @@ nav {
   z-index: 1040; }
   #mobile-menu .rpl-site-header__top {
     height: 3rem; }
+
+.pages-menu .dropdown-menu.show {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 48px 40px;
+  background-color: #F6BE00;
+  border: none;
+  inset: 85px 60px auto -40px !important;
+  transform: translate(40px, 160px) !important;
+  height: 100%;
+  margin-left: 20px !important; }
+  .pages-menu .dropdown-menu.show .dropdown-header {
+    width: 50%;
+    padding: 0; }
+    .pages-menu .dropdown-menu.show .dropdown-header h3 {
+      color: #1A1A1A;
+      font-size: 20px;
+      font-weight: 700;
+      padding: 0 8px; }
+  .pages-menu .dropdown-menu.show .dropdown-items {
+    width: 50%;
+    list-style-type: none;
+    padding: 0; }
+    .pages-menu .dropdown-menu.show .dropdown-items li {
+      border-bottom: 1px solid #F69C00; }
+      .pages-menu .dropdown-menu.show .dropdown-items li a {
+        color: #1A1A1A;
+        font-size: 14px;
+        padding: 12px 8px; }
+    .pages-menu .dropdown-menu.show .dropdown-items .dropdown-item:hover {
+      background-color: #FCEBB3; }
+
+#main-menu .pages-menu .rpl-link {
+  font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
+  font-size: 0.875rem;
+  line-height: 1em;
+  font-weight: normal;
+  background-color: transparent;
+  padding: 0;
+  position: relative;
+  margin: auto 1.75rem auto auto; }
+  #main-menu .pages-menu .rpl-link::after {
+    content: "";
+    display: inline-block;
+    font-family: FontAwesome;
+    color: #011A3C; }
+  #main-menu .pages-menu .rpl-link.show::after {
+    transform: rotate(180deg); }
+
+#main-menu .pages-menu .dropdown-menu.show {
+  flex-direction: row;
+  align-items: flex-start;
+  inset: 0px 60px auto -40px !important; }
+  #main-menu .pages-menu .dropdown-menu.show .dropdown-header {
+    width: 25%; }
+  #main-menu .pages-menu .dropdown-menu.show .dropdown-items {
+    width: 25%; }
 
 .module-content .pagination {
   margin: 0; }
