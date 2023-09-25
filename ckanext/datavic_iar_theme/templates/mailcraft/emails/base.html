@@ -12,8 +12,8 @@
 
         @font-face {
             font-family: "VIC-Regular";
-            src: url("/fonts/VIC-Regular.eot");
-            src: url("/fonts/VIC-Regular.eot?#iefix") format("embedded-opentype"), url("/fonts/VIC-Regular.woff") format("woff"), url("/fonts/VIC-Regular.woff2") format("woff2"), url("/fonts/VIC-Regular.ttf") format("truetype");
+            src: url("{{ h.url_for_static('/fonts/VIC-Regular.eot', _external=True) }}");
+            src: url("{{ h.url_for_static('/fonts/VIC-Regular.eot?#iefix', _external=True) }}") format("embedded-opentype"), url("{{ h.url_for_static('/fonts/VIC-Regular.woff', _external=True) }}") format("woff"), url("{{ h.url_for_static('/fonts/VIC-Regular.woff2', _external=True) }}") format("woff2"), url("{{ h.url_for_static('/fonts/VIC-Regular.ttf', _external=True) }}") format("truetype");
         }
 
 		body {
