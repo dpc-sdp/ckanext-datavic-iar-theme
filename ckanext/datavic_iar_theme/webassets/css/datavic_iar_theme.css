@@ -1706,6 +1706,9 @@ nav {
   #mobile-menu .rpl-site-header__top {
     height: 3rem; }
 
+.pages-menu .rpl-link {
+  color: #011A3C; }
+
 .pages-menu .dropdown-menu.show {
   display: flex;
   flex-direction: column;
