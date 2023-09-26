@@ -25,5 +25,6 @@ $rpl-button-secondary-active-background-image: rpl_gradient('secondary_gradient_
 $rpl-button-secondary-active-text-color: $rpl-button-text-color !default;
 $rpl-button-disabled-border: 1px solid rpl_color('dark_neutral') !default;
 $rpl-button-disabled-text-color: rpl_color('dark_neutral') !default;
+$rpl-button-success-hover-background-color: rpl_color('dark_success') !default;
 $rpl-narrow-button-padding-xs: $rpl-space-4 $rpl-space-4 !default;
 $rpl-narrow-button-padding-m: $rpl-space-4 ($rpl-space * 6) !default;
