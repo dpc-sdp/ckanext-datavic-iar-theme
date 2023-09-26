@@ -358,6 +358,9 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
 }
 
 .pages-menu {
+  .rpl-link {
+    color: rpl-color('secondary');
+  }
   .dropdown-menu.show {
     display: flex;
     flex-direction: column;
