@@ -337,6 +337,8 @@ $rpl-search-form-search-text: $rpl-search-form-show-filters-ruleset !default;
           margin-right: -24px;
           a {
             display: block;
+            margin: -8px -20px -8px -20px;
+            padding: 8px 20px 8px 20px;
             span {
               .muted {
                 color: rpl-color('dark_neutral');

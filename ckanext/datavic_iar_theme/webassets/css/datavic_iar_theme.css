@@ -2778,7 +2778,9 @@ label.rpl-checkbox:after {
         margin-left: -24px;
         margin-right: -24px; }
         .suggestion-box .suggestion-section .suggestions li.active a, .suggestion-box .suggestion-section .suggestions li:hover a {
-          display: block; }
+          display: block;
+          margin: -8px -20px -8px -20px;
+          padding: 8px 20px 8px 20px; }
           .suggestion-box .suggestion-section .suggestions li.active a span .muted, .suggestion-box .suggestion-section .suggestions li:hover a span .muted {
             color: #465870; }
       .suggestion-box .suggestion-section .suggestions li a {
