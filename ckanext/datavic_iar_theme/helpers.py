@@ -177,3 +177,13 @@ def _get_last_resource_if_historical(package: dict[str, Any]) -> dict[str, Any] 
 @helper
 def get_route_after_login_config():
     return tk.config.get("ckan.auth.route_after_login")
+
+
+@helper
+def get_came_from_url(came_from: str | None) -> str:
+    if came_from is None:
+        return tk.url_for(
+            tk.config.get("ckan.auth.route_after_login") or "dataset.search"
+        )
+    return came_from
+    
