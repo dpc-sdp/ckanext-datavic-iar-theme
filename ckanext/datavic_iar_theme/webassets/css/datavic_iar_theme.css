@@ -3199,46 +3199,57 @@ a.close {
   font-size: 1.5rem; }
 
 .row.user-login-page .primary,
-.row.user-register-page .primary {
+.row.user-register-page .primary,
+.row.user-reset-page .primary {
   float: none; }
   .row.user-login-page .primary .page-heading,
-  .row.user-register-page .primary .page-heading {
+  .row.user-register-page .primary .page-heading,
+  .row.user-reset-page .primary .page-heading {
     margin-bottom: 4rem; }
   .row.user-login-page .primary .sso-block,
-  .row.user-register-page .primary .sso-block {
+  .row.user-register-page .primary .sso-block,
+  .row.user-reset-page .primary .sso-block {
     padding: 0 30px; }
     .row.user-login-page .primary .sso-block .sso-block-button,
-    .row.user-register-page .primary .sso-block .sso-block-button {
+    .row.user-register-page .primary .sso-block .sso-block-button,
+    .row.user-reset-page .primary .sso-block .sso-block-button {
       text-align: center;
       margin-bottom: 2.25rem; }
       .row.user-login-page .primary .sso-block .sso-block-button .btn,
-      .row.user-register-page .primary .sso-block .sso-block-button .btn {
+      .row.user-register-page .primary .sso-block .sso-block-button .btn,
+      .row.user-reset-page .primary .sso-block .sso-block-button .btn {
         width: 100%;
         text-decoration: none; }
     .row.user-login-page .primary .sso-block .sso-block--info,
-    .row.user-register-page .primary .sso-block .sso-block--info {
+    .row.user-register-page .primary .sso-block .sso-block--info,
+    .row.user-reset-page .primary .sso-block .sso-block--info {
       font-style: italic;
       line-height: 1.3;
       display: flex;
       align-items: center;
       margin-bottom: 2rem; }
       .row.user-login-page .primary .sso-block .sso-block--info .info--icon,
-      .row.user-register-page .primary .sso-block .sso-block--info .info--icon {
+      .row.user-register-page .primary .sso-block .sso-block--info .info--icon,
+      .row.user-reset-page .primary .sso-block .sso-block--info .info--icon {
         margin: 0 10px; }
         .row.user-login-page .primary .sso-block .sso-block--info .info--icon svg,
-        .row.user-register-page .primary .sso-block .sso-block--info .info--icon svg {
+        .row.user-register-page .primary .sso-block .sso-block--info .info--icon svg,
+        .row.user-reset-page .primary .sso-block .sso-block--info .info--icon svg {
           height: 32px;
           width: 32px; }
       .row.user-login-page .primary .sso-block .sso-block--info .info--text a,
-      .row.user-register-page .primary .sso-block .sso-block--info .info--text a {
+      .row.user-register-page .primary .sso-block .sso-block--info .info--text a,
+      .row.user-reset-page .primary .sso-block .sso-block--info .info--text a {
         text-decoration: underline; }
   .row.user-login-page .primary .module-content,
-  .row.user-register-page .primary .module-content {
+  .row.user-register-page .primary .module-content,
+  .row.user-reset-page .primary .module-content {
     width: fit-content;
     margin: 0 auto;
     max-width: 655px; }
     .row.user-login-page .primary .module-content .form-label,
-    .row.user-register-page .primary .module-content .form-label {
+    .row.user-register-page .primary .module-content .form-label,
+    .row.user-reset-page .primary .module-content .form-label {
       width: unset;
       float: unset;
       text-align: left;
@@ -3246,80 +3257,111 @@ a.close {
       font-size: 1rem;
       margin-bottom: 0.5rem; }
     .row.user-login-page .primary .module-content .control-medium,
-    .row.user-register-page .primary .module-content .control-medium {
+    .row.user-register-page .primary .module-content .control-medium,
+    .row.user-reset-page .primary .module-content .control-medium {
       margin: 0;
       margin-bottom: 1rem; }
       .row.user-login-page .primary .module-content .control-medium .controls,
-      .row.user-register-page .primary .module-content .control-medium .controls {
+      .row.user-register-page .primary .module-content .control-medium .controls,
+      .row.user-reset-page .primary .module-content .control-medium .controls {
         margin-left: 0; }
       .row.user-login-page .primary .module-content .control-medium input,
       .row.user-login-page .primary .module-content .control-medium select,
       .row.user-login-page .primary .module-content .control-medium textarea,
       .row.user-register-page .primary .module-content .control-medium input,
       .row.user-register-page .primary .module-content .control-medium select,
-      .row.user-register-page .primary .module-content .control-medium textarea {
+      .row.user-register-page .primary .module-content .control-medium textarea,
+      .row.user-reset-page .primary .module-content .control-medium input,
+      .row.user-reset-page .primary .module-content .control-medium select,
+      .row.user-reset-page .primary .module-content .control-medium textarea {
         width: 100%;
         height: 50px;
         background-color: #F6F6F9;
         border: 1px solid #D7DBE0;
         border-radius: 0.25rem; }
     .row.user-login-page .primary .module-content .form-actions,
-    .row.user-register-page .primary .module-content .form-actions {
+    .row.user-register-page .primary .module-content .form-actions,
+    .row.user-reset-page .primary .module-content .form-actions {
       display: flex;
       gap: 30px;
       justify-content: space-between;
       align-items: center;
       margin-top: 3rem; }
+      .row.user-login-page .primary .module-content .form-actions.form-reset,
+      .row.user-register-page .primary .module-content .form-actions.form-reset,
+      .row.user-reset-page .primary .module-content .form-actions.form-reset {
+        justify-content: flex-end; }
       .row.user-login-page .primary .module-content .form-actions .sign-up,
-      .row.user-register-page .primary .module-content .form-actions .sign-up {
+      .row.user-register-page .primary .module-content .form-actions .sign-up,
+      .row.user-reset-page .primary .module-content .form-actions .sign-up {
         font-family: "Vic-Bold", arial, sans-serif; }
         .row.user-login-page .primary .module-content .form-actions .sign-up a,
-        .row.user-register-page .primary .module-content .form-actions .sign-up a {
+        .row.user-register-page .primary .module-content .form-actions .sign-up a,
+        .row.user-reset-page .primary .module-content .form-actions .sign-up a {
           color: #011A3C; }
       .row.user-login-page .primary .module-content .form-actions .btn,
-      .row.user-register-page .primary .module-content .form-actions .btn {
+      .row.user-register-page .primary .module-content .form-actions .btn,
+      .row.user-reset-page .primary .module-content .form-actions .btn {
         width: 25%; }
+        .row.user-login-page .primary .module-content .form-actions .btn.btn-reset,
+        .row.user-register-page .primary .module-content .form-actions .btn.btn-reset,
+        .row.user-reset-page .primary .module-content .form-actions .btn.btn-reset {
+          width: 35%; }
         .row.user-login-page .primary .module-content .form-actions .btn:disabled,
-        .row.user-register-page .primary .module-content .form-actions .btn:disabled {
+        .row.user-register-page .primary .module-content .form-actions .btn:disabled,
+        .row.user-reset-page .primary .module-content .form-actions .btn:disabled {
           width: unset;
           margin-left: auto; }
     .row.user-login-page .primary .module-content .password-reset,
-    .row.user-register-page .primary .module-content .password-reset {
+    .row.user-register-page .primary .module-content .password-reset,
+    .row.user-reset-page .primary .module-content .password-reset {
       font-size: 0.875rem;
       text-align: right; }
       .row.user-login-page .primary .module-content .password-reset a,
-      .row.user-register-page .primary .module-content .password-reset a {
+      .row.user-register-page .primary .module-content .password-reset a,
+      .row.user-reset-page .primary .module-content .password-reset a {
         color: #011A3C;
         text-decoration: underline; }
 
 @media (max-width: 767px) {
   .row.user-login-page .primary,
-  .row.user-register-page .primary {
+  .row.user-register-page .primary,
+  .row.user-reset-page .primary {
     padding: 0; }
     .row.user-login-page .primary .sso-block,
-    .row.user-register-page .primary .sso-block {
+    .row.user-register-page .primary .sso-block,
+    .row.user-reset-page .primary .sso-block {
       padding: 0; }
       .row.user-login-page .primary .sso-block .sso-block-button,
-      .row.user-register-page .primary .sso-block .sso-block-button {
+      .row.user-register-page .primary .sso-block .sso-block-button,
+      .row.user-reset-page .primary .sso-block .sso-block-button {
         text-align: center;
         margin-bottom: 1.5rem; }
         .row.user-login-page .primary .sso-block .sso-block-button .btn,
-        .row.user-register-page .primary .sso-block .sso-block-button .btn {
+        .row.user-register-page .primary .sso-block .sso-block-button .btn,
+        .row.user-reset-page .primary .sso-block .sso-block-button .btn {
           word-wrap: break-word;
           white-space: normal;
           line-height: 1.3; }
     .row.user-login-page .primary .module-content,
-    .row.user-register-page .primary .module-content {
+    .row.user-register-page .primary .module-content,
+    .row.user-reset-page .primary .module-content {
       max-width: unset;
       width: 100%;
       padding: 10px; }
       .row.user-login-page .primary .module-content .form-actions .btn,
-      .row.user-register-page .primary .module-content .form-actions .btn {
-        padding: 16px; } }
+      .row.user-register-page .primary .module-content .form-actions .btn,
+      .row.user-reset-page .primary .module-content .form-actions .btn {
+        padding: 16px; }
+        .row.user-login-page .primary .module-content .form-actions .btn.btn-reset,
+        .row.user-register-page .primary .module-content .form-actions .btn.btn-reset,
+        .row.user-reset-page .primary .module-content .form-actions .btn.btn-reset {
+          width: fit-content; } }
 
 @media (max-width: 991px) {
   .row.user-login-page,
-  .row.user-register-page {
+  .row.user-register-page,
+  .row.user-reset-page {
     margin: 0; } }
 
 .row.user-register-page .division-line {

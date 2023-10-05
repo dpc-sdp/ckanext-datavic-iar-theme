@@ -1,0 +1,83 @@
+{% ckan_extends %}
+
+
+{% block wrapper_class %} user-reset-page {% endblock %}
+
+{% block subtitle %}{{ _('Reset your password') }}{% endblock %}
+
+{% block breadcrumb_content %}
+  <li class="active">{% link_for _('Password Reset'), named_route='user.request_reset' %}</li>
+{% endblock %}
+
+{% block primary %}
+  <div class="primary col-12" role="main">
+    {% block primary_content %}
+      <article class="module">
+        <div class="module-content">
+          {% block primary_content_inner %}
+            <h1 class="page-heading">{{ _('Reset your password') }}</h1>
+            {% block form %}
+              <form action="" method="post" class="form-horizontal">
+                {{ h.csrf_input() }}
+
+                <div class="sso-block">
+                  <div class="sso-block--info">
+                    <span class="info--icon">
+                      {% include 'snippets/svg/info.svg' %}
+                    </span>
+                    <span class="info--text">
+                      {% trans %}
+                        Have you used the Single sign-on previously? If so you will no longer
+                        be able to reset your password here, you must use the SSO with your
+                        Microsoft workplace credentials to log in.
+                      {% endtrans %}
+                    </span>
+                  </div>
+      
+                  {% block oidc_login_button %}
+                    <div class="sso-block-button">
+                      <a href="{{ h.url_for("oidc_pkce.login", came_from=request.path ~ '?__no_cache__=True') }}" class="btn btn-primary">
+                        {{ _("Access VPS Data Directory using Single Sign-On") }}
+                      </a>
+                    </div>
+                  {% endblock %}
+                </div>
+              
+                <div class="division-line">
+                  <span>{{ _('Or') }}</span>
+                </div>
+
+                <div class="form-group control-medium">
+                  <label class=" form-label" for="field-username">{{ _('Email or username') }}</label>
+                  <input id="field-username" class="control-medium form-control" name="user" value="" type="text" />
+                </div>
+
+                <div class="form-actions form-reset">
+                  {% block form_button %}
+                    <button class="btn btn-primary btn-reset" type="submit" name="reset">{{ _("Request Reset") }}</button>
+                  {% endblock %}
+                </div>
+              </form>
+            {% endblock %}
+          {% endblock %}
+        </div>
+      </article>
+    {% endblock %}
+  </div>
+{% endblock %}
+
+
+{% block secondary_content %}
+  {% block help %}
+  <section class="module module-narrow module-shallow">
+    {% block help_inner %}
+    <h2 class="module-heading">{{ _('How does this work?') }}</h2>
+    <div class="module-content">
+      <p>{% trans %}Enter your email address or username into the box and we
+        will send you an email with a link to enter a new password.
+        {% endtrans %}</p>
+    </div>
+    {% endblock %}
+  </section>
+  {% endblock %}
+{% endblock %}
