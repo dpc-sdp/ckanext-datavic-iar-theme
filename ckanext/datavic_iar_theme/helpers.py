@@ -58,7 +58,7 @@ def format_list() -> list[str]:
     )
 
     formats = [
-        resource.format.upper().split('.')[-1] for resource in query if resource.format
+        resource.format.upper().split(".")[-1] for resource in query if resource.format
     ]
     unique_formats = set(formats)
 
@@ -128,16 +128,16 @@ def visibility_list() -> list[dict[str, str]]:
 @helper
 def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any]]:
     """Return a featured resource preview
-        - It takes only CSV resources with an existing preview
-        - Only resources uploaded to datastore
-        - Only not historical resources
+    - It takes only CSV resources with an existing preview
+    - Only resources uploaded to datastore
+    - Only not historical resources
     """
 
     featured_preview = None
 
-    resource_groups: list[list[dict[str, Any]]] = tk.h.group_resources_by_temporal_range(
-        package.get("resources", [])
-    )
+    resource_groups: list[
+        list[dict[str, Any]]
+    ] = tk.h.group_resources_by_temporal_range(package.get("resources", []))
 
     resources = resource_groups[0] if resource_groups else []
 
@@ -186,7 +186,6 @@ def get_came_from_url(came_from: str | None) -> str:
             tk.config.get("ckan.auth.route_after_login") or "dataset.search"
         )
     return came_from
-    
 
 
 @helper
@@ -197,13 +196,76 @@ def show_blog_button():
 @helper
 def get_pages_dropdown_items():
     dropdown_items = ""
-    pages_list = tk.get_action('ckanext_pages_list')({},
-                                                     {'order': True, 'private': False})
+    pages_list = tk.get_action("ckanext_pages_list")(
+        {}, {"order": True, "private": False}
+    )
     for page in pages_list:
-        type_ = 'blog' if page['page_type'] == 'blog' else conf.get_pages_base_url()
-        name = page['name']
-        title = page['title']
-        link = tk.h.literal('<a class="dropdown-item" href="/{}/{}">{}</a>'.format(type_, name, title))
-        li = tk.h.literal('<li>') + link + tk.h.literal('</li>')
+        type_ = "blog" if page["page_type"] == "blog" else conf.get_pages_base_url()
+        name = page["name"]
+        title = page["title"]
+        link = tk.h.literal(
+            '<a class="dropdown-item" href="/{}/{}">{}</a>'.format(type_, name, title)
+        )
+        li = tk.h.literal("<li>") + link + tk.h.literal("</li>")
         dropdown_items = dropdown_items + li
     return dropdown_items
+
+
+def is_delwp_vector_data(resources: list[dict[str, Any]]) -> bool:
+    for res in resources:
+        if res["format"] in [
+            "DWG",
+            "DXF",
+            "GDB",
+            "SHP",
+            "MIF",
+            "TAB",
+            "EXTENDED TAB",
+            "MAPINFO",
+        ]:
+            return True
+
+    return False
+
+
+@helper
+def is_delwp_raster_data(resources: list[dict[str, Any]]) -> bool:
+    for res in resources:
+        if res["format"] in [
+            "ECW",
+            "GEOTIFF",
+            "JPEG",
+            "JP2",
+            "JPEG 2000",
+            "TIFF",
+            "LAS",
+            "XYZ",
+        ]:
+            return True
+
+    return False
+
+
+@helper
+def is_delwp_dataset(package: dict[str, Any]) -> bool:
+    """Check if the dataset is harvested with delwp harvester"""
+    for extra in package.get("extras", []):
+        if extra["key"] != "harvest_source_type":
+            continue
+
+        if extra["value"] == "delwp":
+            return True
+
+    return False
+
+
+@helper
+def is_delwp_dataset_restricted(package: dict[str, Any]) -> bool:
+    """Check if the delwp dataset is restricted"""
+    for extra in package.get("extras", []):
+        if extra["key"] != "delwp_restricted":
+            continue
+
+        return tk.asbool(extra["value"])
+
+    return False
