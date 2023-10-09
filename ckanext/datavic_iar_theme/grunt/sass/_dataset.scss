@@ -1,0 +1,58 @@
+
+
+.via-iar-delwp-dataset {
+    .delwp-resource-list {
+        .resource-item {
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            .resource-icon img {
+                width: 50px;
+            }
+            .resource-summary {
+                p {
+                    margin: 0;
+                }
+
+                .resource-summary__formats {
+                    font-size: rpl-font-size('xs');
+                }
+            }
+
+            .btn-group .btn {
+                border: 2px rpl-color() solid;
+                background: rpl-color('white');
+                color: #545454;
+            }
+        }
+    }
+    .delwp-access-notes {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    #data-request-form {
+        margin-top: 4rem;
+        .form {
+            .form-group {
+                label {
+                    float: unset;
+                    width: auto;
+                    span.required {
+                        color: #b92d4e;
+                        font-weight: normal;
+                    }
+                }
+
+                .controls {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+
+
+    #dataset-contact {
+        display: none;
+    }
+}

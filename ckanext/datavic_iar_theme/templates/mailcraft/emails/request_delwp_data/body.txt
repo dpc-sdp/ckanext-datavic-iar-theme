@@ -1,0 +1,6 @@
+A user has requested an access to DEECA dataset.
+
+Name - {{ username }}
+Email - {{ email }}
+Organisation - {{ organisation }}
+Message - {{ message }}

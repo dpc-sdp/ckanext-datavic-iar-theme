@@ -123,9 +123,9 @@ def visibility_list() -> list[dict[str, str]]:
 @helper
 def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any]]:
     """Return a featured resource preview
-        - It takes only CSV resources with an existing preview
-        - Only resources uploaded to datastore
-        - Only not historical resources
+    - It takes only CSV resources with an existing preview
+    - Only resources uploaded to datastore
+    - Only not historical resources
     """
 
     featured_preview = None
@@ -171,3 +171,64 @@ def _get_last_resource_if_historical(package: dict[str, Any]) -> dict[str, Any] 
         return historical_resources[0]
 
     return
+
+
+@helper
+def is_delwp_vector_data(resources: list[dict[str, Any]]) -> bool:
+    for res in resources:
+        if res["format"] in [
+            "DWG",
+            "DXF",
+            "GDB",
+            "SHP",
+            "MIF",
+            "TAB",
+            "EXTENDED TAB",
+            "MAPINFO",
+        ]:
+            return True
+
+    return False
+
+
+@helper
+def is_delwp_raster_data(resources: list[dict[str, Any]]) -> bool:
+    for res in resources:
+        if res["format"] in [
+            "ECW",
+            "GEOTIFF",
+            "JPEG",
+            "JP2",
+            "JPEG 2000",
+            "TIFF",
+            "LAS",
+            "XYZ",
+        ]:
+            return True
+
+    return False
+
+
+@helper
+def is_delwp_dataset(package: dict[str, Any]) -> bool:
+    """Check if the dataset is harvested with delwp harvester"""
+    for extra in package.get("extras", []):
+        if extra["key"] != "harvest_source_type":
+            continue
+
+        if extra["value"] == "delwp":
+            return True
+
+    return False
+
+
+@helper
+def is_delwp_dataset_restricted(package: dict[str, Any]) -> bool:
+    """Check if the delwp dataset is restricted"""
+    for extra in package.get("extras", []):
+        if extra["key"] != "delwp_restricted":
+            continue
+
+        return tk.asbool(extra["value"])
+
+    return False
