@@ -211,6 +211,7 @@ def get_pages_dropdown_items():
     return dropdown_items
 
 
+@helper
 def is_delwp_vector_data(resources: list[dict[str, Any]]) -> bool:
     for res in resources:
         if res["format"] in [
