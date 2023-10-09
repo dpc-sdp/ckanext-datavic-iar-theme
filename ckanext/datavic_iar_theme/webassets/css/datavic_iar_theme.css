@@ -615,6 +615,9 @@ h2 {
 .rpl-icon--color_black {
   fill: #000; }
 
+.rpl-icon--color_dark_success {
+  fill: #316f31; }
+
 .nav.nav-tabs i.fa {
   color: #F6BE00; }
 
@@ -941,6 +944,18 @@ nav {
         color: #000; } }
   .btn-secondary:hover, .btn-secondary:focus {
     text-decoration: none; }
+
+.btn-success {
+  text-align: center;
+  display: inline-block;
+  padding: 1rem 3rem;
+  border: 1px solid transparent;
+  line-height: 1rem;
+  font-size: 1rem;
+  font-family: VIC-Bold,Arial,Helvetica,"sans-serif"; }
+  .btn-success:hover, .btn-success:focus {
+    background-color: #316f31 !important;
+    border-color: #316f31; }
 
 .btn:hover {
   background-color: #F69C00; }
@@ -1877,14 +1892,24 @@ nav {
 .datapreview .resource-view .resource-view .actions {
   position: relative; }
 
-.dtv-resource-view {
-  position: relative; }
-  .dtv-resource-view .dtv-external-link {
-    margin-left: auto;
-    width: fit-content;
-    display: block;
-    white-space: inherit;
-    line-height: 1.5em; }
+.resource-preview {
+  padding-bottom: 1rem; }
+  .resource-preview h3 {
+    margin: 0; }
+  .resource-preview .header-container {
+    padding-top: 3rem;
+    padding-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+    .resource-preview .header-container .dtv-external-link {
+      font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
+      color: #0052C2; }
+      .resource-preview .header-container .dtv-external-link svg {
+        fill: #0052C2; }
+  .resource-preview .resource-view {
+    margin: 0;
+    position: relative; }
 
 .resource-read .table.table-striped thead {
   display: none; }

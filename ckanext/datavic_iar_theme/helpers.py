@@ -57,7 +57,12 @@ def format_list() -> list[str]:
         .order_by(func.lower(model.Resource.format))
     )
 
-    return [resource.format for resource in query if resource.format]
+    formats = [
+        resource.format.upper().split('.')[-1] for resource in query if resource.format
+    ]
+    unique_formats = set(formats)
+
+    return sorted(list(unique_formats))
 
 
 @helper
@@ -232,3 +237,9 @@ def is_delwp_dataset_restricted(package: dict[str, Any]) -> bool:
         return tk.asbool(extra["value"])
 
     return False
+
+
+@helper
+def get_route_after_login_config():
+    return tk.config.get("ckan.auth.route_after_login")
+
