@@ -201,15 +201,15 @@ def get_pages_dropdown_items():
 @helper
 def is_delwp_vector_data(resources: list[dict[str, Any]]) -> bool:
     for res in resources:
-        if res["format"] in [
-            "DWG",
-            "DXF",
-            "GDB",
-            "SHP",
-            "MIF",
-            "TAB",
-            "EXTENDED TAB",
-            "MAPINFO",
+        if res["format"].lower() in [
+            "dwg",
+            "dxf",
+            "gdb",
+            "shp",
+            "mif",
+            "tab",
+            "extended tab",
+            "mapinfo",
         ]:
             return True
 
@@ -219,15 +219,15 @@ def is_delwp_vector_data(resources: list[dict[str, Any]]) -> bool:
 @helper
 def is_delwp_raster_data(resources: list[dict[str, Any]]) -> bool:
     for res in resources:
-        if res["format"] in [
-            "ECW",
-            "GEOTIFF",
-            "JPEG",
-            "JP2",
-            "JPEG 2000",
-            "TIFF",
-            "LAS",
-            "XYZ",
+        if res["format"].lower() in [
+            "ecw",
+            "geotiff",
+            "jpeg",
+            "jp2",
+            "jpeg 2000",
+            "tiff",
+            "lass",
+            "xyz",
         ]:
             return True
 
