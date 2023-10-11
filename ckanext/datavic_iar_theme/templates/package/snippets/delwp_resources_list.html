@@ -1,0 +1,22 @@
+<ul class="resource-list delwp-resource-list">
+    <li class="resource-item">
+        <div class="resource-icon">
+            <img src="{{ h.url_for_static('image-icon.png') }}" alt="resource icon">
+        </div>
+
+        <div class="resource-summary">
+            <p class="resource-summary__name">{{ _("Resources") }}</p>
+            <p class="resource-summary__formats">
+                {{ pkg.resources | map(attribute='format') | unique | join(' | ') }}
+            </p>
+        </div>
+
+        {% if with_button %}
+            <div class="btn-group">
+                <a href="#data-request-form" class="btn btn-primary">
+                {{ _('Request access') }}
+                </a>
+            </div>
+        {% endif %}
+    </li>
+</ul>

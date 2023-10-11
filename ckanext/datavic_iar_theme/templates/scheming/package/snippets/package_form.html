@@ -31,3 +31,10 @@
   {%- endif -%}
 
   {% endblock %}
+
+{% block metadata_fields %}
+    <!-- add extras to form, but hide, otherwise we are overwriting the harvested packages extras -->
+    <div class="hidden vic-iar-extras">
+        {% snippet 'snippets/custom_form_fields.html', extras=data.extras, errors=errors, limit=3 %}
+    </div>
+{% endblock %}
