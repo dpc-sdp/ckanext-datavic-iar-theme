@@ -3448,6 +3448,9 @@ a.close {
 .dtr-control:before {
   background-color: #3A833A !important; }
 
+.dataTables_wrapper .dataTables_scroll .dataTables_scrollBody table {
+  border-left: transparent !important; }
+
 .dataTables_wrapper #dtprv_paginate ul li.active a {
   background-color: #3A833A !important; }
 
