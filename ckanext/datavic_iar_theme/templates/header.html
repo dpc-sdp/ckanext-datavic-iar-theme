@@ -16,16 +16,17 @@
               {% block header_account_logged %}
               {% if c.userobj.sysadmin %}
                 <li>
-                    <a href="{{ h.url_for('pages.pages_index') }}" title="{{ _('Pages') }}">
+                    <a href="{{ h.url_for('datavicpages.pages_index') }}" title="{{ _('Pages') }}">
                         <i class="fa fa-file icon-file"></i>
                     </a>
                 </li>
+                {% if h.vic_iar_show_blog_button() %}
                 <li>
                     <a href="{{ h.url_for('pages.blog_index') }}" title="{{ _('Blog') }}">
                         <i class="fa fa-pencil icon-pencil"></i>
                     </a>
                 </li>
-
+                {% endif %}
                 <li>
                   <a href="{{ h.url_for('admin.index') }}" title="{{ _('Sysadmin settings') }}">
                     <i class="fa fa-gavel" aria-hidden="true"></i>
@@ -99,7 +100,24 @@
                       <a href="{{ h.url_for('organization.index') }}" class="rpl-link rpl-menu__item-link">{{ _('Organisations') }}</a>
                     </li>
                     <li class="rpl-menu__item">
-                      <a href="{{ h.url_for('home.about') }}" class="rpl-link rpl-menu__item-link">{{ _('About us') }}</a>
+                      <a href="{{ h.url_for('home.about') }}"
+                         class="rpl-link rpl-menu__item-link">{{ _('About us') }}</a>
+                    </li>
+                    <li class="pages-menu rpl-menu__item">
+                      <a href="#" class="rpl-link rpl-menu__item-link dropdown-toggle"
+                         data-module="datavic-dropdown">{{ _('Pages') }}</a>
+                      <div class="dropdown">
+                        <div class="container">
+                          <div class="dropdown-header">
+                          <h3>Resources</h3>
+                        </div>
+                        <ul class="dropdown-items">
+                          {{ h.vic_iar_get_pages_dropdown_items() }}
+                          <li><a class="dropdown-item" href="{{ h.url_for('datavicpages.pages_index') }}">All data
+                            sharing resources</a></li>
+                        </ul>
+                      </div>
+                      </div>
                     </li>
                     <li class="rpl-menu__item">
                       <a href="{{ h.vic_iar_get_parent_site_url() }}/contact-us" class="rpl-link rpl-menu__item-link" target="_blank">{{ _('Contact us') }}</a>
@@ -159,6 +177,22 @@
                     </li>
                     <li class="rpl-menu__item">
                       <a href="{{ h.url_for('home.about') }}" class="rpl-link rpl-menu__item-link">{{ _('About us') }}</a>
+                    </li>
+                    <li class="pages-menu rpl-menu__item">
+                      <a href="#" class="btn rpl-link dropdown-toggle"
+                         data-module="datavic-dropdown">{{ _('Pages') }}</a>
+                      <div class="dropdown">
+                        <div class="container">
+                          <div class="dropdown-header">
+                            <h3>Resources</h3>
+                          </div>
+                          <ul class="dropdown-items">
+                            {{ h.vic_iar_get_pages_dropdown_items() }}
+                            <li><a class="dropdown-item" href="{{ h.url_for('datavicpages.pages_index') }}">All data
+                              sharing resources</a></li>
+                          </ul>
+                        </div>
+                      </div>
                     </li>
                     <li class="rpl-menu__item">
                       <a href="{{ h.vic_iar_get_parent_site_url() }}/contact-us" class="rpl-link rpl-menu__item-link" target="_blank">{{ _('Contact us') }}</a>
