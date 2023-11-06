@@ -3,6 +3,7 @@ import ckan.plugins.toolkit as tk
 import ckanext.datavic_iar_theme.helpers as helpers
 
 
+@tk.blanket.config_declarations
 class DatavicIARThemePlugin(p.SingletonPlugin):
     p.implements(p.IConfigurer)
     p.implements(p.ITemplateHelpers)
