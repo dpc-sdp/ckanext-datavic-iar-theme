@@ -1,0 +1,14 @@
+version: 1
+groups:
+  - annotation: ckanext-datavic-iar-theme
+    options:
+      - key: ckan.parent_site_url
+        default: https://www.data.vic.gov.au/
+
+      - key: ckan.tracking.hotjar_enabled
+        type: bool
+        default: False
+
+      - key: ckan.tracking.hotjar.hjid
+
+      - key: ckan.tracking.hotjar.hjsv
