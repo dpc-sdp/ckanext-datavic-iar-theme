@@ -22,6 +22,10 @@
   {% else %}
     {{ h.build_nav_icon('activity.user_activity', _('Activity Stream'), id=user.name) }}
   {% endif %}
+
+  {% if h.check_access('api_token_list', {'user': user['name']}) %}
+    {{ h.build_nav_icon('user.api_tokens', _('API Tokens'), id=user.name) }}
+  {% endif %}
 {% endblock %}
 
 {% block user_nums %}
@@ -53,7 +57,7 @@
   </dl>
   {% if is_myself %}
     <dl>
-      <dt>{{ _('Email') }} <span class="label" title="{{ _('This means only you can see this') }}">{{ _('Private') }}</span></dt>
+      <dt>{{ _('Email') }} <span class="badge bg-info" title="{{ _('This means only you can see this') }}">{{ _('Private') }}</span></dt>
       <dd>{{ user.email }}</dd>
     </dl>
   {% endif %}
@@ -69,10 +73,4 @@
       <dd><a class="btn btn-danger" href="{{ h.url_for('datavicuser.deny', id=user.id)}}">Deny</a></dd>
     {% endif %}
   </dl>
-  {% if is_myself and h.check_access('sysadmin') %}
-    <dl>
-      <dt class="key">{{ _('API Key') }} <span class="label" title="{{ _('This means only you can see this') }}">{{ _('Private') }}</span></dt>
-      <dd class="value"><code>{{ user.apikey }}</code></dd>
-    </dl>
-  {% endif %}
 {% endblock %}
