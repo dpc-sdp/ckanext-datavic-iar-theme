@@ -360,49 +360,55 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
 .pages-menu {
   .rpl-link {
     color: rpl-color('secondary');
-  }
-  .dropdown-menu.show {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 28px 48px 40px;
-    background-color: rpl-color('primary');
-    border: none;
-    inset: 85px 60px auto -40px !important;
-    transform: translate(40px, 160px) !important;
-    height: 100%;
-    margin-left: 20px !important;
 
-    .dropdown-header {
-      width: 50%;
-      padding: 0;
-
-
-      h3 {
-        color: #1A1A1A;
-        font-size: 20px;
-        font-weight: 700;
-        padding: 0 8px;
-      }
+    &::after {
+      content: none;
+      border: none;
     }
+  }
 
-    .dropdown-items {
-      width: 50%;
-      list-style-type: none;
-      padding: 0;
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    z-index: 100;
+    background-color: rpl-color('primary');
+    transition: background-color 0.3s ease;
+    inset: -40px 60px auto -40px;
 
-      li {
-        border-bottom: 1px solid rpl-color('light_primary');
+    .container {
+      display: flex;
+      flex-direction: column;
+      padding: 28px 48px 40px;
 
-        a {
+      .dropdown-header {
+        padding: 0;
+
+        h3 {
           color: #1A1A1A;
-          font-size: 14px;
-          padding: 12px 8px;
+          font-size: 20px;
+          font-weight: 700;
+          padding: 0 8px;
         }
       }
 
-      .dropdown-item:hover {
-        background-color: rpl-color('light_primary_2');
+      .dropdown-items {
+        list-style-type: none;
+        padding: 0;
+
+        li {
+          border-bottom: 1px solid rpl-color('light_primary');
+
+          a {
+            color: #1A1A1A;
+            font-size: 14px;
+            padding: 12px 8px;
+          }
+        }
+
+        .dropdown-item:hover {
+          background-color: rpl-color('primary');
+        }
       }
     }
   }
@@ -427,22 +433,36 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
       &.show {
         &::after {
           transform: rotate(180deg);
+          transition: transform 0.3s ease;
         }
       }
     }
 
-    .dropdown-menu.show {
-      flex-direction: row;
-      align-items: flex-start;
-      inset: 0px 60px auto -40px !important;
+    .dropdown {
+      margin-left: 20px;
+      inset: 0 60px auto -40px;
 
-      .dropdown-header {
-        width: 25%;
-      }
+      .container {
+        flex-direction: row;
 
-      .dropdown-items {
-        width: 25%
+        .dropdown-header {
+          width: 25%;
+        }
+
+        .dropdown-items {
+          width: 25%
+        }
       }
     }
   }
+}
+
+.dropdown-shown {
+  background-color: rpl-color('light_primary_2') !important;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-hidden {
+  background-color: rpl-color('primary') !important;
+  transition: background-color 0.3s ease;
 }
