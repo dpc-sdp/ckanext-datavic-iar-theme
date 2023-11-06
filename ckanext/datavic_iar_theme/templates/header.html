@@ -104,10 +104,11 @@
                          class="rpl-link rpl-menu__item-link">{{ _('About us') }}</a>
                     </li>
                     <li class="pages-menu rpl-menu__item">
-                      <a href="{{ h.url_for('home.about') }}" class="btn rpl-link rpl-menu__item-link"
-                         id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">{{ _('Pages') }}</a>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <div class="dropdown-header">
+                      <a href="#" class="rpl-link rpl-menu__item-link dropdown-toggle"
+                         data-module="datavic-dropdown">{{ _('Pages') }}</a>
+                      <div class="dropdown">
+                        <div class="container">
+                          <div class="dropdown-header">
                           <h3>Resources</h3>
                         </div>
                         <ul class="dropdown-items">
@@ -115,6 +116,7 @@
                           <li><a class="dropdown-item" href="{{ h.url_for('datavicpages.pages_index') }}">All data
                             sharing resources</a></li>
                         </ul>
+                      </div>
                       </div>
                     </li>
                     <li class="rpl-menu__item">
@@ -177,16 +179,19 @@
                       <a href="{{ h.url_for('home.about') }}" class="rpl-link rpl-menu__item-link">{{ _('About us') }}</a>
                     </li>
                     <li class="pages-menu rpl-menu__item">
-                      <a href="{{ h.url_for('home.about') }}" class="btn rpl-link"
-                         id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">{{ _('Pages') }}</a>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <div class="dropdown-header">
-                          <h3>Resources</h3>
+                      <a href="#" class="btn rpl-link dropdown-toggle"
+                         data-module="datavic-dropdown">{{ _('Pages') }}</a>
+                      <div class="dropdown">
+                        <div class="container">
+                          <div class="dropdown-header">
+                            <h3>Resources</h3>
+                          </div>
+                          <ul class="dropdown-items">
+                            {{ h.vic_iar_get_pages_dropdown_items() }}
+                            <li><a class="dropdown-item" href="{{ h.url_for('datavicpages.pages_index') }}">All data
+                              sharing resources</a></li>
+                          </ul>
                         </div>
-                        <ul class="dropdown-items">
-                          {{ h.vic_iar_get_pages_dropdown_items() }}
-                          <li><a class="dropdown-item" href="{{ h.url_for('datavicpages.pages_index') }}">All data sharing resources</a></li>
-                        </ul>
                       </div>
                     </li>
                     <li class="rpl-menu__item">
