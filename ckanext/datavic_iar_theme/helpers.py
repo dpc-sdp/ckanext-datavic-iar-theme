@@ -135,15 +135,11 @@ def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any
 
     featured_preview = None
 
-    historical_resouce: dict[str, Any] | None = _get_last_resource_if_historical(
-        package
+    resource_groups: list[list[dict[str, Any]]] = tk.h.group_resources_by_temporal_range(
+        package.get("resources", [])
     )
 
-    resources: list[dict[str, Any]] = (
-        sorted(package.get("resources", []), key=lambda res: res["metadata_modified"])
-        if not historical_resouce
-        else [historical_resouce]
-    )
+    resources = resource_groups[0] if resource_groups else []
 
     for resource in resources:
         if resource.get("format", "").lower() != "csv":
@@ -181,3 +177,13 @@ def _get_last_resource_if_historical(package: dict[str, Any]) -> dict[str, Any] 
 @helper
 def get_route_after_login_config():
     return tk.config.get("ckan.auth.route_after_login")
+
+
+@helper
+def get_came_from_url(came_from: str | None) -> str:
+    if came_from is None:
+        return tk.url_for(
+            tk.config.get("ckan.auth.route_after_login") or "dataset.search"
+        )
+    return came_from
+    

@@ -147,6 +147,13 @@
           </tr>
         {% endif %}
 
+        {% if pkg_dict.role %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _('Role') }}</th>
+            <td class="dataset-details" property="dc:contributor">{{ pkg_dict.role }}</td>
+          </tr>
+        {% endif %}
+
         {% if pkg_dict.maintainer_email %}
           <tr>
             <th scope="row" class="dataset-label">{{ _('Email') }}</th>

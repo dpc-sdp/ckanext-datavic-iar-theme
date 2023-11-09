@@ -2066,6 +2066,10 @@ select.form-control {
     width: 100%;
     display: block; }
 
+.dataset-form .resource-upload-field .btn-remove-url {
+  margin: 0;
+  top: 7px; }
+
 @media (min-width: 768px) {
   .dataset-form .form-actions {
     flex-direction: row;
@@ -2730,6 +2734,70 @@ label.rpl-checkbox:after {
 .rpl-checklist__info {
   border-radius: 0.25rem; }
 
+.suggestion-box {
+  background-color: #fff;
+  border: 1px solid #F6BE00;
+  border-top: 0;
+  position: absolute;
+  z-index: 1;
+  width: auto;
+  left: -1px;
+  right: -1px;
+  margin: 0; }
+  .suggestion-box .suggestion-section:first-child {
+    border-top: #D7DBE0 1px solid; }
+  .suggestion-box .suggestion-section .suggestions:before {
+    display: block;
+    background-color: #F6F6F9;
+    padding: 8px 20px 8px 20px;
+    margin-left: -24px;
+    margin-right: -24px;
+    z-index: 2;
+    width: auto;
+    color: #000;
+    content: attr(data-label);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px; }
+  .suggestion-box .suggestion-section .suggestions {
+    margin: 0px 24px 20px 24px; }
+    .suggestion-box .suggestion-section .suggestions li {
+      display: block;
+      background-color: #fff;
+      padding: 8px 20px 8px 20px;
+      margin-top: 0;
+      margin-left: -24px;
+      margin-right: -24px;
+      font-size: 16px;
+      line-height: 22px; }
+      .suggestion-box .suggestion-section .suggestions li:first-child {
+        margin-top: 0; }
+      .suggestion-box .suggestion-section .suggestions li.active, .suggestion-box .suggestion-section .suggestions li:hover {
+        background-color: #F6BE00;
+        padding: 8px 20px 8px 20px;
+        margin-left: -24px;
+        margin-right: -24px; }
+        .suggestion-box .suggestion-section .suggestions li.active a, .suggestion-box .suggestion-section .suggestions li:hover a {
+          display: block;
+          margin: -8px -20px -8px -20px;
+          padding: 8px 20px 8px 20px; }
+          .suggestion-box .suggestion-section .suggestions li.active a span .muted, .suggestion-box .suggestion-section .suggestions li:hover a span .muted {
+            color: #465870; }
+      .suggestion-box .suggestion-section .suggestions li a {
+        display: block; }
+        .suggestion-box .suggestion-section .suggestions li a.selected, .suggestion-box .suggestion-section .suggestions li a:focus {
+          border: none;
+          text-decoration: unset; }
+
+.pending-request {
+  position: absolute;
+  top: 50%;
+  margin-left: -17px;
+  display: none;
+  color: #000;
+  transform: translateY(-50%);
+  transform-origin: 50%; }
+
 ul.btn-holder {
   margin: 0;
   padding: 0;
@@ -3275,6 +3343,9 @@ a.close {
 .dataTables_wrapper .dataTables_scroll
 .dtr-control:before {
   background-color: #3A833A !important; }
+
+.dataTables_wrapper .dataTables_scroll .dataTables_scrollBody table {
+  border-left: transparent !important; }
 
 .dataTables_wrapper #dtprv_paginate ul li.active a {
   background-color: #3A833A !important; }

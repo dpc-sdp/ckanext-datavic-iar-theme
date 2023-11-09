@@ -45,9 +45,12 @@ Example:
 
   <div class="sso-block">
     {% block oidc_login_button %}
-      {% set came_from = h.get_request_param('came_from') or request.path %}
+      {% set came_from = h.get_request_param('came_from') %}
+      {% if came_from == "/dashboard" %}
+        {% set came_from = h.url_for('dashboard.datasets') %}
+      {% endif %}
       <div class="sso-block-button">
-        <a href="{{ h.url_for('oidc_pkce.login', came_from=came_from ~ '?__no_cache__=True') }}" class="btn btn-primary">
+        <a href="{{ h.url_for('oidc_pkce.login', came_from=h.vic_iar_get_came_from_url(came_from ) ~ '?__no_cache__=True') }}" class="btn btn-primary">
           {{ _("Access VPS Data Directory using Single Sign-On") }}
         </a>
       </div>
