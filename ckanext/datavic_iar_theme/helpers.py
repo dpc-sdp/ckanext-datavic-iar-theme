@@ -260,3 +260,10 @@ def get_pages_dropdown_items():
         li = tk.h.literal('<li>') + link + tk.h.literal('</li>')
         dropdown_items = dropdown_items + li
     return dropdown_items
+
+@helper
+def datastore_loaded_resources(pkg_dict: dict[str, Any]) -> list[str]:
+    """Return a list of the dataset resources that are loaded to the datastore"""
+    if not pkg_dict["resources"]:
+        return []
+    return [resource["id"] for resource in pkg_dict["resources"] if resource["datastore_active"]]
