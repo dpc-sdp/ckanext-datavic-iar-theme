@@ -1,0 +1,12 @@
+{% extends "mailcraft/emails/base.html" %}
+
+{% block main_text %}
+
+<p>A user has requested an access to DEECA <a href="{{ h.url_for('dataset.read', id=package_id, _external=True)}}">dataset</a>.</p>
+
+<p>Name - {{ username }}</p>
+<p>Email - {{ email }}</p>
+<p>Organisation - {{ organisation }}</p>
+<p>Message - {{ message }}</p>
+
+{% endblock %}

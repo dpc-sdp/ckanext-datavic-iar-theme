@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html {
   font-size: 100%; }
 
@@ -1720,6 +1721,79 @@ nav {
   #mobile-menu .rpl-site-header__top {
     height: 3rem; }
 
+.pages-menu .rpl-link {
+  color: #011A3C; }
+  .pages-menu .rpl-link::after {
+    content: none;
+    border: none; }
+
+.pages-menu .dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  z-index: 100;
+  background-color: #F6BE00;
+  transition: background-color 0.3s ease;
+  inset: -40px 60px auto -40px; }
+  .pages-menu .dropdown .container {
+    display: flex;
+    flex-direction: column;
+    padding: 28px 48px 40px; }
+    .pages-menu .dropdown .container .dropdown-header {
+      padding: 0; }
+      .pages-menu .dropdown .container .dropdown-header h3 {
+        color: #1A1A1A;
+        font-size: 20px;
+        font-weight: 700;
+        padding: 0 8px; }
+    .pages-menu .dropdown .container .dropdown-items {
+      list-style-type: none;
+      padding: 0; }
+      .pages-menu .dropdown .container .dropdown-items li {
+        border-bottom: 1px solid #F69C00; }
+        .pages-menu .dropdown .container .dropdown-items li a {
+          color: #1A1A1A;
+          font-size: 14px;
+          padding: 12px 8px; }
+      .pages-menu .dropdown .container .dropdown-items .dropdown-item:hover {
+        background-color: #F6BE00; }
+
+#main-menu .pages-menu .rpl-link {
+  font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
+  font-size: 0.875rem;
+  line-height: 1em;
+  font-weight: normal;
+  background-color: transparent;
+  padding: 0;
+  position: relative;
+  margin: auto 1.75rem auto auto; }
+  #main-menu .pages-menu .rpl-link::after {
+    content: "";
+    display: inline-block;
+    font-family: FontAwesome;
+    color: #011A3C; }
+  #main-menu .pages-menu .rpl-link.show::after {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease; }
+
+#main-menu .pages-menu .dropdown {
+  margin-left: 20px;
+  inset: 0 60px auto -40px; }
+  #main-menu .pages-menu .dropdown .container {
+    flex-direction: row; }
+    #main-menu .pages-menu .dropdown .container .dropdown-header {
+      width: 25%; }
+    #main-menu .pages-menu .dropdown .container .dropdown-items {
+      width: 25%; }
+
+.dropdown-shown {
+  background-color: #FCEBB3 !important;
+  transition: background-color 0.3s ease; }
+
+.dropdown-hidden {
+  background-color: #F6BE00 !important;
+  transition: background-color 0.3s ease; }
+
 .module-content .pagination {
   margin: 0; }
 
@@ -1825,8 +1899,7 @@ nav {
   padding: 10px; }
   .resource-item .resource-summary {
     flex-grow: 2;
-    margin-right: 15px;
-    word-break: break-all; }
+    margin-right: 15px; }
   .resource-item .resource-icon {
     max-width: 45px; }
     .resource-item .resource-icon .format-label {
@@ -1837,6 +1910,9 @@ nav {
       height: 60px;
       width: 60px;
       vertical-align: text-bottom; }
+  @media (min-width: 767px) {
+    .resource-item .resource-summary {
+      width: 24%; } }
 
 .resource-list .resource-item {
   display: flex;
@@ -1845,19 +1921,26 @@ nav {
   align-items: flex-start; }
   .resource-list .resource-item:hover {
     background-color: transparent; }
-  .resource-list .resource-item .btn-group {
-    display: inline-block; }
-
-.resource-list .btn-group {
-  position: relative;
-  top: auto;
-  right: auto; }
+  .resource-list .resource-item .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem; }
+  .resource-list .resource-item .btn {
+    border: 2px solid #F6BE00;
+    padding: 0.75rem; }
+  .resource-list .resource-item .btn-outline {
+    border-width: 2px;
+    background-color: #FFFFFF; }
+  .resource-list .resource-item .btn-api {
+    border-color: #3A833A;
+    color: #3A833A; }
 
 @media (max-width: 767px) {
   .resource-list .resource-item {
     display: inline; }
-    .resource-list .resource-item .btn-group {
-      display: block; } }
+  .resource-list .buttons {
+    flex-direction: column; } }
 
 .dropdown-menu {
   border-color: #F6BE00; }
@@ -1865,23 +1948,48 @@ nav {
     background-image: none;
     background-color: #F6BE00; }
 
-.dataset-resources .badge {
-  background: none;
-  color: #465870;
-  font-size: 0.875rem;
-  padding: 0 0.25rem 0 0;
-  text-shadow: none;
-  text-transform: uppercase; }
-  .dataset-resources .badge:hover, .dataset-resources .badge:focus {
+.dataset-resources {
+  display: inline; }
+  .dataset-resources .badge {
+    background: none;
     color: #465870;
-    text-decoration: underline; }
-  .dataset-resources .badge:before {
-    content: "|";
-    padding-right: 0.625rem; }
+    font-size: 0.875rem;
+    padding: 0 0.25rem 0 0;
+    text-shadow: none;
+    text-transform: uppercase; }
+    .dataset-resources .badge:hover, .dataset-resources .badge:focus {
+      color: #465870;
+      text-decoration: underline; }
+    .dataset-resources .badge:before {
+      content: "|";
+      padding-right: 0.625rem; }
+  .dataset-resources li:first-child .badge:before {
+    content: "";
+    padding-right: 0; }
 
-.dataset-resources li:first-child .badge:before {
-  content: "";
-  padding-right: 0; }
+.dataset-api {
+  display: inline;
+  float: right;
+  color: #465870;
+  font-size: 0.875rem; }
+  .dataset-api li {
+    display: inline;
+    padding-right: 50px; }
+    .dataset-api li:last-child {
+      padding-right: 0; }
+  .dataset-api i {
+    padding-right: 3px; }
+  .dataset-api .preview {
+    color: #011A3C; }
+  .dataset-api .api a {
+    color: #3A833A; }
+
+@media (max-width: 767px) {
+  .dataset-api, .dataset-resources {
+    display: block; }
+  .dataset-api {
+    margin-top: 0.75rem;
+    float: unset; } }
 
 .res_abstract_heading {
   font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
@@ -1924,6 +2032,10 @@ nav {
     font-weight: 600;
     font-family: "VIC-Regular", "Arial", "Helvetica", "sans-serif";
     margin-bottom: 0.5rem; }
+
+@media (min-width: 576px) {
+  .api-modal {
+    max-width: 80%; } }
 
 .dataset-resources {
   margin-top: 0.75rem; }
@@ -3137,46 +3249,57 @@ a.close {
   font-size: 1.5rem; }
 
 .row.user-login-page .primary,
-.row.user-register-page .primary {
+.row.user-register-page .primary,
+.row.user-reset-page .primary {
   float: none; }
   .row.user-login-page .primary .page-heading,
-  .row.user-register-page .primary .page-heading {
+  .row.user-register-page .primary .page-heading,
+  .row.user-reset-page .primary .page-heading {
     margin-bottom: 4rem; }
   .row.user-login-page .primary .sso-block,
-  .row.user-register-page .primary .sso-block {
+  .row.user-register-page .primary .sso-block,
+  .row.user-reset-page .primary .sso-block {
     padding: 0 30px; }
     .row.user-login-page .primary .sso-block .sso-block-button,
-    .row.user-register-page .primary .sso-block .sso-block-button {
+    .row.user-register-page .primary .sso-block .sso-block-button,
+    .row.user-reset-page .primary .sso-block .sso-block-button {
       text-align: center;
       margin-bottom: 2.25rem; }
       .row.user-login-page .primary .sso-block .sso-block-button .btn,
-      .row.user-register-page .primary .sso-block .sso-block-button .btn {
+      .row.user-register-page .primary .sso-block .sso-block-button .btn,
+      .row.user-reset-page .primary .sso-block .sso-block-button .btn {
         width: 100%;
         text-decoration: none; }
     .row.user-login-page .primary .sso-block .sso-block--info,
-    .row.user-register-page .primary .sso-block .sso-block--info {
+    .row.user-register-page .primary .sso-block .sso-block--info,
+    .row.user-reset-page .primary .sso-block .sso-block--info {
       font-style: italic;
       line-height: 1.3;
       display: flex;
       align-items: center;
       margin-bottom: 2rem; }
       .row.user-login-page .primary .sso-block .sso-block--info .info--icon,
-      .row.user-register-page .primary .sso-block .sso-block--info .info--icon {
+      .row.user-register-page .primary .sso-block .sso-block--info .info--icon,
+      .row.user-reset-page .primary .sso-block .sso-block--info .info--icon {
         margin: 0 10px; }
         .row.user-login-page .primary .sso-block .sso-block--info .info--icon svg,
-        .row.user-register-page .primary .sso-block .sso-block--info .info--icon svg {
+        .row.user-register-page .primary .sso-block .sso-block--info .info--icon svg,
+        .row.user-reset-page .primary .sso-block .sso-block--info .info--icon svg {
           height: 32px;
           width: 32px; }
       .row.user-login-page .primary .sso-block .sso-block--info .info--text a,
-      .row.user-register-page .primary .sso-block .sso-block--info .info--text a {
+      .row.user-register-page .primary .sso-block .sso-block--info .info--text a,
+      .row.user-reset-page .primary .sso-block .sso-block--info .info--text a {
         text-decoration: underline; }
   .row.user-login-page .primary .module-content,
-  .row.user-register-page .primary .module-content {
+  .row.user-register-page .primary .module-content,
+  .row.user-reset-page .primary .module-content {
     width: fit-content;
     margin: 0 auto;
     max-width: 655px; }
     .row.user-login-page .primary .module-content .form-label,
-    .row.user-register-page .primary .module-content .form-label {
+    .row.user-register-page .primary .module-content .form-label,
+    .row.user-reset-page .primary .module-content .form-label {
       width: unset;
       float: unset;
       text-align: left;
@@ -3184,80 +3307,111 @@ a.close {
       font-size: 1rem;
       margin-bottom: 0.5rem; }
     .row.user-login-page .primary .module-content .control-medium,
-    .row.user-register-page .primary .module-content .control-medium {
+    .row.user-register-page .primary .module-content .control-medium,
+    .row.user-reset-page .primary .module-content .control-medium {
       margin: 0;
       margin-bottom: 1rem; }
       .row.user-login-page .primary .module-content .control-medium .controls,
-      .row.user-register-page .primary .module-content .control-medium .controls {
+      .row.user-register-page .primary .module-content .control-medium .controls,
+      .row.user-reset-page .primary .module-content .control-medium .controls {
         margin-left: 0; }
       .row.user-login-page .primary .module-content .control-medium input,
       .row.user-login-page .primary .module-content .control-medium select,
       .row.user-login-page .primary .module-content .control-medium textarea,
       .row.user-register-page .primary .module-content .control-medium input,
       .row.user-register-page .primary .module-content .control-medium select,
-      .row.user-register-page .primary .module-content .control-medium textarea {
+      .row.user-register-page .primary .module-content .control-medium textarea,
+      .row.user-reset-page .primary .module-content .control-medium input,
+      .row.user-reset-page .primary .module-content .control-medium select,
+      .row.user-reset-page .primary .module-content .control-medium textarea {
         width: 100%;
         height: 50px;
         background-color: #F6F6F9;
         border: 1px solid #D7DBE0;
         border-radius: 0.25rem; }
     .row.user-login-page .primary .module-content .form-actions,
-    .row.user-register-page .primary .module-content .form-actions {
+    .row.user-register-page .primary .module-content .form-actions,
+    .row.user-reset-page .primary .module-content .form-actions {
       display: flex;
       gap: 30px;
       justify-content: space-between;
       align-items: center;
       margin-top: 3rem; }
+      .row.user-login-page .primary .module-content .form-actions.form-reset,
+      .row.user-register-page .primary .module-content .form-actions.form-reset,
+      .row.user-reset-page .primary .module-content .form-actions.form-reset {
+        justify-content: flex-end; }
       .row.user-login-page .primary .module-content .form-actions .sign-up,
-      .row.user-register-page .primary .module-content .form-actions .sign-up {
+      .row.user-register-page .primary .module-content .form-actions .sign-up,
+      .row.user-reset-page .primary .module-content .form-actions .sign-up {
         font-family: "Vic-Bold", arial, sans-serif; }
         .row.user-login-page .primary .module-content .form-actions .sign-up a,
-        .row.user-register-page .primary .module-content .form-actions .sign-up a {
+        .row.user-register-page .primary .module-content .form-actions .sign-up a,
+        .row.user-reset-page .primary .module-content .form-actions .sign-up a {
           color: #011A3C; }
       .row.user-login-page .primary .module-content .form-actions .btn,
-      .row.user-register-page .primary .module-content .form-actions .btn {
+      .row.user-register-page .primary .module-content .form-actions .btn,
+      .row.user-reset-page .primary .module-content .form-actions .btn {
         width: 25%; }
+        .row.user-login-page .primary .module-content .form-actions .btn.btn-reset,
+        .row.user-register-page .primary .module-content .form-actions .btn.btn-reset,
+        .row.user-reset-page .primary .module-content .form-actions .btn.btn-reset {
+          width: 35%; }
         .row.user-login-page .primary .module-content .form-actions .btn:disabled,
-        .row.user-register-page .primary .module-content .form-actions .btn:disabled {
+        .row.user-register-page .primary .module-content .form-actions .btn:disabled,
+        .row.user-reset-page .primary .module-content .form-actions .btn:disabled {
           width: unset;
           margin-left: auto; }
     .row.user-login-page .primary .module-content .password-reset,
-    .row.user-register-page .primary .module-content .password-reset {
+    .row.user-register-page .primary .module-content .password-reset,
+    .row.user-reset-page .primary .module-content .password-reset {
       font-size: 0.875rem;
       text-align: right; }
       .row.user-login-page .primary .module-content .password-reset a,
-      .row.user-register-page .primary .module-content .password-reset a {
+      .row.user-register-page .primary .module-content .password-reset a,
+      .row.user-reset-page .primary .module-content .password-reset a {
         color: #011A3C;
         text-decoration: underline; }
 
 @media (max-width: 767px) {
   .row.user-login-page .primary,
-  .row.user-register-page .primary {
+  .row.user-register-page .primary,
+  .row.user-reset-page .primary {
     padding: 0; }
     .row.user-login-page .primary .sso-block,
-    .row.user-register-page .primary .sso-block {
+    .row.user-register-page .primary .sso-block,
+    .row.user-reset-page .primary .sso-block {
       padding: 0; }
       .row.user-login-page .primary .sso-block .sso-block-button,
-      .row.user-register-page .primary .sso-block .sso-block-button {
+      .row.user-register-page .primary .sso-block .sso-block-button,
+      .row.user-reset-page .primary .sso-block .sso-block-button {
         text-align: center;
         margin-bottom: 1.5rem; }
         .row.user-login-page .primary .sso-block .sso-block-button .btn,
-        .row.user-register-page .primary .sso-block .sso-block-button .btn {
+        .row.user-register-page .primary .sso-block .sso-block-button .btn,
+        .row.user-reset-page .primary .sso-block .sso-block-button .btn {
           word-wrap: break-word;
           white-space: normal;
           line-height: 1.3; }
     .row.user-login-page .primary .module-content,
-    .row.user-register-page .primary .module-content {
+    .row.user-register-page .primary .module-content,
+    .row.user-reset-page .primary .module-content {
       max-width: unset;
       width: 100%;
       padding: 10px; }
       .row.user-login-page .primary .module-content .form-actions .btn,
-      .row.user-register-page .primary .module-content .form-actions .btn {
-        padding: 16px; } }
+      .row.user-register-page .primary .module-content .form-actions .btn,
+      .row.user-reset-page .primary .module-content .form-actions .btn {
+        padding: 16px; }
+        .row.user-login-page .primary .module-content .form-actions .btn.btn-reset,
+        .row.user-register-page .primary .module-content .form-actions .btn.btn-reset,
+        .row.user-reset-page .primary .module-content .form-actions .btn.btn-reset {
+          width: fit-content; } }
 
 @media (max-width: 991px) {
   .row.user-login-page,
-  .row.user-register-page {
+  .row.user-register-page,
+  .row.user-reset-page {
     margin: 0; } }
 
 .row.user-register-page .division-line {
@@ -3352,3 +3506,59 @@ a.close {
 
 .dataTables_wrapper .pagination {
   padding-top: 2.5rem; }
+
+.via-iar-delwp-dataset .delwp-resource-list .resource-item {
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem; }
+  .via-iar-delwp-dataset .delwp-resource-list .resource-item .resource-icon img {
+    width: 50px; }
+  .via-iar-delwp-dataset .delwp-resource-list .resource-item .resource-summary p {
+    margin: 0; }
+  .via-iar-delwp-dataset .delwp-resource-list .resource-item .resource-summary .resource-summary__formats {
+    font-size: 0.875rem; }
+  .via-iar-delwp-dataset .delwp-resource-list .resource-item .btn-group .btn {
+    border: 2px #F6BE00 solid;
+    background: #fff;
+    color: #545454; }
+
+.via-iar-delwp-dataset .delwp-access-notes {
+  margin-top: 2rem;
+  margin-bottom: 1rem; }
+
+.via-iar-delwp-dataset #data-request-form {
+  margin-top: 4rem; }
+  .via-iar-delwp-dataset #data-request-form > h3 {
+    margin-bottom: 1rem; }
+  .via-iar-delwp-dataset #data-request-form > p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem; }
+  .via-iar-delwp-dataset #data-request-form .form .form-group label {
+    float: unset;
+    width: auto;
+    color: #1a1a1a;
+    font-size: 1.125rem;
+    font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
+    margin-bottom: 1rem; }
+    .via-iar-delwp-dataset #data-request-form .form .form-group label span.required {
+      color: #aa0028;
+      font-family: "VIC-Regular", "Arial", "Helvetica", "sans-serif";
+      font-size: 1rem;
+      font-weight: normal; }
+  .via-iar-delwp-dataset #data-request-form .form .form-group .controls {
+    margin-left: 0; }
+  .via-iar-delwp-dataset #data-request-form .form .form-group input {
+    height: 50px; }
+  .via-iar-delwp-dataset #data-request-form .form .form-group input,
+  .via-iar-delwp-dataset #data-request-form .form .form-group textarea {
+    background-color: #f5f5f5;
+    border-color: #666666;
+    box-shadow: none; }
+  .via-iar-delwp-dataset #data-request-form .form .form-actions {
+    float: left; }
+  @media screen and (min-width: 768px) {
+    .via-iar-delwp-dataset #data-request-form {
+      max-width: 75%; } }
+
+.via-iar-delwp-dataset #dataset-contact {
+  display: none; }
