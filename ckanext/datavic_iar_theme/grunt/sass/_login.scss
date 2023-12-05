@@ -51,7 +51,8 @@ a.close {
 
 
 .row.user-login-page,
-.row.user-register-page {
+.row.user-register-page,
+.row.user-reset-page {
     .primary {
         float: none;
 
@@ -139,9 +140,11 @@ a.close {
                 gap: 30px;
                 justify-content: space-between;
                 align-items: center;
-
                 margin-top: rem(48px);
 
+                &.form-reset {
+                    justify-content: flex-end;
+                }
 
                 .sign-up {
                     font-family: "Vic-Bold", arial, sans-serif;
@@ -153,6 +156,10 @@ a.close {
 
                 .btn {
                     width: 25%;
+
+                    &.btn-reset {
+                        width: 35%;
+                    }
 
                     &:disabled {
                         width: unset;
@@ -201,6 +208,10 @@ a.close {
 
                     .btn {
                         padding: 16px;
+
+                        &.btn-reset {
+                            width: fit-content;
+                        }
                     }
                 }
             }
@@ -211,7 +222,6 @@ a.close {
         margin: 0;
     }
 }
-
 
 .row.user-register-page {
     .division-line {
@@ -237,7 +247,6 @@ a.close {
             margin-bottom: rem(36px);
         }
     }
-
 }
 
 .division-line {
