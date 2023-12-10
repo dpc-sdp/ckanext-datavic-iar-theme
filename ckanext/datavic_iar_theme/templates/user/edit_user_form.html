@@ -37,15 +37,20 @@
 
   <fieldset{% if is_sso_user %} class="hidden"{% endif %}>
       <legend>{{ _('Change password') }}</legend>
-      {{ form.input('old_password',
-          type='password',
-          label=_('Sysadmin Password') if is_sysadmin else _('Old Password'),
-          id='field-password-old',
-          value=data.oldpassword,
-          error=errors.oldpassword,
-          classes=['control-medium'],
-          attrs={'autocomplete': 'off', 'class': 'form-control'}
-      ) }}
+
+      {% set self_update = g.user == data.name %}
+
+      {% if not is_sysadmin or self_update %}
+        {{ form.input('old_password',
+            type='password',
+            label=_('Old Password'),
+            id='field-password-old',
+            value=data.oldpassword,
+            error=errors.oldpassword,
+            classes=['control-medium'],
+            attrs={'autocomplete': 'off', 'class': 'form-control'}
+        ) }}
+      {% endif %}
 
       {{ form.input('password1', type='password', label=_('Password'), id='field-password', value=data.password1, error=errors.password1, classes=['control-medium'], attrs={'autocomplete': 'off', 'class': 'form-control'} ) }}
 
