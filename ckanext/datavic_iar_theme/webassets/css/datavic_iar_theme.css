@@ -1963,6 +1963,17 @@ nav {
   .api-modal {
     max-width: 80%; } }
 
+.format-label {
+  text-indent: -900em;
+  background: url("/datavic-sprite-resource-icons.png") no-repeat 0 0; }
+
+.format-label[data-format="data tool"] {
+  width: 60px;
+  height: 65px;
+  background-position: -2320px -220px;
+  transform: scale(0.53);
+  margin: -14px 0 0 -14px; }
+
 .dataset-resources {
   margin-top: 0.75rem; }
   .dataset-resources li a.badge {
