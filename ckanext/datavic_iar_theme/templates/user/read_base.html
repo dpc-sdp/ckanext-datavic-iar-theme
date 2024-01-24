@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content_action %}
-  {% if h.check_access('user_update', user) %}
+  {% if (is_sysadmin or is_myself) and h.check_access('user_update', user) %}
     {% link_for _('Edit'), named_route='datavicuser.edit', id=user.name, class_='btn', icon='wrench' %}
   {% endif %}
 {% endblock %}
