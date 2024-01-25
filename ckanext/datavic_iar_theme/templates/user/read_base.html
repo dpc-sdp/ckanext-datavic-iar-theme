@@ -1,12 +1,7 @@
 {% ckan_extends %}
 
 {% block breadcrumb_content %}
-  {{ h.build_nav('user.index', _('Users')) }}
-  {% if h.check_access('package_create') %}
-    {{ h.build_nav('user.read', user.display_name|truncate(35), id=user.name) }}
-  {% else %}
-    {{ h.build_nav('activity.user_activity', user.display_name|truncate(35), id=user.name) }}
-  {% endif %}
+
 {% endblock %}
 
 {% block content_action %}
