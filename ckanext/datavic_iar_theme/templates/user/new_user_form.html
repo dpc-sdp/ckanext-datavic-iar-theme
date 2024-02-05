@@ -1,0 +1,49 @@
+{% import "macros/form.html" as form %}
+
+<form id="user-register-form" class="form-horizontal" action="" method="post">
+    {{ h.csrf_input() }}
+
+  {{ form.errors(error_summary) }}
+
+  <div class="custom-select">
+    {{ form.select(
+    "organisation_id",
+    label=_("Organisation"),
+    options=h.vic_iar_get_parent_orgs(),
+    selected=data.organisation_id,
+    error=errors.organisation_id,
+    classes=["control-medium"],
+  ) }}
+  </div>
+
+  {{ form.input("name", id="field-username", label=_("Username"), placeholder=_("username"), value=data.name, error=errors.name, classes=["control-medium"], autocomplete="username") }}
+  {{ form.input("fullname", id="field-fullname", label=_("Full Name"), placeholder=_("Joe Bloggs"), value=data.fullname, error=errors.fullname, classes=["control-medium"], autocomplete="name") }}
+  {{ form.input("email", id="field-email", label=_("Email"), type="email", placeholder=_("joe@example.com"), value=data.email, error=errors.email, classes=["control-medium"], autocomplete="email") }}
+
+  <div class="password-block">
+    <div class="password-block--info">
+        <div class="info--title">
+            <h2>Password</h2>
+        </div>
+        <div class="info--text">
+            <p>Your password must be a minimum of 12 characters in length and include at least one upper and lower-case letter, a number and a symbol.
+            </p>
+        </div>
+    </div>
+
+
+    {{ form.input("password1", id="field-password", label=_("Password"), type="password", placeholder=_("Password"), value=data.password1, error=errors.password1, classes=["control-medium"], autocomplete="new-password") }}
+    {{ form.input("password2", id="field-confirm-password", label=_("Confirm password"), type="password", placeholder=_("Confirm password"), value=data.password2, error=errors.password1, classes=["control-medium"], autocomplete="new-password") }}
+
+  </div>
+  {% if g.recaptcha_publickey %}
+    {% snippet "user/snippets/recaptcha.html", public_key=g.recaptcha_publickey %}
+  {% endif %}
+
+  <div class="form-actions">
+    {% block form_actions %}
+    <button class="btn btn-primary" type="submit" name="save">{{ _("Create Account") }}</button>
+    {% endblock %}
+
+  </div>
+</form>
