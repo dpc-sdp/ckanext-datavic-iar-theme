@@ -63,5 +63,9 @@
   <dl>
     <dt>{{ _('State') }}</dt>
     <dd>{{ _(user.state) }}</dd>
+    {% if h.is_user_account_pending_review(user.id) and h.check_access('sysadmin') %}
+      <dd><a class="btn btn-warning" href="{{ h.url_for('datavicuser.approve', id=user.id)}}">Approve</a></dd>
+      <dd><a class="btn btn-danger" href="{{ h.url_for('datavicuser.deny', id=user.id)}}">Deny</a></dd>
+    {% endif %}
   </dl>
 {% endblock %}
