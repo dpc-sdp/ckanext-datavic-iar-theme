@@ -12,6 +12,7 @@ import ckan.lib.helpers as h
 from ckanext.toolbelt.decorators import Collector
 
 import ckanext.datavic_iar_theme.config as conf
+import ckanext.datavicmain.const as const
 
 
 log = logging.getLogger(__name__)
@@ -27,14 +28,16 @@ def organization_list() -> list[dict[str, Any]]:
 
 @helper
 def get_parent_orgs(output: Optional[str] = None) -> list[dict[str, str]] | list[str]:
+    """Get a list of parent organisations options. Exclude restricted ones"""
     organisations: list[model.Group] = model.Group.get_top_level_groups("organization")
 
-    if output == "list":
-        parent_orgs = [org.name for org in organisations]
-    else:
-        parent_orgs = [{"value": "", "text": "Please select..."}]
-        for org in organisations:
-            parent_orgs.append({"value": org.name, "text": org.display_name})
+    parent_orgs = [{"value": "", "text": "Please select..."}]
+
+    for org in organisations:
+        if org.extras.get(const.ORG_VISIBILITY_FIELD) == const.ORG_RESTRICTED:
+            continue
+
+        parent_orgs.append({"value": org.name, "text": org.display_name})
 
     return parent_orgs
 
@@ -186,4 +189,3 @@ def get_came_from_url(came_from: str | None) -> str:
             tk.config.get("ckan.auth.route_after_login") or "dataset.search"
         )
     return came_from
-    
