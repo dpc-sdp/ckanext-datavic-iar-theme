@@ -61,7 +61,7 @@ def format_list() -> list[str]:
     )
 
     formats = [
-        resource.format.upper().split('.')[-1] for resource in query if resource.format
+        resource.format.upper().split(".")[-1] for resource in query if resource.format
     ]
     unique_formats = set(formats)
 
@@ -131,15 +131,15 @@ def visibility_list() -> list[dict[str, str]]:
 @helper
 def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any]]:
     """Return a featured resource preview
-        - It takes only CSV resources with an existing preview
-        - Only resources uploaded to datastore
-        - Only not historical resources
+    - It takes only CSV resources with an existing preview
+    - Only resources uploaded to datastore
+    - Only not historical resources
     """
 
     featured_preview = None
 
-    resource_groups: list[list[dict[str, Any]]] = tk.h.group_resources_by_temporal_range(
-        package.get("resources", [])
+    resource_groups: list[list[dict[str, Any]]] = (
+        tk.h.group_resources_by_temporal_range(package.get("resources", []))
     )
 
     resources = resource_groups[0] if resource_groups else []
@@ -178,14 +178,73 @@ def _get_last_resource_if_historical(package: dict[str, Any]) -> dict[str, Any] 
 
 
 @helper
+def is_delwp_vector_data(resources: list[dict[str, Any]]) -> bool:
+    for res in resources:
+        if res["format"].lower() in [
+            "dwg",
+            "dxf",
+            "gdb",
+            "shp",
+            "mif",
+            "tab",
+            "extended tab",
+            "mapinfo",
+        ]:
+            return True
+
+    return False
+
+
+@helper
+def is_delwp_raster_data(resources: list[dict[str, Any]]) -> bool:
+    for res in resources:
+        if res["format"].lower() in [
+            "ecw",
+            "geotiff",
+            "jpeg",
+            "jp2",
+            "jpeg 2000",
+            "tiff",
+            "lass",
+            "xyz",
+        ]:
+            return True
+
+    return False
+
+
+@helper
+def is_delwp_dataset(package: dict[str, Any]) -> bool:
+    """Check if the dataset is harvested with delwp harvester"""
+    for extra in package.get("extras", []):
+        if extra["key"] != "harvest_source_type":
+            continue
+
+        if extra["value"] == "delwp":
+            return True
+
+    return False
+
+
+@helper
+def is_delwp_dataset_restricted(package: dict[str, Any]) -> bool:
+    """Check if the delwp dataset is restricted"""
+    for extra in package.get("extras", []):
+        if extra["key"] != "delwp_restricted":
+            continue
+
+        return tk.asbool(extra["value"])
+
+    return False
+
+
+@helper
 def get_route_after_login_config():
     return tk.config.get("ckan.auth.route_after_login")
 
 
 @helper
 def get_came_from_url(came_from: str | None) -> str:
-    if came_from is None:
-        return tk.url_for(
-            tk.config.get("ckan.auth.route_after_login") or "dataset.search"
-        )
-    return came_from
+    return came_from or tk.url_for(
+        tk.config.get("ckan.auth.route_after_login") or "dataset.search"
+    )
