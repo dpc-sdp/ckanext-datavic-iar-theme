@@ -165,11 +165,6 @@ def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any
 
 
 @helper
-def get_route_after_login_config():
-    return tk.config.get("ckan.auth.route_after_login")
-
-
-@helper
 def get_came_from_url(came_from: str | None) -> str:
     if came_from is None:
         return tk.url_for(
@@ -251,23 +246,98 @@ def show_blog_button():
 
 
 @helper
-def get_pages_dropdown_items():
-    dropdown_items = ""
-    pages_list = tk.get_action('ckanext_pages_list')({},
-                                                     {'order': True, 'private': False})
-    for page in pages_list:
-        type_ = 'blog' if page['page_type'] == 'blog' else conf.get_pages_base_url()
-        name = page['name']
-        title = page['title']
-        link = tk.h.literal('<a class="dropdown-item" href="/{}/{}">{}</a>'.format(type_, name, title))
-        li = tk.h.literal('<li>') + link + tk.h.literal('</li>')
-        dropdown_items = dropdown_items + li
-    return dropdown_items
-
-
-@helper
 def datastore_loaded_resources(pkg_dict: dict[str, Any]) -> list[str]:
     """Return a list of the dataset resources that are loaded to the datastore"""
     if not pkg_dict["resources"]:
         return []
     return [resource["id"] for resource in pkg_dict["resources"] if resource["datastore_active"]]
+
+
+@helper
+def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
+    result = [
+        {
+            "title": tk._("My Account"),
+            "url": "#",
+            "child": [
+                {
+                    "title": tk._("Dashboard"),
+                    "url": tk.h.url_for("dashboard.datasets"),
+                    "hide": not userobj
+                    or not tk.check_access(
+                        "package_create", {"user": userobj.name}, {}
+                    ),
+                },
+                {
+                    "title": tk._("My Profile"),
+                    "url": tk.h.url_for("dashboard.datasets"),
+                },
+            ],
+        },
+        {
+            "title": tk._("Support"),
+            "url": "#",
+            "child": [
+                {"title": tk._("User guides"), "url": tk.h.url_for("home.index")},
+                {
+                    "title": tk._("Contact Us"),
+                    "url": tk.h.vic_iar_get_parent_site_url() + "/contact-us",
+                },
+                {"title": tk._("About Us"), "url": tk.h.url_for("home.about")},
+                {
+                    "title": tk._("News and Announcements"),
+                    "url": tk.h.url_for("home.about"),
+                },
+            ],
+        },
+        {
+            "title": tk._("Data Sharing"),
+            "url": "#",
+            "child": [
+                {
+                    "title": tk._("Data Sharing Framework"),
+                    "url": tk.h.url_for("home.index"),
+                },
+                {"title": tk._("Data Ethics"), "url": tk.h.url_for("home.index")},
+            ],
+        },
+        {
+            "title": tk._("Browse"),
+            "url": "#",
+            "child": [
+                {"title": tk._("All data"), "url": h.url_for("dataset.search")},
+                {
+                    "title": tk._("Organisations"),
+                    "url": tk.h.url_for("organization.index"),
+                },
+                {"title": tk._("Categories"), "url": tk.h.url_for("group.index")},
+            ],
+        },
+    ]
+
+    if "pages" in tk.g.plugins:
+        menu_item = {
+            "title": tk._("Pages"),
+            "url": "#",
+            "child": None
+        }
+
+        child_items = []
+        pages_list = tk.get_action("ckanext_pages_list")(
+            {}, {"order": True, "private": False}
+        )
+
+        for page in pages_list:
+            page_type = "blog" if page["page_type"] == "blog" else conf.get_pages_base_url()
+
+            child_items.append({
+                "title": page["title"],
+                "url": "/{}/{}".format(page_type, page["name"])
+
+            })
+
+        if child_items:
+            menu_item["child"] = child_items
+            result.append(menu_item)
+
+    return result
