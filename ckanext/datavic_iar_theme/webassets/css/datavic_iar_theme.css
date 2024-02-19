@@ -619,6 +619,9 @@ h2 {
 .rpl-icon--color_dark_success {
   fill: #316f31; }
 
+.rpl-icon--color_green {
+  fill: #007b4b; }
+
 .nav.nav-tabs i.fa {
   color: #F6BE00; }
 
@@ -1249,7 +1252,7 @@ nav {
       padding: 1.25rem 1.25rem 0.25rem 1.25rem; } }
   .rpl-site-header__inner {
     overflow: hidden;
-    background-color: #F6BE00;
+    background-color: #007b4b;
     border-radius: 0.25rem;
     transition: height .25s;
     height: 3rem; }
@@ -1268,7 +1271,7 @@ nav {
     .rpl-site-header--open .rpl-site-header__inner {
       margin: 0;
       border-radius: 0.25rem;
-      background-color: #F6BE00;
+      background-color: #FCEBB3;
       height: 100%; }
   .rpl-site-header__top {
     display: flex;
@@ -1298,7 +1301,7 @@ nav {
         width: auto; }
       .rpl-site-header__logo-container--vic-logo-primary--cobrand {
         padding-right: 0.5rem;
-        border-right: 1px solid #011A3C;
+        border-right: 1px solid #fff;
         display: none; }
         @media screen and (min-width: 768px) {
           .rpl-site-header__logo-container--vic-logo-primary--cobrand {
@@ -1317,7 +1320,7 @@ nav {
     margin-left: auto; }
   .rpl-site-header__search-container {
     position: relative;
-    background-color: #F6BE00;
+    background-color: #FCEBB3;
     overflow-x: hidden;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -1337,7 +1340,7 @@ nav {
     cursor: pointer; }
     .rpl-site-header__btn--menu {
       padding-right: 0.5rem;
-      border-right: 1px solid #011A3C; }
+      border-right: 1px solid #fff; }
       @media screen and (min-width: 992px) {
         .rpl-site-header__btn--menu {
           display: none; } }
@@ -1406,16 +1409,18 @@ nav {
       font-size: 0.875rem;
       line-height: 1em;
       font-weight: normal;
-      color: #011A3C; }
+      color: #fff; }
     .rpl-site-header__btn .rpl-icon {
       display: inline; }
-  .rpl-site-header .cobrand a {
-    color: #011A3C;
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 0.0125rem;
-    line-height: 1rem;
-    padding-left: 0; }
+  .rpl-site-header .cobrand {
+    margin-left: 0.5rem; }
+    .rpl-site-header .cobrand a {
+      color: #011A3C;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.0125rem;
+      line-height: 1rem;
+      padding-left: 0; }
 
 .module .dashboard-header {
   font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
@@ -1457,6 +1462,8 @@ nav {
   list-style: none;
   box-sizing: border-box;
   padding: 0 1.5rem; }
+  .rpl-menu--vertical .rpl-menu__items .rpl-menu__item.vic-logout-btn .btn {
+    justify-content: center; }
 
 .rpl-menu--vertical .rpl-menu__header {
   padding: 0 1.5rem; }
@@ -1481,7 +1488,15 @@ nav {
   .rpl-menu--horizontal .rpl-menu__items--root {
     display: flex;
     list-style: none;
-    margin: 0; }
+    margin: 0;
+    align-items: center; }
+    .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-logout-btn .btn {
+      padding: 0.5rem 1rem;
+      justify-content: center; }
+    .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-login-btn .rpl-link {
+      margin-right: 0; }
+      .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-login-btn .rpl-link:hover:after {
+        display: none; }
     .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-menu__item-link {
       font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
       font-size: 0.875rem;
@@ -1494,7 +1509,7 @@ nav {
       display: inline-block;
       position: relative;
       cursor: pointer;
-      color: #011A3C;
+      color: #fff;
       margin: auto 1.75rem auto auto; }
       .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-menu__item-link:hover::after, .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-menu__item-link:focus::after {
         content: '';
@@ -1506,7 +1521,7 @@ nav {
         left: 0;
         right: 0;
         height: 2px;
-        background-color: #011A3C;
+        background-color: #fff;
         background-image: none; }
       .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-menu__item-link .rpl-icon {
         vertical-align: middle;
@@ -1720,78 +1735,124 @@ nav {
   z-index: 1040; }
   #mobile-menu .rpl-site-header__top {
     height: 3rem; }
+  #mobile-menu .dropdown {
+    position: relative;
+    background: unset;
+    top: 5px;
+    left: 0; }
+    #mobile-menu .dropdown .container {
+      padding: 0rem 0 2rem 0; }
+      #mobile-menu .dropdown .container .dropdown-header {
+        display: none; }
+      #mobile-menu .dropdown .container .dropdown-items li a:hover {
+        background-color: #F69C00; }
 
-.pages-menu .rpl-link {
+.vic-dropdown-menu .rpl-link::after {
+  content: none;
+  border: none; }
+
+.vic-dropdown-menu .rpl-link.dropdown-toggle::after {
+  content: "";
+  display: inline-block;
+  font-family: FontAwesome;
   color: #011A3C; }
-  .pages-menu .rpl-link::after {
-    content: none;
-    border: none; }
 
-.pages-menu .dropdown {
+.vic-dropdown-menu .dropdown {
   display: none;
-  position: absolute;
-  top: 100%;
-  z-index: 100;
-  background-color: #F6BE00;
   transition: background-color 0.3s ease;
   inset: -40px 60px auto -40px; }
-  .pages-menu .dropdown .container {
+  .vic-dropdown-menu .dropdown .container {
     display: flex;
     flex-direction: column;
     padding: 28px 48px 40px; }
-    .pages-menu .dropdown .container .dropdown-header {
+    .vic-dropdown-menu .dropdown .container .dropdown-header {
       padding: 0; }
-      .pages-menu .dropdown .container .dropdown-header h3 {
-        color: #1A1A1A;
+      .vic-dropdown-menu .dropdown .container .dropdown-header h3 {
         font-size: 20px;
         font-weight: 700;
         padding: 0 8px; }
-    .pages-menu .dropdown .container .dropdown-items {
+    .vic-dropdown-menu .dropdown .container .dropdown-items {
       list-style-type: none;
       padding: 0; }
-      .pages-menu .dropdown .container .dropdown-items li {
+      .vic-dropdown-menu .dropdown .container .dropdown-items li {
         border-bottom: 1px solid #F69C00; }
-        .pages-menu .dropdown .container .dropdown-items li a {
-          color: #1A1A1A;
+        .vic-dropdown-menu .dropdown .container .dropdown-items li a {
           font-size: 14px;
           padding: 12px 8px; }
-      .pages-menu .dropdown .container .dropdown-items .dropdown-item:hover {
+      .vic-dropdown-menu .dropdown .container .dropdown-items .dropdown-item:hover {
         background-color: #F6BE00; }
 
-#main-menu .pages-menu .rpl-link {
+#btn-mobile-menu-open {
+  margin-right: 0.5rem; }
+  #btn-mobile-menu-open svg path {
+    fill: #fff; }
+
+#btn-mobile-menu-close span {
+  color: #011A3C; }
+
+#main-menu .vic-dropdown-menu .rpl-link {
   font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
   font-size: 0.875rem;
   line-height: 1em;
   font-weight: normal;
+  color: #fff;
   background-color: transparent;
   padding: 0;
   position: relative;
   margin: auto 1.75rem auto auto; }
-  #main-menu .pages-menu .rpl-link::after {
-    content: "";
-    display: inline-block;
-    font-family: FontAwesome;
-    color: #011A3C; }
-  #main-menu .pages-menu .rpl-link.show::after {
+  #main-menu .vic-dropdown-menu .rpl-link.dropdown-toggle::after {
+    color: #fff; }
+  #main-menu .vic-dropdown-menu .rpl-link.show::after {
     transform: rotate(180deg);
     transition: transform 0.3s ease; }
 
-#main-menu .pages-menu .dropdown {
+#main-menu .vic-dropdown-menu .dropdown {
+  background-color: #007b4b;
   margin-left: 20px;
-  inset: 0 60px auto -40px; }
-  #main-menu .pages-menu .dropdown .container {
+  inset: 0 60px auto -40px;
+  position: absolute;
+  top: 100%;
+  z-index: 100; }
+  #main-menu .vic-dropdown-menu .dropdown .container {
     flex-direction: row; }
-    #main-menu .pages-menu .dropdown .container .dropdown-header {
+    #main-menu .vic-dropdown-menu .dropdown .container .dropdown-header h3 {
+      color: #fff; }
+    #main-menu .vic-dropdown-menu .dropdown .container .dropdown-items li a {
+      color: #fff; }
+    #main-menu .vic-dropdown-menu .dropdown .container .dropdown-items .dropdown-item:hover {
+      background-color: #F6BE00; }
+    #main-menu .vic-dropdown-menu .dropdown .container .dropdown-header {
       width: 25%; }
-    #main-menu .pages-menu .dropdown .container .dropdown-items {
+    #main-menu .vic-dropdown-menu .dropdown .container .dropdown-items {
       width: 25%; }
 
-.dropdown-shown {
+#main-menu .dropdown-shown {
   background-color: #FCEBB3 !important;
   transition: background-color 0.3s ease; }
+  #main-menu .dropdown-shown .dropdown {
+    margin-left: 20px;
+    inset: 0 60px auto -40px; }
+    #main-menu .dropdown-shown .dropdown .container {
+      flex-direction: row; }
+      #main-menu .dropdown-shown .dropdown .container .dropdown-header {
+        width: 25%; }
+        #main-menu .dropdown-shown .dropdown .container .dropdown-header h3 {
+          color: #011A3C; }
+      #main-menu .dropdown-shown .dropdown .container .dropdown-items {
+        width: 25%; }
+        #main-menu .dropdown-shown .dropdown .container .dropdown-items .dropdown-item {
+          color: #011A3C; }
+  #main-menu .dropdown-shown .rpl-link {
+    color: #011A3C; }
+    #main-menu .dropdown-shown .rpl-link.dropdown-toggle::after {
+      color: #011A3C; }
+  #main-menu .dropdown-shown .rpl-site-header__top .rpl-site-header__logo-container--vic-logo-primary--cobrand {
+    border-color: #011A3C; }
+  #main-menu .dropdown-shown .rpl-site-header__top svg g {
+    fill: #011A3C; }
 
-.dropdown-hidden {
-  background-color: #F6BE00 !important;
+#main-menu .dropdown-hidden {
+  background-color: #007b4b !important;
   transition: background-color 0.3s ease; }
 
 .module-content .pagination {

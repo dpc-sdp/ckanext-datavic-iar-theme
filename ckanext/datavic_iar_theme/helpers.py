@@ -271,3 +271,66 @@ def get_pages_dropdown_items():
         li = tk.h.literal("<li>") + link + tk.h.literal("</li>")
         dropdown_items = dropdown_items + li
     return dropdown_items
+
+
+@helper
+def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
+    return [
+        {
+            "title": tk._("My Account"),
+            "url": "#",
+            "child": [
+                {
+                    "title": tk._("Dashboard"),
+                    "url": tk.h.url_for("dashboard.datasets"),
+                    "hide": not userobj
+                    or not tk.check_access(
+                        "package_create", {"user": userobj.name}, {}
+                    ),
+                },
+                {
+                    "title": tk._("My Profile"),
+                    "url": tk.h.url_for("dashboard.datasets"),
+                },
+            ],
+        },
+        {
+            "title": tk._("Support"),
+            "url": "#",
+            "child": [
+                {"title": tk._("User guides"), "url": tk.h.url_for("home.index")},
+                {
+                    "title": tk._("Contact Us"),
+                    "url": tk.h.vic_iar_get_parent_site_url() + "/contact-us",
+                },
+                {"title": tk._("About Us"), "url": tk.h.url_for("home.about")},
+                {
+                    "title": tk._("News and Announcements"),
+                    "url": tk.h.url_for("home.about"),
+                },
+            ],
+        },
+        {
+            "title": tk._("Data Sharing"),
+            "url": "#",
+            "child": [
+                {
+                    "title": tk._("Data Sharing Framework"),
+                    "url": tk.h.url_for("home.index"),
+                },
+                {"title": tk._("Data Ethics"), "url": tk.h.url_for("home.index")},
+            ],
+        },
+        {
+            "title": tk._("Browse"),
+            "url": "#",
+            "child": [
+                {"title": tk._("All data"), "url": h.url_for("dataset.search")},
+                {
+                    "title": tk._("Organisations"),
+                    "url": tk.h.url_for("organization.index"),
+                },
+                {"title": tk._("Categories"), "url": tk.h.url_for("group.index")},
+            ],
+        },
+    ]
