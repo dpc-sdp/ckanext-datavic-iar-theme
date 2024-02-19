@@ -279,9 +279,10 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
         {
             "title": tk._("My Account"),
             "url": "#",
+            "hide": not userobj,
             "child": [
                 {
-                    "title": tk._("Dashboard"),
+                    "title": tk._("My Dashboard"),
                     "url": tk.h.url_for("dashboard.datasets"),
                     "hide": not userobj
                     or not tk.check_access(
@@ -290,7 +291,8 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
                 },
                 {
                     "title": tk._("My Profile"),
-                    "url": tk.h.url_for("dashboard.datasets"),
+                    "url": tk.h.url_for("user.read", id=userobj.name) if userobj else "#",
+                    "hide": not userobj
                 },
             ],
         },
