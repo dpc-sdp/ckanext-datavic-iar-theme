@@ -39,10 +39,16 @@
 
     {% if g.userobj %}
         <li class="rpl-menu__item vic-logout-btn">
-            <a class="btn btn-primary" href="{{ h.url_for('user.logout',  _time=session._accessed_time) }}" title="{{ _('Log out') }}" class="btn rpl-link rpl-menu__item-link">
-                <span>{{ _('Log out') }}</span>
-                <i class="fa fa-sign-out"></i>
-            </a>
+            {% if mobile %}
+                <a href="{{ h.url_for('user.logout',  _time=session._accessed_time) }}" title="{{ _('Log out') }}" class="rpl-link rpl-menu__item-link">
+                    <span>{{ _('Log out') }} <i class="mx-2 fa fa-sign-out"></i></span>
+                </a>
+            {% else %}
+                <a href="{{ h.url_for('user.logout',  _time=session._accessed_time) }}" title="{{ _('Log out') }}" class="btn btn-primary">
+                    <span>{{ _('Log out') }}</span>
+                    <i class="fa fa-sign-out"></i>
+                </a>
+            {% endif %}
         </li>
     {% else %}
         <li class="rpl-menu__item vic-login-btn">
