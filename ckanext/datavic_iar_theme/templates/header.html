@@ -52,14 +52,15 @@
         </li>
     {% else %}
         <li class="rpl-menu__item vic-login-btn">
-            <a href="{{ h.url_for('user.login') }}" title="{{ _('Log in') }}"  class="btn rpl-link rpl-menu__item-link">
-                {% if mobile %}
+            {% if mobile %}
+                <a href="{{ h.url_for('user.login') }}" title="{{ _('Log in') }}" class="rpl-link rpl-menu__item-link">
                     <span>{{ _('Log in') }} <i class="mx-2 fa fa-sign-in"></i></span>
-                {% else %}
-                    <span class="sr-only">{{ _('Log in') }}</span>
-                    <i class="mx-2 fa fa-sign-in"></i>
-                {% endif %}
-            </a>
+                </a>
+            {% else %}
+                <a href="{{ h.url_for('user.login') }}" title="{{ _('Log in') }}"  class="btn btn-primary">
+                    <span>{{ _('Log in') }} <i class="mx-2 fa fa-sign-in"></i></span>
+                </a>
+            {% endif %}
         </li>
     {% endif %}
 {% endmacro %}
