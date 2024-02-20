@@ -255,7 +255,7 @@ def datastore_loaded_resources(pkg_dict: dict[str, Any]) -> list[str]:
 
 @helper
 def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
-    result = [
+    return [
         {
             "title": tk._("My Account"),
             "url": "#",
@@ -316,30 +316,3 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
             ],
         },
     ]
-
-    if "pages" in tk.g.plugins:
-        menu_item = {
-            "title": tk._("Pages"),
-            "url": "#",
-            "child": None
-        }
-
-        child_items = []
-        pages_list = tk.get_action("ckanext_pages_list")(
-            {}, {"order": True, "private": False}
-        )
-
-        for page in pages_list:
-            page_type = "blog" if page["page_type"] == "blog" else conf.get_pages_base_url()
-
-            child_items.append({
-                "title": page["title"],
-                "url": "/{}/{}".format(page_type, page["name"])
-
-            })
-
-        if child_items:
-            menu_item["child"] = child_items
-            result.append(menu_item)
-
-    return result
