@@ -4,10 +4,10 @@ $rpl-menu-vertical-heading-margin: ($rpl-space * 6) auto $rpl-space-3 auto !defa
 $rpl-menu-vertical-items-padding: 0 ($rpl-space * 6) !default;
 $rpl-menu-vertical-header-padding: $rpl-menu-vertical-items-padding !default;
 $rpl-menu-vertical-back-icon-margin: auto $rpl-space auto 0 !default;
-$rpl-menu-horizontal-items-root-link-color: rpl-color('white') !default;
+$rpl-menu-horizontal-items-root-link-color: rpl-color('extra_dark_neutral') !default;
 $rpl-menu-horizontal-items-root-margin: auto ($rpl-space * 7) auto auto !default;
 $rpl-menu-horizontal-items-root-active-line-background-image: rpl-gradient('primary_gradient') !default;
-$rpl-menu-horizontal-items-root-active-hover-line-color: rpl-color('white') !default;
+$rpl-menu-horizontal-items-root-active-hover-line-color: rpl-color('secondary') !default;
 $rpl-menu-horizontal-items-root-active-thickness: 2px !default;
 $rpl-menu-horizontal-items-root-parent-icon-margin: auto auto auto $rpl-space !default;
 $rpl-menu-horizontal-inner-margin: ($rpl-space * 12) auto auto !default;
@@ -135,19 +135,11 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
     margin: 0;
     align-items: center;
 
-    .rpl-menu__item.vic-logout-btn .btn {
+    .rpl-menu__item.vic-logout-btn .btn,
+    .rpl-menu__item.vic-login-btn .btn {
         padding: 0.5rem 1rem;
         justify-content: center;
-    }
-
-    .rpl-menu__item.vic-login-btn .rpl-link {
-        margin-right: 0;
-
-        &:hover {
-            &:after {
-                display: none;
-            }
-        }
+        background-color: rpl-color('light_primary');
     }
 
     & > .rpl-menu__item > .rpl-menu__item-link {
@@ -458,33 +450,15 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
     }
 }
 
-#btn-mobile-menu-open {
-    margin-right: 0.5rem;
-
-    svg path {
-        fill: rpl-color('white');
-    }
-}
-
-#btn-mobile-menu-close {
-    span {
-        color: rpl-color('secondary');
-    }
-}
 
 #main-menu {
     .vic-dropdown-menu {
         .rpl-link {
             @include rpl_typography_font('xs', 1em, 'bold');
-            color: rpl-color('white');
             background-color: transparent;
             padding: 0;
             position: relative;
             margin: $rpl-menu-horizontal-items-root-margin;
-
-            &.dropdown-toggle::after {
-                color: rpl-color('white');
-            }
 
             &.show {
                 &::after {
@@ -495,7 +469,7 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
         }
 
         .dropdown {
-            background-color: rpl-color('green');
+            background-color: rpl-color('primary');
             margin-left: 20px;
             inset: 0 60px auto -40px;
             position: absolute;
@@ -507,17 +481,11 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
 
                 .dropdown-header {
                     h3 {
-                        color: rpl-color('white');
+                        color: rpl-color('secondary');
                     }
                 }
 
                 .dropdown-items {
-                    li {
-                        a {
-                            color: rpl-color('white');
-                        }
-                    }
-
                     .dropdown-item:hover {
                         background-color: rpl-color('primary');
                     }
@@ -548,44 +516,17 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
 
                 .dropdown-header {
                     width: 25%;
-
-                    h3 {
-                        color: rpl-color('secondary');
-                    }
                 }
 
                 .dropdown-items {
                     width: 25%;
-
-                    .dropdown-item {
-                        color: rpl-color('secondary');
-                    }
                 }
-            }
-        }
-
-        .rpl-link {
-            color: rpl-color('secondary');
-
-            &.dropdown-toggle::after {
-                color: rpl-color('secondary');
-            }
-        }
-
-        // paint svg header icons in black on open
-        .rpl-site-header__top {
-            .rpl-site-header__logo-container--vic-logo-primary--cobrand {
-                border-color: rpl-color('secondary');
-            }
-
-            svg g {
-                fill: rpl-color('secondary');
             }
         }
     }
 
     .dropdown-hidden {
-        background-color: rpl-color('green') !important;
+        background-color: rpl-color('primary') !important;
         transition: background-color 0.3s ease;
     }
 }

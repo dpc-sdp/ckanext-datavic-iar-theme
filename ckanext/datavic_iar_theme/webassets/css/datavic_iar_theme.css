@@ -1252,7 +1252,7 @@ nav {
       padding: 1.25rem 1.25rem 0.25rem 1.25rem; } }
   .rpl-site-header__inner {
     overflow: hidden;
-    background-color: #007b4b;
+    background-color: #F6BE00;
     border-radius: 0.25rem;
     transition: height .25s;
     height: 3rem; }
@@ -1271,7 +1271,7 @@ nav {
     .rpl-site-header--open .rpl-site-header__inner {
       margin: 0;
       border-radius: 0.25rem;
-      background-color: #FCEBB3;
+      background-color: #F6BE00;
       height: 100%; }
   .rpl-site-header__top {
     display: flex;
@@ -1301,7 +1301,7 @@ nav {
         width: auto; }
       .rpl-site-header__logo-container--vic-logo-primary--cobrand {
         padding-right: 0.5rem;
-        border-right: 1px solid #fff;
+        border-right: 1px solid #011A3C;
         display: none; }
         @media screen and (min-width: 768px) {
           .rpl-site-header__logo-container--vic-logo-primary--cobrand {
@@ -1320,7 +1320,7 @@ nav {
     margin-left: auto; }
   .rpl-site-header__search-container {
     position: relative;
-    background-color: #FCEBB3;
+    background-color: #F6BE00;
     overflow-x: hidden;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -1340,7 +1340,7 @@ nav {
     cursor: pointer; }
     .rpl-site-header__btn--menu {
       padding-right: 0.5rem;
-      border-right: 1px solid #fff; }
+      border-right: 1px solid #011A3C; }
       @media screen and (min-width: 992px) {
         .rpl-site-header__btn--menu {
           display: none; } }
@@ -1409,7 +1409,7 @@ nav {
       font-size: 0.875rem;
       line-height: 1em;
       font-weight: normal;
-      color: #fff; }
+      color: #011A3C; }
     .rpl-site-header__btn .rpl-icon {
       display: inline; }
   .rpl-site-header .cobrand {
@@ -1490,13 +1490,11 @@ nav {
     list-style: none;
     margin: 0;
     align-items: center; }
-    .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-logout-btn .btn {
+    .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-logout-btn .btn,
+    .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-login-btn .btn {
       padding: 0.5rem 1rem;
-      justify-content: center; }
-    .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-login-btn .rpl-link {
-      margin-right: 0; }
-      .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-login-btn .rpl-link:hover:after {
-        display: none; }
+      justify-content: center;
+      background-color: #F69C00; }
     .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-menu__item-link {
       font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
       font-size: 0.875rem;
@@ -1509,7 +1507,7 @@ nav {
       display: inline-block;
       position: relative;
       cursor: pointer;
-      color: #fff;
+      color: #011A3C;
       margin: auto 1.75rem auto auto; }
       .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-menu__item-link:hover::after, .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-menu__item-link:focus::after {
         content: '';
@@ -1521,7 +1519,7 @@ nav {
         left: 0;
         right: 0;
         height: 2px;
-        background-color: #fff;
+        background-color: #011A3C;
         background-image: none; }
       .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-menu__item-link .rpl-icon {
         vertical-align: middle;
@@ -1782,32 +1780,21 @@ nav {
       .vic-dropdown-menu .dropdown .container .dropdown-items .dropdown-item:hover {
         background-color: #F6BE00; }
 
-#btn-mobile-menu-open {
-  margin-right: 0.5rem; }
-  #btn-mobile-menu-open svg path {
-    fill: #fff; }
-
-#btn-mobile-menu-close span {
-  color: #011A3C; }
-
 #main-menu .vic-dropdown-menu .rpl-link {
   font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
   font-size: 0.875rem;
   line-height: 1em;
   font-weight: normal;
-  color: #fff;
   background-color: transparent;
   padding: 0;
   position: relative;
   margin: auto 1.75rem auto auto; }
-  #main-menu .vic-dropdown-menu .rpl-link.dropdown-toggle::after {
-    color: #fff; }
   #main-menu .vic-dropdown-menu .rpl-link.show::after {
     transform: rotate(180deg);
     transition: transform 0.3s ease; }
 
 #main-menu .vic-dropdown-menu .dropdown {
-  background-color: #007b4b;
+  background-color: #F6BE00;
   margin-left: 20px;
   inset: 0 60px auto -40px;
   position: absolute;
@@ -1816,9 +1803,7 @@ nav {
   #main-menu .vic-dropdown-menu .dropdown .container {
     flex-direction: row; }
     #main-menu .vic-dropdown-menu .dropdown .container .dropdown-header h3 {
-      color: #fff; }
-    #main-menu .vic-dropdown-menu .dropdown .container .dropdown-items li a {
-      color: #fff; }
+      color: #011A3C; }
     #main-menu .vic-dropdown-menu .dropdown .container .dropdown-items .dropdown-item:hover {
       background-color: #F6BE00; }
     #main-menu .vic-dropdown-menu .dropdown .container .dropdown-header {
@@ -1836,23 +1821,11 @@ nav {
       flex-direction: row; }
       #main-menu .dropdown-shown .dropdown .container .dropdown-header {
         width: 25%; }
-        #main-menu .dropdown-shown .dropdown .container .dropdown-header h3 {
-          color: #011A3C; }
       #main-menu .dropdown-shown .dropdown .container .dropdown-items {
         width: 25%; }
-        #main-menu .dropdown-shown .dropdown .container .dropdown-items .dropdown-item {
-          color: #011A3C; }
-  #main-menu .dropdown-shown .rpl-link {
-    color: #011A3C; }
-    #main-menu .dropdown-shown .rpl-link.dropdown-toggle::after {
-      color: #011A3C; }
-  #main-menu .dropdown-shown .rpl-site-header__top .rpl-site-header__logo-container--vic-logo-primary--cobrand {
-    border-color: #011A3C; }
-  #main-menu .dropdown-shown .rpl-site-header__top svg g {
-    fill: #011A3C; }
 
 #main-menu .dropdown-hidden {
-  background-color: #007b4b !important;
+  background-color: #F6BE00 !important;
   transition: background-color 0.3s ease; }
 
 .module-content .pagination {

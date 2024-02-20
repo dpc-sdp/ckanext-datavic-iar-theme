@@ -1,11 +1,11 @@
 $rpl-site-header-logo-width: auto;
 $rpl-site-header-logo-primary-width: auto;
-$rpl-site-header-text-color: rpl-color('white') !default;
+$rpl-site-header-text-color: rpl-color('extra_dark_neutral') !default;
 $rpl-site-header-border-radius: rem(4px) !default;
-$rpl-site-header-background-color: rpl-color('green') !default;
-$rpl-site-header-background-color-open: rpl-color('light_primary_2') !default;
+$rpl-site-header-background-color: rpl-color('primary') !default;
+$rpl-site-header-background-color-open: rpl-color('primary') !default;
 $rpl-site-header-top-padding: ($rpl-space * 6) ($rpl-space * 5) !default;
-$rpl-site-header-menu-toggle-border-right: 1px solid rpl-color('white') !default;
+$rpl-site-header-menu-toggle-border-right: 1px solid rpl-color('extra_dark_neutral') !default;
 $rpl-site-header-menu-toggle-border-spacing: $rpl-space-2 !default;
 $rpl-site-header-menu-toggle-icon-margin: auto $rpl-space-2 auto 0 !default;
 $rpl-site-header-search-toggle-icon-margin: auto 0 auto $rpl-space-2 !default;
