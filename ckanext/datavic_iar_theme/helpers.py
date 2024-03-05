@@ -255,64 +255,89 @@ def datastore_loaded_resources(pkg_dict: dict[str, Any]) -> list[str]:
 
 @helper
 def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
+    is_logged_in: bool = bool(userobj)
+    is_sysadmin: bool = bool(userobj) and userobj.sysadmin
+
     return [
         {
-            "title": tk._("My Account"),
+            "title": tk._("My account"),
             "url": "#",
-            "hide": not userobj,
+            "hide": not is_logged_in,
             "child": [
                 {
-                    "title": tk._("My Dashboard"),
+                    "title": tk._("Dashboard"),
                     "url": tk.h.url_for("dashboard.datasets"),
-                    "hide": not userobj
+                    "hide": not is_logged_in
                     or not tk.check_access(
                         "package_create", {"user": userobj.name}, {}
                     ),
                 },
                 {
-                    "title": tk._("My Profile"),
-                    "url": tk.h.url_for("user.read", id=userobj.name) if userobj else "#",
-                    "hide": not userobj
+                    "title": tk._("Profile"),
+                    "url": (
+                        tk.h.url_for("user.read", id=userobj.name)
+                        if is_logged_in
+                        else "#"
+                    ),
+                    "hide": not is_logged_in,
+                },
+                {
+                    "title": tk._("Sysadmin settings"),
+                    "url": tk.h.url_for("admin.index"),
+                    "hide": not is_sysadmin,
+                },
+                {
+                    "title": tk._("Pages"),
+                    "url": tk.h.url_for("pages.pages_index"),
+                    "hide": not is_logged_in,
+                },
+                {
+                    "title": tk._("Blog"),
+                    "url": tk.h.url_for("pages.blog_index"),
+                    "hide": not is_logged_in,
                 },
             ],
         },
         {
             "title": tk._("Support"),
             "url": "#",
+            "hide": not is_logged_in,
             "child": [
                 {"title": tk._("User guides"), "url": tk.h.url_for("home.index")},
                 {
-                    "title": tk._("Contact Us"),
+                    "title": tk._("Contact us"),
                     "url": tk.h.vic_iar_get_parent_site_url() + "/contact-us",
                 },
-                {"title": tk._("About Us"), "url": tk.h.url_for("home.about")},
+                {"title": tk._("About us"), "url": tk.h.url_for("home.about")},
                 {
-                    "title": tk._("News and Announcements"),
+                    "title": tk._("News and announcements"),
                     "url": tk.h.url_for("home.about"),
                 },
             ],
         },
         {
-            "title": tk._("Data Sharing"),
+            "title": tk._("Data sharing"),
             "url": "#",
+            "hide": not is_logged_in,
             "child": [
                 {
-                    "title": tk._("Data Sharing Framework"),
+                    "title": tk._("Data sharing framework"),
                     "url": tk.h.url_for("home.index"),
                 },
-                {"title": tk._("Data Ethics"), "url": tk.h.url_for("home.index")},
+                {"title": tk._("Data ethics"), "url": tk.h.url_for("home.index")},
             ],
         },
         {
-            "title": tk._("Browse"),
+            "title": tk._("Datasets"),
             "url": "#",
+            "hide": not is_logged_in,
             "child": [
-                {"title": tk._("All data"), "url": h.url_for("dataset.search")},
+                {"title": tk._("Search"), "url": h.url_for("dataset.search")},
                 {
-                    "title": tk._("Organisations"),
+                    "title": tk._("Browse by organisation"),
                     "url": tk.h.url_for("organization.index"),
                 },
-                {"title": tk._("Categories"), "url": tk.h.url_for("group.index")},
+                {"title": tk._("Browse by category"), "url": tk.h.url_for("group.index")},
             ],
         },
     ]

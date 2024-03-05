@@ -5,13 +5,11 @@
     {% endif %}
   {% endblock %}
 
-{% block header_account %}{% endblock %}
-
 {% macro header_menu(items, mobile=false) %}
     {% for menu_item in items if not menu_item.hide %}
     <li class="vic-dropdown-menu rpl-menu__item">
         {% if menu_item.child %}
-            <a href="{{ menu_item.url }}" class="btn rpl-link {% if mobile %}rpl-menu__item-link{% endif %} dropdown-toggle">{{ menu_item.title }}</a>
+            <a href="{{ menu_item.url }}" class="btn rpl-link {% if mobile %}rpl-menu__item-link{% endif %} dropdown-toggle"><span>{{ menu_item.title }}</span></a>
         {% else %}
             <a href="{{ menu_item.url }}" class="rpl-link rpl-menu__item-link">{{ menu_item.title }}</a>
         {% endif %}
@@ -26,7 +24,7 @@
                         {% for menu_item in menu_item.child if not menu_item.hide %}
                             <li>
                                 <a href="{{ menu_item.url }}" class="dropdown-item">
-                                    {{ menu_item.title }}
+                                    <span>{{ menu_item.title }}</span>
                                 </a>
                             </li>
                         {% endfor %}
@@ -41,12 +39,15 @@
         <li class="rpl-menu__item vic-logout-btn">
             {% if mobile %}
                 <a href="{{ h.url_for('user.logout',  _time=session._accessed_time) }}" title="{{ _('Log out') }}" class="rpl-link rpl-menu__item-link">
-                    <span>{{ _('Log out') }} <i class="mx-2 fa fa-sign-out"></i></span>
+                    <span>
+                        {{ _('Log out') }}
+                        {% snippet 'snippets/svg/header-logout-icon.svg' %}
+                    </span>
                 </a>
             {% else %}
                 <a href="{{ h.url_for('user.logout',  _time=session._accessed_time) }}" title="{{ _('Log out') }}" class="btn btn-primary">
                     <span>{{ _('Log out') }}</span>
-                    <i class="fa fa-sign-out"></i>
+                    {% snippet 'snippets/svg/header-logout-icon.svg' %}
                 </a>
             {% endif %}
         </li>
@@ -54,11 +55,17 @@
         <li class="rpl-menu__item vic-login-btn">
             {% if mobile %}
                 <a href="{{ h.url_for('user.login') }}" title="{{ _('Log in') }}" class="rpl-link rpl-menu__item-link">
-                    <span>{{ _('Log in') }} <i class="mx-2 fa fa-sign-in"></i></span>
+                    <span>
+                        {{ _('Log in') }}
+                        {% snippet 'snippets/svg/header-login-icon.svg' %}
+                    </span>
                 </a>
             {% else %}
-                <a href="{{ h.url_for('user.login') }}" title="{{ _('Log in') }}"  class="btn btn-primary">
-                    <span>{{ _('Log in') }} <i class="mx-2 fa fa-sign-in"></i></span>
+                <a href="{{ h.url_for('user.login') }}" title="{{ _('Log in') }}"  class="rpl-link rpl-menu__item-link">
+                    <span>
+                        {{ _('Log in') }}
+                        {% snippet 'snippets/svg/header-login-icon.svg' %}
+                    </span>
                 </a>
             {% endif %}
         </li>

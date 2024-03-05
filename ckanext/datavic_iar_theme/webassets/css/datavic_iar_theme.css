@@ -1462,8 +1462,16 @@ nav {
   list-style: none;
   box-sizing: border-box;
   padding: 0 1.5rem; }
-  .rpl-menu--vertical .rpl-menu__items .rpl-menu__item.vic-logout-btn .btn {
-    justify-content: center; }
+  .rpl-menu--vertical .rpl-menu__items .rpl-menu__item.vic-logout-btn span,
+  .rpl-menu--vertical .rpl-menu__items .rpl-menu__item.vic-login-btn span {
+    justify-content: center;
+    display: flex;
+    align-items: center; }
+    .rpl-menu--vertical .rpl-menu__items .rpl-menu__item.vic-logout-btn span svg,
+    .rpl-menu--vertical .rpl-menu__items .rpl-menu__item.vic-login-btn span svg {
+      width: 12px;
+      height: 12px;
+      margin-left: 0.5rem; }
 
 .rpl-menu--vertical .rpl-menu__header {
   padding: 0 1.5rem; }
@@ -1490,17 +1498,47 @@ nav {
     list-style: none;
     margin: 0;
     align-items: center; }
-    .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-logout-btn .btn,
-    .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-login-btn .btn {
-      padding: 0.5rem 1rem;
-      justify-content: center;
+    .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-logout-btn,
+    .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-login-btn {
+      justify-content: center; }
+      .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-logout-btn svg,
+      .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-login-btn svg {
+        width: 12px;
+        height: 12px;
+        margin-left: 0.5rem; }
+    .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-logout-btn {
       background-color: #F69C00; }
+    .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-link.show::before {
+      content: '';
+      width: 100%;
+      position: absolute;
+      display: inline-block;
+      bottom: -0.0625rem;
+      border-radius: 2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #011A3C;
+      background-image: none; }
+    .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-link:hover::before, .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-link:focus::before {
+      content: '';
+      width: 100%;
+      position: absolute;
+      display: inline-block;
+      bottom: -0.0625rem;
+      border-radius: 2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #011A3C;
+      background-image: none; }
+    .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-link:focus {
+      box-shadow: unset; }
     .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-menu__item-link {
       font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
       font-size: 0.875rem;
       line-height: 1em;
       font-weight: normal;
-      text-decoration: none;
       background-color: transparent;
       border: 0;
       padding: 0;
@@ -1514,7 +1552,7 @@ nav {
         width: 100%;
         position: absolute;
         display: inline-block;
-        bottom: -0.3125rem;
+        bottom: -0.0625rem;
         border-radius: 2px;
         left: 0;
         right: 0;
@@ -1676,7 +1714,6 @@ nav {
   margin: 0;
   border-radius: 0;
   cursor: pointer;
-  text-decoration: none;
   padding: 1rem 1.25rem 1rem 0;
   color: #011A3C;
   transition: padding-left .25s; }
@@ -1709,7 +1746,8 @@ nav {
     .rpl-menu--horizontal .rpl-menu--subs .rpl-menu__item-link--active span,
     .rpl-menu--horizontal .rpl-menu--subs .rpl-menu__item-link:hover span,
     .rpl-menu--horizontal .rpl-menu--subs .rpl-menu__item-link:focus span {
-      margin-right: 0; }
+      margin-right: 0;
+      text-decoration: underline; }
   .rpl-menu--vertical .rpl-menu__item-link:hover, .rpl-menu--vertical .rpl-menu__item-link:focus,
   .rpl-menu--horizontal-floating-wrapper .rpl-menu__item-link:hover,
   .rpl-menu--horizontal-floating-wrapper .rpl-menu__item-link:focus,
@@ -1749,15 +1787,24 @@ nav {
   content: none;
   border: none; }
 
-.vic-dropdown-menu .rpl-link.dropdown-toggle::after {
+.vic-dropdown-menu .rpl-link.dropdown-toggle span::after {
   content: "";
   display: inline-block;
   font-family: FontAwesome;
-  color: #011A3C; }
+  color: #011A3C;
+  margin-left: 0.5rem; }
+
+.vic-dropdown-menu .dropdown-items li span {
+  transition: 80ms ease-out; }
+
+.vic-dropdown-menu .dropdown-items li .dropdown-item:hover span {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  transform: translate(12px);
+  display: block; }
 
 .vic-dropdown-menu .dropdown {
   display: none;
-  transition: background-color 0.3s ease;
   inset: -40px 60px auto -40px; }
   .vic-dropdown-menu .dropdown .container {
     display: flex;
@@ -1777,43 +1824,56 @@ nav {
         .vic-dropdown-menu .dropdown .container .dropdown-items li a {
           font-size: 14px;
           padding: 12px 8px; }
+          .vic-dropdown-menu .dropdown .container .dropdown-items li a:active, .vic-dropdown-menu .dropdown .container .dropdown-items li a:focus {
+            background-color: #F6BE00;
+            color: #011A3C; }
       .vic-dropdown-menu .dropdown .container .dropdown-items .dropdown-item:hover {
         background-color: #F6BE00; }
 
-#main-menu .vic-dropdown-menu .rpl-link {
-  font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
-  font-size: 0.875rem;
-  line-height: 1em;
-  font-weight: normal;
-  background-color: transparent;
-  padding: 0;
-  position: relative;
+#main-menu .vic-dropdown-menu {
   margin: auto 1.75rem auto auto; }
-  #main-menu .vic-dropdown-menu .rpl-link.show::after {
-    transform: rotate(180deg);
-    transition: transform 0.3s ease; }
-
-#main-menu .vic-dropdown-menu .dropdown {
-  background-color: #F6BE00;
-  margin-left: 20px;
-  inset: 0 60px auto -40px;
-  position: absolute;
-  top: 100%;
-  z-index: 100; }
-  #main-menu .vic-dropdown-menu .dropdown .container {
-    flex-direction: row; }
-    #main-menu .vic-dropdown-menu .dropdown .container .dropdown-header h3 {
-      color: #011A3C; }
-    #main-menu .vic-dropdown-menu .dropdown .container .dropdown-items .dropdown-item:hover {
-      background-color: #F6BE00; }
-    #main-menu .vic-dropdown-menu .dropdown .container .dropdown-header {
-      width: 25%; }
-    #main-menu .vic-dropdown-menu .dropdown .container .dropdown-items {
-      width: 25%; }
+  #main-menu .vic-dropdown-menu .rpl-link {
+    font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
+    font-size: 0.875rem;
+    line-height: 1em;
+    font-weight: normal;
+    background-color: transparent;
+    padding: 0;
+    position: relative;
+    margin: auto 1.75rem auto auto; }
+    #main-menu .vic-dropdown-menu .rpl-link.show::after {
+      transform: rotate(180deg);
+      transition: transform 0.3s ease; }
+    #main-menu .vic-dropdown-menu .rpl-link.dropdown-toggle::after {
+      content: "";
+      display: inline-block;
+      font-family: FontAwesome;
+      color: #011A3C;
+      margin-left: 0.5rem;
+      position: absolute;
+      right: -16px; }
+    #main-menu .vic-dropdown-menu .rpl-link.dropdown-toggle span::after {
+      display: none; }
+  #main-menu .vic-dropdown-menu .dropdown {
+    background-color: #F6BE00;
+    margin-left: 20px;
+    inset: 0 60px auto -40px;
+    position: absolute;
+    top: 100%;
+    z-index: 100; }
+    #main-menu .vic-dropdown-menu .dropdown .container {
+      flex-direction: row; }
+      #main-menu .vic-dropdown-menu .dropdown .container .dropdown-header h3 {
+        color: #011A3C; }
+      #main-menu .vic-dropdown-menu .dropdown .container .dropdown-items .dropdown-item:hover {
+        background-color: #F6BE00; }
+      #main-menu .vic-dropdown-menu .dropdown .container .dropdown-header {
+        width: 25%; }
+      #main-menu .vic-dropdown-menu .dropdown .container .dropdown-items {
+        width: 25%; }
 
 #main-menu .dropdown-shown {
-  background-color: #FCEBB3 !important;
-  transition: background-color 0.3s ease; }
+  background-color: #FCEBB3 !important; }
   #main-menu .dropdown-shown .dropdown {
     margin-left: 20px;
     inset: 0 60px auto -40px; }
@@ -1825,8 +1885,7 @@ nav {
         width: 25%; }
 
 #main-menu .dropdown-hidden {
-  background-color: #F6BE00 !important;
-  transition: background-color 0.3s ease; }
+  background-color: #F6BE00 !important; }
 
 .module-content .pagination {
   margin: 0; }
