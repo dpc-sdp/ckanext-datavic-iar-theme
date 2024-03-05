@@ -14,18 +14,26 @@ this.ckan.module("datavic-dropdown", function ($) {
         },
 
         _onDropdownClick: function (e) {
-            var dropdownItem = e.target;
-            var header
-            var dropdown_top
+            if (e.target.tagName === "SPAN") {
+                e.target = $(e.target).parent()[0];
+            }
+
+            console.log(e.target);
+            let dropdownItem = e.target;
+            let openedItem = $(".dropdown.dropdown-shown").prev(".dropdown-toggle");
+            let isCloseAction = e.target === openedItem[0];
+            let isOpenAction = openedItem.length && !isCloseAction;
+
+            let header;
 
             if (this.options.isMobile) {
                 header = $("#mobile-menu").children(".rpl-site-header__inner");
-                dropdown_top = $(dropdownItem).offset().top
-                // $(dropdownItem).next(".dropdown").css("transform", `translate(40px, ${dropdown_top}px)`);
             } else {
                 header = $("#main-menu").children(".rpl-site-header__inner");
-                dropdown_top = header.offset().top + header.outerHeight(true) - 2
-                var dropdown_height = $("body").outerHeight() - dropdown_top
+
+                let dropdown_top = header.offset().top + header.outerHeight(true) - 2;
+                let dropdown_height = window.innerHeight - header[0].getBoundingClientRect().bottom - 30;
+
                 $(dropdownItem).next(".dropdown").css("transform", `translate(40px, ${dropdown_top}px)`);
                 $(dropdownItem).next(".dropdown").css("height", `${dropdown_height}px`);
             }
@@ -40,8 +48,8 @@ this.ckan.module("datavic-dropdown", function ($) {
                 $(el).next(".dropdown").removeClass("dropdown-shown");
             })
 
-            $(dropdownItem).next(".dropdown").slideToggle();
-            $(dropdownItem).toggleClass("show")
+            $(dropdownItem).next(".dropdown").slideToggle(!isOpenAction ? 400 : 0);
+            $(dropdownItem).toggleClass("show");
             $(dropdownItem).next(".dropdown").toggleClass("dropdown-shown");
 
             if ($(".rpl-link.dropdown-toggle.show").length) {

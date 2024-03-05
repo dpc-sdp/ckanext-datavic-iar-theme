@@ -7,7 +7,6 @@ $rpl-menu-vertical-back-icon-margin: auto $rpl-space auto 0 !default;
 $rpl-menu-horizontal-items-root-link-color: rpl-color('extra_dark_neutral') !default;
 $rpl-menu-horizontal-items-root-margin: auto ($rpl-space * 7) auto auto !default;
 $rpl-menu-horizontal-items-root-active-line-background-image: rpl-gradient('primary_gradient') !default;
-$rpl-menu-horizontal-items-root-active-hover-line-color: rpl-color('secondary') !default;
 $rpl-menu-horizontal-items-root-active-thickness: 2px !default;
 $rpl-menu-horizontal-items-root-parent-icon-margin: auto auto auto $rpl-space !default;
 $rpl-menu-horizontal-inner-margin: ($rpl-space * 12) auto auto !default;
@@ -99,8 +98,17 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
     box-sizing: border-box;
     padding: $rpl-menu-vertical-items-padding;
 
-    .rpl-menu__item.vic-logout-btn .btn {
+    .rpl-menu__item.vic-logout-btn span,
+    .rpl-menu__item.vic-login-btn span{
         justify-content: center;
+        display: flex;
+        align-items: center;
+
+        svg {
+            width: 12px;
+            height: 12px;
+            margin-left: 0.5rem;
+        }
     }
   }
 
@@ -135,16 +143,42 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
     margin: 0;
     align-items: center;
 
-    .rpl-menu__item.vic-logout-btn .btn,
-    .rpl-menu__item.vic-login-btn .btn {
-        padding: 0.5rem 1rem;
+    .rpl-menu__item.vic-logout-btn,
+    .rpl-menu__item.vic-login-btn {
         justify-content: center;
+
+        svg {
+            width: 12px;
+            height: 12px;
+            margin-left: 0.5rem;
+        }
+    }
+
+    .rpl-menu__item.vic-logout-btn {
         background-color: rpl-color('light_primary');
+    }
+
+    // SHOW UNDERLINE WHEN DROPDOWN OPENED AND ON HOVER/FOCUS
+    & > .rpl-menu__item > .rpl-link {
+        &.show {
+            &::before {
+                @include underline-bottom;
+            }
+        }
+
+        &:hover, &:focus {
+            &::before {
+                @include underline-bottom;
+            }
+        }
+
+        &:focus {
+            box-shadow: unset;
+        }
     }
 
     & > .rpl-menu__item > .rpl-menu__item-link {
       @include rpl_typography_font('xs', 1em, 'bold');
-      text-decoration: none;
       background-color: transparent;
       border: 0;
       padding: 0;
@@ -156,17 +190,7 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
 
       &:hover, &:focus {
         &::after {
-          content: '';
-          width: 100%;
-          position: absolute;
-          display: inline-block;
-          bottom: rem(-5px);
-          border-radius: $rpl-menu-horizontal-items-root-active-thickness;
-          left: 0;
-          right: 0;
-          height: $rpl-menu-horizontal-items-root-active-thickness;
-          background-color: $rpl-menu-horizontal-items-root-active-hover-line-color;
-          background-image: none;
+          @include underline-bottom;
         }
       }
 
@@ -315,7 +339,6 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
     margin: 0;
     border-radius: 0;
     cursor: pointer;
-    text-decoration: none;
     padding: $rpl-menu-item-link-padding;
     color: $rpl-menu-item-link-color;
     transition: padding-left .25s;
@@ -340,6 +363,7 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
 
       span {
         margin-right: 0;
+        text-decoration: underline;
       }
     }
 
@@ -401,17 +425,32 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
             border: none;
         }
 
-        &.dropdown-toggle::after {
+        &.dropdown-toggle span::after {
             content: "";
             display: inline-block;
             font-family: FontAwesome;
             color: rpl-color('secondary');
+            margin-left: 0.5rem;
+        }
+    }
+
+    .dropdown-items li {
+        span {
+            transition: 80ms ease-out;
+        }
+
+        .dropdown-item:hover {
+            span {
+                -webkit-text-decoration: underline;
+                text-decoration: underline;
+                transform: translate(12px);
+                display: block;
+            }
         }
     }
 
     .dropdown {
         display: none;
-        transition: background-color 0.3s ease;
         inset: -40px 60px auto -40px;
 
         .container {
@@ -439,6 +478,11 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
                     a {
                         font-size: 14px;
                         padding: 12px 8px;
+
+                        &:active, &:focus {
+                            background-color: rpl-color('primary');
+                            color: rpl-color('secondary');
+                        }
                     }
                 }
 
@@ -453,6 +497,8 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
 
 #main-menu {
     .vic-dropdown-menu {
+        margin: auto 1.75rem auto auto;
+
         .rpl-link {
             @include rpl_typography_font('xs', 1em, 'bold');
             background-color: transparent;
@@ -465,6 +511,20 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
                     transform: rotate(180deg);
                     transition: transform 0.3s ease;
                 }
+            }
+
+            &.dropdown-toggle::after {
+                content: "";
+                display: inline-block;
+                font-family: FontAwesome;
+                color: rpl-color('secondary');
+                margin-left: 0.5rem;
+                position: absolute;
+                right: -16px;
+            }
+
+            &.dropdown-toggle span::after {
+                display: none;
             }
         }
 
@@ -504,7 +564,6 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
 
     .dropdown-shown {
         background-color: rpl-color('light_primary_2') !important;
-        transition: background-color 0.3s ease;
 
         .dropdown {
             margin-left: 20px;
@@ -527,6 +586,5 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
 
     .dropdown-hidden {
         background-color: rpl-color('primary') !important;
-        transition: background-color 0.3s ease;
     }
 }
