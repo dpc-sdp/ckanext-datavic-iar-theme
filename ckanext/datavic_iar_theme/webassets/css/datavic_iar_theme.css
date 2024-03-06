@@ -1489,6 +1489,15 @@ nav {
   .rpl-menu--vertical .rpl-menu__back .rpl-icon {
     margin: auto 0.25rem auto 0; }
 
+.rpl-menu__item.vic-logout-btn,
+.rpl-menu__item.vic-login-btn {
+  justify-content: center; }
+  .rpl-menu__item.vic-logout-btn svg,
+  .rpl-menu__item.vic-login-btn svg {
+    width: 12px;
+    height: 12px;
+    margin-left: 0.5rem; }
+
 .rpl-menu--horizontal {
   margin: 0; }
   .rpl-menu--horizontal .rpl-menu__heading {
@@ -1498,17 +1507,11 @@ nav {
     list-style: none;
     margin: 0;
     align-items: center; }
-    .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-logout-btn,
-    .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-login-btn {
-      justify-content: center; }
-      .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-logout-btn svg,
-      .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-login-btn svg {
-        width: 12px;
-        height: 12px;
-        margin-left: 0.5rem; }
+    .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-login-btn svg {
+      position: absolute; }
     .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-logout-btn {
       background-color: #F69C00; }
-    .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-link.show::before {
+    .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-link.show span::before {
       content: '';
       width: 100%;
       position: absolute;
@@ -1520,7 +1523,7 @@ nav {
       height: 2px;
       background-color: #011A3C;
       background-image: none; }
-    .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-link:hover::before, .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-link:focus::before {
+    .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-link:hover span::before, .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-link:focus span::before {
       content: '';
       width: 100%;
       position: absolute;
@@ -1547,18 +1550,6 @@ nav {
       cursor: pointer;
       color: #011A3C;
       margin: auto 1.75rem auto auto; }
-      .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-menu__item-link:hover::after, .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-menu__item-link:focus::after {
-        content: '';
-        width: 100%;
-        position: absolute;
-        display: inline-block;
-        bottom: -0.0625rem;
-        border-radius: 2px;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background-color: #011A3C;
-        background-image: none; }
       .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-menu__item-link .rpl-icon {
         vertical-align: middle;
         margin: auto auto auto 0.25rem;

@@ -54,18 +54,14 @@
     {% else %}
         <li class="rpl-menu__item vic-login-btn">
             {% if mobile %}
-                <a href="{{ h.url_for('user.login') }}" title="{{ _('Log in') }}" class="rpl-link rpl-menu__item-link">
-                    <span>
-                        {{ _('Log in') }}
-                        {% snippet 'snippets/svg/header-login-icon.svg' %}
-                    </span>
+                <a href="{{ h.url_for('user.login') }}" title="{{ _('Log in') }}" class="btn rpl-link rpl-menu__item-link">
+                    <span>{{ _('Log in') }}</span>
+                    {% snippet 'snippets/svg/header-login-icon.svg' %}
                 </a>
             {% else %}
-                <a href="{{ h.url_for('user.login') }}" title="{{ _('Log in') }}"  class="rpl-link rpl-menu__item-link">
-                    <span>
-                        {{ _('Log in') }}
-                        {% snippet 'snippets/svg/header-login-icon.svg' %}
-                    </span>
+                <a href="{{ h.url_for('user.login') }}" title="{{ _('Log in') }}"  class="btn rpl-link rpl-menu__item-link">
+                    <span>{{ _('Log in') }}</span>
+                    {% snippet 'snippets/svg/header-login-icon.svg' %}
                 </a>
             {% endif %}
         </li>

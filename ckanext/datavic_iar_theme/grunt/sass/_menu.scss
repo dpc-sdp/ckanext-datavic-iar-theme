@@ -130,6 +130,17 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
   }
 }
 
+.rpl-menu__item.vic-logout-btn,
+.rpl-menu__item.vic-login-btn {
+    justify-content: center;
+
+    svg {
+        width: 12px;
+        height: 12px;
+        margin-left: 0.5rem;
+    }
+}
+
 .rpl-menu--horizontal {
   margin: 0;
 
@@ -143,14 +154,9 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
     margin: 0;
     align-items: center;
 
-    .rpl-menu__item.vic-logout-btn,
     .rpl-menu__item.vic-login-btn {
-        justify-content: center;
-
         svg {
-            width: 12px;
-            height: 12px;
-            margin-left: 0.5rem;
+            position: absolute;
         }
     }
 
@@ -161,13 +167,13 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
     // SHOW UNDERLINE WHEN DROPDOWN OPENED AND ON HOVER/FOCUS
     & > .rpl-menu__item > .rpl-link {
         &.show {
-            &::before {
+            span::before {
                 @include underline-bottom;
             }
         }
 
         &:hover, &:focus {
-            &::before {
+            span::before {
                 @include underline-bottom;
             }
         }
@@ -188,11 +194,11 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
       color: $rpl-menu-horizontal-items-root-link-color;
       margin: $rpl-menu-horizontal-items-root-margin;
 
-      &:hover, &:focus {
-        &::after {
-          @include underline-bottom;
-        }
-      }
+    //   &:hover, &:focus {
+    //     &::after {
+    //       @include underline-bottom;
+    //     }
+    //   }
 
       .rpl-icon {
         vertical-align: middle;
