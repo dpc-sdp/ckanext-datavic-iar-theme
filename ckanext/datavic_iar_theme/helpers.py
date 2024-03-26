@@ -258,6 +258,15 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
     is_logged_in: bool = bool(userobj)
     is_sysadmin: bool = bool(userobj) and userobj.sysadmin
 
+    try:
+        can_create_packages = (
+            bool(userobj)
+            and tk.check_access("package_create", {"user": userobj.name}, {})
+            and True
+        )
+    except tk.NotAuthorized:
+        can_create_packages = False
+
     return [
         {
             "title": tk._("My account"),
@@ -267,10 +276,7 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
                 {
                     "title": tk._("Dashboard"),
                     "url": tk.h.url_for("dashboard.datasets"),
-                    "hide": not is_logged_in
-                    or not tk.check_access(
-                        "package_create", {"user": userobj.name}, {}
-                    ),
+                    "hide": not is_logged_in or not can_create_packages,
                 },
                 {
                     "title": tk._("Profile"),
@@ -337,7 +343,10 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
                     "title": tk._("Browse by organisation"),
                     "url": tk.h.url_for("organization.index"),
                 },
-                {"title": tk._("Browse by category"), "url": tk.h.url_for("group.index")},
+                {
+                    "title": tk._("Browse by category"),
+                    "url": tk.h.url_for("group.index"),
+                },
             ],
         },
     ]
