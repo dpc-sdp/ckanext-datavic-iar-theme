@@ -3610,8 +3610,15 @@ a.close {
     width: 50px; }
   .via-iar-delwp-dataset .delwp-resource-list .resource-item .resource-summary p {
     margin: 0; }
+  .via-iar-delwp-dataset .delwp-resource-list .resource-item .resource-summary .resource-summary__name {
+    margin-bottom: 1rem; }
   .via-iar-delwp-dataset .delwp-resource-list .resource-item .resource-summary .resource-summary__formats {
     font-size: 0.875rem; }
+    .via-iar-delwp-dataset .delwp-resource-list .resource-item .resource-summary .resource-summary__formats span {
+      margin: 0 0.5rem;
+      display: inline-block; }
+      .via-iar-delwp-dataset .delwp-resource-list .resource-item .resource-summary .resource-summary__formats span:first-child {
+        margin-left: 0; }
   .via-iar-delwp-dataset .delwp-resource-list .resource-item .btn-group .btn {
     border: 2px #F6BE00 solid;
     background: #fff;
@@ -3632,14 +3639,16 @@ a.close {
     float: unset;
     width: auto;
     color: #1a1a1a;
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
     margin-bottom: 1rem; }
     .via-iar-delwp-dataset #data-request-form .form .form-group label span.required {
       color: #aa0028;
       font-family: "VIC-Regular", "Arial", "Helvetica", "sans-serif";
-      font-size: 1rem;
+      font-size: 0.875rem;
       font-weight: normal; }
+    .via-iar-delwp-dataset #data-request-form .form .form-group label:after {
+      display: none; }
   .via-iar-delwp-dataset #data-request-form .form .form-group .controls {
     margin-left: 0; }
   .via-iar-delwp-dataset #data-request-form .form .form-group input {

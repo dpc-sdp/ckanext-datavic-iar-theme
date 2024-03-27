@@ -1,3 +1,5 @@
+<h2>{{ _('Data and Resources') }}</h2>
+
 <ul class="resource-list delwp-resource-list">
     <li class="resource-item">
         <div class="resource-icon">
@@ -5,9 +7,15 @@
         </div>
 
         <div class="resource-summary">
-            <p class="resource-summary__name">{{ _("Resources") }}</p>
+            <p class="resource-summary__name">{{ pkg.title }}</p>
             <p class="resource-summary__formats">
-                {{ pkg.resources | map(attribute='format') | unique | join(' | ') }}
+                {{ _("Available files:") }}
+            </p>
+            <p class="resource-summary__formats">
+                {% for res_format in pkg.resources | map(attribute='format') | unique %}
+                    <span>{{ res_format }}</span>
+                    {% if not loop.last %}|{% endif %}
+                {% endfor %}
             </p>
         </div>
 
