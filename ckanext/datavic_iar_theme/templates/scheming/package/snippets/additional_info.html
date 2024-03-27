@@ -85,7 +85,11 @@
                   {{ pkg_dict.custom_licence_text }}
                 {% endif %}
               {% else %}
-                <a href="{{ pkg_dict.license_url }}" target="_blank">{{ pkg_dict.license_title }}</a>
+                {% if pkg_dict.license_url %}
+                    <a href="{{ pkg_dict.license_url }}" target="_blank">{{ pkg_dict.license_title }}</a>
+                {% else %}
+                    <span>{{ pkg_dict.license_title }}</span>
+                {% endif %}
               {% endif %}
             </td>
           </tr>
