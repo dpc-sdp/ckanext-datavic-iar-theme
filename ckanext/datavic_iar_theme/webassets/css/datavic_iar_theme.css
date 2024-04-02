@@ -2122,8 +2122,12 @@ nav {
     max-width: 80%; } }
 
 .format-label {
-  text-indent: -900em;
-  background: url("/datavic-sprite-resource-icons.png") no-repeat 0 0; }
+  background: url("/datavic-sprite-resource-icons.png") no-repeat 0 0;
+  width: 60px;
+  height: 65px;
+  background-position: -1720px -220px;
+  transform: scale(0.53);
+  margin: -14px 0 0 -14px; }
 
 .format-label[data-format="data tool"] {
   width: 60px;

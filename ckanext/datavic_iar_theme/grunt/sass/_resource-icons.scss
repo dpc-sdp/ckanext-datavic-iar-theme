@@ -20,8 +20,9 @@ $icon-position: (
 }
 
 .format-label {
-    text-indent: -900em;
     background: url("/datavic-sprite-resource-icons.png") no-repeat 0 0;
+    // default "Data" icon
+    @include ckan-resource-icon-bg-pos(17, "resourceIcon");
 }
 
 .format-label[data-format="data tool"] {
