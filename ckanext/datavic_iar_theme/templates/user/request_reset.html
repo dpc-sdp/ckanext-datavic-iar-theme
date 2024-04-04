@@ -36,7 +36,7 @@
       
                   {% block oidc_login_button %}
                     <div class="sso-block-button">
-                      <a href="{{ h.url_for("oidc_pkce.login", came_from=request.path ~ '?__no_cache__=True') }}" class="btn btn-primary">
+                      <a href="{{ h.url_for("oidc_pkce.login", came_from="dataset.search") }}" class="btn btn-primary">
                         {{ _("Access VPS Data Directory using Single Sign-On") }}
                       </a>
                     </div>
