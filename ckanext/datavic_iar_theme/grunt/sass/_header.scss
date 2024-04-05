@@ -83,6 +83,7 @@ $rpl-site-header-logout-btn-icon-margin: 0 0 0 $rpl-space-2 !default;
     .rpl-link {
       display: flex;
       flex-flow: column;
+      padding: 25px 0;
     }
 
     img {
@@ -95,12 +96,11 @@ $rpl-site-header-logout-btn-icon-margin: 0 0 0 $rpl-space-2 !default;
 
       img {
         width: $rpl-site-header-logo-primary-width;
+        border-right: $rpl-site-header-menu-toggle-border-right;
+        padding-right: $rpl-site-header-menu-toggle-border-spacing;
       }
 
       &--cobrand {
-
-        padding-right: 0.5rem;
-        border-right: $rpl-site-header-menu-toggle-border-right;
         display: none;
 
         @include rpl_breakpoint('m') {
