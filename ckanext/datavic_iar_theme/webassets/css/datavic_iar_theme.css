@@ -1295,7 +1295,7 @@ nav {
       margin-left: 0.5rem; }
     .rpl-site-header__logo-container--vic-logo-primary {
       display: block; }
-      .rpl-site-header__logo-container--vic-logo-primary img {
+      .rpl-site-header__logo-container--vic-logo-primary svg, .rpl-site-header__logo-container--vic-logo-primary img {
         width: auto;
         border-right: 1px solid #011A3C;
         padding-right: 0.5rem; }
