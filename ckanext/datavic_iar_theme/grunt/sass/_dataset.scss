@@ -58,7 +58,7 @@
         }
 
         .form {
-            .form-group {
+            .form-controls .form-group {
                 label {
                     float: unset;
                     width: auto;
@@ -79,10 +79,6 @@
                     }
                 }
 
-                .controls {
-                    margin-left: 0;
-                }
-
                 input {
                     height: 50px;
                 }
@@ -95,8 +91,18 @@
                 }
             }
 
+            .form-group {
+                .controls {
+                    margin-left: 0;
+                }
+            }
+
             .form-actions {
                 float: left;
+            }
+
+            label.checkbox {
+                font-weight: normal;
             }
         }
 
