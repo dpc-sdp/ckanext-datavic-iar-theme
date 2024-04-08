@@ -2694,7 +2694,7 @@ select.form-control {
         margin: auto; }
   .rpl-checkbox:focus .rpl-checkbox__box, .rpl-checkbox:hover .rpl-checkbox__box, .rpl-checkbox:active .rpl-checkbox__box {
     border-color: #1A1A1A; }
-  .rpl-checkbox :after {
+  .rpl-checkbox:after {
     content: ""; }
 
 .rpl-clearform {
