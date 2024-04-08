@@ -2661,24 +2661,24 @@ select.form-control {
     opacity: 0;
     width: 1.25rem;
     height: 1.25rem; }
-    .rpl-checkbox input[type="checkbox"]:focus + .rpl-checkbox__box {
-      border: 1px solid #F6BE00; }
-  .rpl-checkbox__inline-label {
+    .rpl-checkbox input[type="checkbox"]:focus + .rpl-checkbox__box, .rpl-checkbox input[type="checkbox"]:active + .rpl-checkbox__box {
+      box-shadow: 0 0 0 1px #1A1A1A inset, 0 0 0 4px #FF9E1B; }
+  .rpl-checkbox .rpl-checkbox__inline-label {
     font-family: "VIC-Regular", "Arial", "Helvetica", "sans-serif";
     font-size: 0.875rem;
     line-height: 1em;
     font-weight: normal;
     margin-left: 0.5rem;
-    font-weight: bold; }
+    font-size: 0.875rem; }
   .rpl-checkbox__box {
-    display: inline-block;
     vertical-align: middle;
-    border: 1px solid #D7DBE0;
-    border-radius: 0.25rem;
-    background-color: #F6F6F9;
-    width: 1.25rem;
-    height: 1.25rem;
-    position: relative; }
+    width: 24px;
+    height: 24px;
+    background: #F5F5F5;
+    border: 1px solid #666666;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; }
     .rpl-checkbox__box .rpl-icon {
       display: none; }
     .rpl-checkbox__box--checked {
@@ -2692,9 +2692,10 @@ select.form-control {
         top: 0;
         bottom: 0;
         margin: auto; }
-
-label.rpl-checkbox:after {
-  content: ""; }
+  .rpl-checkbox:focus .rpl-checkbox__box, .rpl-checkbox:hover .rpl-checkbox__box, .rpl-checkbox:active .rpl-checkbox__box {
+    border-color: #1A1A1A; }
+  .rpl-checkbox :after {
+    content: ""; }
 
 .rpl-clearform {
   padding: 0.5rem 0;
@@ -3640,31 +3641,33 @@ a.close {
   .via-iar-delwp-dataset #data-request-form > p {
     font-size: 1.125rem;
     margin-bottom: 2rem; }
-  .via-iar-delwp-dataset #data-request-form .form .form-group label {
+  .via-iar-delwp-dataset #data-request-form .form .form-controls .form-group label {
     float: unset;
     width: auto;
     color: #1a1a1a;
     font-size: 1rem;
     font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
     margin-bottom: 1rem; }
-    .via-iar-delwp-dataset #data-request-form .form .form-group label span.required {
+    .via-iar-delwp-dataset #data-request-form .form .form-controls .form-group label span.required {
       color: #aa0028;
       font-family: "VIC-Regular", "Arial", "Helvetica", "sans-serif";
       font-size: 0.875rem;
       font-weight: normal; }
-    .via-iar-delwp-dataset #data-request-form .form .form-group label:after {
+    .via-iar-delwp-dataset #data-request-form .form .form-controls .form-group label:after {
       display: none; }
-  .via-iar-delwp-dataset #data-request-form .form .form-group .controls {
-    margin-left: 0; }
-  .via-iar-delwp-dataset #data-request-form .form .form-group input {
+  .via-iar-delwp-dataset #data-request-form .form .form-controls .form-group input {
     height: 50px; }
-  .via-iar-delwp-dataset #data-request-form .form .form-group input,
-  .via-iar-delwp-dataset #data-request-form .form .form-group textarea {
+  .via-iar-delwp-dataset #data-request-form .form .form-controls .form-group input,
+  .via-iar-delwp-dataset #data-request-form .form .form-controls .form-group textarea {
     background-color: #f5f5f5;
     border-color: #666666;
     box-shadow: none; }
+  .via-iar-delwp-dataset #data-request-form .form .form-group .controls {
+    margin-left: 0; }
   .via-iar-delwp-dataset #data-request-form .form .form-actions {
     float: left; }
+  .via-iar-delwp-dataset #data-request-form .form label.checkbox {
+    font-weight: normal; }
   @media screen and (min-width: 768px) {
     .via-iar-delwp-dataset #data-request-form {
       max-width: 75%; } }
