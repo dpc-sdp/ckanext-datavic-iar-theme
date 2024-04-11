@@ -14,8 +14,21 @@
                     margin: 0;
                 }
 
+                .resource-summary__name {
+                    margin-bottom: 1rem;
+                }
+
                 .resource-summary__formats {
                     font-size: rpl-font-size('xs');
+
+                    span {
+                        margin: 0 0.5rem;
+                        display: inline-block;
+
+                        &:first-child {
+                            margin-left: 0;
+                        }
+                    }
                 }
             }
 
@@ -45,25 +58,25 @@
         }
 
         .form {
-            .form-group {
+            .form-controls .form-group {
                 label {
                     float: unset;
                     width: auto;
                     color: #1a1a1a;
-                    font-size: rpl-font-size('m');
+                    font-size: rpl-font-size('s');
                     font-family: rpl-font('bold');
                     margin-bottom: 1rem;
 
                     span.required {
                         color: #aa0028;
                         font-family: rpl-font('regular');
-                        font-size: rpl-font-size('s');
+                        font-size: rpl-font-size('xs');
                         font-weight: normal;
                     }
-                }
 
-                .controls {
-                    margin-left: 0;
+                    &:after {
+                        display: none;
+                    }
                 }
 
                 input {
@@ -78,8 +91,18 @@
                 }
             }
 
+            .form-group {
+                .controls {
+                    margin-left: 0;
+                }
+            }
+
             .form-actions {
                 float: left;
+            }
+
+            label.checkbox {
+                font-weight: normal;
             }
         }
 
