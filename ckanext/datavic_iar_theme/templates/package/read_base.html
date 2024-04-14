@@ -2,6 +2,18 @@
 
 {% set confirmation_text = _('You will now enter edit mode. By saving any changes the workflow status for this dataset will transition to DRAFT. Are you sure you want to edit this dataset?') %}
 
+{% block head_extras %}
+  {{ g.template_head_end | safe }}
+
+  {% if h.vic_iar_hotjar_tracking_enabled() %}
+    {% snippet "snippets/hotjar.html" %}
+  {% endif %}
+
+  {% set description = h.markdown_extract(pkg.extract, extract_length=200)|forceescape %}
+  <meta property="og:title" content="{{ h.dataset_display_name(pkg) }} - {{ g.site_title }}">
+  <meta property="og:description" content="{{ description|forceescape|trim }}">
+{% endblock %}
+
 {% block content_action %}
   {% asset 'datavic_iar_theme/datavic-iar-confirm-link-action' %}
 

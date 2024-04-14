@@ -1,38 +1,47 @@
 {% ckan_extends %}
 
-        {% block heading %}
-            <span class="privacy-label {% if package.private %}private{% endif %}">
-            {% if package.private %}
-                Open to VPS only
-            {% else %}
-                Open to the public
-            {% endif %}
-            </span>
-          <h3 class="dataset-heading">
-            {% block heading_private %}
-            {% endblock %}
-            {% block heading_title %}
-              {% set truncate_title = 255 %}
-              {{ h.link_to(title|truncate(truncate_title), h.url_for('dataset.read', id=package.name)) }}
-            {% endblock %}
-            {% block heading_meta %}
-              {% if package.get('state', '').startswith('draft') %}
-                <span class="label label-info">{{ _('Draft') }}</span>
-              {% elif package.get('state', '').startswith('deleted') %}
-                <span class="label label-important">{{ _('Deleted') }}</span>
-              {% endif %}
-              {{ h.popular('recent views', package.tracking_summary.recent, min=10) if package.tracking_summary }}
-            {% endblock %}
-          </h3>
-        {% endblock %}
+{% block heading %}
+  <span class="privacy-label {% if package.private %}private{% endif %}">
+    {% if package.private %}
+        Open to VPS only
+    {% else %}
+        Open to the public
+    {% endif %}
+  </span>
+  <h3 class="dataset-heading">
+    {% block heading_private %}
+    {% endblock %}
 
-        {% block notes %}
-          {{ super() }}
-            {% if package.organization %}
-                <h4 class="search-result-organisation">
-                    <a href="{{ h.url_for('organization.read', id=package.organization.name) }}">
-                        {{ package.organization.title }}
-                    </a>
-                </h4>
-            {% endif %}
-        {% endblock %}
+    {% block heading_title %}
+      {% set truncate_title = 255 %}
+      {{ h.link_to(title|truncate(truncate_title), h.url_for('dataset.read', id=package.name)) }}
+    {% endblock %}
+
+    {% block heading_meta %}
+      {% if package.get('state', '').startswith('draft') %}
+        <span class="label label-info">{{ _('Draft') }}</span>
+      {% elif package.get('state', '').startswith('deleted') %}
+        <span class="label label-important">{{ _('Deleted') }}</span>
+      {% endif %}
+      {{ h.popular('recent views', package.tracking_summary.recent, min=10) if package.tracking_summary }}
+    {% endblock %}
+  </h3>
+{% endblock %}
+
+{% block notes %}
+  {% set abstract = h.markdown_extract(package.extract, extract_length=0) %}
+
+  {% if abstract %}
+    <div>{{ abstract|urlize }}</div>
+  {% else %}
+    <p class="empty">{{ h.humanize_entity_type('package', package.type, 'no description') or _("There is no description for this dataset") }}</p>
+  {% endif %}
+
+  {% if package.organization %}
+    <h4 class="search-result-organisation">
+      <a href="{{ h.url_for('organization.read', id=package.organization.name) }}">
+        {{ package.organization.title }}
+      </a>
+    </h4>
+  {% endif %}
+{% endblock %}
