@@ -161,19 +161,6 @@ def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any
     return featured_preview
 
 
-def _get_last_resource_if_historical(package: dict[str, Any]) -> dict[str, Any] | None:
-    """If the dataset contains historical resources, return the most recent one"""
-    historical_resources = tk.h.historical_resources_list(package.get("resources", []))
-
-    if len(historical_resources) <= 1:
-        return
-
-    if historical_resources[1].get("period_start"):
-        return historical_resources[0]
-
-    return
-
-
 @helper
 def is_delwp_vector_data(resources: list[dict[str, Any]]) -> bool:
     for res in resources:
