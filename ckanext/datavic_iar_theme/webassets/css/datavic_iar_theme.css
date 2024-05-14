@@ -2255,6 +2255,10 @@ nav {
 
 .primary form .info-block {
   color: #757575; }
+  .primary form .info-block.info-user-email {
+    margin-top: -24px;
+    margin-bottom: 30px;
+    margin-left: 130px; }
 
 .error-block {
   background: #DD3134; }
