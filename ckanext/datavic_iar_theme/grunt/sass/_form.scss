@@ -111,6 +111,12 @@ $break-stages-text-small: 545px;
     form {
         .info-block {
             color: #757575;
+
+            &.info-user-email {
+                margin-top: -24px;
+                margin-bottom: 30px;
+                margin-left: 130px;
+            }
         }
     }
 }
