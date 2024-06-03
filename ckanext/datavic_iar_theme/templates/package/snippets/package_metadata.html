@@ -1,0 +1,113 @@
+<table class="table table-striped table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th scope="col">{{ _("Field") }}</th>
+            <th scope="col">{{ _("Value") }}</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <th scope="row" class="dataset-label">{{ _("Description") }}</th>
+            <td class="dataset-details">{{ pkg_dict.notes }}</td>
+        </tr>
+
+        <tr>
+            <th scope="row" class="dataset-label">{{ _("Abstract") }}</th>
+            <td class="dataset-details">{{ pkg_dict.extract }}</td>
+        </tr>
+
+        <tr>
+            <th scope="row" class="dataset-label">{{ _("Keywords") }}</th>
+            <td class="dataset-details">
+                {% for tag in pkg_dict.tags %}
+                    {{ tag.display_name }}
+                    {{ ", " if not loop.last else "" }}
+                {% endfor %}
+            </td>
+        </tr>
+
+        <tr>
+            <th scope="row" class="dataset-label">{{ _("Purpose") }}</th>
+            <td class="dataset-details">{{ pkg_dict.primary_purpose_of_collection }}</td>
+        </tr>
+
+        {% set org = h.get_organization(pkg_dict.organization.name) %}
+        <tr>
+            <th scope="row" class="dataset-label">{{ _("Organisation") }}</th>
+            <td class="dataset-details" property="dc:contributor">{{ org.title }}</td>
+        </tr>
+
+        <tr>
+            <th scope="row" class="dataset-label">{{ _("Agency Program/Domain") }}</th>
+            <td class="dataset-details">{{ pkg_dict.agency_program_domain }}</td>
+        </tr>
+
+        {% set category = h.get_group(pkg_dict.category) %}
+        <tr>
+            <th scope="row" class="dataset-label">{{ _("Category") }}</th>
+            <td class="dataset-details">{{ category.display_name }}</td>
+        </tr>
+
+        <tr>
+            <th scope="row" class="dataset-label">{{ _("License") }}</th>
+            <td class="dataset-details">
+                {% if pkg_dict.custom_licence_text %}
+                    {% if pkg_dict.custom_licence_link %}
+                        <a href="{{ pkg_dict.custom_licence_link }}" target="_blank">{{ pkg_dict.custom_licence_text }}</a>
+                    {% else %}
+                        {{ pkg_dict.custom_licence_text }}
+                    {% endif %}
+                {% else %}
+                    <a href="{{ pkg_dict.license_url }}" target="_blank">{{ pkg_dict.license_title }}</a>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <th scope="row" class="dataset-label">{{ _("License - other") }}</th>
+            <td class="dataset-details">{{ pkg_dict.custom_licence_text }}</td>
+        </tr>
+
+        <tr>
+            <th scope="row" class="dataset-label">{{ _("Custom license link") }}</th>
+            <td class="dataset-details">{{ pkg_dict.custom_licence_link }}</td>
+        </tr>
+
+        <tr>
+            <th scope="row" class="dataset-label">{{ _("Created (Data asset)") }}</th>
+            <td class="dataset-details" property="dct:issued">
+                {{ h.render_datetime(pkg_dict.date_created_data_asset, date_format='%d/%m/%Y') }}
+            </td>
+        </tr>
+
+        <tr>
+            <th scope="row" class="dataset-label">{{ _("Last modified (Data asset)") }}</th>
+            <td class="dataset-details" property="dct:updated">
+                {{ h.render_datetime(pkg_dict.date_modified_data_asset, date_format='%d/%m/%Y') }}
+            </td>
+        </tr>
+
+        <tr>
+            <th scope="row" class="dataset-label">{{ _("Update Frequency") }}</th>
+            <td class="dataset-details">{{ pkg_dict.update_frequency|capitalize }}</td>
+        </tr>
+
+        <tr>
+            <th scope="row" class="dataset-label">{{ _('Full metadata URL') }}</th>
+            <td class="dataset-details">
+                {% if pkg_dict.full_metadata_url.startswith('http') %}
+                    <a href="{{ pkg_dict.full_metadata_url }}" target="_blank" rel="nofollow">{{ pkg_dict.full_metadata_url }}</a>
+                {% else %}
+                    {{ pkg_dict.full_metadata_url }}
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            {% set dtv = "On" if pkg_dict.dtv_preview is true else "Off" %}
+            <th scope="row" class="dataset-label">{{ _("Digital Twin Preview") }}</th>
+            <td class="dataset-details">{{ dtv }}</td>
+        </tr>
+    </tbody>
+</table>

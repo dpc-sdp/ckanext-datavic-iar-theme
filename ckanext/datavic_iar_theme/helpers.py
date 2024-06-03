@@ -5,6 +5,7 @@ from typing import Optional, Any
 
 from sqlalchemy.sql import func
 
+import ckan.authz as authz
 import ckan.model as model
 import ckan.plugins.toolkit as tk
 import ckan.lib.helpers as h
@@ -186,4 +187,8 @@ def get_came_from_url(came_from: str | None) -> str:
             tk.config.get("ckan.auth.route_after_login") or "dataset.search"
         )
     return came_from
-    
+
+
+@helper
+def role_in_org(organization_id, user_name):
+    return authz.users_role_for_group_or_org(organization_id, user_name)
