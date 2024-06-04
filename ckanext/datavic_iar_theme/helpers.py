@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import logging
 from typing import Optional, Any
 
@@ -11,6 +12,7 @@ import ckan.plugins.toolkit as tk
 import ckan.lib.helpers as h
 
 from ckanext.toolbelt.decorators import Collector
+from ckanext.scheming.helpers import scheming_get_dataset_schema
 
 import ckanext.datavic_iar_theme.config as conf
 
@@ -192,3 +194,21 @@ def get_came_from_url(came_from: str | None) -> str:
 @helper
 def role_in_org(organization_id, user_name):
     return authz.users_role_for_group_or_org(organization_id, user_name)
+
+
+@helper
+def prepare_general_fields(data: dict[str, Any]) -> str:
+    groups: list[str] = [
+        "General",
+    ]
+    schema: dict[str, Any] = scheming_get_dataset_schema(data["type"])
+
+    new_data = {
+        field : data.get(field, "") for field in [
+            field["field_name"] for field in schema[
+                "dataset_fields"
+                ] if field.get("display_group") and field["display_group"] in groups
+            ]
+    }
+
+    return json.dumps(new_data)
