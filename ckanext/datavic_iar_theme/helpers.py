@@ -210,17 +210,19 @@ def prepare_general_fields(data: dict[str, Any]) -> str:
                 ]
             ]
     }
+    if new_data.get('tag_string'):
+        new_data['tag_string'] = ','.join([i.strip() for i in new_data['tag_string'].split(',')])
 
     return json.dumps(new_data)
 
 
 @helper
 def get_metadata_groups(data):
-    if data and not data.get(u'tag_string'):
-        data[u'tag_string'] = u', '.join(
-            h.dict_list_reduce(data.get(u'tags', {}), u'name')
+    if data and not data.get('tag_string'):
+        data['tag_string'] = ', '.join(
+            h.dict_list_reduce(data.get('tags', {}), 'name')
         )
-    structured = []
+
     schema: dict[str, Any] = scheming_get_dataset_schema(data["type"])
     groups = []
     fields = schema["dataset_fields"]
