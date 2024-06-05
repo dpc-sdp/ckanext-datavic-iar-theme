@@ -204,11 +204,35 @@ def prepare_general_fields(data: dict[str, Any]) -> str:
     schema: dict[str, Any] = scheming_get_dataset_schema(data["type"])
 
     new_data = {
-        field : data.get(field, "") for field in [
+        field : _get_value_for_field(data.get(field, "")) for field in [
             field["field_name"] for field in schema[
                 "dataset_fields"
-                ] if field.get("display_group") and field["display_group"] in groups
+                ]
             ]
     }
 
     return json.dumps(new_data)
+
+
+@helper
+def get_metadata_groups(data):
+    if data and not data.get(u'tag_string'):
+        data[u'tag_string'] = u', '.join(
+            h.dict_list_reduce(data.get(u'tags', {}), u'name')
+        )
+    structured = []
+    schema: dict[str, Any] = scheming_get_dataset_schema(data["type"])
+    groups = []
+    fields = schema["dataset_fields"]
+    for field in schema["dataset_fields"]:
+        if field.get("display_group") and field["display_group"] not in groups:
+            groups.append(field["display_group"])
+    groups.append("Other")
+    return groups, fields
+
+
+def _get_value_for_field(value):
+    # Boolean in forms shown with Capitalize
+    if (type(value) is bool):
+        value = str(value).capitalize()
+    return value

@@ -825,6 +825,14 @@ nav {
 .btn.btn-group > .btn {
   font-size: initial; }
 
+.btn.btn-primary:disabled {
+  background-color: gray;
+  border-color: gray;
+  cursor: not-allowed;
+  pointer-events: initial; }
+  .btn.btn-primary:disabled:hover {
+    color: #fff; }
+
 .btn-primary {
   color: #011A3C;
   text-align: center;

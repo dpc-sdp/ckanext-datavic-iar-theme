@@ -58,9 +58,9 @@
         {% if form_style == 'edit' and is_dataset_harvested %}
           {% asset 'ckanext-datavicmain/datavicmain-confirm-action' %}
           <input type="hidden" name="save" value="true" />
-          <button class="btn btn-primary" type="submit" data-module="datavicmain-confirm-action" data-module-with-data=true data-module-content="{{ confirmation_text }}{{ _('Are you sure you want to update?') }}">{{ _('Update Dataset') }}</button>
+          <button class="btn btn-primary save-btn" type="submit" data-module="datavicmain-confirm-action" data-module-with-data=true data-module-content="{{ confirmation_text }}{{ _('Are you sure you want to update?') }}">{{ _('Update Dataset') }}</button>
         {% elif form_style == "edit" and not is_dataset_harvested %}
-          <button class="btn btn-primary" type="submit" name="save">
+          <button class="btn btn-primary save-btn" type="submit" name="save">
               {{ h.humanize_entity_type('package', pkg_dict.type, 'update label') or _('Update Dataset') }}
           </button>
         {% else %}

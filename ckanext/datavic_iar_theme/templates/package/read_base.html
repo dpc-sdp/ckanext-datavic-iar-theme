@@ -59,7 +59,7 @@
     {% if current_user.sysadmin or (user_role in ["admin", "editor"]) %}
       <a type="btn" class="btn" data-bs-toggle="modal" data-bs-target="#viewModal" title="View record details">
         <i class="fa fa-eye"></i>
-        {{ _("View") }}
+        {{ _("View record details") }}
       </a>
 
       <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
