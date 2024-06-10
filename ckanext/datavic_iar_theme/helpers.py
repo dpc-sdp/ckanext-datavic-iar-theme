@@ -393,7 +393,6 @@ def get_metadata_groups(data):
     for field in schema["dataset_fields"]:
         if field.get("display_group") and field["display_group"] not in groups:
             groups.append(field["display_group"])
-    groups.append("Other")
     return groups, fields
 
 

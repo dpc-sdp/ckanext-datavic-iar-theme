@@ -15,13 +15,22 @@
             {% for field in fields %}
                 {% if field.display_group and field.display_group == group %}
                     <tr>
-                        <th scope="row" class="dataset-label">{{ field.label or field.field_name }}</th>
-                        <td class="dataset-details">{{ pkg_dict[field.field_name] }}</td>
-                    </tr>
-                {% elif not field.display_group and group == 'Other' %}
-                    <tr>
-                        <th scope="row" class="dataset-label">{{ field.label or field.field_name }}</th>
-                        <td class="dataset-details">{{ pkg_dict[field.field_name] }}</td>
+                        <th scope="row" class="dataset-label">{{ h.scheming_language_text(field.label) }}</th>
+                        <td class="dataset-details">
+                            {% if field.field_name == 'private' %}
+                                {% set val = pkg_dict[field.field_name] %}
+                                {% if val %}
+                                    {{ 'No' }}
+                                {% else %}
+                                    {{ 'Yes' }}
+                                {% endif %}
+                            {% elif field.field_name == 'workflow_status' %}
+                                {{  pkg_dict[field.field_name]|capitalize }}
+                            {% else %}
+                                {%- snippet 'scheming/snippets/display_field.html',
+                                field=field, data=pkg_dict, schema=schema -%}
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endif %}
             {% endfor %}

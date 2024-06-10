@@ -33,6 +33,7 @@ ckan.module('datavic_update_restrict', function($, _){
             this._checkData(this.new_data, this.original_data);
         },
         _checkData: function (current, original) {
+            current.tag_string = current.tag_string.replace(/\s/g, '');
             if (JSON.stringify(current) != JSON.stringify(original)) {
                 this.save_button.removeAttr("disabled");
             } else {
