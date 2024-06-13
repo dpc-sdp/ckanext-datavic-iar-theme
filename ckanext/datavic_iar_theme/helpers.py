@@ -11,6 +11,7 @@ import ckan.model as model
 import ckan.plugins.toolkit as tk
 import ckan.lib.helpers as h
 
+from ckanext.harvest.model import HarvestSource
 from ckanext.toolbelt.decorators import Collector
 from ckanext.scheming.helpers import scheming_get_dataset_schema
 
@@ -401,3 +402,22 @@ def _get_value_for_field(value):
     if (type(value) is bool):
         value = str(value).capitalize()
     return value
+
+
+@helper
+def harvester_list() -> list[dict[str, Any]]:
+    """Return a list of all available harvesters on the portal"""
+
+    query = model.Session.query(HarvestSource) \
+        .order_by(HarvestSource.created.desc())
+
+    harvesters = [
+        {
+            "value": harvester.id,
+            "label": harvester.title
+        }
+        for harvester in query
+    ]
+    harvesters.insert(0, {"value": "", "label": "All"})
+
+    return harvesters
