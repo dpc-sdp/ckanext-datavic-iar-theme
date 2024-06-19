@@ -6,7 +6,7 @@
     {% set group = facet_values.get('groups')[0] if facet_values.get('groups', [])[0] else '' %}
     {% set format = facet_values.get('res_format')[0] if facet_values.get('res_format', [])[0] else '' %}
     {% set placeholder =  _('Search Data') %}
-    {% set visibility_selected = g.visibility_selected or 'all' %}
+    {% set visibility_selected = request.args.ext_visibility or 'all' %}
 
     <div class="search-form-wrapper" data-module="datavic-advanced-search">
       <div class="rpl-search-form da-search rpl-site-constrain--on-all">
@@ -342,7 +342,7 @@
                       </div>
                     </div>
                     {% set visibility_list = h.vic_iar_visibility_list() %}
-                    {% set visibility_selected = g.visibility_selected or 'all' %}
+                    {% set visibility_selected = request.args.ext_visibility or 'all' %}
                     <div class="form-group form-group--col-two field-rplchecklist">
                       <label for="field-visibility">
                         <span>&nbsp;</span>
