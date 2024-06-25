@@ -3360,3 +3360,25 @@ a.close {
 
 .dataTables_wrapper .pagination {
   padding-top: 2.5rem; }
+
+.homepage .container {
+  max-width: 940px; }
+
+.homepage section.cards {
+  padding-bottom: 80px;
+  padding-top: 40px; }
+  .homepage section.cards h2 {
+    font-size: 32px;
+    margin: 40px 0; }
+  .homepage section.cards .card {
+    height: 100%; }
+    .homepage section.cards .card .card-body .card-title {
+      font-size: 20px; }
+      .homepage section.cards .card .card-body .card-title a {
+        color: #011A3C; }
+        .homepage section.cards .card .card-body .card-title a:hover {
+          color: #0052C2; }
+    .homepage section.cards .card img {
+      aspect-ratio: 16 / 9; }
+    .homepage section.cards .card:hover {
+      box-shadow: 0 2px 8px rgba(26, 26, 26, 0.16); }

@@ -12,25 +12,72 @@
 {% block subtitle %}{% endblock %}
 
 {% block content %}
-    <main>
-        {{ super() }}
-    </main>
+<main>
+    {{ super() }}
+</main>
 {% endblock %}
 
 {% block primary_content %}
 
-    <section>
-        <div class="rpl-hero-banner">
-            <div class=rpl-hero-banner__center>
-                <h1 class="rpl-hero-banner__title">
-                    <span>VPS Data Directory</span>
-                </h1>
-                <p class="rpl-hero-banner__description">The place for Victorian public servants to find, discover and share data amongst departments and agencies</p>
-            </div>
+<section>
+    <div class="rpl-hero-banner">
+        <div class=rpl-hero-banner__center>
+            <h1 class="rpl-hero-banner__title">
+                <span>VPS Data Directory</span>
+            </h1>
+            <p class="rpl-hero-banner__description">The place for Victorian public servants to find, discover and share
+                data amongst departments and agencies</p>
         </div>
-        {% block search %}
-            {% snippet 'snippets/dataset_search_form.html', query=query, count=count, type=type, facets=facets, placeholder=placeholder, sorting=sorting, form_id=form_id, sorting_selected=sorting_selected %}
-        {% endblock %}
-    </section>
+    </div>
+    {% block search %}
+    {% snippet 'snippets/dataset_search_form.html', query=query, count=count, type=type, facets=facets,
+    placeholder=placeholder, sorting=sorting, form_id=form_id, sorting_selected=sorting_selected %}
+    {% endblock %}
+</section>
+
+<section class="cards">
+    <div class="container">
+        {% set sections = {
+            "news": "Datavic news, events and updates",
+            "data": "Browse by data category",
+            "resources": "Resources"}
+        %}
+
+        {% for type, title in sections.items() %}
+            {% set items = h.get_item_by_section_type(type) %}
+
+            {% if items %}
+                <h2>{{ title }}</h2>
+
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    {% for item in items %}
+                        <div class="col">
+                            <div class="card">
+                                {% if item.image_id %}
+                                    {% set file_info = h.files_link_details(item.image_id) %}
+
+                                    {% if file_info %}
+                                        <img src="{{ file_info.href }}" loading="lazy" fetchpriority="auto" alt="Uploaded Image" sizes="sm:768px">
+                                    {% endif %}
+                                {% elif item.url %}
+                                    <img src="{{ item.url }}" loading="lazy" fetchpriority="auto" alt="Uploaded Image" sizes="sm:768px">
+                                {% endif %}
+
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a class="stretched-link" href="https://www.data.vic.gov.au/">{{ item.title }}</a>
+                                    </h5>
+                                    <p class="card-text">
+                                        {{ item.description }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</section>
 
 {% endblock %}
