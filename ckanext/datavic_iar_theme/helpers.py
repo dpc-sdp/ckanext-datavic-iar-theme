@@ -142,9 +142,9 @@ def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any
 
     featured_preview = None
 
-    resource_groups: list[
-        list[dict[str, Any]]
-    ] = tk.h.group_resources_by_temporal_range(package.get("resources", []))
+    resource_groups: list[list[dict[str, Any]]] = (
+        tk.h.group_resources_by_temporal_range(package.get("resources", []))
+    )
 
     resources = resource_groups[0] if resource_groups else []
 
@@ -166,15 +166,6 @@ def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any
                 featured_preview = {"preview": resource_views[0], "resource": resource}
 
     return featured_preview
-
-
-@helper
-def get_came_from_url(came_from: str | None) -> str:
-    if came_from is None:
-        return tk.url_for(
-            tk.config.get("ckan.auth.route_after_login") or "dataset.search"
-        )
-    return came_from
 
 
 @helper
@@ -243,11 +234,14 @@ def get_route_after_login_config():
     return tk.config.get("ckan.auth.route_after_login")
 
 
-
 @helper
-def show_blog_button():
-    return conf.show_blog_button()
-
+def get_came_from_url(came_from: str | None) -> str:
+    if came_from is None:
+        return tk.url_for(
+            tk.config.get("ckan.auth.route_after_login") or "dataset.search"
+        )
+    return came_from
+    
 
 @helper
 def datastore_loaded_resources(pkg_dict: dict[str, Any]) -> list[str]:
@@ -255,6 +249,11 @@ def datastore_loaded_resources(pkg_dict: dict[str, Any]) -> list[str]:
     if not pkg_dict["resources"]:
         return []
     return [resource["id"] for resource in pkg_dict["resources"] if resource["datastore_active"]]
+
+
+@helper
+def show_blog_button():
+    return conf.show_blog_button()
 
 
 @helper
@@ -421,3 +420,21 @@ def harvester_list() -> list[dict[str, Any]]:
     harvesters.insert(0, {"value": "", "label": "All"})
 
     return harvesters
+
+
+@helper
+def get_pages_dropdown_items():
+    dropdown_items = ""
+    pages_list = tk.get_action("ckanext_pages_list")(
+        {}, {"order": True, "private": False}
+    )
+    for page in pages_list:
+        type_ = "blog" if page["page_type"] == "blog" else conf.get_pages_base_url()
+        name = page["name"]
+        title = page["title"]
+        link = tk.h.literal(
+            '<a class="dropdown-item" href="/{}/{}">{}</a>'.format(type_, name, title)
+        )
+        li = tk.h.literal("<li>") + link + tk.h.literal("</li>")
+        dropdown_items = dropdown_items + li
+    return dropdown_items
