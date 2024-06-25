@@ -1900,8 +1900,7 @@ nav {
   padding: 10px; }
   .resource-item .resource-summary {
     flex-grow: 2;
-    margin-right: 15px;
-    word-break: break-all; }
+    margin-right: 15px; }
   .resource-item .resource-icon {
     max-width: 45px; }
     .resource-item .resource-icon .format-label {
@@ -1912,6 +1911,9 @@ nav {
       height: 60px;
       width: 60px;
       vertical-align: text-bottom; }
+  @media (min-width: 767px) {
+    .resource-item .resource-summary {
+      width: 24%; } }
 
 .resource-list .resource-item {
   display: flex;
@@ -1920,19 +1922,26 @@ nav {
   align-items: flex-start; }
   .resource-list .resource-item:hover {
     background-color: transparent; }
-  .resource-list .resource-item .btn-group {
-    display: inline-block; }
-
-.resource-list .btn-group {
-  position: relative;
-  top: auto;
-  right: auto; }
+  .resource-list .resource-item .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem; }
+  .resource-list .resource-item .btn {
+    border: 2px solid #F6BE00;
+    padding: 0.75rem; }
+  .resource-list .resource-item .btn-outline {
+    border-width: 2px;
+    background-color: #FFFFFF; }
+  .resource-list .resource-item .btn-api {
+    border-color: #3A833A;
+    color: #3A833A; }
 
 @media (max-width: 767px) {
   .resource-list .resource-item {
     display: inline; }
-    .resource-list .resource-item .btn-group {
-      display: block; } }
+  .resource-list .buttons {
+    flex-direction: column; } }
 
 .dropdown-menu {
   border-color: #F6BE00; }
@@ -1940,23 +1949,48 @@ nav {
     background-image: none;
     background-color: #F6BE00; }
 
-.dataset-resources .badge {
-  background: none;
-  color: #465870;
-  font-size: 0.875rem;
-  padding: 0 0.25rem 0 0;
-  text-shadow: none;
-  text-transform: uppercase; }
-  .dataset-resources .badge:hover, .dataset-resources .badge:focus {
+.dataset-resources {
+  display: inline; }
+  .dataset-resources .badge {
+    background: none;
     color: #465870;
-    text-decoration: underline; }
-  .dataset-resources .badge:before {
-    content: "|";
-    padding-right: 0.625rem; }
+    font-size: 0.875rem;
+    padding: 0 0.25rem 0 0;
+    text-shadow: none;
+    text-transform: uppercase; }
+    .dataset-resources .badge:hover, .dataset-resources .badge:focus {
+      color: #465870;
+      text-decoration: underline; }
+    .dataset-resources .badge:before {
+      content: "|";
+      padding-right: 0.625rem; }
+  .dataset-resources li:first-child .badge:before {
+    content: "";
+    padding-right: 0; }
 
-.dataset-resources li:first-child .badge:before {
-  content: "";
-  padding-right: 0; }
+.dataset-api {
+  display: inline;
+  float: right;
+  color: #465870;
+  font-size: 0.875rem; }
+  .dataset-api li {
+    display: inline;
+    padding-right: 50px; }
+    .dataset-api li:last-child {
+      padding-right: 0; }
+  .dataset-api i {
+    padding-right: 3px; }
+  .dataset-api .preview {
+    color: #011A3C; }
+  .dataset-api .api a {
+    color: #3A833A; }
+
+@media (max-width: 767px) {
+  .dataset-api, .dataset-resources {
+    display: block; }
+  .dataset-api {
+    margin-top: 0.75rem;
+    float: unset; } }
 
 .res_abstract_heading {
   font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
@@ -1999,6 +2033,25 @@ nav {
     font-weight: 600;
     font-family: "VIC-Regular", "Arial", "Helvetica", "sans-serif";
     margin-bottom: 0.5rem; }
+
+@media (min-width: 576px) {
+  .api-modal {
+    max-width: 80%; } }
+
+.format-label {
+  background: url("/datavic-sprite-resource-icons.png") no-repeat 0 0;
+  width: 60px;
+  height: 65px;
+  background-position: -1720px -220px;
+  transform: scale(0.53);
+  margin: -14px 0 0 -14px; }
+
+.format-label[data-format="data tool"] {
+  width: 60px;
+  height: 65px;
+  background-position: -2320px -220px;
+  transform: scale(0.53);
+  margin: -14px 0 0 -14px; }
 
 .dataset-resources {
   margin-top: 0.75rem; }
