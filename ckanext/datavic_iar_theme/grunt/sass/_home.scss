@@ -1,40 +1,57 @@
 .homepage {
     .container {
-        max-width: 940px;
-    }
 
-    section.cards {
-        padding-bottom: 80px;
-        padding-top: 40px;
-
-        h2 {
-            font-size: 32px;
-            margin: 40px 0;
+        @include rpl_breakpoint('m') {
+            max-width: 730px;
         }
 
-        .card {
-            height: 100%;
+        @include rpl_breakpoint('l') {
+            max-width: 920px;
+        }
+    }
 
-            .card-body {
-                .card-title {
-                    font-size: 20px;
 
-                    a {
-                        color: rpl_color('secondary');
+    section.cards {
+        h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
 
-                        &:hover {
-                            color: $primary-color;
+        .section-type {
+            margin-bottom: 40px;
+
+            .card {
+                height: 100%;
+
+                .card-body {
+                    .card-title {
+                        font-size: 20px;
+
+                        a {
+                            color: rpl_color('secondary');
+
+                            &:hover {
+                                color: $primary-color;
+                            }
                         }
                     }
                 }
+
+                img {
+                    aspect-ratio: 16 / 9;
+                }
+
+                &:hover {
+                    box-shadow: 0 2px 8px rgba(26, 26, 26, .16);
+                }
             }
 
-            img {
-                aspect-ratio: 16 / 9;
+            &:first-of-type {
+                margin-top: 80px;
             }
 
-            &:hover {
-                box-shadow: 0 2px 8px rgba(26, 26, 26, .16);
+            &:last-of-type {
+                margin-bottom: 80px;
             }
         }
     }
