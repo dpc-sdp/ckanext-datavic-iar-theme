@@ -236,12 +236,11 @@ def get_route_after_login_config():
 
 @helper
 def get_came_from_url(came_from: str | None) -> str:
-    if came_from is None:
-        return tk.url_for(
-            tk.config.get("ckan.auth.route_after_login") or "dataset.search"
-        )
-    return came_from
 
+    return came_from or tk.url_for(
+        tk.config.get("ckan.auth.route_after_login") or "dataset.search"
+    )
+    
 
 @helper
 def datastore_loaded_resources(pkg_dict: dict[str, Any]) -> list[str]:
@@ -254,6 +253,24 @@ def datastore_loaded_resources(pkg_dict: dict[str, Any]) -> list[str]:
 @helper
 def show_blog_button():
     return conf.show_blog_button()
+
+
+@helper
+def get_pages_dropdown_items():
+    dropdown_items = ""
+    pages_list = tk.get_action("ckanext_pages_list")(
+        {}, {"order": True, "private": False}
+    )
+    for page in pages_list:
+        type_ = "blog" if page["page_type"] == "blog" else conf.get_pages_base_url()
+        name = page["name"]
+        title = page["title"]
+        link = tk.h.literal(
+            '<a class="dropdown-item" href="/{}/{}">{}</a>'.format(type_, name, title)
+        )
+        li = tk.h.literal("<li>") + link + tk.h.literal("</li>")
+        dropdown_items = dropdown_items + li
+    return dropdown_items
 
 
 @helper
@@ -425,21 +442,3 @@ def harvester_list() -> list[dict[str, Any]]:
     harvesters.insert(0, {"value": "", "label": "All"})
 
     return harvesters
-
-
-@helper
-def get_pages_dropdown_items():
-    dropdown_items = ""
-    pages_list = tk.get_action("ckanext_pages_list")(
-        {}, {"order": True, "private": False}
-    )
-    for page in pages_list:
-        type_ = "blog" if page["page_type"] == "blog" else conf.get_pages_base_url()
-        name = page["name"]
-        title = page["title"]
-        link = tk.h.literal(
-            '<a class="dropdown-item" href="/{}/{}">{}</a>'.format(type_, name, title)
-        )
-        li = tk.h.literal("<li>") + link + tk.h.literal("</li>")
-        dropdown_items = dropdown_items + li
-    return dropdown_items
