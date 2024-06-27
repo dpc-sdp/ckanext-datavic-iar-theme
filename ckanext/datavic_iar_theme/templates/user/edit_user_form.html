@@ -13,10 +13,14 @@
     {{ form.input('fullname', label=_('Full name'), id='field-fullname', value=data.fullname, error=errors.fullname, placeholder=_('eg. Joe Bloggs'), classes=['control-medium']) }}
 
     {% set email_attrs = {"class": "form-control", "aria-required": "true", "required": "true"} %}
-    {% if is_sso_user %}
-        {% do email_attrs.update(readonly=true) %}
+    {% if is_sso_user or not is_sysadmin %}
+      {% do email_attrs.update(readonly=true) %}
     {% endif %}
     {{ form.input('email', label=_('Email'), id='field-email', type='email', value=data.email, error=errors.email, placeholder=_('eg. joe@example.com'), classes=['control-medium'], is_required=true, attrs=email_attrs) }}
+    {% if is_sso_user or not is_sysadmin %}
+      {% set email_helper_text = _("To update your email address, please <a target='_blank' href='https://www.data.vic.gov.au/contact-us'>contact us</a>."|string) %}
+      {{ form.info(email_helper_text, classes=['info-user-email']) }}
+    {% endif %}
 
     {{ form.markdown('about', label=_('About'), id='field-about', value=data.about, error=errors.about, placeholder=_('A little information about yourself')) }}
 

@@ -164,19 +164,6 @@ def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any
     return featured_preview
 
 
-def _get_last_resource_if_historical(package: dict[str, Any]) -> dict[str, Any] | None:
-    """If the dataset contains historical resources, return the most recent one"""
-    historical_resources = tk.h.historical_resources_list(package.get("resources", []))
-
-    if len(historical_resources) <= 1:
-        return
-
-    if historical_resources[1].get("period_start"):
-        return historical_resources[0]
-
-    return
-
-
 @helper
 def is_delwp_vector_data(resources: list[dict[str, Any]]) -> bool:
     for res in resources:
@@ -248,6 +235,14 @@ def get_came_from_url(came_from: str | None) -> str:
     return came_from or tk.url_for(
         tk.config.get("ckan.auth.route_after_login") or "dataset.search"
     )
+    
+
+@helper
+def datastore_loaded_resources(pkg_dict: dict[str, Any]) -> list[str]:
+    """Return a list of the dataset resources that are loaded to the datastore"""
+    if not pkg_dict["resources"]:
+        return []
+    return [resource["id"] for resource in pkg_dict["resources"] if resource["datastore_active"]]
 
 
 @helper
