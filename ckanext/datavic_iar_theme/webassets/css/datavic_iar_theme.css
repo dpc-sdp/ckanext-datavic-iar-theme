@@ -3725,8 +3725,6 @@ a.close {
       font-size: 20px; }
       .homepage section.cards .section-type .card .card-body .card-title a {
         color: #011A3C; }
-        .homepage section.cards .section-type .card .card-body .card-title a:hover {
-          color: #0052C2; }
     .homepage section.cards .section-type .card img {
       aspect-ratio: 16 / 9; }
     .homepage section.cards .section-type .card:hover {
