@@ -40,6 +40,9 @@ ckan.module("datavic-advanced-search", function ($) {
                     } else if ($(this).attr('data-checklist') == 'checklist-visibility') {
                         $('.rpl-search-form input[name="visibility"]').val(value);
                         $('.rpl-search-form form').submit();
+                    } else if ($(this).attr('data-checklist') == 'checklist-harvester') {
+                        $('.rpl-search-form input[name="harvest_source_id"]').val(value);
+                        $('.rpl-search-form form').submit();
                     }
                 }
 
