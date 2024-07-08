@@ -257,3 +257,34 @@ def get_pages_dropdown_items():
         li = tk.h.literal("<li>") + link + tk.h.literal("</li>")
         dropdown_items = dropdown_items + li
     return dropdown_items
+
+
+@helper
+def datastore_dictionary(resource_id: str, resource_view_id: str):
+    """
+    Return the data dictionary info for a resource
+    """
+    try:
+        resource_view = tk.get_action("resource_view_show")(
+            {},
+            {"id": resource_view_id}
+        )
+        headers = [
+            f for f in tk.get_action("datastore_search")(
+                {},
+                {
+                    "resource_id": resource_id,
+                    "limit": 0,
+                    "include_total": False
+                }
+            )["fields"]
+            if not f["id"].startswith("_")
+        ]
+
+        if "show_fields" in resource_view:
+            headers = [c for c in headers if c["id"] in resource_view["show_fields"]]
+
+        return headers
+
+    except (tk.ObjectNotFound, tk.NotAuthorized):
+        return []
