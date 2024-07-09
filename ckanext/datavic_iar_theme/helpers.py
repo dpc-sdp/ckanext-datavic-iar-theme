@@ -384,10 +384,12 @@ def role_in_org(organization_id, user_name):
 
 @helper
 def prepare_general_fields(data: dict[str, Any]) -> str:
-    groups: list[str] = [
-        "General",
-    ]
-    schema: dict[str, Any] = scheming_get_dataset_schema(data["type"])
+    schema: dict[str, Any] | None = scheming_get_dataset_schema(
+        data.get("type", "dataset")
+    )
+
+    if not schema:
+        return json.dumps({})
 
     new_data = {
         field : _get_value_for_field(data.get(field, "")) for field in [
@@ -409,9 +411,16 @@ def get_metadata_groups(data):
             h.dict_list_reduce(data.get('tags', {}), 'name')
         )
 
-    schema: dict[str, Any] = scheming_get_dataset_schema(data["type"])
+    schema: dict[str, Any] | None = scheming_get_dataset_schema(
+        data.get("type", "dataset")
+    )
+
+    if not schema:
+        return [], []
+
     groups = []
     fields = schema["dataset_fields"]
+
     for field in schema["dataset_fields"]:
         if field.get("display_group") and field["display_group"] not in groups:
             groups.append(field["display_group"])
