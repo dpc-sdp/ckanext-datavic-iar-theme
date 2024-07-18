@@ -177,27 +177,34 @@
                     <li class="rpl-menu__item">
                       <a href="{{ h.url_for('organization.index') }}" class="rpl-link rpl-menu__item-link">{{ _('Organisations') }}</a>
                     </li>
-                    <li class="rpl-menu__item">
-                      <a href="{{ h.url_for('home.about') }}" class="rpl-link rpl-menu__item-link">{{ _('About us') }}</a>
-                    </li>
+
                     {% if g.userobj.sysadmin %}
                       <li class="pages-menu rpl-menu__item">
                         <a href="#" class="btn rpl-link dropdown-toggle"
-                          data-module="datavic-dropdown">{{ _('Pages') }}</a>
+                          data-module="datavic-dropdown">{{ _('Digital and Analytics Service (DaAS)') }}</a>
                         <div class="dropdown">
                           <div class="container">
                             <div class="dropdown-header">
-                              <h3>Resources</h3>
+                              <h3>DaAS</h3>
                             </div>
                             <ul class="dropdown-items">
-                              {{ h.vic_iar_get_pages_dropdown_items() }}
-                              <li><a class="dropdown-item" href="{{ h.url_for('datavicpages.pages_index') }}">All data
-                                sharing resources</a></li>
+                              {% set pages_items = h.vic_iar_get_pages_dropdown_items() %}
+
+                              {% if not pages_items %}
+                                <li><p>{{ _("No page items have been created yet") }}</p></li>
+                              {% else %}
+                                {{ pages_items }}
+                              {% endif %}
                             </ul>
                           </div>
                         </div>
                       </li>
                     {% endif %}
+
+                    <li class="rpl-menu__item">
+                      <a href="{{ h.url_for('home.about') }}" class="rpl-link rpl-menu__item-link">{{ _('About us') }}</a>
+                    </li>
+
                     <li class="rpl-menu__item">
                       <a href="{{ h.vic_iar_get_parent_site_url() }}/contact-us" class="rpl-link rpl-menu__item-link" target="_blank">{{ _('Contact us') }}</a>
                     </li>
