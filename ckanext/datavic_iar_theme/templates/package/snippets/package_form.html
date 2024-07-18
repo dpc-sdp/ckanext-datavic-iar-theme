@@ -4,6 +4,8 @@
 {% set is_dataset_harvested =  h.is_dataset_harvested(data.id) %}
 {% set confirmation_text =  _('This dataset has been harvested and should only be updated from the harvested source. ') if is_dataset_harvested else '' %}
 {% set general_fields_info = h.vic_iar_prepare_general_fields(data) %}
+{% asset "ckanext-datavicmain/datavicmain-session" %}
+
 
 <form id="dataset-edit" class="dataset-form" method="post" action="{{ action }}" data-module="basic-form datavic_update_restrict" data-module-pkg-data="{{ general_fields_info }}" novalidate>
     {{ h.csrf_input() }}
