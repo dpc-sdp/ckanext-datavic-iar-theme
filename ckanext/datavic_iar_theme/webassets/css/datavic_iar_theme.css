@@ -1730,16 +1730,14 @@ nav {
 
 .pages-menu .dropdown {
   display: none;
-  position: absolute;
   top: 100%;
   z-index: 100;
   background-color: #F6BE00;
-  transition: background-color 0.3s ease;
-  inset: -40px 60px auto -40px; }
+  transition: background-color 0.3s ease; }
   .pages-menu .dropdown .container {
     display: flex;
     flex-direction: column;
-    padding: 28px 48px 40px; }
+    padding: 24px 48px 40px; }
     .pages-menu .dropdown .container .dropdown-header {
       padding: 0; }
       .pages-menu .dropdown .container .dropdown-header h3 {
@@ -1786,6 +1784,8 @@ nav {
       width: 25%; }
     #main-menu .pages-menu .dropdown .container .dropdown-items {
       width: 25%; }
+  #main-menu .pages-menu .dropdown.dropdown-shown {
+    position: relative; }
 
 .dropdown-shown {
   background-color: #FCEBB3 !important;
