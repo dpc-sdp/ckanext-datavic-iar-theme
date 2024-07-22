@@ -369,17 +369,15 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
 
   .dropdown {
     display: none;
-    position: absolute;
     top: 100%;
     z-index: 100;
     background-color: rpl-color('primary');
     transition: background-color 0.3s ease;
-    inset: -40px 60px auto -40px;
 
     .container {
       display: flex;
       flex-direction: column;
-      padding: 28px 48px 40px;
+      padding: 24px 48px 40px;
 
       .dropdown-header {
         padding: 0;
@@ -452,6 +450,10 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
         .dropdown-items {
           width: 25%
         }
+      }
+
+      &.dropdown-shown {
+        position: relative;
       }
     }
   }
