@@ -1782,6 +1782,8 @@ nav {
         display: none; }
       #mobile-menu .dropdown .container .dropdown-items li a:hover {
         background-color: #F69C00; }
+    #mobile-menu .dropdown.dropdown-shown {
+      position: relative; }
 
 .vic-dropdown-menu .rpl-link::after {
   content: none;

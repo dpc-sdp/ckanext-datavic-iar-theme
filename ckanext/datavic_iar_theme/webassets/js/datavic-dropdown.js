@@ -18,7 +18,6 @@ this.ckan.module("datavic-dropdown", function ($) {
                 e.target = $(e.target).parent()[0];
             }
 
-            console.log(e.target);
             let dropdownItem = e.target;
             let openedItem = $(".dropdown.dropdown-shown").prev(".dropdown-toggle");
             let isCloseAction = e.target === openedItem[0];
