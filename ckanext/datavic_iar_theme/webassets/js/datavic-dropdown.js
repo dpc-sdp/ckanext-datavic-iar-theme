@@ -18,8 +18,10 @@ this.ckan.module("datavic-dropdown", function ($) {
                     header = $("#main-menu").children(".rpl-site-header__inner");
                     dropdown_top = header.offset().top + header.outerHeight(true) - 2
                     var dropdown_height = $("body").outerHeight() - dropdown_top
+                    $(this).next(".dropdown").css("transform", `translate(40px, ${dropdown_top}px)`);
                     $(this).next(".dropdown").css("height", `${dropdown_height}px`);
                 }
+
                 $(this).next(".dropdown").slideToggle();
                 $(this).toggleClass("show")
                 $(this).next(".dropdown").toggleClass("dropdown-shown");

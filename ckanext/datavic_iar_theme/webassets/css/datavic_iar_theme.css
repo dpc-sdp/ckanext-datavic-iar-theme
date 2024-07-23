@@ -1721,6 +1721,8 @@ nav {
   z-index: 1040; }
   #mobile-menu .rpl-site-header__top {
     height: 3rem; }
+  #mobile-menu .pages-menu.rpl-menu__item .dropdown.dropdown-shown {
+    position: relative; }
 
 .pages-menu .rpl-link {
   color: #011A3C; }
@@ -1777,15 +1779,14 @@ nav {
 
 #main-menu .pages-menu .dropdown {
   margin-left: 20px;
-  inset: 0 60px auto -40px; }
+  inset: 0 60px auto -40px;
+  position: absolute; }
   #main-menu .pages-menu .dropdown .container {
     flex-direction: row; }
     #main-menu .pages-menu .dropdown .container .dropdown-header {
       width: 25%; }
     #main-menu .pages-menu .dropdown .container .dropdown-items {
       width: 25%; }
-  #main-menu .pages-menu .dropdown.dropdown-shown {
-    position: relative; }
 
 .dropdown-shown {
   background-color: #FCEBB3 !important;
