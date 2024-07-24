@@ -355,6 +355,12 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
   .rpl-site-header__top {
     height: 3rem;
   }
+
+  .pages-menu.rpl-menu__item {
+    .dropdown.dropdown-shown {
+        position: relative;
+    }
+  }
 }
 
 .pages-menu {
@@ -369,17 +375,15 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
 
   .dropdown {
     display: none;
-    position: absolute;
     top: 100%;
     z-index: 100;
     background-color: rpl-color('primary');
     transition: background-color 0.3s ease;
-    inset: -40px 60px auto -40px;
 
     .container {
       display: flex;
       flex-direction: column;
-      padding: 28px 48px 40px;
+      padding: 24px 48px 40px;
 
       .dropdown-header {
         padding: 0;
@@ -441,6 +445,7 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
     .dropdown {
       margin-left: 20px;
       inset: 0 60px auto -40px;
+      position: absolute;
 
       .container {
         flex-direction: row;

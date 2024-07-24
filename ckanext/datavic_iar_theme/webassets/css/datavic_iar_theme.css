@@ -1721,6 +1721,8 @@ nav {
   z-index: 1040; }
   #mobile-menu .rpl-site-header__top {
     height: 3rem; }
+  #mobile-menu .pages-menu.rpl-menu__item .dropdown.dropdown-shown {
+    position: relative; }
 
 .pages-menu .rpl-link {
   color: #011A3C; }
@@ -1730,16 +1732,14 @@ nav {
 
 .pages-menu .dropdown {
   display: none;
-  position: absolute;
   top: 100%;
   z-index: 100;
   background-color: #F6BE00;
-  transition: background-color 0.3s ease;
-  inset: -40px 60px auto -40px; }
+  transition: background-color 0.3s ease; }
   .pages-menu .dropdown .container {
     display: flex;
     flex-direction: column;
-    padding: 28px 48px 40px; }
+    padding: 24px 48px 40px; }
     .pages-menu .dropdown .container .dropdown-header {
       padding: 0; }
       .pages-menu .dropdown .container .dropdown-header h3 {
@@ -1779,7 +1779,8 @@ nav {
 
 #main-menu .pages-menu .dropdown {
   margin-left: 20px;
-  inset: 0 60px auto -40px; }
+  inset: 0 60px auto -40px;
+  position: absolute; }
   #main-menu .pages-menu .dropdown .container {
     flex-direction: row; }
     #main-menu .pages-menu .dropdown .container .dropdown-header {
