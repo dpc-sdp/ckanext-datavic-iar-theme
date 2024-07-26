@@ -240,7 +240,7 @@ def get_came_from_url(came_from: str | None) -> str:
     return came_from or tk.url_for(
         tk.config.get("ckan.auth.route_after_login") or "dataset.search"
     )
-    
+
 
 @helper
 def datastore_loaded_resources(pkg_dict: dict[str, Any]) -> list[str]:
@@ -327,6 +327,11 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
                     "url": tk.h.url_for("datavic_home.manage"),
                     "hide": not is_logged_in,
                 },
+                {
+                    "title": tk._("Bulk manager"),
+                    "url": tk.h.url_for("bulk.manager"),
+                    "hide": not is_sysadmin,
+                }
             ],
         },
         {
