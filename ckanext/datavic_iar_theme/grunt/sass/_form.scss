@@ -179,3 +179,12 @@ select.form-control {
         }
     }
 }
+
+// hide URL button for upload widget
+.organization-edit {
+    .image-upload {
+        .btn[title*="Link to a URL"] {
+            display: none !important;
+        }
+    }
+}
