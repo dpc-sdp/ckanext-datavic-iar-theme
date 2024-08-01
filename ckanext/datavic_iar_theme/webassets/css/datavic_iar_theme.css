@@ -3513,7 +3513,8 @@ a.close {
     .row.user-register-page .primary .module-content .password-reset,
     .row.user-reset-page .primary .module-content .password-reset {
       font-size: 0.875rem;
-      text-align: right; }
+      text-align: right;
+      margin-bottom: 30px; }
       .row.user-login-page .primary .module-content .password-reset a,
       .row.user-register-page .primary .module-content .password-reset a,
       .row.user-reset-page .primary .module-content .password-reset a {
