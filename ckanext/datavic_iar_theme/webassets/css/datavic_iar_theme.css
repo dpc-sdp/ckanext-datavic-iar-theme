@@ -2297,6 +2297,9 @@ select.form-control {
       height: fit-content;
       max-width: 260px; } }
 
+.organization-edit .image-upload .btn[title*="Link to a URL"] {
+  display: none !important; }
+
 .rpl-form {
   font-family: "VIC-Regular", "Arial", "Helvetica", "sans-serif";
   font-size: 0.875rem;
@@ -2540,6 +2543,17 @@ select.form-control {
   background: #011A3C; }
   .multiselect__option--highlight.multiselect__option--selected {
     background-color: #af272f; }
+
+.main .secondary .module.context-info img {
+  max-width: 200px;
+  width: -webkit-fill-available; }
+
+@media (max-width: 767.98px) {
+  .main .secondary {
+    -webkit-order: -1;
+    order: -1; }
+    .main .secondary .module.context-info img {
+      max-height: 150px; } }
 
 .rpl-fieldset legend {
   display: flex;
