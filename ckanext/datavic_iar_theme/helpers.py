@@ -235,7 +235,7 @@ def get_came_from_url(came_from: str | None) -> str:
     return came_from or tk.url_for(
         tk.config.get("ckan.auth.route_after_login") or "dataset.search"
     )
-    
+
 
 @helper
 def datastore_loaded_resources(pkg_dict: dict[str, Any]) -> list[str]:
@@ -248,24 +248,6 @@ def datastore_loaded_resources(pkg_dict: dict[str, Any]) -> list[str]:
 @helper
 def show_blog_button():
     return conf.show_blog_button()
-
-
-@helper
-def get_pages_dropdown_items():
-    dropdown_items = ""
-    pages_list = tk.get_action("ckanext_pages_list")(
-        {}, {"order": True, "private": False}
-    )
-    for page in pages_list:
-        type_ = "blog" if page["page_type"] == "blog" else conf.get_pages_base_url()
-        name = page["name"]
-        title = page["title"]
-        link = tk.h.literal(
-            '<a class="dropdown-item" href="/{}/{}">{}</a>'.format(type_, name, title)
-        )
-        li = tk.h.literal("<li>") + link + tk.h.literal("</li>")
-        dropdown_items = dropdown_items + li
-    return dropdown_items
 
 
 @helper
@@ -351,7 +333,7 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
         {
             "title": tk._("Datasets"),
             "url": "#",
-            "hide": not is_logged_in,
+            "hide": True,
             "child": [
                 {"title": tk._("Search"), "url": h.url_for("dataset.search")},
                 {
@@ -364,4 +346,25 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
                 },
             ],
         },
+        {
+            "title": tk._("Digital and Analytics Service (DaAS)"),
+            "subtitle": tk._("DaAS"),
+            "url": "#",
+            "hide": not is_logged_in,
+            "child": [
+                {
+                    "title": page["title"],
+                    "url": _build_page_url(page),
+                }
+                for page in tk.get_action("ckanext_pages_list")(
+                    {}, {"order": True, "private": False}
+                )
+            ],
+        },
     ]
+
+
+def _build_page_url(page: dict[str, Any]) -> str:
+    page_type = "blog" if page["page_type"] == "blog" else conf.get_pages_base_url()
+
+    return f"/{page_type}/{page['name']}"
