@@ -4,6 +4,10 @@
 not used as a form_snippet directly #}
 
 {% macro _organization() %}
+  {% if data.organization %}
+    {% set organizations_available = h.add_curent_organisation(organizations_available, data.organization) %}
+  {% endif %}
+
   {% set existing_org = data.owner_org or data.group_id %}
   {% call form.input_block('field-organizations',
     label=h.scheming_language_text(field.label),

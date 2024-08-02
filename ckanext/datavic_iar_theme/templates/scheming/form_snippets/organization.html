@@ -3,7 +3,7 @@
   {% block organization_option scoped %}
     <option value="{{ organization.id }}"{%
       if selected_org %} selected="selected"{% endif
-      %}>{{ organization.display_name }}</option>
+      %}>{{ organization.display_name or organization.title }}</option>
   {% endblock %}
 {% endmacro %}
 
@@ -16,6 +16,5 @@
       or h.scheming_field_required(field),
     organization_option_tag=organization_option_tag %}
 
-    
   {% block package_metadata_fields_visibility %}
   {% endblock %}

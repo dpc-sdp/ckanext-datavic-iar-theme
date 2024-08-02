@@ -619,6 +619,9 @@ h2 {
 .rpl-icon--color_dark_success {
   fill: #316f31; }
 
+.rpl-icon--color_green {
+  fill: #007b4b; }
+
 .nav.nav-tabs i.fa {
   color: #F6BE00; }
 
@@ -1410,13 +1413,15 @@ nav {
       color: #011A3C; }
     .rpl-site-header__btn .rpl-icon {
       display: inline; }
-  .rpl-site-header .cobrand a {
-    color: #011A3C;
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 0.0125rem;
-    line-height: 1rem;
-    padding-left: 0; }
+  .rpl-site-header .cobrand {
+    margin-left: 0.5rem; }
+    .rpl-site-header .cobrand a {
+      color: #011A3C;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.0125rem;
+      line-height: 1rem;
+      padding-left: 0; }
 
 .module .dashboard-header {
   font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
@@ -1458,6 +1463,16 @@ nav {
   list-style: none;
   box-sizing: border-box;
   padding: 0 1.5rem; }
+  .rpl-menu--vertical .rpl-menu__items .rpl-menu__item.vic-logout-btn span,
+  .rpl-menu--vertical .rpl-menu__items .rpl-menu__item.vic-login-btn span {
+    justify-content: center;
+    display: flex;
+    align-items: center; }
+    .rpl-menu--vertical .rpl-menu__items .rpl-menu__item.vic-logout-btn span svg,
+    .rpl-menu--vertical .rpl-menu__items .rpl-menu__item.vic-login-btn span svg {
+      width: 12px;
+      height: 12px;
+      margin-left: 0.5rem; }
 
 .rpl-menu--vertical .rpl-menu__header {
   padding: 0 1.5rem; }
@@ -1475,6 +1490,15 @@ nav {
   .rpl-menu--vertical .rpl-menu__back .rpl-icon {
     margin: auto 0.25rem auto 0; }
 
+.rpl-menu__item.vic-logout-btn,
+.rpl-menu__item.vic-login-btn {
+  justify-content: center; }
+  .rpl-menu__item.vic-logout-btn svg,
+  .rpl-menu__item.vic-login-btn svg {
+    width: 12px;
+    height: 12px;
+    margin-left: 0.5rem; }
+
 .rpl-menu--horizontal {
   margin: 0; }
   .rpl-menu--horizontal .rpl-menu__heading {
@@ -1482,13 +1506,43 @@ nav {
   .rpl-menu--horizontal .rpl-menu__items--root {
     display: flex;
     list-style: none;
-    margin: 0; }
+    margin: 0;
+    align-items: center; }
+    .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-login-btn svg {
+      position: absolute; }
+    .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-logout-btn {
+      background-color: #F69C00; }
+    .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-link.show span::before {
+      content: '';
+      width: 100%;
+      position: absolute;
+      display: inline-block;
+      bottom: -0.0625rem;
+      border-radius: 2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #011A3C;
+      background-image: none; }
+    .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-link:hover span::before, .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-link:focus span::before {
+      content: '';
+      width: 100%;
+      position: absolute;
+      display: inline-block;
+      bottom: -0.0625rem;
+      border-radius: 2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #011A3C;
+      background-image: none; }
+    .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-link:focus {
+      box-shadow: unset; }
     .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-menu__item-link {
       font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
       font-size: 0.875rem;
       line-height: 1em;
       font-weight: normal;
-      text-decoration: none;
       background-color: transparent;
       border: 0;
       padding: 0;
@@ -1497,18 +1551,6 @@ nav {
       cursor: pointer;
       color: #011A3C;
       margin: auto 1.75rem auto auto; }
-      .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-menu__item-link:hover::after, .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-menu__item-link:focus::after {
-        content: '';
-        width: 100%;
-        position: absolute;
-        display: inline-block;
-        bottom: -0.3125rem;
-        border-radius: 2px;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background-color: #011A3C;
-        background-image: none; }
       .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-menu__item-link .rpl-icon {
         vertical-align: middle;
         margin: auto auto auto 0.25rem;
@@ -1664,7 +1706,6 @@ nav {
   margin: 0;
   border-radius: 0;
   cursor: pointer;
-  text-decoration: none;
   padding: 1rem 1.25rem 1rem 0;
   color: #011A3C;
   transition: padding-left .25s; }
@@ -1697,7 +1738,8 @@ nav {
     .rpl-menu--horizontal .rpl-menu--subs .rpl-menu__item-link--active span,
     .rpl-menu--horizontal .rpl-menu--subs .rpl-menu__item-link:hover span,
     .rpl-menu--horizontal .rpl-menu--subs .rpl-menu__item-link:focus span {
-      margin-right: 0; }
+      margin-right: 0;
+      text-decoration: underline; }
   .rpl-menu--vertical .rpl-menu__item-link:hover, .rpl-menu--vertical .rpl-menu__item-link:focus,
   .rpl-menu--horizontal-floating-wrapper .rpl-menu__item-link:hover,
   .rpl-menu--horizontal-floating-wrapper .rpl-menu__item-link:focus,
@@ -1721,80 +1763,121 @@ nav {
   z-index: 1040; }
   #mobile-menu .rpl-site-header__top {
     height: 3rem; }
-  #mobile-menu .pages-menu.rpl-menu__item .dropdown.dropdown-shown {
-    position: relative; }
+  #mobile-menu .dropdown {
+    position: relative;
+    background: unset;
+    top: 5px;
+    left: 0; }
+    #mobile-menu .dropdown .container {
+      padding: 0rem 0 2rem 0; }
+      #mobile-menu .dropdown .container .dropdown-header {
+        display: none; }
+      #mobile-menu .dropdown .container .dropdown-items li a:hover {
+        background-color: #F69C00; }
 
-.pages-menu .rpl-link {
-  color: #011A3C; }
-  .pages-menu .rpl-link::after {
-    content: none;
-    border: none; }
+.vic-dropdown-menu .rpl-link::after {
+  content: none;
+  border: none; }
 
-.pages-menu .dropdown {
+.vic-dropdown-menu .rpl-link.dropdown-toggle span::after {
+  content: "";
+  display: inline-block;
+  font-family: FontAwesome;
+  color: #011A3C;
+  margin-left: 0.5rem; }
+
+.vic-dropdown-menu .dropdown-items li span {
+  transition: 80ms ease-out; }
+
+.vic-dropdown-menu .dropdown-items li .dropdown-item:hover span {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  transform: translate(12px);
+  display: block; }
+
+.vic-dropdown-menu .dropdown {
   display: none;
-  top: 100%;
-  z-index: 100;
-  background-color: #F6BE00;
-  transition: background-color 0.3s ease; }
-  .pages-menu .dropdown .container {
+  inset: -40px 60px auto -40px; }
+  .vic-dropdown-menu .dropdown .container {
     display: flex;
     flex-direction: column;
-    padding: 24px 48px 40px; }
-    .pages-menu .dropdown .container .dropdown-header {
+    padding: 28px 48px 40px; }
+    .vic-dropdown-menu .dropdown .container .dropdown-header {
       padding: 0; }
-      .pages-menu .dropdown .container .dropdown-header h3 {
-        color: #1A1A1A;
+      .vic-dropdown-menu .dropdown .container .dropdown-header h3 {
         font-size: 20px;
         font-weight: 700;
         padding: 0 8px; }
-    .pages-menu .dropdown .container .dropdown-items {
+    .vic-dropdown-menu .dropdown .container .dropdown-items {
       list-style-type: none;
       padding: 0; }
-      .pages-menu .dropdown .container .dropdown-items li {
+      .vic-dropdown-menu .dropdown .container .dropdown-items li {
         border-bottom: 1px solid #F69C00; }
-        .pages-menu .dropdown .container .dropdown-items li a {
-          color: #1A1A1A;
+        .vic-dropdown-menu .dropdown .container .dropdown-items li a {
           font-size: 14px;
           padding: 12px 8px; }
-      .pages-menu .dropdown .container .dropdown-items .dropdown-item:hover {
+          .vic-dropdown-menu .dropdown .container .dropdown-items li a:active, .vic-dropdown-menu .dropdown .container .dropdown-items li a:focus {
+            background-color: #F6BE00;
+            color: #011A3C; }
+      .vic-dropdown-menu .dropdown .container .dropdown-items .dropdown-item:hover {
         background-color: #F6BE00; }
 
-#main-menu .pages-menu .rpl-link {
-  font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
-  font-size: 0.875rem;
-  line-height: 1em;
-  font-weight: normal;
-  background-color: transparent;
-  padding: 0;
-  position: relative;
+#main-menu .vic-dropdown-menu {
   margin: auto 1.75rem auto auto; }
-  #main-menu .pages-menu .rpl-link::after {
-    content: "";
-    display: inline-block;
-    font-family: FontAwesome;
-    color: #011A3C; }
-  #main-menu .pages-menu .rpl-link.show::after {
-    transform: rotate(180deg);
-    transition: transform 0.3s ease; }
+  #main-menu .vic-dropdown-menu .rpl-link {
+    font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
+    font-size: 0.875rem;
+    line-height: 1em;
+    font-weight: normal;
+    background-color: transparent;
+    padding: 0;
+    position: relative;
+    margin: auto 1.75rem auto auto; }
+    #main-menu .vic-dropdown-menu .rpl-link.show::after {
+      transform: rotate(180deg);
+      transition: transform 0.3s ease; }
+    #main-menu .vic-dropdown-menu .rpl-link.dropdown-toggle::after {
+      content: "";
+      display: inline-block;
+      font-family: FontAwesome;
+      color: #011A3C;
+      margin-left: 0.5rem;
+      position: absolute;
+      right: -16px; }
+    #main-menu .vic-dropdown-menu .rpl-link.dropdown-toggle span::after {
+      display: none; }
+  #main-menu .vic-dropdown-menu .dropdown {
+    background-color: #F6BE00;
+    margin-left: 20px;
+    inset: 0 60px auto -40px;
+    position: absolute;
+    top: 100%;
+    z-index: 100; }
+    #main-menu .vic-dropdown-menu .dropdown .container {
+      flex-direction: row; }
+      #main-menu .vic-dropdown-menu .dropdown .container .dropdown-header h3 {
+        color: #011A3C; }
+      #main-menu .vic-dropdown-menu .dropdown .container .dropdown-items .dropdown-item:hover {
+        background-color: #F6BE00; }
+      #main-menu .vic-dropdown-menu .dropdown .container .dropdown-header {
+        width: 25%; }
+      #main-menu .vic-dropdown-menu .dropdown .container .dropdown-items {
+        width: 25%; }
 
-#main-menu .pages-menu .dropdown {
-  margin-left: 20px;
-  inset: 0 60px auto -40px;
-  position: absolute; }
-  #main-menu .pages-menu .dropdown .container {
-    flex-direction: row; }
-    #main-menu .pages-menu .dropdown .container .dropdown-header {
-      width: 25%; }
-    #main-menu .pages-menu .dropdown .container .dropdown-items {
-      width: 25%; }
+#main-menu .dropdown-shown {
+  background-color: #FCEBB3 !important; }
+  #main-menu .dropdown-shown .dropdown {
+    margin-left: 20px;
+    inset: 0 60px auto -40px; }
+    #main-menu .dropdown-shown .dropdown .container {
+      flex-direction: row; }
+      #main-menu .dropdown-shown .dropdown .container .dropdown-header {
+        width: 25%; }
+      #main-menu .dropdown-shown .dropdown .container .dropdown-items {
+        width: 25%; }
 
-.dropdown-shown {
-  background-color: #FCEBB3 !important;
-  transition: background-color 0.3s ease; }
-
-.dropdown-hidden {
-  background-color: #F6BE00 !important;
-  transition: background-color 0.3s ease; }
+#main-menu .dropdown-hidden {
+  background-color: #F6BE00 !important; }
 
 .module-content .pagination {
   margin: 0; }
@@ -3142,27 +3225,45 @@ label.chk-label-active .custom-check,
         margin-top: 1rem;
         margin-bottom: 1rem; } }
 
-.dataset-contact form label:after {
-  content: ""; }
-
-.dataset-contact form .form-label {
-  float: none;
-  width: auto; }
-
-.dataset-contact form .controls {
-  margin-left: 0; }
-
-.dataset-contact .form-controls {
-  margin-bottom: 0.875rem; }
-
-.dataset-contact .privacy-statement {
-  font-size: 0.875rem;
-  line-height: 1.3rem;
-  padding-top: 0.875rem; }
-  .dataset-contact .privacy-statement label {
+.dataset-contact {
+  margin-top: 4rem; }
+  .dataset-contact > h3 {
+    margin-bottom: 1rem; }
+  .dataset-contact > p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem; }
+  .dataset-contact .form .form-controls .form-group label {
+    float: unset;
+    width: auto;
+    color: #1a1a1a;
+    font-size: 1rem;
+    font-family: "VIC-Bold", "Arial", "Helvetica", "sans-serif";
+    margin-bottom: 1rem; }
+    .dataset-contact .form .form-controls .form-group label span.required {
+      color: #aa0028;
+      font-family: "VIC-Regular", "Arial", "Helvetica", "sans-serif";
+      font-size: 0.875rem;
+      font-weight: normal; }
+    .dataset-contact .form .form-controls .form-group label:after {
+      display: none; }
+  .dataset-contact .form .form-controls .form-group input {
+    height: 50px; }
+  .dataset-contact .form .form-controls .form-group input,
+  .dataset-contact .form .form-controls .form-group textarea {
+    background-color: #f5f5f5;
+    border-color: #666666;
+    box-shadow: none; }
+  .dataset-contact .form .form-group .controls {
+    margin-left: 0; }
+  .dataset-contact .form .form-actions {
+    float: left; }
+  .dataset-contact .form label.checkbox {
     font-weight: normal; }
-  .dataset-contact .privacy-statement input[type="checkbox"] {
-    margin-top: 3px; }
+  .dataset-contact .form .subject-group {
+    display: none; }
+  @media screen and (min-width: 768px) {
+    .dataset-contact {
+      max-width: 75%; } }
 
 .report-options {
   display: none; }

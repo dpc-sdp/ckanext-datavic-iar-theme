@@ -18,8 +18,6 @@ $rpl-site-header-logout-btn-icon-margin: 0 0 0 $rpl-space-2 !default;
 
 .rpl-site-header {
   $root: &;
-  //position: absolute;
-  //z-index: $rpl-zindex-header;
   padding: $rpl-header-horizontal-padding-xs 0 rem(4px) 0;
   box-sizing: border-box;
   width: 100%;
@@ -250,6 +248,7 @@ $rpl-site-header-logout-btn-icon-margin: 0 0 0 $rpl-space-2 !default;
       line-height: rem(16px);
       padding-left: 0;
     }
+    margin-left: 0.5rem;
   }
 }
 
