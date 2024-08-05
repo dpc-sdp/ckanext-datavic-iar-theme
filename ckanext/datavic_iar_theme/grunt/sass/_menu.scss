@@ -389,7 +389,7 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
     .rpl-site-header__menu-container {
         display: none;
 
-        @include rpl_breakpoint('l') {
+        @include rpl_breakpoint('xl') {
             display: inline-block;
         }
     }
@@ -410,6 +410,7 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
 
         .container {
             padding: 0rem 0 2rem 0;
+            margin: 0;
 
             .dropdown-header {
                 display: none;
@@ -474,6 +475,7 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
                     font-size: 20px;
                     font-weight: 700;
                     padding: 0 8px;
+                    white-space: normal;
                 }
             }
 
