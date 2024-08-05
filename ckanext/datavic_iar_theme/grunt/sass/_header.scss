@@ -157,7 +157,7 @@ $rpl-site-header-logout-btn-icon-margin: 0 0 0 $rpl-space-2 !default;
     &--menu {
       padding-right: $rpl-site-header-menu-toggle-border-spacing;
       border-right: $rpl-site-header-menu-toggle-border-right;
-      @include rpl_breakpoint('l') {
+      @include rpl_breakpoint('xl') {
         display: none;
       }
 
