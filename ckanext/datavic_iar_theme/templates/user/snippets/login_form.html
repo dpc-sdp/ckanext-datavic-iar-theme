@@ -9,21 +9,10 @@ Example:
   {% snippet "user/snippets/login_form.html", action=c.login_handler, error_summary=error_summary %}
 
 #}
-
-{#
-    The login form is highly altered:
-    - it was altered to include the MFA login form from the ckanext-security extension
-    - datavic related styles were added
-#}
-
 {% import 'macros/form.html' as form %}
 
 {% set username_error = true if error_summary %}
 {% set password_error = true if error_summary %}
-
-{% if "security" in g.plugins and h.security_enable_totp() %}
-  {% asset 'security/mfa_login' %}
-{% endif %}
 
 {# TODO: drop debug condition #}
 {% if g.action == "logged_in" %}
@@ -49,7 +38,7 @@ Example:
 {% endif %}
 
 
-<form action="{{ action }}{% if not h.get_request_param('came_from') %}?came_from={{ h.url_for(h.vic_iar_get_route_after_login_config() or 'dataset.search') }}{% endif %}" method="post" class="form-horizontal" id="mfa-login-form">
+<form action="{{ action }}{% if not h.get_request_param('came_from') %}?came_from={{ h.url_for(h.vic_iar_get_route_after_login_config() or 'dataset.search') }}{% endif %}" method="post" class="form-horizontal">
   {{ h.csrf_input() }}
 
   {{ form.errors(errors=error_summary) }}
@@ -87,69 +76,43 @@ Example:
     <span>{{ _('Or') }}</span>
   </div>
 
-  <div id="login-form">
-    <div class="block-details">
-        <p>
-          {{ _('Access the VPS Data Directory using your login details.') }}
-        </p>
-    </div>
+  <div class="block-details">
+    <p>
+      {{ _('Access the VPS Data Directory using your login details.') }}
+    </p>
+  </div>
 
-    <div id="login-fields">
-        {{ form.input('login', label=_("Username"), id='field-login', placeholder="Username", value="", error=username_error, classes=["control-medium"], autocomplete="username") }}
 
-        {{ form.input('password', label=_("Password"), id='field-password', placeholder="Enter password", type="password", value="", error=password_error, classes=["control-medium"], autocomplete="current-password") }}
+  {{ form.input('login', label=_("Username"), id='field-login', placeholder="Username", value="", error=username_error, classes=["control-medium"], autocomplete="username") }}
 
-        <div class="control-group hidden">
-          <div class="controls">
-            <label class="rpl-checkbox" for="field-remember" data-module="datavic-checkbox">
-              <input type="checkbox" id='field-remember' name="remember" checked=true, value="63072000" />
-              <span class="rpl-checkbox__box rpl-checkbox__box--checked">
-                {% snippet 'snippets/svg/checkbox-tick.svg' %}
-              </span>
-              <span class="rpl-checkbox__inline-label">{{ _("Remember me") }}</span>
-            </label>
-          </div>
-        </div>
+  {{ form.input('password', label=_("Password"), id='field-password', placeholder="Enter password", type="password", value="", error=password_error, classes=["control-medium"], autocomplete="current-password") }}
 
-        <div class="password-reset">
-            <span>
-            <a href="{{ h.url_for('user.request_reset') }}">{{ _('Forgotten your password?') }}</a>
-            </span>
-        </div>
-        <div class="form-actions">
-            {% block login_button %}
-              <div class="sign-up">
-                <span>
-                  {{ _('Don t have an account yet?') }} <a href="{{ h.url_for('user.register') }}">{{ _('Sign up here.') }}</a>
-                </span>
-              </div>
-              <button class="btn btn-primary" type="submit">{{ _('Next') }}</button>
-            {% endblock %}
-        </div>
+  <div class="control-group hidden">
+    <div class="controls">
+      <label class="rpl-checkbox" for="field-remember" data-module="datavic-checkbox">
+        <input type="checkbox" id='field-remember' name="remember" checked=true, value="63072000" />
+        <span class="rpl-checkbox__box rpl-checkbox__box--checked">
+          {% snippet 'snippets/svg/checkbox-tick.svg' %}
+        </span>
+        <span class="rpl-checkbox__inline-label">{{ _("Remember me") }}</span>
+      </label>
     </div>
   </div>
 
-    {% if "security" in g.plugins and  h.security_enable_totp() %}
-        <div id="mfa-form" style="display: none;">
-            <fieldset id="mfa-setup" style="display: none; text-align: center">
-                <legend>{{_('Scan this QR code with your two factor authentication app')}}</legend>
-                <p>
-                    {% trans %}If you don't already have an authenticator app, you could try Google Authenticator.{% endtrans %}</p>
-                    <div><canvas class="radius-lg padding-sm margin-b-sm border-solid" id="qr-code-container"></canvas></div>
-                <p>
+  <div class="password-reset">
+    <span>
+      <a href="{{ h.url_for('user.request_reset') }}">{{ _('Forgotten your password?') }}</a>
+    </span>
+  </div>
 
-                {% trans %}If you are not able to scan the QR code, you can manually enter this secret into your authenticator app: {% endtrans %}<code id="totp-secret"></code>
-                </p>
-            </fieldset>
-
-            <p>{{_('Please enter your authenticator app generated 6-digit verification code.')}}</p>
-            {{ form.input('mfa', label=_("Verification code"), id='field-mfa', type="text", value="", error=mfa_error, classes=["control-medium"], attrs={"autocomplete": "off"}) }}
-
-            <input id="mfa-form-active" name="mfa-form-active" type="hidden" value="" />
-            <div class="form-actions">
-                <a id="mfa-help-link" href="/" target="_blank" style="display: none; margin-right: 20px;">{{_('Need help?')}}</a>
-                <button class="btn btn-primary" type="submit">{{ _('Submit') }}</button>
-            </div>
-        </div>
-    {% endif %}
+  <div class="form-actions">
+    {% block login_button %}
+      <div class="sign-up">
+        <span>
+          {{ _('Don t have an account yet?') }} <a href="{{ h.url_for('user.register') }}">{{ _('Sign up here.') }}</a>
+        </span>
+      </div>
+      <button class="btn btn-primary" type="submit">{{ _('Login') }}</button>
+    {% endblock %}
+  </div>
 </form>
