@@ -333,7 +333,7 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
         {
             "title": tk._("Datasets"),
             "url": "#",
-            "hide": True,
+            "hide": not is_logged_in,
             "child": [
                 {"title": tk._("Search"), "url": h.url_for("dataset.search")},
                 {
@@ -347,8 +347,8 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
             ],
         },
         {
-            "title": tk._("Digital and Analytics Service (DaAS)"),
-            "subtitle": tk._("DaAS"),
+            "title": tk._("DaAS"),
+            "subtitle": tk._("""Digital and Analytics Service (DaAS)"""),
             "url": "#",
             "hide": not is_logged_in,
             "child": [
