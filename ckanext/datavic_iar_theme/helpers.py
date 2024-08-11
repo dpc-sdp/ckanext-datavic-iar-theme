@@ -490,3 +490,16 @@ def datastore_dictionary(resource_id: str, resource_view_id: str):
 
     except (tk.ObjectNotFound, tk.NotAuthorized):
         return []
+
+
+@helper
+def get_package_title(package_id: str) -> str:
+    user = tk.g.user
+    context = {"user": user}
+    try:
+        pkg = tk.get_action("package_show")(
+            context, {"id": package_id}
+        )
+    except (tk.ObjectNotFound, tk.NotAuthorized):
+        tk.abort(403)
+    return pkg.get("title", "")

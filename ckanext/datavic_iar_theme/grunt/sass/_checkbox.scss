@@ -3,15 +3,13 @@ $rpl-checkbox-box-border-focus: 1px solid rpl-color('primary');
 $rpl-checkbox-box-border-radius: rem(4px);
 
 .rpl-checkbox {
-    position: relative;
 
     input[type="checkbox"] {
         position: absolute;
-        top: 1px;
-        left: 1px;
         opacity: 0;
         width: $rpl-space * 5;
         height: $rpl-space * 5;
+        cursor: pointer;
 
         &:focus,
         &:active {
@@ -24,7 +22,7 @@ $rpl-checkbox-box-border-radius: rem(4px);
     .rpl-checkbox__inline-label {
         @include rpl_typography_ruleset($rpl-form-element-text-ruleset);
         margin-left: $rpl-space-2;
-        font-size: rpl-font-size('xs');
+        font-size: rpl-font-size('s');
     }
 
     &__box {
@@ -36,6 +34,8 @@ $rpl-checkbox-box-border-radius: rem(4px);
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        position: relative;
+        z-index: 999;
 
         .rpl-icon {
             display: none;
