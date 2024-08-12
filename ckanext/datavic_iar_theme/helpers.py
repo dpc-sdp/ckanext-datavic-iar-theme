@@ -386,15 +386,15 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
 
 def _get_page_item(name: str) -> dict[str, Any] | None:
     """Return a ckanext-pages page item based on the page name"""
-    try:
-        result = tk.get_action("ckanext_pages_show")({}, {"page": name})
-    except tk.ObjectNotFound:
+    result = tk.get_action("ckanext_pages_show")({}, {"page": name})
+
+    if not result:
         return None
 
-    if result["page_type"] == "page":
-        return result
+    if result["page_type"] != "page":
+        return None
 
-    return None
+    return result
 
 
 def _build_page_url(page: dict[str, Any]) -> str:
