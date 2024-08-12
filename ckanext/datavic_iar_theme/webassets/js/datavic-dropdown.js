@@ -31,7 +31,7 @@ this.ckan.module("datavic-dropdown", function ($) {
                 header = $("#main-menu").children(".rpl-site-header__inner");
 
                 let dropdown_top = header.offset().top + header.outerHeight(true) - 2;
-                let dropdown_height = window.innerHeight - header[0].getBoundingClientRect().bottom - 30;
+                let dropdown_height = window.innerHeight - header[0].getBoundingClientRect().bottom - 20;
 
                 $(dropdownItem).next(".dropdown").css("transform", `translate(40px, ${dropdown_top}px)`);
                 $(dropdownItem).next(".dropdown").css("height", `${dropdown_height}px`);
@@ -54,10 +54,12 @@ this.ckan.module("datavic-dropdown", function ($) {
             if ($(".rpl-link.dropdown-toggle.show").length) {
                 header.removeClass("dropdown-hidden")
                 header.addClass("dropdown-shown");
+                $(document.body).addClass("rpl-u-viewport-locked");
             }
             else {
                 header.addClass("dropdown-hidden")
                 header.removeClass("dropdown-shown");
+                $(document.body).removeClass("rpl-u-viewport-locked");
             }
         },
     };
