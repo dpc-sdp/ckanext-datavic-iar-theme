@@ -242,12 +242,11 @@ def datastore_loaded_resources(pkg_dict: dict[str, Any]) -> list[str]:
     """Return a list of the dataset resources that are loaded to the datastore"""
     if not pkg_dict["resources"]:
         return []
-    return [resource["id"] for resource in pkg_dict["resources"] if resource["datastore_active"]]
-
-
-@helper
-def show_blog_button():
-    return conf.show_blog_button()
+    return [
+        resource["id"]
+        for resource in pkg_dict["resources"]
+        if resource["datastore_active"]
+    ]
 
 
 @helper
@@ -292,12 +291,12 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
                 {
                     "title": tk._("Pages"),
                     "url": tk.h.url_for("pages.pages_index"),
-                    "hide": not is_logged_in,
+                    "hide": not is_sysadmin,
                 },
                 {
                     "title": tk._("Blog"),
                     "url": tk.h.url_for("pages.blog_index"),
-                    "hide": not is_logged_in,
+                    "hide": not is_sysadmin,
                 },
             ],
         },
@@ -306,15 +305,23 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
             "url": "#",
             "hide": not is_logged_in,
             "child": [
-                {"title": tk._("User guides"), "url": tk.h.url_for("home.index")},
+                {
+                    "title": tk._("User guides"),
+                    "url": f"/{conf.get_pages_base_url()}/user-guides",
+                    "hide": _get_page_item("user-guides") is None,
+                },
                 {
                     "title": tk._("Contact us"),
-                    "url": tk.h.vic_iar_get_parent_site_url() + "/contact-us",
+                    "url": f"/{conf.get_pages_base_url()}/contact-us",
+                    "hide": _get_page_item("contact-us") is None,
                 },
-                {"title": tk._("About us"), "url": tk.h.url_for("home.about")},
+                {
+                    "title": tk._("About us"),
+                    "url": tk.h.url_for("home.about"),
+                },
                 {
                     "title": tk._("News and announcements"),
-                    "url": tk.h.url_for("home.about"),
+                    "url": tk.h.url_for("pages.blog_index"),
                 },
             ],
         },
@@ -324,10 +331,10 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
             "hide": not is_logged_in,
             "child": [
                 {
-                    "title": tk._("Data sharing framework"),
-                    "url": tk.h.url_for("home.index"),
-                },
-                {"title": tk._("Data ethics"), "url": tk.h.url_for("home.index")},
+                    "title": tk._("Data sharing resources"),
+                    "url": f"/{conf.get_pages_base_url()}/data-sharing-resources",
+                    "hide": _get_page_item("data-sharing-resources") is None,
+                }
             ],
         },
         {
@@ -356,18 +363,43 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
                     "title": page["title"],
                     "url": _build_page_url(page),
                 }
-                for page in tk.get_action("ckanext_pages_list")(
-                    {}, {"order": True, "private": False}
-                )
+                for page in _get_daas_pages()
             ],
         },
     ]
 
 
+def _get_page_item(name: str) -> dict[str, Any] | None:
+    """Return a ckanext-pages page item based on the page name"""
+    try:
+        result = tk.get_action("ckanext_pages_show")({}, {"page": name})
+    except tk.ObjectNotFound:
+        return None
+
+    if result["page_type"] == "page":
+        return result
+
+    return None
+
+
 def _build_page_url(page: dict[str, Any]) -> str:
+    """Build a page URL for ckanext-pages entity based on the page type and name"""
     page_type = "blog" if page["page_type"] == "blog" else conf.get_pages_base_url()
 
     return f"/{page_type}/{page['name']}"
+
+
+def _get_daas_pages():
+    """Return a list of DaAS pages. Exclude pages that are not DaAS related,
+    but were created with ckanext-pages"""
+    exclude = ("user-guides", "contact-us", "data-sharing-resources")
+    result = tk.get_action("ckanext_pages_list")({}, {"order": True, "private": False})
+
+    return [
+        page
+        for page in result
+        if (page["page_type"] == "page" and page["name"] not in exclude)
+    ]
 
 
 @helper
@@ -375,9 +407,7 @@ def get_package_title(package_id: str) -> str:
     user = tk.g.user
     context = {"user": user}
     try:
-        pkg = tk.get_action("package_show")(
-            context, {"id": package_id}
-        )
+        pkg = tk.get_action("package_show")(context, {"id": package_id})
     except (tk.ObjectNotFound, tk.NotAuthorized):
         tk.abort(403)
     return pkg.get("title", "")
