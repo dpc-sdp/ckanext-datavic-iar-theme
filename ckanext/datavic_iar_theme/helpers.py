@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import logging
 from typing import Optional, Any
+from bs4 import BeautifulSoup
 
 from sqlalchemy.sql import func
 
@@ -533,3 +534,14 @@ def get_package_title(package_id: str) -> str:
     except (tk.ObjectNotFound, tk.NotAuthorized):
         tk.abort(403)
     return pkg.get("title", "")
+
+
+@helper
+def extra_html_restrictions(text):
+    filtered_text = BeautifulSoup(text,"html.parser")
+
+    # Lets remove all script tags from the HTML markup
+    for script in filtered_text.find_all('script'):
+        script.extract()
+
+    return str(filtered_text)

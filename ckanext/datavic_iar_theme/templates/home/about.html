@@ -5,7 +5,7 @@
     <div class="module-content">
       {% block about %}
         {% if g.site_about %}
-          {{ h.render_markdown(g.site_about, False, True) }}
+          {{ h.render_markdown(g.site_about, False) }}
         {% else %}
           <h1 class="page-heading">{{ _('About') }}</h1>
           {% snippet 'home/snippets/about_text.html' %}
