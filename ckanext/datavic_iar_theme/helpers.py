@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 from typing import Optional, Any
+from bs4 import BeautifulSoup
 
 from sqlalchemy.sql import func
 
@@ -288,3 +289,14 @@ def datastore_dictionary(resource_id: str, resource_view_id: str):
 
     except (tk.ObjectNotFound, tk.NotAuthorized):
         return []
+
+
+@helper
+def extra_html_restrictions(text):
+    filtered_text = BeautifulSoup(text,"html.parser")
+
+    # Lets remove all script tags from the HTML markup
+    for script in filtered_text.find_all('script'):
+        script.extract()
+
+    return str(filtered_text)
