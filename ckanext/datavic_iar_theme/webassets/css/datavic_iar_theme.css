@@ -723,6 +723,9 @@ h2 {
   height: 100vh;
   overflow: hidden; }
 
+.radio-no-colon:after {
+  display: none; }
+
 @media screen and (min-width: 768px) {
   .rpl-acknowledgement {
     display: flex;

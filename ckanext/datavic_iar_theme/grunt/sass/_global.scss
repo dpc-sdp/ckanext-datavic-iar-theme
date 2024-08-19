@@ -11,3 +11,9 @@
     height: 100vh;
     overflow: hidden;
 }
+
+.radio-no-colon {
+    &:after {
+        display: none;
+    }
+}
