@@ -1,5 +1,14 @@
 {% ckan_extends %}
 
+{% block breadcrumb_content %}
+  <li>{% link_for h.humanize_entity_type('organization', group_type, 'breadcrumb') or _('Organizations'), named_route=group_type+'.index' %}</li>
+  <li>{% link_for organization.display_name|truncate(35), named_route=group_type+'.read', id=organization.name, title=organization.display_name %}</li>
+
+  {% block breadcrumb_content_inner %}
+    <li class="active">{% link_for _('Manage'), named_route=group_type+'.edit', id=organization.name %}</li>
+  {% endblock %}
+{% endblock %}
+
 {% block content_action %}
   {% if organization and h.check_access('datavic_toggle_organization_uploads', {'id': organization.id}) %}
       <form method="POST" class="d-inline" action="{{ h.url_for("datavicmain.toggle_organization_uploads", id=organization.id) }}">
