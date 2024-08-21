@@ -30,9 +30,10 @@ icon='plus-square' %}
         </thead>
         <tbody>
             {% for user_id, user, role in c.members %}
+                {% set pending_review = h.is_user_account_pending_review(user_id) %}
                 {% set pending = '' %}
                 {% if h.check_access('sysadmin') %}
-                    {% set pending = '(Review required)' if h.is_user_account_pending_review(user_id) else '(Invite not active)' if user.state == 'pending' else '' %}
+                    {% set pending = '(Review required)' if pending_review else '(Invite not active)' if user.state == 'pending' else '' %}
                 {% endif %}
 
                 <tr>
@@ -41,6 +42,7 @@ icon='plus-square' %}
                     </td>
                     <td>{{ role }}</td>
                     <td>
+                        {% if not pending_review %}
                         <div class="btn-group pull-right">
                             <a class="btn btn-sm" href="{% url_for 'organization.member_new', id=group_dict.id, user=user_id %}"
                                 title="{{ _('Edit') }}">
@@ -54,6 +56,7 @@ icon='plus-square' %}
                                 <i class="fa fa-times"></i>
                             </button>
                         </div>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
