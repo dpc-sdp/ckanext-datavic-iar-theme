@@ -719,6 +719,13 @@ h2 {
   padding: 5px 5px 5px 18px !important;
   margin-left: 12px !important; }
 
+.rpl-u-viewport-locked {
+  height: 100vh;
+  overflow: hidden; }
+
+.radio-no-colon:after {
+  display: none; }
+
 @media screen and (min-width: 768px) {
   .rpl-acknowledgement {
     display: flex;
@@ -1463,16 +1470,6 @@ nav {
   list-style: none;
   box-sizing: border-box;
   padding: 0 1.5rem; }
-  .rpl-menu--vertical .rpl-menu__items .rpl-menu__item.vic-logout-btn span,
-  .rpl-menu--vertical .rpl-menu__items .rpl-menu__item.vic-login-btn span {
-    justify-content: center;
-    display: flex;
-    align-items: center; }
-    .rpl-menu--vertical .rpl-menu__items .rpl-menu__item.vic-logout-btn span svg,
-    .rpl-menu--vertical .rpl-menu__items .rpl-menu__item.vic-login-btn span svg {
-      width: 12px;
-      height: 12px;
-      margin-left: 0.5rem; }
 
 .rpl-menu--vertical .rpl-menu__header {
   padding: 0 1.5rem; }
@@ -1490,15 +1487,6 @@ nav {
   .rpl-menu--vertical .rpl-menu__back .rpl-icon {
     margin: auto 0.25rem auto 0; }
 
-.rpl-menu__item.vic-logout-btn,
-.rpl-menu__item.vic-login-btn {
-  justify-content: center; }
-  .rpl-menu__item.vic-logout-btn svg,
-  .rpl-menu__item.vic-login-btn svg {
-    width: 12px;
-    height: 12px;
-    margin-left: 0.5rem; }
-
 .rpl-menu--horizontal {
   margin: 0; }
   .rpl-menu--horizontal .rpl-menu__heading {
@@ -1510,8 +1498,6 @@ nav {
     align-items: center; }
     .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-login-btn svg {
       position: absolute; }
-    .rpl-menu--horizontal .rpl-menu__items--root .rpl-menu__item.vic-logout-btn {
-      background-color: #F69C00; }
     .rpl-menu--horizontal .rpl-menu__items--root > .rpl-menu__item > .rpl-link.show span::before {
       content: '';
       width: 100%;
@@ -1786,6 +1772,15 @@ nav {
   font-family: FontAwesome;
   color: #011A3C;
   margin-left: 0.5rem; }
+
+.vic-dropdown-menu .rpl-link span {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .vic-dropdown-menu .rpl-link span svg {
+    width: 12px;
+    height: 12px;
+    margin-left: 0.5rem; }
 
 .vic-dropdown-menu .dropdown-items li span {
   transition: 80ms ease-out; }
@@ -2672,50 +2667,53 @@ select.form-control {
 .rpl-checklist .rpl-checkbox {
   margin-bottom: 10px; }
 
-.rpl-checkbox {
-  position: relative; }
-  .rpl-checkbox input[type="checkbox"] {
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    opacity: 0;
-    width: 1.25rem;
-    height: 1.25rem; }
-    .rpl-checkbox input[type="checkbox"]:focus + .rpl-checkbox__box, .rpl-checkbox input[type="checkbox"]:active + .rpl-checkbox__box {
-      box-shadow: 0 0 0 1px #1A1A1A inset, 0 0 0 4px #FF9E1B; }
-  .rpl-checkbox .rpl-checkbox__inline-label {
-    font-family: "VIC-Regular", "Arial", "Helvetica", "sans-serif";
-    font-size: 0.875rem;
-    line-height: 1em;
-    font-weight: normal;
-    margin-left: 0.5rem;
-    font-size: 0.875rem; }
-  .rpl-checkbox__box {
-    vertical-align: middle;
-    width: 24px;
-    height: 24px;
-    background: #F5F5F5;
-    border: 1px solid #666666;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center; }
-    .rpl-checkbox__box .rpl-icon {
-      display: none; }
-    .rpl-checkbox__box--checked {
-      background-color: #fff;
-      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08); }
-      .rpl-checkbox__box--checked .rpl-icon {
-        display: block;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        margin: auto; }
-  .rpl-checkbox:focus .rpl-checkbox__box, .rpl-checkbox:hover .rpl-checkbox__box, .rpl-checkbox:active .rpl-checkbox__box {
-    border-color: #1A1A1A; }
-  .rpl-checkbox:after {
-    content: ""; }
+.rpl-checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer; }
+  .rpl-checkbox input[type="checkbox"]:focus + .rpl-checkbox__box, .rpl-checkbox input[type="checkbox"]:active + .rpl-checkbox__box {
+    box-shadow: 0 0 0 1px #1A1A1A inset, 0 0 0 4px #FF9E1B; }
+
+.rpl-checkbox .rpl-checkbox__inline-label {
+  font-family: "VIC-Regular", "Arial", "Helvetica", "sans-serif";
+  font-size: 0.875rem;
+  line-height: 1em;
+  font-weight: normal;
+  margin-left: 0.5rem;
+  font-size: 1rem; }
+
+.rpl-checkbox__box {
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  background: #F5F5F5;
+  border: 1px solid #666666;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 999; }
+  .rpl-checkbox__box .rpl-icon {
+    display: none; }
+  .rpl-checkbox__box--checked {
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08); }
+    .rpl-checkbox__box--checked .rpl-icon {
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto; }
+
+.rpl-checkbox:focus .rpl-checkbox__box, .rpl-checkbox:hover .rpl-checkbox__box, .rpl-checkbox:active .rpl-checkbox__box {
+  border-color: #1A1A1A; }
+
+.rpl-checkbox:after {
+  content: ""; }
 
 .rpl-clearform {
   padding: 0.5rem 0;

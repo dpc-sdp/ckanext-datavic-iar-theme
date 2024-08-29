@@ -15,7 +15,7 @@
             {% set email = data.email|lower if data else userobj.email|lower %}
             {{ form.input("email", label=_("Email"), id="field-email", value=email, error=errors.email, classes=["form-group"], is_required=true, attrs={"class": "form-control"}) }}
 
-            {% set subject = _("VPS Data Directory user query - ") + g.pkg.title %}
+            {% set subject = _("VPS Data Directory user query - ") + h.vic_iar_get_package_title(pkg_id) %}
             {{ form.input("subject", label=_("Subject"), id="field-subject", value=subject, error=errors.subject, classes=["form-group subject-group"], is_required=true, attrs={"class": "form-control"}) }}
 
             {{ form.textarea("message", label=_("Message"), id="field-message", value=data.message, error=errors.message, classes=["form-group"], is_required=true, attrs={"class": "form-control"}) }}
