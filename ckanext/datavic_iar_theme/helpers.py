@@ -371,6 +371,11 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
 
 def _get_page_item(name: str) -> dict[str, Any] | None:
     """Return a ckanext-pages page item based on the page name"""
+    try:
+        tk.check_access('ckanext_pages_show', {}, {"page": name})
+    except tk.NotAuthorized:
+        return None
+
     result = tk.get_action("ckanext_pages_show")({}, {"page": name})
 
     if not result:
