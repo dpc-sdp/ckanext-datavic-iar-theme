@@ -180,11 +180,39 @@ select.form-control {
     }
 }
 
+
+// Organisation form styles
+
 // hide URL button for upload widget
 .organization-edit {
     .image-upload {
         .btn[title*="Link to a URL"] {
             display: none !important;
+        }
+    }
+}
+
+.select2-choice {
+    height: 29px !important;
+}
+
+.restricted {
+    div,
+    &.select2-chosen {
+        &::after {
+            content: 'Restricted';
+            display: inline-block;
+            color: #055160;
+            background-color: #cff4fc;
+            border-color: #b6effb;
+            border-radius: 0.25rem;
+            padding: 0.35em 0.65em;
+            font-size: 0.75em;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
         }
     }
 }
