@@ -2245,7 +2245,16 @@ nav {
   background: #3a7138; }
 
 .control-required {
-  color: #B15D5F; }
+  color: #aa0028;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Vic-Regular", arial, sans-serif; }
+
+.label-and-text-checkbox label {
+  display: flex; }
+
+.label-and-text-checkbox .rpl-checkbox .rpl-checkbox__inline-label {
+  line-height: 24px; }
 
 .editor .editor-info-block a {
   color: #187491; }

@@ -19,6 +19,12 @@ ckan.module("datavic-checkbox", function ($, _) {
                 }
                 e.preventDefault();
             });
+            $('.rpl-checkbox').on('keydown', function(e) {
+                if (e.key == " ") {
+                    let checkbox = $('.rpl-checkbox').children('input[type="checkbox"]');
+                    checkbox.prop("checked", checkbox.is(":checked") ? false : true);
+                }
+            });
         },
     };
 });
