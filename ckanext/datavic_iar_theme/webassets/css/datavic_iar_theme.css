@@ -1446,6 +1446,9 @@ nav {
 .rpl-text-icon--before {
   margin: auto .5rem auto auto; }
 
+.fa.blank {
+  opacity: 0; }
+
 .rpl-menu--vertical.rpl-menu--root {
   position: relative;
   margin: 2.5rem auto auto;
