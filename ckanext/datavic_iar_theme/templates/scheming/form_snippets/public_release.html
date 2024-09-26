@@ -15,12 +15,6 @@
                 <span class="info-block" style="max-width: 320px">
                     <strong>Public Release</strong> can only be set to <strong>'Yes'</strong> if Workflow Status is 'Published' and Organisation Visibility is 'All'
                 </span>
-
-                {% if data.owner_org and h.datavic_is_org_restricted(data.owner_org) %}
-                    <span class="info-block" style="max-width: 320px">
-                        Any updates to this dataset will not be published to the Open Data Portal because it is owned by a restricted organisation. <b>NOTE</b>: If this dataset has been published before it WILL NOT be removed from the Open Data Portal Automatically.
-                    </span>
-                {% endif %}
             </div>
         </div>
     {% endblock %}
