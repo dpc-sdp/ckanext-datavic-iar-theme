@@ -6,7 +6,7 @@
     {% set group = facet_values.get('groups')[0] if facet_values.get('groups', [])[0] else '' %}
     {% set format = facet_values.get('res_format')[0] if facet_values.get('res_format', [])[0] else '' %}
     {% set placeholder =  _('Search Data') %}
-    {% set visibility_selected = g.visibility_selected or 'all' %}
+    {% set visibility_selected = request.args.ext_visibility or 'all' %}
 
     <div class="search-form-wrapper" data-module="datavic-advanced-search">
       <div class="rpl-search-form da-search rpl-site-constrain--on-all">
@@ -28,7 +28,7 @@
         {% endif %}
         <form {% if form_id %}id="{{ form_id }}" {% endif %}class="rpl-form" action="{{ h.url_for('dataset.search') }}" method="get">
           <input type="hidden" id="field-order-by" name="sort" value="{{ sorting_selected }}" />
-          <input type="hidden" id="field-visibility" name="visibility" value="{{ visibility_selected }}" />
+          <input type="hidden" id="field-visibility" name="ext_visibility" value="{{ visibility_selected }}" />
           <div class="rpl-search-form__field" data-module="datavic-search-autocomplete" data-module-suggestion-box="#search-autocomplete--suggestion-box" data-module-autocomplete-input="#search-query">
             <label for="search-query">
               <span class="rpl-search-form__label-text">Search for</span>
@@ -353,7 +353,7 @@
                       </div>
                     </div>
                     {% set visibility_list = h.vic_iar_visibility_list() %}
-                    {% set visibility_selected = g.visibility_selected or 'all' %}
+                    {% set visibility_selected = request.args.ext_visibility or 'all' %}
                     <div class="form-group form-group--col-two field-rplchecklist">
                       <label for="field-visibility">
                         <span>&nbsp;</span>

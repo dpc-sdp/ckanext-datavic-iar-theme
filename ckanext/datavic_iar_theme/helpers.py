@@ -12,6 +12,7 @@ import ckan.lib.helpers as h
 from ckanext.toolbelt.decorators import Collector
 
 import ckanext.datavic_iar_theme.config as conf
+import ckanext.datavicmain.const as const
 
 
 log = logging.getLogger(__name__)
@@ -27,14 +28,16 @@ def organization_list() -> list[dict[str, Any]]:
 
 @helper
 def get_parent_orgs(output: Optional[str] = None) -> list[dict[str, str]] | list[str]:
+    """Get a list of parent organisations options. Exclude restricted ones"""
     organisations: list[model.Group] = model.Group.get_top_level_groups("organization")
 
-    if output == "list":
-        parent_orgs = [org.name for org in organisations]
-    else:
-        parent_orgs = [{"value": "", "text": "Please select..."}]
-        for org in organisations:
-            parent_orgs.append({"value": org.name, "text": org.display_name})
+    parent_orgs = [{"value": "", "text": "Please select..."}]
+
+    for org in organisations:
+        if org.extras.get(const.ORG_VISIBILITY_FIELD) == const.ORG_RESTRICTED:
+            continue
+
+        parent_orgs.append({"value": org.name, "text": org.display_name})
 
     return parent_orgs
 
@@ -229,39 +232,187 @@ def get_route_after_login_config():
 
 @helper
 def get_came_from_url(came_from: str | None) -> str:
-    if came_from is None:
-        return tk.url_for(
-            tk.config.get("ckan.auth.route_after_login") or "dataset.search"
-        )
-    return came_from
-    
+    return came_from or tk.url_for(
+        tk.config.get("ckan.auth.route_after_login") or "dataset.search"
+    )
+
 
 @helper
 def datastore_loaded_resources(pkg_dict: dict[str, Any]) -> list[str]:
     """Return a list of the dataset resources that are loaded to the datastore"""
     if not pkg_dict["resources"]:
         return []
-    return [resource["id"] for resource in pkg_dict["resources"] if resource["datastore_active"]]
+    return [
+        resource["id"]
+        for resource in pkg_dict["resources"]
+        if resource["datastore_active"]
+    ]
 
 
 @helper
-def show_blog_button():
-    return conf.show_blog_button()
+def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
+    is_logged_in: bool = bool(userobj)
+    is_sysadmin: bool = bool(userobj) and userobj.sysadmin
 
-
-@helper
-def get_pages_dropdown_items():
-    dropdown_items = ""
-    pages_list = tk.get_action("ckanext_pages_list")(
-        {}, {"order": True, "private": False}
-    )
-    for page in pages_list:
-        type_ = "blog" if page["page_type"] == "blog" else conf.get_pages_base_url()
-        name = page["name"]
-        title = page["title"]
-        link = tk.h.literal(
-            '<a class="dropdown-item" href="/{}/{}">{}</a>'.format(type_, name, title)
+    try:
+        can_create_packages = (
+            bool(userobj)
+            and tk.check_access("package_create", {"user": userobj.name}, {})
+            and True
         )
-        li = tk.h.literal("<li>") + link + tk.h.literal("</li>")
-        dropdown_items = dropdown_items + li
-    return dropdown_items
+    except tk.NotAuthorized:
+        can_create_packages = False
+
+    return [
+        {
+            "title": tk._("My account"),
+            "url": "#",
+            "hide": not is_logged_in,
+            "child": [
+                {
+                    "title": tk._("Dashboard"),
+                    "url": tk.h.url_for("dashboard.datasets"),
+                    "hide": not is_logged_in or not can_create_packages,
+                },
+                {
+                    "title": tk._("Profile"),
+                    "url": (
+                        tk.h.url_for("user.read", id=userobj.name)
+                        if is_logged_in
+                        else "#"
+                    ),
+                    "hide": not is_logged_in,
+                },
+                {
+                    "title": tk._("Sysadmin settings"),
+                    "url": tk.h.url_for("admin.index"),
+                    "hide": not is_sysadmin,
+                },
+                {
+                    "title": tk._("Pages"),
+                    "url": tk.h.url_for("pages.pages_index"),
+                    "hide": not is_sysadmin,
+                },
+                {
+                    "title": tk._("Blog"),
+                    "url": tk.h.url_for("pages.blog_index"),
+                    "hide": not is_sysadmin,
+                },
+            ],
+        },
+        {
+            "title": tk._("Support"),
+            "url": "#",
+            "hide": not is_logged_in,
+            "child": [
+                {
+                    "title": tk._("User guides"),
+                    "url": f"/{conf.get_pages_base_url()}/user-guides",
+                    "hide": _get_page_item("user-guides") is None,
+                },
+                {
+                    "title": tk._("Contact us"),
+                    "url": f"/{conf.get_pages_base_url()}/contact-us",
+                    "hide": _get_page_item("contact-us") is None,
+                },
+                {
+                    "title": tk._("About us"),
+                    "url": tk.h.url_for("home.about"),
+                },
+                {
+                    "title": tk._("News and announcements"),
+                    "url": tk.h.url_for("pages.blog_index"),
+                },
+            ],
+        },
+        {
+            "title": tk._("Data sharing"),
+            "url": "#",
+            "hide": not is_logged_in,
+            "child": [
+                {
+                    "title": tk._("Data sharing resources"),
+                    "url": f"/{conf.get_pages_base_url()}/data-sharing-resources",
+                    "hide": _get_page_item("data-sharing-resources") is None,
+                }
+            ],
+        },
+        {
+            "title": tk._("Datasets"),
+            "url": "#",
+            "hide": not is_logged_in,
+            "child": [
+                {"title": tk._("Search"), "url": h.url_for("dataset.search")},
+                {
+                    "title": tk._("Browse by organisation"),
+                    "url": tk.h.url_for("organization.index"),
+                },
+                {
+                    "title": tk._("Browse by category"),
+                    "url": tk.h.url_for("group.index"),
+                },
+            ],
+        },
+        {
+            "title": tk._("DaAS"),
+            "subtitle": tk._("""Digital and Analytics Service (DaAS)"""),
+            "url": "#",
+            "hide": not is_logged_in,
+            "child": [
+                {
+                    "title": page["title"],
+                    "url": _build_page_url(page),
+                }
+                for page in _get_daas_pages()
+            ],
+        },
+    ]
+
+
+def _get_page_item(name: str) -> dict[str, Any] | None:
+    """Return a ckanext-pages page item based on the page name"""
+    try:
+        tk.check_access('ckanext_pages_show', {}, {"page": name})
+    except tk.NotAuthorized:
+        return None
+
+    result = tk.get_action("ckanext_pages_show")({}, {"page": name})
+
+    if not result:
+        return None
+
+    if result["page_type"] != "page":
+        return None
+
+    return result
+
+
+def _build_page_url(page: dict[str, Any]) -> str:
+    """Build a page URL for ckanext-pages entity based on the page type and name"""
+    page_type = "blog" if page["page_type"] == "blog" else conf.get_pages_base_url()
+
+    return f"/{page_type}/{page['name']}"
+
+
+def _get_daas_pages():
+    """Return a list of DaAS pages. Exclude pages that are not DaAS related,
+    but were created with ckanext-pages"""
+    exclude = ("user-guides", "contact-us", "data-sharing-resources")
+    result = tk.get_action("ckanext_pages_list")({}, {"order": True, "private": False})
+
+    return [
+        page
+        for page in result
+        if (page["page_type"] == "page" and page["name"] not in exclude)
+    ]
+
+
+@helper
+def get_package_title(package_id: str) -> str:
+    user = tk.g.user
+    context = {"user": user}
+    try:
+        pkg = tk.get_action("package_show")(context, {"id": package_id})
+    except (tk.ObjectNotFound, tk.NotAuthorized):
+        tk.abort(403)
+    return pkg.get("title", "")
