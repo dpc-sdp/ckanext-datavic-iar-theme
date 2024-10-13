@@ -50,9 +50,9 @@
     </div>
     {% endif %}
     {% if pkg.workflow_status|lower != 'draft' %}
-      <a class="btn" href="{{ url }}" data-module="datavic-confirm-link-action" data-module-content="{{ confirmation_text }}"><i class="fa fa-wrench"></i> {{ _('Edit') }}</a>
+      <a class="btn" href="{{ h.url_for('dataset.edit', id=pkg.name) }}" data-module="datavic-confirm-link-action" data-module-content="{{ confirmation_text }}"><i class="fa fa-wrench"></i> {{ _('Edit') }}</a>
     {% else %}
-      <a class="btn" href="{{ url }}"><i class="fa fa-wrench"></i> {{ _('Edit') }}</a>
+      <a class="btn" href="{{ h.url_for('dataset.edit', id=pkg.name) }}"><i class="fa fa-wrench"></i> {{ _('Edit') }}</a>
     {% endif %}
 
     {% set user_role = h.vic_iar_role_in_org(pkg_dict.organization.id, current_user.name) %}

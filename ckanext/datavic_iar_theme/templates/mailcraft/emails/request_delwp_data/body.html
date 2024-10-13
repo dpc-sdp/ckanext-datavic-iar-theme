@@ -1,0 +1,15 @@
+{% extends "mailcraft/emails/base.html" %}
+
+
+{% block main_text %}
+    <p>A VPS Data Directory user has requested access to <a href="{{ h.url_for('dataset.read', id=package_id, _external=True)}}">{{ __extras.package_title }}</a>.</p>
+    <p>Name - {{ username }}</p>
+    <p>Email - {{ email }}</p>
+    <p>Organisation - {{ organisation }}</p>
+    <p>Details of request - {{ message }}</p>
+{% endblock %}
+
+{% block regards %}
+    <p>Kind regards,</p>
+    <p>VPS Data Directory</p>
+{% endblock %}

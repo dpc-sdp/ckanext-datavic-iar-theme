@@ -6,7 +6,7 @@
     {% set group = facet_values.get('groups')[0] if facet_values.get('groups', [])[0] else '' %}
     {% set format = facet_values.get('res_format')[0] if facet_values.get('res_format', [])[0] else '' %}
     {% set placeholder =  _('Search Data') %}
-    {% set visibility_selected = g.visibility_selected or 'all' %}
+    {% set visibility_selected = request.args.ext_visibility or 'all' %}
 
     <div class="search-form-wrapper" data-module="datavic-advanced-search">
       <div class="rpl-search-form da-search rpl-site-constrain--on-all">
@@ -28,7 +28,7 @@
         {% endif %}
         <form {% if form_id %}id="{{ form_id }}" {% endif %}class="rpl-form" action="{{ h.url_for('dataset.search') }}" method="get">
           <input type="hidden" id="field-order-by" name="sort" value="{{ sorting_selected }}" />
-          <input type="hidden" id="field-visibility" name="visibility" value="{{ visibility_selected }}" />
+          <input type="hidden" id="field-visibility" name="ext_visibility" value="{{ visibility_selected }}" />
           <div class="rpl-search-form__field" data-module="datavic-search-autocomplete" data-module-suggestion-box="#search-autocomplete--suggestion-box" data-module-autocomplete-input="#search-query">
             <label for="search-query">
               <span class="rpl-search-form__label-text">Search for</span>
@@ -195,14 +195,16 @@
                             <div class="rpl-checklist__combobox">
                               <div class="rpl-checklist__main-row">
                                 <button type="button" class="rpl-checklist__info" data-checklist="checklist-format">
-                                  {% if format %}
+                                  {% if format and format == 'ALL_API' %}
+                                    <span>{{ _("All API formats") }}</span>
+                                  {% elif format %}
                                     {% for item in h.vic_iar_format_list() %}
                                       {% if item == format %}
                                         <span>{{ item|upper }}</span>
                                       {% endif %}
                                     {% endfor %}
                                   {% else %}
-                                  <span>Please select a format</span>
+                                    <span>Please select a format</span>
                                   {% endif %}
                                   <svg focusable="false" aria-hidden="true" class="rpl-icon rpl-icon--down rpl-icon--color_light_primary" style="width: 8px; height: 5px;" width="8" height="5" viewBox="0 0 8 5" xmlns="http://www.w3.org/2000/svg">
                                     <path id="arrow-vector-3" fill-rule="evenodd" clip-rule="evenodd" d="M0.292893 0.292893C0.683417 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L4 2.58579L6.29289 0.292893C6.68342 -0.0976311 7.31658 -0.0976311 7.70711 0.292893C8.09763 0.683417 8.09763 1.31658 7.70711 1.70711L4.70711 4.70711C4.31658 5.09763 3.68342 5.09763 3.29289 4.70711L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683417 0.292893 0.292893Z"
@@ -220,6 +222,15 @@
                                               data-checklist="checklist-format"
                                       >
                                         <span>Please select a format</span>
+                                      </button><!---->
+                                    </div>
+                                    <div class="rpl-checklist__list-row rpl-checklist__list-row--single">
+                                      <button type="button" class="rpl-checklist__single-item"
+                                              data-value="ALL_API"
+                                              data-target="res_format"
+                                              data-checklist="checklist-format"
+                                      >
+                                        <span>{{ _("All API formats") }}</span>
                                       </button><!---->
                                     </div>
                                   {% for item in items %}
@@ -342,7 +353,7 @@
                       </div>
                     </div>
                     {% set visibility_list = h.vic_iar_visibility_list() %}
-                    {% set visibility_selected = g.visibility_selected or 'all' %}
+                    {% set visibility_selected = request.args.ext_visibility or 'all' %}
                     <div class="form-group form-group--col-two field-rplchecklist">
                       <label for="field-visibility">
                         <span>&nbsp;</span>

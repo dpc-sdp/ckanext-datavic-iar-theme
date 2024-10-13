@@ -15,6 +15,7 @@ from ckanext.toolbelt.decorators import Collector
 from ckanext.scheming.helpers import scheming_get_dataset_schema
 
 import ckanext.datavic_iar_theme.config as conf
+import ckanext.datavicmain.const as const
 
 
 log = logging.getLogger(__name__)
@@ -30,14 +31,16 @@ def organization_list() -> list[dict[str, Any]]:
 
 @helper
 def get_parent_orgs(output: Optional[str] = None) -> list[dict[str, str]] | list[str]:
+    """Get a list of parent organisations options. Exclude restricted ones"""
     organisations: list[model.Group] = model.Group.get_top_level_groups("organization")
 
-    if output == "list":
-        parent_orgs = [org.name for org in organisations]
-    else:
-        parent_orgs = [{"value": "", "text": "Please select..."}]
-        for org in organisations:
-            parent_orgs.append({"value": org.name, "text": org.display_name})
+    parent_orgs = [{"value": "", "text": "Please select..."}]
+
+    for org in organisations:
+        if org.extras.get(const.ORG_VISIBILITY_FIELD) == const.ORG_RESTRICTED:
+            continue
+
+        parent_orgs.append({"value": org.name, "text": org.display_name})
 
     return parent_orgs
 
@@ -61,7 +64,7 @@ def format_list() -> list[str]:
     )
 
     formats = [
-        resource.format.upper().split('.')[-1] for resource in query if resource.format
+        resource.format.upper().split(".")[-1] for resource in query if resource.format
     ]
     unique_formats = set(formats)
 
@@ -131,15 +134,15 @@ def visibility_list() -> list[dict[str, str]]:
 @helper
 def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any]]:
     """Return a featured resource preview
-        - It takes only CSV resources with an existing preview
-        - Only resources uploaded to datastore
-        - Only not historical resources
+    - It takes only CSV resources with an existing preview
+    - Only resources uploaded to datastore
+    - Only not historical resources
     """
 
     featured_preview = None
 
-    resource_groups: list[list[dict[str, Any]]] = tk.h.group_resources_by_temporal_range(
-        package.get("resources", [])
+    resource_groups: list[list[dict[str, Any]]] = (
+        tk.h.group_resources_by_temporal_range(package.get("resources", []))
     )
 
     resources = resource_groups[0] if resource_groups else []
@@ -164,17 +167,65 @@ def featured_resource_preview(package: dict[str, Any]) -> Optional[dict[str, Any
     return featured_preview
 
 
-def _get_last_resource_if_historical(package: dict[str, Any]) -> dict[str, Any] | None:
-    """If the dataset contains historical resources, return the most recent one"""
-    historical_resources = tk.h.historical_resources_list(package.get("resources", []))
+@helper
+def is_delwp_vector_data(resources: list[dict[str, Any]]) -> bool:
+    for res in resources:
+        if res["format"].lower() in [
+            "dwg",
+            "dxf",
+            "gdb",
+            "shp",
+            "mif",
+            "tab",
+            "extended tab",
+            "mapinfo",
+        ]:
+            return True
 
-    if len(historical_resources) <= 1:
-        return
+    return False
 
-    if historical_resources[1].get("period_start"):
-        return historical_resources[0]
 
-    return
+@helper
+def is_delwp_raster_data(resources: list[dict[str, Any]]) -> bool:
+    for res in resources:
+        if res["format"].lower() in [
+            "ecw",
+            "geotiff",
+            "jpeg",
+            "jp2",
+            "jpeg 2000",
+            "tiff",
+            "lass",
+            "xyz",
+        ]:
+            return True
+
+    return False
+
+
+@helper
+def is_delwp_dataset(package: dict[str, Any]) -> bool:
+    """Check if the dataset is harvested with delwp harvester"""
+    for extra in package.get("extras", []):
+        if extra["key"] != "harvest_source_type":
+            continue
+
+        if extra["value"] == "delwp":
+            return True
+
+    return False
+
+
+@helper
+def is_delwp_dataset_restricted(package: dict[str, Any]) -> bool:
+    """Check if the delwp dataset is restricted"""
+    for extra in package.get("extras", []):
+        if extra["key"] != "delwp_restricted":
+            continue
+
+        return tk.asbool(extra["value"])
+
+    return False
 
 
 @helper
@@ -184,11 +235,190 @@ def get_route_after_login_config():
 
 @helper
 def get_came_from_url(came_from: str | None) -> str:
-    if came_from is None:
-        return tk.url_for(
-            tk.config.get("ckan.auth.route_after_login") or "dataset.search"
+    return came_from or tk.url_for(
+        tk.config.get("ckan.auth.route_after_login") or "dataset.search"
+    )
+
+
+@helper
+def datastore_loaded_resources(pkg_dict: dict[str, Any]) -> list[str]:
+    """Return a list of the dataset resources that are loaded to the datastore"""
+    if not pkg_dict["resources"]:
+        return []
+    return [
+        resource["id"]
+        for resource in pkg_dict["resources"]
+        if resource["datastore_active"]
+    ]
+
+
+@helper
+def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
+    is_logged_in: bool = bool(userobj)
+    is_sysadmin: bool = bool(userobj) and userobj.sysadmin
+
+    try:
+        can_create_packages = (
+            bool(userobj)
+            and tk.check_access("package_create", {"user": userobj.name}, {})
+            and True
         )
-    return came_from
+    except tk.NotAuthorized:
+        can_create_packages = False
+
+    return [
+        {
+            "title": tk._("My account"),
+            "url": "#",
+            "hide": not is_logged_in,
+            "child": [
+                {
+                    "title": tk._("Dashboard"),
+                    "url": tk.h.url_for("dashboard.datasets"),
+                    "hide": not is_logged_in or not can_create_packages,
+                },
+                {
+                    "title": tk._("Profile"),
+                    "url": (
+                        tk.h.url_for("user.read", id=userobj.name)
+                        if is_logged_in
+                        else "#"
+                    ),
+                    "hide": not is_logged_in,
+                },
+                {
+                    "title": tk._("Sysadmin settings"),
+                    "url": tk.h.url_for("admin.index"),
+                    "hide": not is_sysadmin,
+                },
+                {
+                    "title": tk._("Pages"),
+                    "url": tk.h.url_for("pages.pages_index"),
+                    "hide": not is_sysadmin,
+                },
+                {
+                    "title": tk._("Blog"),
+                    "url": tk.h.url_for("pages.blog_index"),
+                    "hide": not is_sysadmin,
+                },
+            ],
+        },
+        {
+            "title": tk._("Support"),
+            "url": "#",
+            "hide": not is_logged_in,
+            "child": [
+                {
+                    "title": tk._("User guides"),
+                    "url": f"/{conf.get_pages_base_url()}/user-guides",
+                    "hide": _get_page_item("user-guides") is None,
+                },
+                {
+                    "title": tk._("Contact us"),
+                    "url": f"/{conf.get_pages_base_url()}/contact-us",
+                    "hide": _get_page_item("contact-us") is None,
+                },
+                {
+                    "title": tk._("About us"),
+                    "url": tk.h.url_for("home.about"),
+                },
+                {
+                    "title": tk._("News and announcements"),
+                    "url": tk.h.url_for("pages.blog_index"),
+                },
+            ],
+        },
+        {
+            "title": tk._("Data sharing"),
+            "url": "#",
+            "hide": not is_logged_in,
+            "child": [
+                {
+                    "title": tk._("Data sharing resources"),
+                    "url": f"/{conf.get_pages_base_url()}/data-sharing-resources",
+                    "hide": _get_page_item("data-sharing-resources") is None,
+                }
+            ],
+        },
+        {
+            "title": tk._("Datasets"),
+            "url": "#",
+            "hide": not is_logged_in,
+            "child": [
+                {"title": tk._("Search"), "url": h.url_for("dataset.search")},
+                {
+                    "title": tk._("Browse by organisation"),
+                    "url": tk.h.url_for("organization.index"),
+                },
+                {
+                    "title": tk._("Browse by category"),
+                    "url": tk.h.url_for("group.index"),
+                },
+            ],
+        },
+        {
+            "title": tk._("DaAS"),
+            "subtitle": tk._("""Digital and Analytics Service (DaAS)"""),
+            "url": "#",
+            "hide": not is_logged_in,
+            "child": [
+                {
+                    "title": page["title"],
+                    "url": _build_page_url(page),
+                }
+                for page in _get_daas_pages()
+            ],
+        },
+    ]
+
+
+def _get_page_item(name: str) -> dict[str, Any] | None:
+    """Return a ckanext-pages page item based on the page name"""
+    try:
+        tk.check_access('ckanext_pages_show', {}, {"page": name})
+    except tk.NotAuthorized:
+        return None
+
+    result = tk.get_action("ckanext_pages_show")({}, {"page": name})
+
+    if not result:
+        return None
+
+    if result["page_type"] != "page":
+        return None
+
+    return result
+
+
+def _build_page_url(page: dict[str, Any]) -> str:
+    """Build a page URL for ckanext-pages entity based on the page type and name"""
+    page_type = "blog" if page["page_type"] == "blog" else conf.get_pages_base_url()
+
+    return f"/{page_type}/{page['name']}"
+
+
+def _get_daas_pages():
+    """Return a list of DaAS pages. Exclude pages that are not DaAS related,
+    but were created with ckanext-pages"""
+    exclude = ("user-guides", "contact-us", "data-sharing-resources")
+    result = tk.get_action("ckanext_pages_list")({}, {"order": True, "private": False})
+
+    return [
+        page
+        for page in result
+        if (page["page_type"] == "page" and page["name"] not in exclude)
+    ]
+
+
+@helper
+def get_package_title(package_id: str) -> str:
+    user = tk.g.user
+    context = {"user": user}
+    try:
+        pkg = tk.get_action("package_show")(context, {"id": package_id})
+    except (tk.ObjectNotFound, tk.NotAuthorized):
+        tk.abort(403)
+    return pkg.get("title", "")
 
 
 @helper

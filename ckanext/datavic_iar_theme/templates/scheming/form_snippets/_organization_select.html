@@ -4,7 +4,12 @@
 not used as a form_snippet directly #}
 
 {% macro _organization() %}
+  {% if data.organization %}
+    {% set organizations_available = h.add_current_organisation(organizations_available, data.organization) %}
+  {% endif %}
+
   {% set existing_org = data.owner_org or data.group_id %}
+  {% set existing_org_is_restricted = h.datavic_is_org_restricted(existing_org) %}
   {% call form.input_block('field-organizations',
     label=h.scheming_language_text(field.label),
     error=errors[field.field_name],
@@ -12,20 +17,29 @@ not used as a form_snippet directly #}
     classes=['form-group', 'control-medium'],
     extra_html=caller() if caller,
     ) %}
-    <div {{
-      form.attributes(field.form_attrs) if 'form_attrs' in field else '' }}>
-    <select id="field-organizations" name="owner_org" {{ form.attributes(
+    <div {{ form.attributes(field.form_attrs) if 'form_attrs' in field else '' }}>
+      <select id="field-organizations" name="owner_org" {{ form.attributes(
         field.get('form_select_attrs', {'data-module':'autocomplete'})) }}
         {% if org_required %}required aria-required="true"{% endif %}>
-      {% if not org_required or field.get('form_include_blank_choice', false) %}
-        <option value="">{% if not org_required
-          %}{{ _('No organization') }}{% endif %}</option>
-      {% endif %}
-      {% for organization in organizations_available %}
-        {% set selected_org = existing_org == organization.id %}
-        {{ organization_option_tag(organization, selected_org) }}
-      {% endfor %}
-    </select>
+        {% if not org_required or field.get('form_include_blank_choice', false) %}
+          <option value="">
+            {% if not org_required %}{{ _('No organization') }}{% endif %}
+          </option>
+        {% endif %}
+
+        {% for organization in organizations_available %}
+          {% set selected_org = existing_org == organization.id %}
+          {% set organization_is_restricted = h.datavic_is_org_restricted(organization.id) %}
+          {% if existing_org %}
+            {% if (existing_org_is_restricted and organization_is_restricted) or
+              (not existing_org_is_restricted and not organization_is_restricted) %}
+              {{ organization_option_tag(organization, selected_org) }}
+            {% endif %}
+          {% else %}
+            {{ organization_option_tag(organization, selected_org) }}
+          {% endif %}
+        {% endfor %}
+      </select>
     </div>
   {% endcall %}
 {% endmacro %}

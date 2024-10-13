@@ -2,13 +2,15 @@
   "name": "grunt-for-datavic",
   "license": "MIT",
   "devDependencies": {
-    "autoprefixer": "^6.6.0",
-    "grunt": "^1.0.4",
+    "autoprefixer": "^10.4.20",
+    "grunt": "^1.6.1",
     "grunt-contrib-compass": "^1.1.1",
-    "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-postcss": "^0.9.0",
-    "grunt-sass": "^2.0.0",
-    "postcss-cli": "^2.6.0"
+    "grunt-contrib-concat": "^2.1.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-sass": "^3.1.0",
+    "postcss-cli": "^11.0.0"
+  },
+  "dependencies": {
+    "node-sass": "^9.0.0"
   }
 }

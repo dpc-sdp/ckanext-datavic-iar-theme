@@ -18,8 +18,6 @@ $rpl-site-header-logout-btn-icon-margin: 0 0 0 $rpl-space-2 !default;
 
 .rpl-site-header {
   $root: &;
-  //position: absolute;
-  //z-index: $rpl-zindex-header;
   padding: $rpl-header-horizontal-padding-xs 0 rem(4px) 0;
   box-sizing: border-box;
   width: 100%;
@@ -83,6 +81,7 @@ $rpl-site-header-logout-btn-icon-margin: 0 0 0 $rpl-space-2 !default;
     .rpl-link {
       display: flex;
       flex-flow: column;
+      padding: 25px 0;
     }
 
     img {
@@ -93,14 +92,13 @@ $rpl-site-header-logout-btn-icon-margin: 0 0 0 $rpl-space-2 !default;
     &--vic-logo-primary {
       display: block; //always show vic.gov logo if no cobrand logo
 
-      img {
+      svg, img {
         width: $rpl-site-header-logo-primary-width;
+        border-right: $rpl-site-header-menu-toggle-border-right;
+        padding-right: $rpl-site-header-menu-toggle-border-spacing;
       }
 
       &--cobrand {
-
-        padding-right: 0.5rem;
-        border-right: $rpl-site-header-menu-toggle-border-right;
         display: none;
 
         @include rpl_breakpoint('m') {
@@ -159,7 +157,7 @@ $rpl-site-header-logout-btn-icon-margin: 0 0 0 $rpl-space-2 !default;
     &--menu {
       padding-right: $rpl-site-header-menu-toggle-border-spacing;
       border-right: $rpl-site-header-menu-toggle-border-right;
-      @include rpl_breakpoint('l') {
+      @include rpl_breakpoint('xl') {
         display: none;
       }
 
@@ -250,6 +248,7 @@ $rpl-site-header-logout-btn-icon-margin: 0 0 0 $rpl-space-2 !default;
       line-height: rem(16px);
       padding-left: 0;
     }
+    margin-left: 0.5rem;
   }
 }
 
