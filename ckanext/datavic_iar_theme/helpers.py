@@ -317,7 +317,8 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
                 },
                 {
                     "title": tk._("About us"),
-                    "url": tk.h.url_for("home.about"),
+                    "url": f"/{conf.get_pages_base_url()}/about-us",
+                    "hide": _get_page_item("about-us") is None,
                 },
                 {
                     "title": tk._("News and announcements"),
