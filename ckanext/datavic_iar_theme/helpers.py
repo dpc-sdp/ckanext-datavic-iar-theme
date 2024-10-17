@@ -1,15 +1,18 @@
 from __future__ import annotations
 
+import json
 import logging
 from typing import Optional, Any
 
 from sqlalchemy.sql import func
 
+import ckan.authz as authz
 import ckan.model as model
 import ckan.plugins.toolkit as tk
 import ckan.lib.helpers as h
 
 from ckanext.toolbelt.decorators import Collector
+from ckanext.scheming.helpers import scheming_get_dataset_schema
 
 import ckanext.datavic_iar_theme.config as conf
 import ckanext.datavicmain.const as const
@@ -417,3 +420,60 @@ def get_package_title(package_id: str) -> str:
     except (tk.ObjectNotFound, tk.NotAuthorized):
         tk.abort(403)
     return pkg.get("title", "")
+
+
+@helper
+def role_in_org(organization_id, user_name):
+    return authz.users_role_for_group_or_org(organization_id, user_name)
+
+
+@helper
+def prepare_general_fields(data: dict[str, Any]) -> str:
+    schema: dict[str, Any] | None = scheming_get_dataset_schema(
+        data.get("type", "dataset")
+    )
+
+    if not schema:
+        return json.dumps({})
+
+    new_data = {
+        field : _get_value_for_field(data.get(field, "")) for field in [
+            field["field_name"] for field in schema[
+                "dataset_fields"
+                ]
+            ]
+    }
+    if new_data.get('tag_string'):
+        new_data['tag_string'] = ','.join([i.strip() for i in new_data['tag_string'].split(',')])
+
+    return json.dumps(new_data)
+
+
+@helper
+def get_metadata_groups(data):
+    if data and not data.get('tag_string'):
+        data['tag_string'] = ', '.join(
+            h.dict_list_reduce(data.get('tags', {}), 'name')
+        )
+
+    schema: dict[str, Any] | None = scheming_get_dataset_schema(
+        data.get("type", "dataset")
+    )
+
+    if not schema:
+        return [], []
+
+    groups = []
+    fields = schema["dataset_fields"]
+
+    for field in schema["dataset_fields"]:
+        if field.get("display_group") and field["display_group"] not in groups:
+            groups.append(field["display_group"])
+    return groups, fields
+
+
+def _get_value_for_field(value):
+    # Boolean in forms shown with Capitalize
+    if (type(value) is bool):
+        value = str(value).capitalize()
+    return value
