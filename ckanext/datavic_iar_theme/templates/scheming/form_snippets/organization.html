@@ -1,9 +1,10 @@
 
 {% macro organization_option_tag(organization, selected_org) %}
   {% block organization_option scoped %}
-    <option value="{{ organization.id }}"{%
-      if selected_org %} selected="selected"{% endif
-      %}>{{ organization.display_name or organization.title }}</option>
+    {% set restricted = h.datavic_is_org_restricted(organization.id) %}
+    <option {% if restricted %}class="restricted"{% endif %} value="{{ organization.id }}"{% if selected_org %} selected="selected"{% endif %}>
+      {{ organization.display_name or organization.title }}
+    </option>
   {% endblock %}
 {% endmacro %}
 
@@ -12,8 +13,7 @@
     data=data,
     errors=errors,
     organizations_available=h.organizations_available('create_dataset'),
-    org_required=not h.check_config_permission('create_unowned_dataset')
-      or h.scheming_field_required(field),
+    org_required=not h.check_config_permission('create_unowned_dataset') or h.scheming_field_required(field),
     organization_option_tag=organization_option_tag %}
 
   {% block package_metadata_fields_visibility %}

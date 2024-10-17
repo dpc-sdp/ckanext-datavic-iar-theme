@@ -1,0 +1,54 @@
+.homepage {
+    .container {
+
+        @include rpl_breakpoint('m') {
+            max-width: 730px;
+        }
+
+        @include rpl_breakpoint('l') {
+            max-width: 920px;
+        }
+    }
+
+
+    section.cards {
+        h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+
+        .section-type {
+            margin-bottom: 40px;
+
+            .card {
+                height: 100%;
+
+                .card-body {
+                    .card-title {
+                        font-size: 20px;
+
+                        a {
+                            color: rpl_color('secondary');
+                        }
+                    }
+                }
+
+                img {
+                    aspect-ratio: 16 / 9;
+                }
+
+                &:hover {
+                    box-shadow: 0 2px 8px rgba(26, 26, 26, .16);
+                }
+            }
+
+            &:first-of-type {
+                margin-top: 80px;
+            }
+
+            &:last-of-type {
+                margin-bottom: 80px;
+            }
+        }
+    }
+}
