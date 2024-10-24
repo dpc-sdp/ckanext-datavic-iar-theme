@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 from typing import Optional, Any
+import json
 
 from sqlalchemy.sql import func
 
@@ -417,3 +418,13 @@ def get_package_title(package_id: str) -> str:
     except (tk.ObjectNotFound, tk.NotAuthorized):
         tk.abort(403)
     return pkg.get("title", "")
+
+
+@helper
+def resource_attributes(attrs):
+    try:
+        attrs = json.loads(attrs)
+    except ValueError:
+        return None
+
+    return attrs
