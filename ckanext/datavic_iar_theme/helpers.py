@@ -551,3 +551,13 @@ def extra_html_restrictions(text):
         script.extract()
 
     return str(filtered_text)
+
+
+@helper
+def resource_attributes(attrs):
+    try:
+        attrs = json.loads(attrs)
+    except ValueError:
+        return None
+
+    return attrs
