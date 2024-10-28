@@ -2107,6 +2107,9 @@ nav {
 .resource-read .table.table-striped thead {
   display: none; }
 
+.resource-read .data-dictionary-table thead {
+  background-color: #f2f2f2; }
+
 .module-resource .nav.nav-tabs li {
   padding: 0 10px; }
   .module-resource .nav.nav-tabs li .btn {
