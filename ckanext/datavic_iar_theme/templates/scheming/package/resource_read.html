@@ -16,7 +16,7 @@
         <h2>{{ _('Data Dictionary') }}</h2>
         <table class="table table-bordered table-condensed data-dictionary-table" data-module="table-toggle-more">
           <thead>
-            {% block resouce_data_dictionary_headers %}
+            {% block resouce_data_dictionary_headers_altered %}
             <tr>
               <th scope="col">{{ _('Field Name') }}</th>
               <th scope="col">{{ _('Name') }}</th>
@@ -31,7 +31,7 @@
               <td>{{ attr.db_name }}</td>
               <td>{{ attr.name }}</td>
               <td>{{ attr.db_format }}</td>
-              <td>{{ attr.definition }}</td>
+              <td>{{ attr.definition|safe }}</td>
               <td>{{ attr.fixed_values }}</td>
             </tr>
           {% endfor %}
@@ -41,7 +41,27 @@
   {% else %}
     {% if res.datastore_active %}
       {% block resource_data_dictionary %}
-        {{ super() }}
+      <div class="module-content">
+        <h2>{{ _('Data Dictionary') }}</h2>
+        <table class="table table-bordered table-condensed data-dictionary-table" data-module="table-toggle-more">
+          <thead>
+            {% block resouce_data_dictionary_headers %}
+            <tr>
+              <th scope="col">{{ _('Column') }}</th>
+              <th scope="col">{{ _('Type') }}</th>
+              <th scope="col">{{ _('Label') }}</th>
+              <th scope="col">{{ _('Description') }}</th>
+            </tr>
+            {% endblock %}
+          </thead>
+          {% block resource_data_dictionary_data %}
+            {% set dict=h.datastore_dictionary(res.id) %}
+            {% for field in dict %}
+              {% snippet "package/snippets/dictionary_table.html", field=field %}
+            {% endfor %}
+          {% endblock %}
+        </table>
+      </div>
       {% endblock %}
     {% endif %}
   {% endif %}
