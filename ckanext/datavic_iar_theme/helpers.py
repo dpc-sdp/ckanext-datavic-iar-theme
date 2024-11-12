@@ -9,6 +9,7 @@ import ckan.model as model
 import ckan.plugins.toolkit as tk
 import ckan.lib.helpers as h
 
+import ckanext.activity.model.activity as model_activity
 from ckanext.toolbelt.decorators import Collector
 
 import ckanext.datavic_iar_theme.config as conf
@@ -417,3 +418,20 @@ def get_package_title(package_id: str) -> str:
     except (tk.ObjectNotFound, tk.NotAuthorized):
         tk.abort(403)
     return pkg.get("title", "")
+
+
+@helper
+def check_last_activity(activity):
+    # Taken originally fron action.py for acitivies
+    prev_activity = (
+        model.Session.query(model_activity.Activity.id)
+        .filter_by(object_id=activity["object_id"])
+        .filter(model_activity.Activity.timestamp < activity["timestamp"])
+        .order_by(
+            # type_ignore_reason: incomplete SQLAlchemy types
+            model_activity.Activity.timestamp.desc()  # type: ignore
+        )
+        .first()
+    )
+
+    return prev_activity if prev_activity else None
