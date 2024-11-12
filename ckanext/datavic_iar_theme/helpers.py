@@ -13,6 +13,7 @@ import ckan.plugins.toolkit as tk
 import ckan.lib.helpers as h
 
 from ckanext.harvest.model import HarvestSource
+import ckanext.activity.model.activity as model_activity
 from ckanext.toolbelt.decorators import Collector
 from ckanext.scheming.helpers import scheming_get_dataset_schema
 
@@ -561,3 +562,20 @@ def resource_attributes(attrs):
         return None
 
     return attrs
+
+
+@helper
+def check_last_activity(activity):
+    # Taken originally fron action.py for acitivies
+    prev_activity = (
+        model.Session.query(model_activity.Activity.id)
+        .filter_by(object_id=activity["object_id"])
+        .filter(model_activity.Activity.timestamp < activity["timestamp"])
+        .order_by(
+            # type_ignore_reason: incomplete SQLAlchemy types
+            model_activity.Activity.timestamp.desc()  # type: ignore
+        )
+        .first()
+    )
+
+    return prev_activity if prev_activity else None
