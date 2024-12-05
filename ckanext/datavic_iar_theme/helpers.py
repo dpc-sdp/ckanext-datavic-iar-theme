@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import logging
 from typing import Optional, Any
+from bs4 import BeautifulSoup
 
 from sqlalchemy.sql import func
 
@@ -12,6 +13,7 @@ import ckan.plugins.toolkit as tk
 import ckan.lib.helpers as h
 
 from ckanext.harvest.model import HarvestSource
+import ckanext.activity.model.activity as model_activity
 from ckanext.toolbelt.decorators import Collector
 from ckanext.scheming.helpers import scheming_get_dataset_schema
 
@@ -236,6 +238,7 @@ def get_route_after_login_config():
 
 @helper
 def get_came_from_url(came_from: str | None) -> str:
+
     return came_from or tk.url_for(
         tk.config.get("ckan.auth.route_after_login") or "dataset.search"
     )
@@ -302,6 +305,16 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
                     "url": tk.h.url_for("pages.blog_index"),
                     "hide": not is_sysadmin,
                 },
+                {
+                    "title": tk._("Manage home page"),
+                    "url": tk.h.url_for("datavic_home.manage"),
+                    "hide": not is_logged_in,
+                },
+                {
+                    "title": tk._("Bulk manager"),
+                    "url": tk.h.url_for("bulk.manager"),
+                    "hide": not is_sysadmin,
+                }
             ],
         },
         {
@@ -413,6 +426,113 @@ def _get_daas_pages():
 
 
 @helper
+def role_in_org(organization_id, user_name):
+    return authz.users_role_for_group_or_org(organization_id, user_name)
+
+
+@helper
+def prepare_general_fields(data: dict[str, Any]) -> str:
+    schema: dict[str, Any] | None = scheming_get_dataset_schema(
+        data.get("type", "dataset")
+    )
+
+    if not schema:
+        return json.dumps({})
+
+    new_data = {
+        field : _get_value_for_field(data.get(field, "")) for field in [
+            field["field_name"] for field in schema[
+                "dataset_fields"
+                ]
+            ]
+    }
+    if new_data.get('tag_string'):
+        new_data['tag_string'] = ','.join([i.strip() for i in new_data['tag_string'].split(',')])
+
+    return json.dumps(new_data)
+
+
+@helper
+def get_metadata_groups(data):
+    if data and not data.get('tag_string'):
+        data['tag_string'] = ', '.join(
+            h.dict_list_reduce(data.get('tags', {}), 'name')
+        )
+
+    schema: dict[str, Any] | None = scheming_get_dataset_schema(
+        data.get("type", "dataset")
+    )
+
+    if not schema:
+        return [], []
+
+    groups = []
+    fields = schema["dataset_fields"]
+
+    for field in schema["dataset_fields"]:
+        if field.get("display_group") and field["display_group"] not in groups:
+            groups.append(field["display_group"])
+    return groups, fields
+
+
+def _get_value_for_field(value):
+    # Boolean in forms shown with Capitalize
+    if (type(value) is bool):
+        value = str(value).capitalize()
+    return value
+
+
+@helper
+def harvester_list() -> list[dict[str, Any]]:
+    """Return a list of all available harvesters on the portal"""
+
+    query = model.Session.query(HarvestSource) \
+        .order_by(HarvestSource.created.desc())
+
+    harvesters = [
+        {
+            "value": harvester.id,
+            "label": harvester.title
+        }
+        for harvester in query
+    ]
+    harvesters.insert(0, {"value": "", "label": "All"})
+
+    return harvesters
+
+
+@helper
+def datastore_dictionary(resource_id: str, resource_view_id: str):
+    """
+    Return the data dictionary info for a resource
+    """
+    try:
+        resource_view = tk.get_action("resource_view_show")(
+            {},
+            {"id": resource_view_id}
+        )
+        headers = [
+            f for f in tk.get_action("datastore_search")(
+                {},
+                {
+                    "resource_id": resource_id,
+                    "limit": 0,
+                    "include_total": False
+                }
+            )["fields"]
+            if not f["id"].startswith("_")
+        ]
+
+        if "show_fields" in resource_view:
+            headers = [c for c in headers if c["id"] in resource_view["show_fields"]]
+
+        return headers
+
+    except (tk.ObjectNotFound, tk.NotAuthorized):
+        return []
+
+
+@helper
 def get_package_title(package_id: str) -> str:
     user = tk.g.user
     context = {"user": user}
@@ -497,3 +617,41 @@ def harvester_list() -> list[dict[str, Any]]:
     harvesters.insert(0, {"value": "", "label": "All"})
 
     return harvesters
+
+
+@helper
+def extra_html_restrictions(text):
+    filtered_text = BeautifulSoup(text,"html.parser")
+
+    # Lets remove all script tags from the HTML markup
+    for script in filtered_text.find_all('script'):
+        script.extract()
+
+    return str(filtered_text)
+
+
+@helper
+def resource_attributes(attrs):
+    try:
+        attrs = json.loads(attrs)
+    except ValueError:
+        return None
+
+    return attrs
+
+
+@helper
+def check_last_activity(activity):
+    # Taken originally fron action.py for acitivies
+    prev_activity = (
+        model.Session.query(model_activity.Activity.id)
+        .filter_by(object_id=activity["object_id"])
+        .filter(model_activity.Activity.timestamp < activity["timestamp"])
+        .order_by(
+            # type_ignore_reason: incomplete SQLAlchemy types
+            model_activity.Activity.timestamp.desc()  # type: ignore
+        )
+        .first()
+    )
+
+    return prev_activity if prev_activity else None

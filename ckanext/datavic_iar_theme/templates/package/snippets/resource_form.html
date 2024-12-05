@@ -3,6 +3,7 @@
 {% set errors = errors or {} %}
 {% set is_dataset_harvested =  h.is_dataset_harvested(data.package_id if data else pkg_name) %}
 {% set confirmation_text =  _('This resource has been harvested and should only be updated from the harvested source. ') if is_dataset_harvested else '' %}
+{% asset "ckanext-datavicmain/datavicmain-session" %}
 
 
 <form id="resource-edit" class="dataset-form dataset-resource-form" method="post" action="{{ action }}" data-module="basic-form resource-form" enctype="multipart/form-data">

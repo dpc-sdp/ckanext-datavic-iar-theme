@@ -394,6 +394,9 @@ $rpl-menu-gutter: rpl_grid_get_gutter($rpl-grid) !default;
                 }
             }
         }
+        &.dropdown-shown {
+          position: relative;
+        }
     }
 }
 
