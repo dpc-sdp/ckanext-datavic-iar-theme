@@ -544,6 +544,82 @@ def get_package_title(package_id: str) -> str:
 
 
 @helper
+def role_in_org(organization_id, user_name):
+    return authz.users_role_for_group_or_org(organization_id, user_name)
+
+
+@helper
+def prepare_general_fields(data: dict[str, Any]) -> str:
+    schema: dict[str, Any] | None = scheming_get_dataset_schema(
+        data.get("type", "dataset")
+    )
+
+    if not schema:
+        return json.dumps({})
+
+    new_data = {
+        field : _get_value_for_field(data.get(field, "")) for field in [
+            field["field_name"] for field in schema[
+                "dataset_fields"
+                ]
+            ]
+    }
+    if new_data.get('tag_string'):
+        new_data['tag_string'] = ','.join([i.strip() for i in new_data['tag_string'].split(',')])
+
+    return json.dumps(new_data)
+
+
+@helper
+def get_metadata_groups(data):
+    if data and not data.get('tag_string'):
+        data['tag_string'] = ', '.join(
+            h.dict_list_reduce(data.get('tags', {}), 'name')
+        )
+
+    schema: dict[str, Any] | None = scheming_get_dataset_schema(
+        data.get("type", "dataset")
+    )
+
+    if not schema:
+        return [], []
+
+    groups = []
+    fields = schema["dataset_fields"]
+
+    for field in schema["dataset_fields"]:
+        if field.get("display_group") and field["display_group"] not in groups:
+            groups.append(field["display_group"])
+    return groups, fields
+
+
+def _get_value_for_field(value):
+    # Boolean in forms shown with Capitalize
+    if (type(value) is bool):
+        value = str(value).capitalize()
+    return value
+
+
+@helper
+def harvester_list() -> list[dict[str, Any]]:
+    """Return a list of all available harvesters on the portal"""
+
+    query = model.Session.query(HarvestSource) \
+        .order_by(HarvestSource.created.desc())
+
+    harvesters = [
+        {
+            "value": harvester.id,
+            "label": harvester.title
+        }
+        for harvester in query
+    ]
+    harvesters.insert(0, {"value": "", "label": "All"})
+
+    return harvesters
+
+
+@helper
 def extra_html_restrictions(text):
     filtered_text = BeautifulSoup(text,"html.parser")
 
