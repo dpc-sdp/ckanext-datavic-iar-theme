@@ -3,9 +3,9 @@
 {% set form_style = form_style or g.action %}
 {% set is_dataset_harvested =  h.is_dataset_harvested(data.id) %}
 {% set confirmation_text =  _('This dataset has been harvested and should only be updated from the harvested source. ') if is_dataset_harvested else '' %}
+{% set general_fields_info = h.vic_iar_prepare_general_fields(data) %}
 
-
-<form id="dataset-edit" class="dataset-form" method="post" action="{{ action }}" data-module="basic-form" novalidate>
+<form id="dataset-edit" class="dataset-form" method="post" action="{{ action }}" data-module="basic-form datavic_update_restrict" data-module-pkg-data="{{ general_fields_info }}" novalidate>
     {{ h.csrf_input() }}
   {{ form.required_message() }}
 
@@ -58,9 +58,9 @@
         {% if form_style == 'edit' and is_dataset_harvested %}
           {% asset 'ckanext-datavicmain/datavicmain-confirm-action' %}
           <input type="hidden" name="save" value="true" />
-          <button class="btn btn-primary" type="submit" data-module="datavicmain-confirm-action" data-module-with-data=true data-module-content="{{ confirmation_text }}{{ _('Are you sure you want to update?') }}">{{ _('Update Dataset') }}</button>
+          <button class="btn btn-primary save-btn" type="submit" data-module="datavicmain-confirm-action" data-module-with-data=true data-module-content="{{ confirmation_text }}{{ _('Are you sure you want to update?') }}">{{ _('Update Dataset') }}</button>
         {% elif form_style == "edit" and not is_dataset_harvested %}
-          <button class="btn btn-primary" type="submit" name="save">
+          <button class="btn btn-primary save-btn" type="submit" name="save">
               {{ h.humanize_entity_type('package', pkg_dict.type, 'update label') or _('Update Dataset') }}
           </button>
         {% else %}

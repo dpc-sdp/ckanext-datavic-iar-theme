@@ -74,6 +74,14 @@
           </tr>
         {% endif %}
 
+        {% if pkg_dict.category %}
+          {% set category = h.get_group(pkg_dict.category) %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _('Category') }}</th>
+            <td class="dataset-details">{{ category.display_name }}</td>
+          </tr>
+        {% endif %}
+
         {% if pkg_dict.license_id %}
           <tr>
             <th scope="row" class="dataset-label">{{ _('License') }}</th>
@@ -111,22 +119,43 @@
 
         {% if pkg_dict.bil_confidentiality %}
           <tr>
-            <th scope="row" class="dataset-label">{{ _('Business Impact Level - Confidentiality Breach') }}</th>
+            <th scope="row" class="dataset-label">{{ _("Business Impact Level - Confidentiality Breach") }}</th>
             <td class="dataset-details">{{ h.option_value_to_label('bil_confidentiality', pkg_dict.bil_confidentiality) }}</td>
+          </tr>
+        {% endif %}
+
+        {% if pkg_dict.bil_confidentiality_description and g.userobj %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Business Impact Level - Confidentiality Breach (notes)") }}</th>
+            <td class="dataset-details">{{ pkg_dict.bil_confidentiality_description }}</td>
           </tr>
         {% endif %}
 
         {% if pkg_dict.bil_availability %}
           <tr>
-            <th scope="row" class="dataset-label">{{ _('Business Impact Level - Availability') }}</th>
+            <th scope="row" class="dataset-label">{{ _("Business Impact Level - Availability") }}</th>
             <td class="dataset-details">{{ h.option_value_to_label('bil_availability', pkg_dict.bil_availability) }}</td>
+          </tr>
+        {% endif %}
+
+        {% if pkg_dict.bil_availability_description and g.userobj %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Business Impact Level - Availability (notes)") }}</th>
+            <td class="dataset-details">{{ pkg_dict.bil_availability_description }}</td>
           </tr>
         {% endif %}
 
         {% if pkg_dict.bil_integrity %}
           <tr>
-            <th scope="row" class="dataset-label">{{ _('Business Impact Level - Integrity') }}</th>
+            <th scope="row" class="dataset-label">{{ _("Business Impact Level - Integrity") }}</th>
             <td class="dataset-details">{{ h.option_value_to_label('bil_integrity', pkg_dict.bil_integrity) }}</td>
+          </tr>
+        {% endif %}
+
+        {% if pkg_dict.bil_integrity_description and g.userobj %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Business Impact Level - Integrity (notes)") }}</th>
+            <td class="dataset-details">{{ pkg_dict.bil_integrity_description }}</td>
           </tr>
         {% endif %}
 
@@ -175,6 +204,69 @@
               {{ pkg_dict.full_metadata_url }}
             {% endif %}
             </td>
+          </tr>
+        {% endif %}
+
+        {% if pkg_dict.primary_purpose_of_collection and g.userobj %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Purpose") }}</th>
+            <td class="dataset-details">{{ pkg_dict.primary_purpose_of_collection }}</td>
+          </tr>
+        {% endif %}
+
+        {% if pkg_dict.agency_program_domain and g.userobj %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Agency Program/Domain") }}</th>
+            <td class="dataset-details">{{ pkg_dict.agency_program_domain }}</td>
+          </tr>
+        {% endif %}
+
+        {% if g.userobj %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Update Frequency") }}</th>
+            <td class="dataset-details">{{ pkg_dict.update_frequency|capitalize }}</td>
+          </tr>
+        {% endif %}
+
+        {% if g.userobj %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Personal Data (Privacy)") }}</th>
+            <td class="dataset-details">{{ pkg_dict.personal_information|capitalize }}</td>
+          </tr>
+        {% endif %}
+
+        {% if pkg_dict.access_description and g.userobj %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Access - description") }}</th>
+            <td class="dataset-details">{{ pkg_dict.access_description }}</td>
+          </tr>
+        {% endif %}
+
+        {% if pkg_dict.source_ict_system and g.userobj %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Source ICT System/Container") }}</th>
+            <td class="dataset-details">{{ pkg_dict.source_ict_system }}</td>
+          </tr>
+        {% endif %}
+
+        {% if pkg_dict.record_disposal_category and g.userobj %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Record Disposal Category") }}</th>
+            <td class="dataset-details">{{ pkg_dict.record_disposal_category }}</td>
+          </tr>
+        {% endif %}
+
+        {% if pkg_dict.disposal_category and g.userobj %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Disposal Category") }}</th>
+            <td class="dataset-details">{{ pkg_dict.disposal_category }}</td>
+          </tr>
+        {% endif %}
+
+        {% if pkg_dict.disposal_class and g.userobj %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Disposal Class") }}</th>
+            <td class="dataset-details">{{ pkg_dict.disposal_class }}</td>
           </tr>
         {% endif %}
 

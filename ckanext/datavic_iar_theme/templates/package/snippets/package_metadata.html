@@ -1,0 +1,47 @@
+{% set groups, fields = h.vic_iar_get_metadata_groups(pkg_dict) %}
+
+{% for group in groups %}
+    <h2>
+        {{ group }}
+    </h2>
+    <table class="table table-striped table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th scope="col">{{ _("Field") }}</th>
+                <th scope="col">{{ _("Value") }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for field in fields %}
+                {% if field.display_group and field.display_group == group %}
+                    <tr>
+                        <th scope="row" class="dataset-label">{{ h.scheming_language_text(field.label) }}</th>
+                        <td class="dataset-details">
+                            {% if field.field_name == 'private' %}
+                                {% set val = pkg_dict[field.field_name] %}
+                                {% if val %}
+                                    {{ 'No' }}
+                                {% else %}
+                                    {{ 'Yes' }}
+                                {% endif %}
+                            {% elif field.field_name == 'workflow_status' %}
+                                {{  pkg_dict[field.field_name]|capitalize }}
+                            {% elif field.field_name == 'owner_org' %}
+                                {{  pkg_dict.organization.title }}
+                            {% elif field.field_name == 'license_id' %}
+                                {% if pkg_dict.license_title %}
+                                    {{  pkg_dict.license_title }}
+                                {% else %}
+                                    {{ pkg_dict.license_id }}
+                                {% endif %}
+                            {% else %}
+                                {%- snippet 'scheming/snippets/display_field.html',
+                                field=field, data=pkg_dict, schema=schema -%}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endfor %}
