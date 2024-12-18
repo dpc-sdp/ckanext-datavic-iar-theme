@@ -40,24 +40,27 @@
 {% block resources %}
   {{ super() }}
   <ul class="list-unstyled dataset-api">
-    {% set featured_resource = h.vic_iar_featured_resource_preview(package) %}
 
-    {% if featured_resource %}
-        <li class="preview">
-            <i class="fa-solid fa-table"></i> {{ _('Preview') }}
-        </li>
-    {% endif %}
+    <ul>
+        {% set dtv_resources = h.get_digital_twin_resources(package.id)|map(attribute="id")|list %}
+        {% set featured_resource = h.vic_iar_featured_resource_preview(package) %}
 
-    {% set dtv_resources = h.get_digital_twin_resources(package.id)|map(attribute="id")|list %}
+        {% if dtv_resources %}
+            {% set dtv_preview_enabled = package.dtv_preview %}
+            {% set dtv_exceeds_limit = h.dtv_exceeds_max_size_limit(dtv_resources[0]) %}
 
-    {% if dtv_resources %}
-        {% set dtv_preview_enabled = package.dtv_preview %}
-        {% set dtv_exceeds_limit = h.dtv_exceeds_max_size_limit(dtv_resources[0]) %}
+            <li class="preview {{ 'hidden' if dtv_exceeds_limit or not dtv_preview_enabled }}">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <span class="{{ 'hidden' if featured_resource }}">{{ _('Preview') }}</span>
+            </li>
+        {% endif %}
 
-        <li class="preview {{ 'hidden' if dtv_exceeds_limit or not dtv_preview_enabled }}">
-            <i class="fa-solid fa-map-location-dot"></i> {{ _('Preview') }}
-        </li>
-    {% endif %}
+        {% if featured_resource %}
+            <li class="preview">
+                <i class="fa-solid fa-table"></i> {{ _('Preview') }}
+            </li>
+        {% endif %}
+    </ul>
 
     {% set datastore_loaded_resources = h.vic_iar_datastore_loaded_resources(package) %}
     {% if datastore_loaded_resources %}
