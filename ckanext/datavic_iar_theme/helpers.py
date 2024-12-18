@@ -311,11 +311,6 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
                     "hide": not is_sysadmin,
                 },
                 {
-                    "title": tk._("Manage home page"),
-                    "url": tk.h.url_for("datavic_home.manage"),
-                    "hide": not is_logged_in,
-                },
-                {
                     "title": tk._("Bulk manager"),
                     "url": tk.h.url_for("bulk.manager"),
                     "hide": not is_sysadmin,
