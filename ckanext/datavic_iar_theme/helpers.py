@@ -486,19 +486,15 @@ def _get_value_for_field(value):
 def harvester_list() -> list[dict[str, Any]]:
     """Return a list of all available harvesters on the portal"""
 
-    query = model.Session.query(HarvestSource) \
-        .order_by(HarvestSource.created.desc())
+    query = (
+        model.Session.query(HarvestSource)
+        .filter(HarvestSource.active.is_(True))
+        .order_by(HarvestSource.created.desc()) # type: ignore
+    )
 
-    harvesters = [
-        {
-            "value": harvester.id,
-            "label": harvester.title
-        }
-        for harvester in query
+    return [{"value": "", "label": "All"}] + [
+        {"value": harvester.id, "label": harvester.title} for harvester in query
     ]
-    harvesters.insert(0, {"value": "", "label": "All"})
-
-    return harvesters
 
 
 @helper
