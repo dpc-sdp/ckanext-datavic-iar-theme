@@ -398,8 +398,10 @@
                       </div>
                     </div>
 
+                    {% if g.userobj.sysadmin %}
                     {% set harvester_list = h.vic_iar_harvester_list() %}
                     {% set harvester_selected = request.args.harvest_source_id %}
+
                     <div class="form-group form-group--col-two field-rplchecklist">
                       <label for="field-harvester">
                         <span>&nbsp;</span>
@@ -444,6 +446,7 @@
                         </div>
                       </div>
                     </div>
+                    {% endif %}
                   </div>
                 </div>
             </div>
