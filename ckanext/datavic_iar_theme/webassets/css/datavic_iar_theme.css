@@ -3308,8 +3308,6 @@ label.chk-label-active .custom-check,
     font-weight: normal; }
   .dataset-contact .form .subject-group {
     display: none; }
-  .dataset-contact .form .privacy-statement .form-group .field-terms .rpl-checkbox__inline-label {
-    font-size: 1rem; }
   @media screen and (min-width: 768px) {
     .dataset-contact {
       max-width: 75%; } }
@@ -3760,6 +3758,9 @@ a.close {
 
 .via-iar-delwp-dataset #dataset-contact {
   display: none; }
+
+.dataset-details ul:last-child {
+  margin-bottom: 0; }
 
 @media screen and (min-width: 768px) {
   .homepage .container {
