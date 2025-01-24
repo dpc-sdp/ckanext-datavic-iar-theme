@@ -110,9 +110,13 @@
         <tr>
             <th scope="row" class="dataset-label">{{ _('Category') }}</th>
             <td class="dataset-details">
-                {% set category = h.get_group(pkg_dict.category) if pkg_dict.category else "" %}
-
-                {{ category.display_name }}
+              <ul>
+                {% for group in pkg_dict.groups %}
+                  <li>
+                      <a href="{% url_for 'dataset.search', groups=group.name %}">{{ group.display_name }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
             </td>
         </tr>
 
