@@ -116,3 +116,12 @@
         display: none;
     }
 }
+
+// Additional info styles
+.dataset-details {
+    ul {
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
