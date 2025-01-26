@@ -117,22 +117,26 @@
     }
 }
 
-// Dataset Additional info styles
-.additional-info {
-    .dataset-details {
-        ul {
+// Dataset Additional info and View details styles
+.dataset-details {
+    ul {
+        margin-bottom: 0;
+
+        &:last-child {
             margin-bottom: 0;
+        }
 
-            &:last-child {
-                margin-bottom: 0;
+        li {
+            &:only-child {
+                list-style-type: none;
+                margin-left: -31px;
             }
+        }
+    }
 
-            li {
-                &:only-child {
-                    list-style-type: none;
-                    margin-left: -31px;
-                }
-            }
+    p {
+        &:last-child {
+            margin-bottom: 0;
         }
     }
 }

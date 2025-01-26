@@ -19,7 +19,7 @@ ckan.module("datavic_update_restrict", function($, _) {
 
             $.each(Object.keys(this.original_data), function(idx, field){
                 let temp_val = $(_this.el).find("[name='" + field + "']").val();
-                if (temp_val.length === 0 && _this.original_data[field].length === 0 || field == "alias") {
+                if (temp_val.length === 0 && _this.original_data[field].length === 0 || field == "alias" || "notes") {
                     temp_val = _this.original_data[field];
                 }
                 current_data[field] = temp_val;
