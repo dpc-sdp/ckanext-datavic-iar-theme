@@ -110,9 +110,13 @@
         <tr>
             <th scope="row" class="dataset-label">{{ _('Category') }}</th>
             <td class="dataset-details">
-                {% set category = h.get_group(pkg_dict.category) if pkg_dict.category else "" %}
-
-                {{ category.display_name }}
+              <ul>
+                {% for group in pkg_dict.groups %}
+                  <li>
+                      <a href="{% url_for 'dataset.search', groups=group.name %}">{{ group.display_name }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
             </td>
         </tr>
 
@@ -137,16 +141,18 @@
             </tr>
         {% endif %}
 
-        <tr>
-            <th scope="row" class="dataset-label">{{ _('Full metadata URL') }}</th>
-            <td class="dataset-details">
-                {% if pkg_dict.full_metadata_url and pkg_dict.full_metadata_url.startswith('http') %}
-                    <a href="{{ pkg_dict.full_metadata_url }}" target="_blank" rel="nofollow">{{ pkg_dict.full_metadata_url }}</a>
-                {% else %}
-                    {{ pkg_dict.full_metadata_url }}
-                {% endif %}
-            </td>
-        </tr>
+        {% if pkg_dict.full_metadata_url %}
+          <tr>
+              <th scope="row" class="dataset-label">{{ _("Full metadata URL") }}</th>
+              <td class="dataset-details">
+                  {% if pkg_dict.full_metadata_url and pkg_dict.full_metadata_url.startswith("http") %}
+                      <a href="{{ pkg_dict.full_metadata_url }}" target="_blank" rel="nofollow">{{ pkg_dict.full_metadata_url }}</a>
+                  {% else %}
+                      {{ pkg_dict.full_metadata_url }}
+                  {% endif %}
+              </td>
+          </tr>
+        {% endif %}
 
         {% if g.userobj %}
             <tr>

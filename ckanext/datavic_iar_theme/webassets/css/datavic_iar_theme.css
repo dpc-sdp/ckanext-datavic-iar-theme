@@ -3785,5 +3785,13 @@ a.close {
 .via-iar-delwp-dataset #dataset-contact {
   display: none; }
 
-.dataset-details ul:last-child {
+.dataset-details ul {
+  margin-bottom: 0; }
+  .dataset-details ul:last-child {
+    margin-bottom: 0; }
+  .dataset-details ul li:only-child {
+    list-style-type: none;
+    margin-left: -31px; }
+
+.dataset-details p:last-child {
   margin-bottom: 0; }
