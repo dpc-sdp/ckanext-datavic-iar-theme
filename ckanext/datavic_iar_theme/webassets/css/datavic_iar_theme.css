@@ -836,6 +836,14 @@ nav {
 .btn.btn-group > .btn {
   font-size: initial; }
 
+.btn.btn-primary:disabled {
+  background-color: gray;
+  border-color: gray;
+  cursor: not-allowed;
+  pointer-events: initial; }
+  .btn.btn-primary:disabled:hover {
+    color: #fff; }
+
 .btn-primary {
   color: #011A3C;
   text-align: center;
@@ -2057,9 +2065,13 @@ nav {
   float: right;
   color: #465870;
   font-size: 0.875rem; }
+  .dataset-api ul {
+    padding-right: 50px;
+    display: inline-flex; }
+    .dataset-api ul i {
+      margin-right: 3px; }
   .dataset-api li {
-    display: inline;
-    padding-right: 50px; }
+    display: inline; }
     .dataset-api li:last-child {
       padding-right: 0; }
   .dataset-api i {
@@ -3677,6 +3689,35 @@ a.close {
 .dataTables_wrapper .pagination {
   padding-top: 2.5rem; }
 
+@media screen and (min-width: 768px) {
+  .homepage .container {
+    max-width: 730px; } }
+
+@media screen and (min-width: 992px) {
+  .homepage .container {
+    max-width: 920px; } }
+
+.homepage section.cards h2 {
+  font-size: 32px;
+  margin-bottom: 40px; }
+
+.homepage section.cards .section-type {
+  margin-bottom: 40px; }
+  .homepage section.cards .section-type .card {
+    height: 100%; }
+    .homepage section.cards .section-type .card .card-body .card-title {
+      font-size: 20px; }
+      .homepage section.cards .section-type .card .card-body .card-title a {
+        color: #011A3C; }
+    .homepage section.cards .section-type .card img {
+      aspect-ratio: 16 / 9; }
+    .homepage section.cards .section-type .card:hover {
+      box-shadow: 0 2px 8px rgba(26, 26, 26, 0.16); }
+  .homepage section.cards .section-type:first-of-type {
+    margin-top: 80px; }
+  .homepage section.cards .section-type:last-of-type {
+    margin-bottom: 80px; }
+
 .via-iar-delwp-dataset .delwp-resource-list .resource-item {
   align-items: center;
   gap: 1rem;
@@ -3743,3 +3784,14 @@ a.close {
 
 .via-iar-delwp-dataset #dataset-contact {
   display: none; }
+
+.dataset-details ul {
+  margin-bottom: 0; }
+  .dataset-details ul:last-child {
+    margin-bottom: 0; }
+  .dataset-details ul li:only-child {
+    list-style-type: none;
+    margin-left: -31px; }
+
+.dataset-details p:last-child {
+  margin-bottom: 0; }
