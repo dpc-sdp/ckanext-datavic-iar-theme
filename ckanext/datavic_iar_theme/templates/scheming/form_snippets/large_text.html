@@ -1,7 +1,7 @@
 {% import 'macros/form.html' as form %}
 
 {% set is_required = h.scheming_field_required(field) %}
-{% set attrs = {} %}
+{% set attrs = {'class': 'form-control'} %}
 
 {% if is_required %}
     {% do attrs.update({"required": "true", "aria-required": "true"}) %}
