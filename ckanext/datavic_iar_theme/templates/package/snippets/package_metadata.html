@@ -38,7 +38,7 @@
                                 <ul>
                                     {% for group in pkg_dict.groups %}
                                         <li>
-                                            <a href="{% url_for 'dataset.search', groups=group.name %}">{{ group.display_name }}</a>
+                                            {{ group.display_name }}
                                         </li>
                                     {% endfor %}
                                 </ul>
