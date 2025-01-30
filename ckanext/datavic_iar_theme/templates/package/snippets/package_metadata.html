@@ -34,6 +34,14 @@
                                 {% else %}
                                     {{ pkg_dict.license_id }}
                                 {% endif %}
+                            {% elif field.field_name == 'category' %}
+                                <ul>
+                                    {% for group in pkg_dict.groups %}
+                                        <li>
+                                            <a href="{% url_for 'dataset.search', groups=group.name %}">{{ group.display_name }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
                             {% else %}
                                 {%- snippet 'scheming/snippets/display_field.html',
                                 field=field, data=pkg_dict, schema=schema -%}
