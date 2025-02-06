@@ -629,3 +629,5 @@ def harvester_list() -> list[dict[str, Any]]:
     return [{"value": "", "label": "All"}] + [
         {"value": harvester.id, "label": harvester.title} for harvester in query
     ]
+
+
