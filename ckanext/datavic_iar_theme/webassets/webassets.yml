@@ -16,8 +16,8 @@ datavic-iar-theme-js:
     - js/datavic-checkbox.js
     - js/_datavic_autocomplete.js
     - js/datavic-search-autocomplete.js
-    - js/datavic-dropdown.js
     - js/datavic_update_restrict.js
+    - js/datavic-dropdown.js
   extra:
     preload:
       - base/main

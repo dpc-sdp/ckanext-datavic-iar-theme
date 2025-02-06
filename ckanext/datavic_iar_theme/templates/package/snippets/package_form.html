@@ -5,7 +5,6 @@
 {% set general_fields_info = h.vic_iar_prepare_general_fields(data) %}
 {% asset "ckanext-datavicmain/datavicmain-session" %}
 
-
 <form id="dataset-edit" class="dataset-form" method="post" data-module="basic-form datavic_update_restrict" data-module-pkg-data="{{ general_fields_info }}" novalidate>
   {{ h.csrf_input() }}
   {{ form.required_message() }}
