@@ -6,7 +6,6 @@ CONFIG_PARENT_SITE_URL = "ckan.parent_site_url"
 CONFIG_HOTJAR_ENABLED = "ckan.tracking.hotjar_enabled"
 CONFIG_HOTJAR_HJID = "ckan.tracking.hotjar.hjid"
 CONFIG_HOTJAR_HJSV = "ckan.tracking.hotjar.hjsv"
-CONFIG_SHOW_BLOG = "ckan.pages.show_blog_button"
 CONFIG_PAGES_BASE_URL = "ckan.pages.base_url"
 
 
@@ -24,10 +23,6 @@ def get_hotjar_hsid() -> str | None:
 
 def get_hotjar_hjsv() -> str | None:
     return tk.config.get(CONFIG_HOTJAR_HJSV)
-
-
-def show_blog_button() -> bool:
-    return tk.config[CONFIG_SHOW_BLOG]
 
 
 def get_pages_base_url() -> str:

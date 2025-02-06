@@ -1,8 +1,14 @@
 'use strict';
+
+const sass = require('node-sass');
+
 module.exports = function(grunt) {
 
   grunt.initConfig({
     sass: {
+      options: {
+        implementation: sass
+      },
       dist: {
         options: {
           style: 'compressed',

@@ -17,6 +17,7 @@
 
   {% if h.check_access('package_update', {'id':pkg.id }) %}
     {% set is_ready_for_sync = h.is_ready_for_publish(pkg) %}
+    {% set url = h.url_for('dataset.edit', id=pkg.name) %}
     {% if is_ready_for_sync %}
       <a type="btn" class="btn" data-bs-toggle="modal" data-bs-target="#syncModal">
         <i class="fa fa-refresh"></i>
@@ -52,6 +53,32 @@
       <a class="btn" href="{{ h.url_for('dataset.edit', id=pkg.name) }}" data-module="datavic-confirm-link-action" data-module-content="{{ confirmation_text }}"><i class="fa fa-wrench"></i> {{ _('Edit') }}</a>
     {% else %}
       <a class="btn" href="{{ h.url_for('dataset.edit', id=pkg.name) }}"><i class="fa fa-wrench"></i> {{ _('Edit') }}</a>
+    {% endif %}
+
+    {% set user_role = h.vic_iar_role_in_org(pkg_dict.organization.id, current_user.name) %}
+    {% if current_user.sysadmin or (user_role in ["admin", "editor"]) %}
+      <a type="btn" class="btn" data-bs-toggle="modal" data-bs-target="#viewModal" title="View record details">
+        <i class="fa fa-eye"></i>
+        {{ _("View record details") }}
+      </a>
+
+      <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{ pkg.title }}</h4>
+                    <a class="btn" href="{{ url }}?metadata=true" data-module="datavic-confirm-link-action" data-module-content="{{ confirmation_text }}" data-metadata-edit="true"><i class="fa fa-wrench"></i> {{ _('Edit') }}</a>
+                </div>
+                <div class="modal-body">
+                  {% snippet 'package/snippets/package_metadata.html', pkg_dict=pkg %}
+                </div>
+                <div class="modal-footer">
+                    <a class="btn" href="{{ url }}?metadata=true" data-module="datavic-confirm-link-action" data-module-content="{{ confirmation_text }}" data-metadata-edit="true"><i class="fa fa-wrench"></i> {{ _('Edit') }}</a>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+      </div>
     {% endif %}
   {% endif %}
 {% endblock %}

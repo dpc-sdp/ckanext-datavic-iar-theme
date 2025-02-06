@@ -96,7 +96,19 @@ $break-stages-text-small: 545px;
 }
 
 .control-required {
-    color: #B15D5F;
+    color: #aa0028;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: "Vic-Regular", arial, sans-serif;
+}
+
+.label-and-text-checkbox {
+    label {
+        display: flex;
+    }
+    .rpl-checkbox .rpl-checkbox__inline-label {
+        line-height: 24px;
+    }
 }
 
 .editor {
@@ -176,6 +188,43 @@ select.form-control {
                 height: fit-content;
                 max-width: 260px;
             }
+        }
+    }
+}
+
+
+// Organisation form styles
+
+// hide URL button for upload widget
+.organization-edit {
+    .image-upload {
+        .btn[title*="Link to a URL"] {
+            display: none !important;
+        }
+    }
+}
+
+.select2-choice {
+    height: 29px !important;
+}
+
+.restricted {
+    div,
+    &.select2-chosen {
+        &::after {
+            content: 'Restricted';
+            display: inline-block;
+            color: #055160;
+            background-color: #cff4fc;
+            border-color: #b6effb;
+            border-radius: 0.25rem;
+            padding: 0.35em 0.65em;
+            font-size: 0.75em;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
         }
     }
 }

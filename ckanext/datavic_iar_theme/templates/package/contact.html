@@ -1,0 +1,49 @@
+{% import "macros/contact_form.html" as form %}
+
+
+<section id="dataset-contact" class="dataset-contact">
+    <h3>{{ _("Contact Data Custodian") }}</h3>
+    <form class="form form-horizontal" action="/dataset/{{ pkg_name }}/contact" method="POST">
+        <div class="form-controls">
+            {% if not data %}
+                {% set name = userobj.fullname if userobj.fullname else userobj.name %}
+            {% else %}
+                {% set name = data.name %}
+            {% endif %}
+            {{ form.input("name", label=_("Name"), id="field-name", value=name, error=errors.name, classes=["form-group"], is_required=true, attrs={"class": "form-control"}) }}
+
+            {% set email = data.email|lower if data else userobj.email|lower %}
+            {{ form.input("email", label=_("Email"), id="field-email", value=email, error=errors.email, classes=["form-group"], is_required=true, attrs={"class": "form-control"}) }}
+
+            {% set subject = _("VPS Data Directory user query - ") + h.vic_iar_get_package_title(pkg_id) %}
+            {{ form.input("subject", label=_("Subject"), id="field-subject", value=subject, error=errors.subject, classes=["form-group subject-group"], is_required=true, attrs={"class": "form-control"}) }}
+
+            {{ form.textarea("message", label=_("Message"), id="field-message", value=data.message, error=errors.message, classes=["form-group"], is_required=true, attrs={"class": "form-control"}) }}
+        </div>
+        <div class="privacy-statement">
+            <p>The Department of Government Services collects the information that you provide with this enquiry form. We use the information you provide to respond to your enquiry. You can request access to, and corrections of, any personal information provided in this form. Requests for access or correction should be sent to <a href="mailto:datavic@dpc.vic.gov.au?subject=Contact%20data.vic%20regarding%20privacy%20and%20personal%20information%20submitted%20in%20the%20enquiry%20form" target="" data-print-url="mailto:datavic@dpc.vic.gov.au?subject=Contact%20data.vic%20regarding%20privacy%20and%20personal%20information%20submitted%20in%20the%20enquiry%20form" class="rpl-link rpl-text-link"><span class="rpl-link__inner"><span class="rpl-text-label"><span>datavic@dpc.vic.gov.au</span></span></span></a>.</p>
+
+            <p>The Department is using the services of CKAN to administer this form. The information that you provide is emailed directly to the maintainer of this dataset.</p>
+
+            <p>For more information on the Department’s handling of any personal information, please refer to the <a href="https://www.vic.gov.au/privacy-vicgovau" target="" data-print-url="https://www.vic.gov.au/privacy-vicgovau" class="rpl-link rpl-text-link"><span class="rpl-link__inner"><span class="rpl-text-label"><span><span>vic.gov.au Privacy</span> <span class="rpl-text-icon__group"> Statement</span></span></span></span></a>.</p>
+
+            <p>If you do not provide all or part of the information requested, we may not be able to contact you about your enquiry. Please <a href="mailto:datavic@dpc.vic.gov.au?subject=Contacting%20data.vic" target="" data-print-url="mailto:datavic@dpc.vic.gov.au?subject=Contacting%20data.vic" class="rpl-link rpl-text-link"><span class="rpl-link__inner"><span class="rpl-text-label"><span>email us</span></span></span></a> if you want to use an alternative mechanism to the online form.</p>
+
+            <div class="form-group label-and-text-checkbox">
+                <label class="rpl-checkbox" for="field-terms" data-module="datavic-checkbox">
+                    <input type="checkbox" id="field-terms" name="terms" value="yes" required/>
+                    <span class="rpl-checkbox__box rpl-checkbox__box--checked">
+                        {% snippet "snippets/svg/checkbox-tick.svg", hide=1 %}
+                    </span>
+                    <span class="rpl-checkbox__inline-label">
+                        {{ _("I have read and understand how Department of Government Services stores information.") }}
+                    </span>
+                </label>
+            </div>
+        </div>
+        <div class="form-actions">
+            <input type="submit" class="btn-primary" value="{{ _('Submit') }}"/>
+            <input type="reset" class="btn-secondary" value="{{ _('Clear') }}"/>
+        </div>
+    </form>
+</section>

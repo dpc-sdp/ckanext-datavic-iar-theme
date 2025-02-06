@@ -11,6 +11,6 @@
     field=field,
     data=data,
     errors=errors,
-    workflow_available=h.workflow_status_options(data.get(field.field_name, None), data.get('owner_org', None)),
+    workflow_available=h.workflow_status_options(data.get(field.field_name, None), data.get('owner_org', None), data.get('id')),
     workflow_required = h.scheming_field_required(field),
     workflow_option_tag=workflow_option_tag %}
