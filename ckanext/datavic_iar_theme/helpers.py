@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import logging
 from typing import Optional, Any
-import json
+from bs4 import BeautifulSoup
 
 from sqlalchemy.sql import func
 
@@ -508,3 +508,5 @@ def harvester_list() -> list[dict[str, Any]]:
     return [{"value": "", "label": "All"}] + [
         {"value": harvester.id, "label": harvester.title} for harvester in query
     ]
+
+
