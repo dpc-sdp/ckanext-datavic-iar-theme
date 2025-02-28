@@ -24,14 +24,6 @@ class DatavicIARThemePlugin(p.SingletonPlugin):
         tk.add_public_directory(config_, "public")
         tk.add_resource("webassets", "datavic_iar_theme")
 
-        tk.add_ckan_admin_tab(
-            tk.config,
-            "check_link.report",
-            "Link availability",
-            config_var="ckan.admin_tabs",
-            icon="chain-broken",
-        )
-
     # ITemplateHelpers
     def get_helpers(self):
         return helpers.get_helpers()
