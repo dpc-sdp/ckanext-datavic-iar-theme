@@ -300,7 +300,7 @@
             (_('Sort results by name ascending'), 'title_string asc'),
             (_('Sort results by name descending'), 'title_string desc'),
             (_('Sort results by last modified'), 'metadata_modified desc'),
-            (_('Sort results Popular'), 'views_recent desc') if g.tracking_enabled else (false, false) ]
+            (_('Sort results Popular'), 'views_recent desc')]
           %}
           {% if not sorting_selected %}
             {% set sorting_selected = 'score desc, metadata_modified desc' %}
