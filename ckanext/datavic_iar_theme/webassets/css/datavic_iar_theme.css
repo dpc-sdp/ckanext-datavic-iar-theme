@@ -2675,7 +2675,7 @@ select.form-control {
     border: 1px solid #F6BE00;
     border-top: 0;
     position: absolute;
-    z-index: 1;
+    z-index: 10;
     width: auto;
     max-height: 23.75rem;
     overflow: auto;
