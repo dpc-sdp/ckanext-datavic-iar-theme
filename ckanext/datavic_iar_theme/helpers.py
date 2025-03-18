@@ -541,3 +541,12 @@ def harvester_list() -> list[dict[str, Any]]:
     ]
 
 
+@helper
+def extra_html_restrictions(text):
+    filtered_text = BeautifulSoup(text, "html.parser")
+
+    # Lets remove all script tags from the HTML markup
+    for script in filtered_text.find_all("script"):
+        script.extract()
+
+    return str(filtered_text)
