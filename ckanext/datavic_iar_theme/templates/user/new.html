@@ -3,79 +3,77 @@
 {% block wrapper_class %} user-register-page {% endblock %}
 
 {% block help_inner %}
-<h2 class="module-heading">{{ _('Why Sign Up?') }}</h2>
-<div class="module-content">
-  <p>Get access to a range of datasets available only to the VPS.</p>
-</div>
+    <h2 class="module-heading">{{ _("Why Sign Up?") }}</h2>
+    <div class="module-content">
+        <p>Get access to a range of datasets available only to the VPS.</p>
+    </div>
 {% endblock %}
 
-
 {% block primary_content %}
-  <article class="module">
-    <div class="module-content">
+    <article class="module">
+        <div class="module-content">
 
-      {% block primary_content_inner %}
-        <h1 class="page-heading">
-            {% block page_heading %}{{ _('Request for an Account') }}{% endblock %}
-        </h1>
+        {% block primary_content_inner %}
+            <h1 class="page-heading">
+                {% block page_heading %}{{ _("Request for an Account") }}{% endblock %}
+            </h1>
 
+            {# TODO: drop debug condition #}
+            {% if session.pop("ckanext:oidc-pkce:error", null) or request.args.__oidc_debug_message %}
+                <div class="sdp-alert sdp-alert-danger alert">
+                    <svg data-v-75058d3a="" viewBox="0 0 20 20" aria-hidden="true" overflow="visible" class="rpl-icon rpl-icon--alert_information rpl-icon--color_danger" style="width: 20px; height: 20px;"><!----> <path d="M11.667 10a1.667 1.667 0 11-3.334 0V5a1.667 1.667 0 013.334 0v5zM10 16.667a1.67 1.67 0 01-1.54-2.306A1.667 1.667 0 1110 16.667zM0 10c0 5.514 4.486 10 10 10s10-4.486 10-10S15.514 0 10 0 0 4.486 0 10z"></path> </svg>
 
-        {# TODO: drop debug condition #}
-        {% if session.pop("ckanext:oidc-pkce:error", null) or request.args.__oidc_debug_message %}
-            <div class="sdp-alert sdp-alert-danger alert">
-                <svg data-v-75058d3a="" viewBox="0 0 20 20" aria-hidden="true" overflow="visible" class="rpl-icon rpl-icon--alert_information rpl-icon--color_danger" style="width: 20px; height: 20px;"><!----> <path d="M11.667 10a1.667 1.667 0 11-3.334 0V5a1.667 1.667 0 013.334 0v5zM10 16.667a1.67 1.67 0 01-1.54-2.306A1.667 1.667 0 1110 16.667zM0 10c0 5.514 4.486 10 10 10s10-4.486 10-10S15.514 0 10 0 0 4.486 0 10z"></path> </svg>
-
-                <div class="sdp-alert__content">
-                    <h4 class="heading">
-                        {{ _("There is an error with your request:") }}
-                    </h4>
-                    <ul class="error-list">
-                        <li>
-                            {% trans %}
-                            Your email account was not automatically recognised. If you
-                            work in the Victorian Public Service, please register an
-                            account using the standard form below. Please contact
-                            <a href="mailto:datavic@dpc.vic.gov.au">datavic@dpc.vic.gov.au</a> for assistance.
-                {% endtrans %}
-
-                        </li>
-                    </ul>
+                    <div class="sdp-alert__content">
+                        <h4 class="heading">
+                            {{ _("There is an error with your request:") }}
+                        </h4>
+                        <ul class="error-list">
+                            <li>
+                                {% trans %}
+                                Your email account was not automatically recognized. If you
+                                work in the Victorian Public Service, please register an
+                                account using the standard form below. Please contact
+                                <a href="mailto:datavic@dpc.vic.gov.au">datavic@dpc.vic.gov.au</a> for assistance.
+                                {% endtrans %}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        {% endif %}
+            {% endif %}
 
-        <div class="sso-block">
-            <div class="sso-block--info">
-                <span class="info--icon">
-                    {% include 'snippets/svg/info.svg' %}
-                </span>
-                <span class="info--text">
-                    {% trans %}
-                    The VPS Data Directory has introduced Single Sign-On (SSO)
-                    access. If you have an eligible account, you can now access
-                    the VPS Data Directory via the SSO button below, without
-                    completing the registration process below.
-                    Find out more, <a href="https://www.data.vic.gov.au/information-data-publishers">including who is eligible, here.</a>
-                    {% endtrans %}
-                </span>
-            </div>
-
-            {% block oidc_login_button %}
-                <div class="sso-block-button">
-                    <a href="{{ h.url_for("oidc_pkce.login", came_from=request.path ~ '?__no_cache__=True') }}" class="btn btn-primary">
-                    {{ _("Access VPS Data Directory using Single Sign-On") }}
-                    </a>
+            <div class="sso-block">
+                <div class="sso-block--info">
+                    <span class="info--icon">
+                        {% include "snippets/svg/info.svg" %}
+                    </span>
+                    <span class="info--text">
+                        {% trans %}
+                        The VPS Data Directory has introduced Single Sign-On (SSO)
+                        access. If you have an eligible account, you can now access
+                        the VPS Data Directory via the SSO button below, without
+                        completing the registration process below.
+                        Find out more, <a href="https://www.data.vic.gov.au/information-data-publishers">including who is eligible, here.</a>
+                        {% endtrans %}
+                    </span>
                 </div>
-            {% endblock %}
+
+                {% block oidc_login_button %}
+                    {% set came_from = h.get_request_param("came_from") %}
+                    <div class="sso-block-button">
+                        <a href="{{ h.url_for('oidc_pkce.login', came_from=h.vic_iar_get_came_from_url(came_from) ~ '?__no_cache__=True') }}" class="btn btn-primary">
+                            {{ _("Access VPS Data Directory using Single Sign-On") }}
+                        </a>
+                    </div>
+                {% endblock %}
+            </div>
+
+            <div class="division-line">
+                <span>{{ _("Or") }}</span>
+            </div>
+
+            {{ form | safe }}
+        {% endblock %}
+
         </div>
-
-        <div class="division-line">
-            <span>{{ _('Or') }}</span>
-        </div>
-
-        {{ form | safe }}
-      {% endblock %}
-
-    </div>
-  </article>
+    </article>
 {% endblock %}

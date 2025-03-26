@@ -69,7 +69,7 @@ $rpl-checklist-dropdown-max-height: (rem(38px) * 10);
       border: $rpl-checklist-expanded-border;
       border-top: 0;
       position: absolute;
-      z-index: 1;
+      z-index: 10;
       width: auto;
       max-height: $rpl-checklist-dropdown-max-height;
       overflow: auto;
