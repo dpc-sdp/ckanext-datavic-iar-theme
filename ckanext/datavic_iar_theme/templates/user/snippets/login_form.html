@@ -126,7 +126,7 @@ Example:
             </span>
         </div>
 
-        {% if  g.recaptcha_publickey %}
+        {% if not g.debug and g.recaptcha_publickey %}
             {% snippet "user/snippets/recaptcha.html", public_key=g.recaptcha_publickey %}
         {% endif %}
 
