@@ -66,6 +66,10 @@
             {% endblock %}
           </div>
           {% if facets %}
+            {% set orgnization_list = h.vic_iar_group_list(is_organization=True) %}
+            {% set group_list = h.vic_iar_group_list(is_organization=False) %}
+            {% set format_list = h.vic_iar_format_list() %}
+
             <button class="rpl-search-form__show-filters rpl-search-form__show-filters--expanded" aria-expanded="true">
               <span>Advanced search</span>
             </button>
@@ -84,7 +88,7 @@
                               <div class="rpl-checklist__main-row">
                                 <button type="button" class="rpl-checklist__info" data-checklist="checklist-organization">
                                   {% if organization %}
-                                    {% for item in h.vic_iar_organization_list() %}
+                                    {% for item in orgnization_list %}
                                       {% if item.name == organization %}
                                         <span>{{ item.display_name }}</span>
                                       {% endif %}
@@ -98,7 +102,7 @@
                                   </svg>
                                 </button>
                               </div>
-                              {% with items = h.vic_iar_organization_list() %}
+                              {% with items = orgnization_list %}
                                 {% if items %}
                                   <div aria-hidden="true" class="rpl-checklist__list rpl-checklist__list--dropdown" style="display: none;">
                                     <div class="rpl-checklist__list-row rpl-checklist__list-row--single">
@@ -139,7 +143,7 @@
                               <div class="rpl-checklist__main-row">
                                 <button type="button" class="rpl-checklist__info" data-checklist="checklist-group">
                                   {% if group %}
-                                    {% for item in h.vic_iar_search_form_group_list() %}
+                                    {% for item in group_list %}
                                       {% if item.name == group %}
                                         <span>{{ item.display_name }}</span>
                                       {% endif %}
@@ -153,7 +157,7 @@
                                   </svg>
                                 </button>
                               </div>
-                              {% with items = h.vic_iar_search_form_group_list() %}
+                              {% with items = group_list %}
                                 {% if items %}
                                   <div aria-hidden="true" class="rpl-checklist__list rpl-checklist__list--dropdown" style="display: none;">
                                     <div class="rpl-checklist__list-row rpl-checklist__list-row--single">
@@ -200,7 +204,7 @@
                                   {% if format and format == 'ALL_API' %}
                                     <span>{{ _("All API formats") }}</span>
                                   {% elif format %}
-                                    {% for item in h.vic_iar_format_list() %}
+                                    {% for item in format_list %}
                                       {% if item == format %}
                                         <span>{{ item|upper }}</span>
                                       {% endif %}
@@ -214,7 +218,7 @@
                                   </svg>
                                 </button>
                               </div>
-                              {% with items = h.vic_iar_format_list() %}
+                              {% with items = format_list %}
                                 {% if items %}
                                   <div aria-hidden="true" class="rpl-checklist__list rpl-checklist__list--dropdown" style="display: none;">
                                     <div class="rpl-checklist__list-row rpl-checklist__list-row--single">
