@@ -13,7 +13,7 @@ import ckan.plugins.toolkit as tk
 import ckan.lib.helpers as h
 
 from ckanext.harvest.model import HarvestSource
-from ckanext.toolbelt.decorators import Collector
+from ckanext.toolbelt.decorators import Collector, Cache
 from ckanext.scheming.helpers import scheming_get_dataset_schema
 
 import ckanext.datavic_iar_theme.config as conf
@@ -25,10 +25,24 @@ helper, get_helpers = Collector("vic_iar").split()
 
 
 @helper
-def organization_list() -> list[dict[str, Any]]:
-    return tk.get_action("organization_list")(
-        {}, {"all_fields": True, "include_dataset_count": False}
+@Cache()
+def group_list(is_organization: bool) -> list[dict[str, str]]:
+    """Returns a list of active groups or organizations.
+
+    Results are cached separately for groups and organizations.
+    Cache is invalidated on create, update, or delete actions
+    (see `clear_group_list_cache` in plugins.py).
+    """
+    groups = (
+        model.Session.query(model.Group.id, model.Group.title, model.Group.name)
+        .filter(model.Group.is_organization.is_(is_organization))
+        .filter(model.Group.state == "active")
+        .all()
     )
+
+    return [
+        {"id": g.id, "display_name": g.title or g.name, "name": g.name} for g in groups
+    ]
 
 
 @helper
@@ -48,29 +62,19 @@ def get_parent_orgs(output: Optional[str] = None) -> list[dict[str, str]] | list
 
 
 @helper
-def search_form_group_list() -> list[dict[str, Any]]:
-    return tk.get_action("group_list")(
-        {}, {"all_fields": True, "include_dataset_count": False}
-    )
-
-
-@helper
 def format_list() -> list[str]:
-    """Return a list of all available resources on portal"""
+    """Return a sorted list of unique resource formats."""
 
     query = (
-        model.Session.query(model.Resource.format)
+        model.Session.query(
+            func.distinct(model.Resource.format), func.lower(model.Resource.format)
+        )
         .filter(model.Resource.state == model.State.ACTIVE)
-        .group_by(model.Resource.format)
+        .filter(model.Resource.format.isnot(None))
+        .filter(model.Resource.format != "")
         .order_by(func.lower(model.Resource.format))
     )
-
-    formats = [
-        resource.format.upper().split(".")[-1] for resource in query if resource.format
-    ]
-    unique_formats = set(formats)
-
-    return sorted(list(unique_formats))
+    return [fmt.upper().split(".")[-1] for fmt, _ in query]
 
 
 @helper
