@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import logging
 from typing import Any
 
@@ -27,6 +29,10 @@ class DatavicIARThemePlugin(p.SingletonPlugin):
         tk.add_template_directory(config_, "templates")
         tk.add_public_directory(config_, "public")
         tk.add_resource("webassets", "datavic_iar_theme")
+
+        # Reset group/organization cache on server restart
+        helpers.group_list.reset(is_organization=False)
+        helpers.group_list.reset(is_organization=True)
 
     # ITemplateHelpers
     def get_helpers(self):
