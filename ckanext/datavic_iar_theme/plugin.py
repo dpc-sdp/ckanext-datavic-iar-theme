@@ -38,6 +38,10 @@ class DatavicIARThemePlugin(p.SingletonPlugin):
             icon="chain-broken",
         )
 
+        # Reset group/organization cache on server restart
+        helpers.group_list.reset(is_organization=False)
+        helpers.group_list.reset(is_organization=True)
+
     # ITemplateHelpers
     def get_helpers(self):
         return helpers.get_helpers()
