@@ -2301,6 +2301,7 @@ select.form-control {
 .dataset-form .form-actions {
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
   gap: 10px; }
   .dataset-form .form-actions .action-info {
     margin: 0; }
