@@ -2007,6 +2007,9 @@ nav {
     .resource-item .resource-summary {
       width: 24%; } }
 
+.resource-list[data-module='resource-reorder'] {
+  margin: 24px -10px 10px -10px; }
+
 .resource-list .resource-item {
   display: flex;
   flex-flow: row nowrap;
@@ -2136,6 +2139,12 @@ nav {
 @media (min-width: 576px) {
   .api-modal {
     max-width: 80%; } }
+
+.module-content.resources .form-actions .cancel {
+  background-color: #af272f;
+  color: #fff; }
+  .module-content.resources .form-actions .cancel:hover {
+    background-color: #F69C00; }
 
 .format-label {
   background: url("/datavic-sprite-resource-icons.png") no-repeat 0 0;

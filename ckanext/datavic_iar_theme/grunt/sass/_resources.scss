@@ -35,6 +35,10 @@ $primary-color: #0052C2;
 }
 
 .resource-list {
+    &[data-module='resource-reorder'] {
+        margin: 24px -10px 10px -10px;
+    }
+
     .resource-item {
         display: flex;
         flex-flow: row nowrap;
@@ -234,5 +238,20 @@ $primary-color: #0052C2;
 @media (min-width: 576px) {
     .api-modal {
         max-width: 80%;
+    }
+}
+
+.module-content {
+    &.resources {
+        .form-actions {
+            .cancel {
+                background-color: $rpl-button-danger-background-color;
+                color: $rpl-button-danger-text-color;
+
+                &:hover {
+                    background-color: $rpl-button-primary-hover-background-color;
+                }
+            }
+        }
     }
 }
