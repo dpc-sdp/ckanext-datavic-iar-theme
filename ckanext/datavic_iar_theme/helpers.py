@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import json
 import logging
-from typing import Optional, Any
+from markupsafe import Markup
+from typing import Optional, Any, Union
 from bs4 import BeautifulSoup
 
 from sqlalchemy.sql import func
@@ -555,3 +556,29 @@ def extra_html_restrictions(text):
         script.extract()
 
     return str(filtered_text)
+
+
+@helper
+def datavic_user_image(user_id: str, size: int = 100) -> Union[Markup, str]:
+    try:
+        user_dict = tk.get_action('user_show')(
+            {'ignore_auth': True},
+            {'id': user_id}
+        )
+    except tk.NotFound:
+        return ''
+
+    image_url = user_dict.get('image_url')
+    if image_url and not image_url.startswith('http'):
+        return h.literal(
+            '''<img src="{url}"
+                class="user-image"
+                width="{size}" height="{size}" alt="{alt}" />
+            '''.format(
+                url=h.sanitize_url(user_dict['image_display_url']),
+                size=size,
+                alt=user_dict['name']
+            )
+        )
+    else:
+        return ''

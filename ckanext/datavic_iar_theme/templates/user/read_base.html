@@ -13,6 +13,8 @@
 {% block content_primary_nav %}
   {% if h.check_access('package_create') %}
     {{ h.build_nav_icon('user.read', _('Datasets'), id=user.name) }}
+    {{ h.build_nav_icon('user.read_organizations', h.humanize_entity_type('organization', org_type, 'content tab') or _('Organizations'), id=user.name) }}
+    {{ h.build_nav_icon('user.read_groups', h.humanize_entity_type('group', group_type, 'content tab') or _('Groups'), id=user.name) }}
     {{ h.build_nav_icon('activity.user_activity', _('Activity Stream'), id=user.name) }}
   {% else %}
     {{ h.build_nav_icon('activity.user_activity', _('Activity Stream'), id=user.name) }}
