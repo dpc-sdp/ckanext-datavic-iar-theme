@@ -1,6 +1,12 @@
 {% ckan_extends %}
 
-{% block user_image %}{% endblock %}
+{% block user_image %}
+    <div class="image">{{ h.vic_iar_datavic_user_image(user.id, size=270) }}</div>
+{% endblock %}
+
+{% block user_about %}{% endblock %}
+
+{% block user_nums %}{% endblock %}
 
 {% block user_info %}
     <div class="info">
@@ -16,8 +22,7 @@
 
         {% if is_myself %}
             <dl>
-                <dt>{{ _('Email') }} <span class="label label-default" title="{{ _('This means only you can see this') }}">{{
-                        _('Private') }}</span></dt>
+                <dt>{{ _('Email') }}</dt>
                 <dd>{{ user.email }}</dd>
             </dl>
         {% endif %}
