@@ -43,13 +43,7 @@ setup(
     # simple. Or you can use find_packages().
     packages=find_packages(exclude=["contrib", "docs", "tests*"]),
     namespace_packages=["ckanext"],
-    install_requires=[
-        "ckanext-check-link~=0.1.2",
-        "ckanext-oidc-pkce~=0.3.1",
-        "ckanext-vip-portal~=0.2.3",
-        "ckanext-toolbelt >=0.2.3, <1.0.0",
-        "ckanext-flakes~=0.4.1",
-    ],
+    install_requires=[],
     # If there are data files included in your packages that need to be
     # installed, specify them here.  If using Python 2.6 or less, then these
     # have to be included in MANIFEST.in as well.

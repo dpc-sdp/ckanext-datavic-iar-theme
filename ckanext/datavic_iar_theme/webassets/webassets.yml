@@ -34,6 +34,16 @@ datavic-iar-confirm-link-action:
       - base/ckan
   filters: rjsmin
 
+datavic-resource-reorder:
+  output: datavic_iar_theme/%(version)s-datavic-resource-reorder.js
+  contents:
+    - js/datavic-resource-reorder.js
+  extra:
+    preload:
+      - base/main
+      - base/ckan
+  filters: rjsmin
+
 datavic_recline_patch_css:
   filter: cssrewrite
   output: ckanext-datavic_iar_theme/%(version)s-datavic-recline.css

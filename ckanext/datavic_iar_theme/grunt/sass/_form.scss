@@ -156,6 +156,7 @@ select.form-control {
     .form-actions {
         display: flex;
         flex-direction: column;
+        flex-wrap: nowrap;
         gap: 10px;
 
         .action-info {
