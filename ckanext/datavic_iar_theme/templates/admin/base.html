@@ -1,0 +1,7 @@
+{% ckan_extends %}
+
+{% block content_primary_nav %}
+    {{ super() }}
+
+    {{ h.build_nav_icon('check_link.report', _('Link availability'), icon='chain-broken') }}
+{% endblock %}
