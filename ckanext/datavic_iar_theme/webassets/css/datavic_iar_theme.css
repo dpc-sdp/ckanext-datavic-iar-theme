@@ -3739,3 +3739,6 @@ a.close {
 
 .dataset-details p:last-child {
   margin-bottom: 0; }
+
+.data-publisher-notice {
+  margin-top: 2rem; }
