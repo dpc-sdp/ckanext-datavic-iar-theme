@@ -262,6 +262,21 @@
           </tr>
         {% endif %}
 
+        {% if pkg_dict.contact_point %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Point of contact") }}</th>
+            <td class="dataset-details">
+              {% if h.vic_iar_is_url(pkg_dict.contact_point) %}
+                <a href="{{ pkg_dict.contact_point }}" target="_blank" rel="nofollow">{{ pkg_dict.contact_point }}</a>
+              {% elif h.vic_iar_is_email(pkg_dict.contact_point) %}
+                <a href="mailto:{{ pkg_dict.contact_point }}">{{ pkg_dict.contact_point }}</a>
+              {% else %}
+                {{ pkg_dict.contact_point }}
+              {% endif %}
+            </td>
+          </tr>
+        {% endif %}
+
       {% block extras scoped %}
       {% endblock %}
 
