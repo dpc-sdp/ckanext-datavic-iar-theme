@@ -20,10 +20,6 @@ from ckanext.scheming.helpers import scheming_get_dataset_schema
 import ckanext.datavic_iar_theme.config as conf
 import ckanext.datavicmain.const as const
 
-from urllib.parse import urlparse
-from ckan.logic.validators import email_validator as ckan_email_validator
-from ckan.lib.navl.dictization_functions import Invalid
-
 log = logging.getLogger(__name__)
 helper, get_helpers = Collector("vic_iar").split()
 
@@ -527,27 +523,12 @@ def datavic_user_image(user_id: str, size: int = 100) -> Union[Markup, str]:
 
 
 @helper
-def is_url(value) -> bool:
-    if not value:
-        return False
-
-    try:
-        parsed = urlparse(value)
-        if parsed.scheme and parsed.netloc and parsed.scheme in ("http", "https"):
-            return True
-    except (ValueError, TypeError):
-        pass
-
-    return False
-
-
-@helper
 def is_email(value) -> bool:
     if not value:
         return False
 
     try:
-        ckan_email_validator(value, {})
+        tk.get_validator("email_validator")(value, {})
         return True
-    except Invalid:
+    except tk.Invalid:
         return False
