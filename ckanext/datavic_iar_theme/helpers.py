@@ -20,7 +20,6 @@ from ckanext.scheming.helpers import scheming_get_dataset_schema
 import ckanext.datavic_iar_theme.config as conf
 import ckanext.datavicmain.const as const
 
-
 log = logging.getLogger(__name__)
 helper, get_helpers = Collector("vic_iar").split()
 
@@ -521,3 +520,15 @@ def datavic_user_image(user_id: str, size: int = 100) -> Union[Markup, str]:
         )
     else:
         return ''
+
+
+@helper
+def is_email(value) -> bool:
+    if not value:
+        return False
+
+    try:
+        tk.get_validator("email_validator")(value, {})
+        return True
+    except tk.Invalid:
+        return False
