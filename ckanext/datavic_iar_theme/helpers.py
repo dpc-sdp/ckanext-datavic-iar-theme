@@ -21,7 +21,6 @@ from ckanext.scheming.helpers import scheming_get_dataset_schema
 import ckanext.datavic_iar_theme.config as conf
 import ckanext.datavicmain.const as const
 
-
 log = logging.getLogger(__name__)
 helper, get_helpers = Collector("vic_iar").split()
 
@@ -316,19 +315,6 @@ def get_header_structure(userobj: model.User | None) -> list[dict[str, Any]]:
                 },
             ],
         },
-        {
-            "title": tk._("DaAS"),
-            "subtitle": tk._("""Digital and Analytics Service (DaAS)"""),
-            "url": "#",
-            "hide": not is_logged_in,
-            "child": [
-                {
-                    "title": page["title"],
-                    "url": _build_page_url(page),
-                }
-                for page in _get_daas_pages()
-            ],
-        },
     ]
 
 
@@ -348,26 +334,6 @@ def _get_page_item(name: str) -> dict[str, Any] | None:
         return None
 
     return result
-
-
-def _build_page_url(page: dict[str, Any]) -> str:
-    """Build a page URL for ckanext-pages entity based on the page type and name"""
-    page_type = "blog" if page["page_type"] == "blog" else conf.get_pages_base_url()
-
-    return f"/{page_type}/{page['name']}"
-
-
-def _get_daas_pages():
-    """Return a list of DaAS pages. Exclude pages that are not DaAS related,
-    but were created with ckanext-pages"""
-    exclude = ("user-guides", "contact-us", "data-sharing-resources")
-    result = tk.get_action("ckanext_pages_list")({}, {"order": True, "private": False})
-
-    return [
-        page
-        for page in result
-        if (page["page_type"] == "page" and page["name"] not in exclude)
-    ]
 
 
 @helper
@@ -546,3 +512,15 @@ def datavic_user_image(user_id: str, size: int = 100) -> Union[Markup, str]:
         )
     else:
         return ''
+
+
+@helper
+def is_email(value) -> bool:
+    if not value:
+        return False
+
+    try:
+        tk.get_validator("email_validator")(value, {})
+        return True
+    except tk.Invalid:
+        return False
