@@ -1,0 +1,10 @@
+{% extends "mailcraft/emails/base.txt" %}
+{% block main_text %}
+Hi {{name}},
+
+Your dataset; {{ package_name }} ({{ url }}) has been returned to draft.
+
+{% if notes %}{% trans %}Notes: {{ notes }}{% endtrans %}{% endif %}
+
+Please review and action.
+{% endblock %}

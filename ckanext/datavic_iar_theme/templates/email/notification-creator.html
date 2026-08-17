@@ -1,0 +1,14 @@
+{% extends "mailcraft/emails/base.html" %}
+{% block main_text %}
+    {% trans %}
+        <p>Hi {{name}}</p>
+
+        <p>Your dataset; <a href="{{ url }}">{{ package_name }}</a> has been returned to draft.</p>
+    {% endtrans %}
+
+    {% if notes %}
+        {% trans %}<p style="white-space: pre-line;">Notes: {{ notes }}</p>{% endtrans %}
+    {% endif %}
+
+    {% trans %}<p>Please review and action.</p>{% endtrans %}
+{% endblock %}
