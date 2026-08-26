@@ -1,6 +1,6 @@
 {% extends "mailcraft/emails/base.txt" %}
 {% block main_text %}
-{% trans %}Hi {{ admin_name }}{% endtrans %}
+{% trans %}Hi {{ admin_user }}{% endtrans %}
 
 {% trans %}{{ package_name }} ({{ url }}) requires your approval on the {{ site_title }}. Please review and action.{% endtrans %}
 
