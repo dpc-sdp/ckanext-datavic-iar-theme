@@ -22,14 +22,3 @@
   {{ super() }}
   <script src="{{ h.url_for_static_or_external("ckeditor.js") }}"></script>
 {% endblock %}
-
-{%- block htmltag -%}
-  {% set lang = h.lang() %}
-
-  {% if lang == 'en_AU' %}
-    {% set lang = 'en-au' %}
-  {% endif %}
-
-  <!--[if IE 9]> <html lang="en-au" class="ie9"> <![endif]-->
-  <!--[if gt IE 8]><!--> <html lang="{{ lang }}"> <!--<![endif]-->
-{%- endblock -%}
