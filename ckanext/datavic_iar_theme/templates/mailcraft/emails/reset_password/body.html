@@ -1,15 +1,8 @@
 {% extends "mailcraft/emails/base.html" %}
-
 {% block main_text %}
-
-{% trans %}
-<p>Dear {{ user_name }},</p>
-
-<p>You have requested your password on {{ site_title }} to be reset.</p>
-
-<p>Please click the following link to confirm this request:</p>
-
-<p><a href="{{ reset_link }}">{{ reset_link }}</a></p>
-{% endtrans %}
-
+  {% trans %}
+    <p>Hi {{ user_name }}</p>
+    <p><a href="{{ reset_link }}">Reset your {{ site_title }} password here.</a></p>
+    <p>If you did not request this, please <a href="mailto:datavic@dpc.vic.gov.au">contact us</a> immediately.</p>
+  {% endtrans %}
 {% endblock %}

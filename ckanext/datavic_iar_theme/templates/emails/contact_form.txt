@@ -1,0 +1,9 @@
+{% extends "mailcraft/emails/base.txt" %}
+{% block main_text %}
+{% trans %}Hi{% endtrans %}
+
+{% trans safe_name=name|safe %}{{ safe_name }} has a query about {{ pkg_name }} ({{ pkg_url }}):{% endtrans %}
+{% trans safe_message=message | safe %}{{ safe_message }}{% endtrans %}
+
+{% trans %}Please respond to {{ email }}{% endtrans %}
+{% endblock %}

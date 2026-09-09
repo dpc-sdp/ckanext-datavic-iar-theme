@@ -1,1 +1,1 @@
-Invitation to join and use the {{ site_title }}
+{% trans %}Invitation to join the {{ site_title }}{% endtrans %}

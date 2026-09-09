@@ -1,0 +1,15 @@
+{% extends "mailcraft/emails/base.html" %}
+{% block main_text %}
+  {% trans %}
+    <p>Hi</p>
+
+    <p>
+      {{ name }} has a query about <a href="{{ pkg_url }}">{{ pkg_name }}</a>:<br/>
+      <span style="white-space: pre-line;">{{ message }}</span>
+    </p>
+
+    <p>
+      Please respond to <a href="mailto:{{ email }}">{{ email }}</a>
+    </p>
+  {% endtrans %}
+{% endblock %}
