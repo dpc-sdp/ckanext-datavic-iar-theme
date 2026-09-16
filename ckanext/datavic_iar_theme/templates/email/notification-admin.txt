@@ -2,9 +2,9 @@
 {% block main_text %}
 {% trans %}Hi {{ admin_user }}{% endtrans %}
 
-{% trans %}{{ package_name }} ({{ url }}) requires your approval on the {{ site_title }}. Please review and action.{% endtrans %}
+{% trans package_title=package_title or package_name %}{{ package_title }} ({{ url }}) requires your approval on the {{ site_title }}. Please review and action.{% endtrans %}
 
 {% trans %}Submitted for approval by: {{user}}{% endtrans %}
-{% trans %}Organisation: {{organization}}{% endtrans %}
+{% trans organization_title=organization_title or organization %}Organisation: {{ organization_title }}{% endtrans %}
 {% if notes %}{% trans %}Notes: {{ notes }}{% endtrans %}{% endif %}
 {% endblock %}

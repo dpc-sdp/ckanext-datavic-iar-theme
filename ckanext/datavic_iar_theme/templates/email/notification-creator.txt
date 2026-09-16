@@ -2,7 +2,7 @@
 {% block main_text %}
 Hi {{name}},
 
-Your dataset; {{ package_name }} ({{ url }}) has been returned to draft.
+Your dataset; {{ package_title or package_name }} ({{ url }}) has been returned to draft.
 
 {% if notes %}{% trans %}Notes: {{ notes }}{% endtrans %}{% endif %}
 
