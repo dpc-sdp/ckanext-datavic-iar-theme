@@ -1,13 +1,13 @@
 {% extends "mailcraft/emails/base.html" %}
 {% block main_text %}
-    {% trans %}
+    {% trans package_title=package_title or package_name %}
         <p>Hi {{ admin_user }}</p>
-        <p><a href="{{url}}">{{ package_name }}</a> requires your approval on the {{ site_title }}.<br/>Please review and action.</p>
+        <p><a href="{{url}}">{{ package_title }}</a> requires your approval on the {{ site_title }}.<br/>Please review and action.</p>
     {% endtrans %}
 
     <p>
         {% trans %}Submitted for approval by: {{user}}<br/>{% endtrans %}
-        {% trans %}Organisation: {{organization}}{% endtrans %}
+        {% trans organization_title=organization_title or organization %}Organisation: {{ organization_title }}{% endtrans %}
         {% if notes %}
             <br/>
             {% trans %}<span style="white-space: pre-line;">Notes: {{ notes }}</span>{% endtrans %}
