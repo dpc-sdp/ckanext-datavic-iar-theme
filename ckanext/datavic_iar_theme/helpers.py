@@ -13,6 +13,7 @@ import ckan.model as model
 import ckan.plugins.toolkit as tk
 import ckan.lib.helpers as h
 
+from ckanext.auth import config as auth_config
 from ckanext.harvest.model import HarvestSource
 from ckanext.toolbelt.decorators import Collector, Cache
 from ckanext.scheming.helpers import scheming_get_dataset_schema
@@ -81,6 +82,17 @@ def format_list() -> list[str]:
 @helper
 def get_parent_site_url():
     return conf.get_parent_site_url().rstrip("/")
+
+
+@helper
+def get_2fa_email_interval_minutes() -> int:
+    """Return the 2FA email verification code TTL, in whole minutes.
+
+    Reads ``ckanext.auth.2fa_email_interval`` (seconds, default 600) so the
+    verification code email always reflects the configured expiry instead of
+    a hardcoded value.
+    """
+    return auth_config.get_2fa_email_interval() // 60
 
 
 @helper

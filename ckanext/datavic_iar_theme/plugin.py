@@ -3,9 +3,12 @@ from __future__ import annotations
 import logging
 from typing import Any
 
+import ckan.lib.mailer as ckan_mailer
 import ckan.plugins as p
 import ckan.plugins.toolkit as tk
 from ckan import types
+from ckanext.datavic_iar_theme.mailer import send_invite
+
 import ckanext.datavic_iar_theme.helpers as helpers
 
 from ckanext.search_autocomplete.interfaces import ISearchAutocomplete
@@ -33,6 +36,12 @@ class DatavicIARThemePlugin(p.SingletonPlugin):
         # Reset group/organization cache on server restart
         helpers.group_list.reset(is_organization=False)
         helpers.group_list.reset(is_organization=True)
+
+        # CKAN core's send_invite sends plain text only. Patch it to also
+        # send an HTML alternative. Acceptable here because core calls it as
+        # a module attribute (ckan/logic/action/create.py:1114), resolved at
+        # call time rather than bound at import. Re-verify on CKAN upgrade.
+        ckan_mailer.send_invite = send_invite
 
     # ITemplateHelpers
     def get_helpers(self):
