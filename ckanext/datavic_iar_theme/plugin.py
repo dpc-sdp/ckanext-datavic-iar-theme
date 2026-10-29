@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import logging
 from typing import Any
 
 import ckan.lib.mailer as ckan_mailer
@@ -13,19 +12,13 @@ import ckanext.datavic_iar_theme.helpers as helpers
 
 from ckanext.search_autocomplete.interfaces import ISearchAutocomplete
 
-log = logging.getLogger(__name__)
 
 @tk.blanket.config_declarations
 class DatavicIARThemePlugin(p.SingletonPlugin):
     p.implements(p.IConfigurer)
     p.implements(p.ITemplateHelpers)
-    p.implements(p.IMiddleware, inherit=True)
     p.implements(ISearchAutocomplete)
     p.implements(p.ISignal)
-
-    def make_middleware(self, app, config):
-        app.before_request(lambda: log.info("Session cookie: %s", tk.request.headers.get("cookie")))
-        return app
 
     # IConfigurer
     def update_config(self, config_):
