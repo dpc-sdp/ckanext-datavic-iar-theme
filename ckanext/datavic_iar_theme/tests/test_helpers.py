@@ -87,12 +87,18 @@ class TestResourceFormats:
 
 
 class TestOrganizationAndGroupLists:
+    @pytest.fixture(autouse=True)
+    def reset_group_list_cache(self):
+        """group_list is cached in Redis and only reset by plugin signals, which these tests don't load."""
+        for is_organization in (True, False):
+            h.group_list.reset(is_organization=is_organization)
+
     def test_organization_list_no_orgs(self):
-        assert not h.organization_list()
+        assert not h.group_list(is_organization=True)
 
     @pytest.mark.usefixtures("clean_db")
     def test_organization_list_with_org(self, organization):
-        org_list = h.organization_list()
+        org_list = h.group_list(is_organization=True)
 
         assert org_list
         assert isinstance(org_list, list)
@@ -100,15 +106,15 @@ class TestOrganizationAndGroupLists:
         assert len(org_list) == 1
 
     def test_organization_list_no_groups(self):
-        assert not h.search_form_group_list()
+        assert not h.group_list(is_organization=False)
 
     @pytest.mark.usefixtures("clean_db")
     def test_organization_list_no_groups_org(self, organization):
-        assert not h.search_form_group_list()
+        assert not h.group_list(is_organization=False)
 
     @pytest.mark.usefixtures("clean_db")
     def test_organization_list_with_group(self, group):
-        group_list = h.search_form_group_list()
+        group_list = h.group_list(is_organization=False)
 
         assert group_list
         assert isinstance(group_list, list)
