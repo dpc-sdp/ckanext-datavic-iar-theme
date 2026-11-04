@@ -1,26 +1,18 @@
-{% set first_name = user_name.split("-")[0] %}Dear {{ first_name[0]|upper }}{{ first_name[1:] }},
-{% if role_name == 'Member' %}
-You have been invited to the {{ site_title }}. The {{ site_title }} is the place for Victoria Public Servants to find, discover and share data amongst departments and agencies.
+{% extends "mailcraft/emails/base.txt" %}
+{% block main_text %}
+{% trans %}Hi{% endtrans %}
 
-This is a new service that we are currently testing with a limited number of users. Your feedback will help us improve it.
+{% trans %}You've been invited to join the {{ site_title }}.{% endtrans %}
 
-An account has already been created for you with the username {{ user_name }}. You can change it later.
 
-Your account allows you to search and find open data as well as a data restricted to Victorian Public Servants.
-{% else %}
-You have been invited to the {{ site_title }}.
+{% trans %}Your username is {{ user_name }}.{% endtrans %}
+{% trans %}To activate your account, please set your password here: {{ reset_link }}{% endtrans %}
 
-A user has already been created for you with the username {{ user_name }}. You can change it later.
+{% trans %}The {{ site_title }} is an internal metadata catalogue where you can discover open, and restricted, Victorian Government datasets.{% endtrans %}
 
-You have been added to the {{ group_type }} {{ group_title }} with the following role: {{ role_name }}.
-{% endif %}
-To accept this invite, please reset your password at:
+{% trans %}You can also register your department or agency's metadata and, where appropriate, publish to DataVic. Learn more about data publishing for the Victorian Public Service here: https://www.data.vic.gov.au/data-publishing-victorian-public-service{% endtrans %}
 
-   {{ reset_link }}
+{% trans %}Access to the {{ site_title }} is restricted to the Victorian Public Service.{% endtrans %}
 
-Thankyou.
-
-The DataVic Team
-
---
-Message sent by the {{ site_title }} ({{ site_url }})
+{% trans %}If you require any assistance, please contact us at datavic@dpc.vic.gov.au.{% endtrans %}
+{% endblock %}

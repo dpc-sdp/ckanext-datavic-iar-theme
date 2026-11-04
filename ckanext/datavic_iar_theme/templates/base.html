@@ -8,6 +8,10 @@
   {% if h.vic_iar_hotjar_tracking_enabled() %}
     {% snippet "snippets/hotjar.html" %}
   {% endif %}
+
+  {% if not (request.endpoint or '').endswith('_resource.view') %}
+    {% snippet "snippets/caretaker-message.html" %}
+  {% endif %}
 {% endblock %}
 
 {% block styles %}
