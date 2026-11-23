@@ -110,7 +110,7 @@ ckan.module('datavic-confirm-link-action', function (jQuery) {
       /* Event handler that displays the confirm dialog */
       _onClick: function (event) {
         console.log(event);
-        this.link = jQuery(event.target).attr('href');
+        this.link = this.el.attr('href');
         event.preventDefault();
         this.confirm();
       },
